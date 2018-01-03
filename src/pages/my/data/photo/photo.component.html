@@ -1,0 +1,22 @@
+<my-hearde title="更新个人资料"></my-hearde>
+
+<ion-content  padding class="camare_content">
+     <ion-avatar item-right>
+          <img [src]="imageData" *ngIf="imageData" />
+    </ion-avatar>   
+    <ion-row class="center">
+        <ion-col col-6>
+            <!-- 打开摄像头的按钮 -->
+            <button ion-button (click)="getPicture(1)">拍照</button>
+        </ion-col>
+        <ion-col col-6>
+            <!-- 打开本地相册的按钮 -->
+            <button ion-button (click)="getPicture(0)">选择相册</button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-6 (click)="getphoto()">
+            <button ion-button>确定</button>
+        </ion-col>
+    </ion-row>
+</ion-content>

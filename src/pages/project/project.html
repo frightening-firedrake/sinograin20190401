@@ -1,0 +1,70 @@
+<!--<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+<app-header title='about'></app-header>
+
+<ion-content padding>
+111
+<br/>
+<br/>
+2222
+</ion-content>-->
+
+
+<app-header title='about'></app-header>
+<!--<ion-header class="common_heard blue">
+  <ion-toolbar class="blue">
+    <img src="assets/image/logo_white.png" alt="" />
+   	<span class="icon-sousuo"></span>
+  </ion-toolbar>
+</ion-header>-->
+<ion-header class="project_header">
+	<ion-toolbar>
+		<ion-segment [(ngModel)]="project">
+			<ion-segment-button value="pc">
+				<span class="left"></span>
+				<font>
+					<font>
+						PC端
+					</font>
+				</font>
+				<span class="right"></span>
+			</ion-segment-button>
+			<ion-segment-button value="phone">
+				<span class="left"></span>
+				<font>
+					<font>
+						移动端
+					</font>
+				</font>
+				<span class="right"></span>
+			</ion-segment-button>
+		</ion-segment>
+	</ion-toolbar>
+</ion-header>
+<ion-content padding class="project_content">
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+	<ion-card (click)="listPage()" *ngFor="let item of items;let i=index;" [ngClass]="{'margin':i%2!=0}">
+		<img [src]=item.thumb />
+		<ion-card-content>
+			<ion-card-title>
+				{{item.name}}
+				<p>{{item.date}}</p>
+			</ion-card-title>
+			<div class="line">
+				<span></span>
+				<p></p>
+			</div>
+			<p>
+				{{item.content}}
+			</p>
+		</ion-card-content>
+	</ion-card>
+	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+		<ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载">
+		</ion-infinite-scroll-content>
+	</ion-infinite-scroll>
+</ion-content>

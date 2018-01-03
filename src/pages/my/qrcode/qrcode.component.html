@@ -1,0 +1,19 @@
+<my-hearde title="生成二维码"></my-hearde>
+<ion-content padding>
+    <ion-card>
+        <!--<ion-card-header class="text-c">
+            <dl class="wqcover">
+                <dt class="font-red">{{storeUserName}}</dt>
+                <dd class="m-n font-n font-light">门店：{{storeName}}</dd>
+                <dd class="m-n font-n font-light">所属供应商：{{storeUserCompany}}</dd>
+            </dl>
+        </ion-card-header>-->
+        <ion-card-content>
+            <div> 
+                <!--//此处就是二维码展示部分 //如果有变量就这样写： [value]="'用户名:'+storeUserName"-->
+                <qrcode [qrdata]="'nickname:'+user.nickname+',name:'+user.name+',sex:'+user.sex" size="300"></qrcode>
+            </div>
+            <p class="text-c font-n font-light">扫一扫上面的二维码图案，办理业务</p>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

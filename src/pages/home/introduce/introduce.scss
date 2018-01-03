@@ -1,0 +1,113 @@
+ion-header.introduce_home_companyDetails_header{
+    height: 0.88rem;
+    ion-toolbar.toolbar{
+        min-height: .85rem;
+        position: relative;
+        .toolbar-background{
+            background-color: #2590c7;
+        }
+        .bar-buttons-md{
+            position: absolute;
+            height: .88rem;
+            .introduce_home_companyDetails_back{
+                font-size: .3rem;
+                margin-top: -1.8rem;
+                color:#fff;
+            }
+        }
+        .toolbar-content-md{
+            ion-title{
+                .toolbar-title-md{
+                    font-size: .3rem;
+                    color:#fff;
+                    text-align: center;
+                }
+                
+            }
+        }
+        
+    }
+}
+.introduce {
+    
+    // background-color: #2590c7;
+    color: white;
+    .toolbar {
+        .back-button {
+            .button-inner {
+                ion-icon {
+                    font-size: 0.5rem;
+                    color: white;
+                    line-height: 0.88rem;
+                }
+            }
+        }
+        .toolbar-content {
+            .title {
+                .toolbar-title {
+                    font-size: 0.3rem;
+                    color: white;
+                    @include fontf;
+                }
+            }
+        }
+    }
+}
+ion-content.introduce_home_companyDetails{
+    text-align: center;
+    .scroll-content{
+        top:0.6rem;
+        margin:0 !important;
+        height:11.5rem;
+            .card{
+                    margin-top: .2rem;
+                    margin-left: 0;
+                    margin-right: 0;
+                    width: auto;
+                    position:relative;
+                    overflow: visible;
+                    &:after{
+                        @include shaodwblue;
+                    }
+               .card-header {
+                    font-size: .35rem;
+                    background: #C0D8F4;
+                    color:#333;
+                    display:flex;
+                    justify-content: center;
+                    letter-spacing:.02rem;
+                    .introduce_home_companyLogo{   
+                        width: .7rem;
+                        img{
+                            width:60%;
+                        }
+                    }
+                }
+                ion-card-content{
+                    font-size: .24rem;
+                    text-indent: 2em;
+                    text-align: left;
+                    padding-top: .3rem;
+                    color: #666666;
+                    p{
+                        text-indent: 2em !important;
+                       letter-spacing:.02rem;
+                       font-size: .24rem;
+                    }
+                    h3{
+                        letter-spacing:.02rem;
+                        margin-left: -.5rem;
+                        font-size: .24rem;
+                        line-height: .5rem;
+                        color:#2590c7;
+                    }
+                    i{
+                        display: block;
+                        height:.3rem;
+                    }
+                }
+            }
+          
+    }
+
+}

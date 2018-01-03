@@ -1,0 +1,176 @@
+.department {
+    background-color: #2590c7;
+    color: white;
+    .toolbar {
+        .back-button {
+            .button-inner {
+                ion-icon {
+                    font-size: 0.5rem;
+                    color:white;
+                    line-height:0.88rem;
+                }
+            }
+        }
+        .toolbar-content{
+            .title{
+                .toolbar-title{
+                    font-size:0.3rem;
+                    color:white;
+                    @include fontf;
+                }
+            }
+        }
+    }
+}
+.department_activity_content {
+    // top: 0.88rem;
+    .scroll-content {
+        margin: 0;
+        padding: 0.27rem 0.24rem 0.62rem 0.24rem !important;
+        ion-list.list {
+            width: 7.02rem;
+            height: 2.07rem;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #e7e7e7;
+            margin: 0;
+            min-width: 100%;
+            ion-item.item {
+                width: 100%;
+                min-height: 100%;
+                display: flex;
+                max-height: 100%;
+                padding: 0.18rem 0.2rem 0.16rem 0.15rem;
+                justify-content: space-around;
+                ion-thumbnail {
+                    width: 1.8rem;
+                    height: 1.7rem;
+                    margin: 0;
+                    margin-right: 0.3rem;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .item-inner {
+                    padding: 0;
+                    padding-right: 0.01rem;
+                    ion-label.label {
+                        margin: 0;
+                        height: 100%;
+                        min-height: 0;
+                        padding: 0;
+                        .activity_content {
+                            width: auto;
+                            height: 100%;
+                            font-size: 0.26rem;
+                            color: #333333;
+                            .activity_con_tit {
+                                font-size: 0.26rem;
+                                color: #333333;
+                                height: auto;
+                                display: flex;
+                                justify-content: space-between;
+                                h3 {
+                                    width: auto;
+                                    margin: 0;
+                                    height: 0.22rem;
+                                    //                         line-height:0;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    font {
+                                        font-size: 0.26rem;
+                                        color: #333333;
+                                    }
+                                }
+                                i {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    font-size: 0.2rem;
+                                    color: #333333;
+                                    span {
+                                        display: flex;
+                                        font {
+                                            font-size: 0.24rem;
+                                            line-height: 0.4rem;
+                                        }
+                                        justify-content: space-between;
+                                    }
+                                }
+                            }
+                            .xian {
+                                width: 100%;
+                                height: 3px;
+                                line-height: 0;
+                                margin-bottom: 0.1rem;
+                                display: flex;
+                                margin-top:0.2rem;
+                                position:relative;
+                                span {
+                                    width: 0.23rem;
+                                    height: 100%;
+                                    display: inline-block;
+                                    background-color: #5996db;
+                                    position:absolute;
+                                    left:0;
+                                    top:0.01rem;
+                                    bottom:0;
+                                    margin:auto;
+                                }
+                                p {
+                                    border-bottom: 1px dashed #5996db;
+                                    width: 30%;
+                                    margin-top: -0.01rem;
+                                    display: inline-block;
+                                    height: 3px;
+                                }
+                            }
+                            .activity_con_con{
+                                height:auto;
+                                margin-bottom:0.05rem;
+                                p{
+                                    display:flex;
+                                    justify-content:space-between;
+                                    word-break:break-all;
+                                    font{
+                                       font-size:0.24rem;
+                                    color:#959595;  
+                                    word-break:break-all;
+                                    }
+                                }
+                            }
+                            .activity_con_time{
+                                .actvity_time{
+                                    width:auto;
+                                    display:inline-block;
+                                    span{
+                                        width:0.1rem;
+                                        height:0.1rem;
+                                        display:inline-block;
+                                        border-radius:50%;
+                                        vertical-align: middle;
+                                        &.blue{
+                                            background-color:#2590c7;
+                                        }
+                                        &.green{
+                                            background-color:#6fd9ff;
+                                        }
+                                    }
+                                    p{
+                                        display:inline-block;
+                                        font-size:0.22rem;
+//                                      display:flex;
+//                                      justify-content: space-between;
+                                        font{
+                                            font-size:0.22rem;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

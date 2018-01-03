@@ -1,0 +1,25 @@
+.newlist_header{
+    ion-navbar{
+        button{
+           min-height: 0.85rem;
+           height:100%;
+           .button-inner{
+               height:100%;
+               ion-icon{
+                   line-height:0.88rem;
+                   color:white;
+                   font-size:0.5rem;
+               }
+           }
+        }
+        .toolbar-content{
+            ion-title{
+                .toolbar-title{
+                    font-size: 0.3rem;
+                    color: white;
+                    font-family: "宋体";
+                }
+            }
+        }
+    }
+}

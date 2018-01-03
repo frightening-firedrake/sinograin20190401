@@ -1,0 +1,62 @@
+.my_hearder {
+    // background-color: #2590c7;
+    color: white;
+    .toolbar {
+        .back-button {
+            .button-inner {
+                ion-icon {
+                    font-size: 0.5rem;
+                    color:white;
+                    line-height:0.88rem;
+                }
+            }
+        }
+        .toolbar-content{
+            .title{
+                .toolbar-title{
+                    font-size:0.3rem;
+                    color:white;
+                    @include fontf;
+                }
+            }
+        }
+    }
+}
+ion-content.camare_content{
+    .scroll-content{
+        top:0.88rem;
+        ion-row{
+            overflow: hidden;
+            margin-bottom:0.2rem;
+            ion-col{
+                overflow: hidden;
+                button{
+                    width:49%;
+                    height:80%;
+                    // margin:0;
+                    span{
+                        font-size:0.14rem;
+                    }
+                }
+            }
+        }
+        ion-item{
+            // width:90%;
+            height:1rem;
+            min-height:0;
+            background-color:transparent;
+            .item-inner{
+                ion-label{
+                    font-size:0.14rem;
+                }
+            }
+        }
+        ion-card{
+            ion-card-content{
+                ion-card-title{
+                    font-size:0.14rem;
+                }
+            }
+        }
+    }
+}

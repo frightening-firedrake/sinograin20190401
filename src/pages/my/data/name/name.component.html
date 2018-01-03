@@ -1,0 +1,7 @@
+<my-hearde title="更新个人信息"></my-hearde>
+<ion-content class="data_content">
+    <ion-item>
+      <ion-input [(ngModel)]="name"  name="name" type="text" placeholder="姓名" required minlength="3"></ion-input>
+    </ion-item>
+    <button full  color="primary" ion-button block (click)="onsubmit()">保 存</button>
+</ion-content>

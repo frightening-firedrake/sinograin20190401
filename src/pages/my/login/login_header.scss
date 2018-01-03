@@ -1,0 +1,24 @@
+.login_hearder {
+    background-color: #2590c7;
+    color: white;
+    .toolbar {
+        .back-button {
+            .button-inner {
+                ion-icon {
+                    font-size: 0.5rem;
+                    color:white;
+                    line-height:0.88rem;
+                }
+            }
+        }
+        .toolbar-content{
+            .title{
+                .toolbar-title{
+                    font-size:0.3rem;
+                    color:white;
+                    @include fontf;
+                }
+            }
+        }
+    }
+}

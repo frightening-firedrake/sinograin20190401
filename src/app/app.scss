@@ -1,0 +1,271 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+// http://ionicframework.com/docs/v2/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+@font-face {font-family: "iconfont";
+  src: url('../assets/font_family/iconfont.eot?t=1514862462708'); /* IE9*/
+  src: url('../assets/font_family/iconfont.eot?t=1514862462708#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../assets/font_family/data:application/x-font-woff;charset=utf-8;base64,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') format('woff'),
+  url('../assets/font_family/iconfont.ttf?t=1514862462708') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../assets/font_family/iconfont.svg?t=1514862462708#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.icon{
+    font-family: ionics;
+}
+
+ion-tabs{
+    .tabbar {
+        .tab-button{
+            ion-icon{
+                font-size:0.45rem !important;
+                line-height:0.6rem;
+            }
+        }
+    }
+}
+// html{
+//     font-size:625%;
+// }
+$design-size:750px;
+$list:320px,
+360px,
+375px,
+412px,
+384px,
+414px,
+640px,
+750px,
+768px,
+800px,
+1024px,
+1600px;
+@each $w in $list {
+    @media screen and (min-width:#{$w}) {
+        html {
+            font-size: 100px * $w /$design-size;
+        }
+    }
+}
+ion-content .scroll-content p{
+    text-indent: 0 !important;
+}
+.list-md .item-block .item-inner{
+    border:none!important;
+}
+.item-md.item-input.input-has-focus .item-inner{
+    box-shadow:none;
+}
+.list-md .item-input.input-has-focus:last-child{
+     box-shadow:none;
+}
+.list-ios > .item-block:last-child{
+    border:none;
+}
+@mixin fontf {
+    font-family: "宋体"
+}
+
+@mixin fonts {
+    font-size: 0.24rem;
+}
+
+@mixin color {
+    color: #8e8e93;
+}
+@mixin shaodwblue{
+    background: #c0d8f4;
+  border-radius:5px;
+  bottom: -0.1rem;
+  content: "";
+  height: 0.15rem;
+  position: absolute;
+  width: 96%;
+  left:2%;
+  z-index: -1;
+}
+@mixin shaodwnavy{
+    background: #cef2ff;
+  border-radius:5px;
+  bottom: -0.1rem;
+  content: "";
+  height: 0.13rem;
+  position: absolute;
+  width: 96%;
+  left:2%;
+  z-index: -1;
+}
+@mixin ionHeader{
+    width: 100%;
+    height: 0.88rem;
+}
+@mixin imgwid{
+    width: 0.45rem;
+    display: inline-block;
+    height: 0.48rem;
+   margin-top: 0.17rem;
+}
+ion-header {
+    width: 100%;
+    height: 0.88rem;
+    //  padding-top:0.2rem;
+    ion-navbar.toolbar {
+        min-height: 0;
+        height: 100%;
+        height: 100%;
+        min-height: 0;
+        //      padding:0;
+        //padding-top:0;
+        padding-top: 0.02rem;
+        .toolbar-background {
+            background-color:#2590C7;
+            box-shadow:none;
+            border: 0;
+        }
+        &.blue {
+            .toolbar-background {
+                background-color: #2590c7;
+                border: 0;
+            }
+        }
+        .toolbar-content {
+            min-height: 0;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            line-height: 0.88rem;
+            img {
+                width: 0.48rem;
+                display: inline-block;
+                height: 0.48rem;
+                margin-top: 0.15rem;
+            }
+            label {
+                line-height: 0.6rem;
+                width: 5.63rem;
+                background-color: white;
+                border-radius: 5px;
+                height: 0.6rem;
+                margin-top: 0.1rem;
+                padding-right: 0.2rem;
+               .searchbar {
+                    min-height:0;
+                    max-height:0.6rem;
+                    min-width:5.36rem;
+                    max-width:5.36rem;
+                    padding-left:0;
+                    padding-right:0;
+                    top:0.001rem;   
+                    width:100%;
+                    height:100%;
+                    .searchbar-input{
+                        width:100%;
+                         background:white;
+                         padding-left:0.07rem;
+                         box-shadow: none;
+                    }
+                    .searchbar-search-icon{
+                        left:90%;
+                        background-size:120%;
+                        top:7%;
+                    }
+                }
+                input {
+                    width: 4.85rem;
+                    height: 0.6rem;
+                    font-size: 0.22rem;
+                    border-radius: 5px;
+                    vertical-align: top;
+                    line-height: 0.6rem;
+                    box-sizing: border-box;
+                    @include color;
+                    //              padding-top:0.2rem;
+                    padding-left: 0.25rem;
+                    border: 0;
+                }
+                span {
+                    font-family: icon;
+                    font-size: 0.4rem;
+                    color: #e7e7e7;
+                    float: right;
+                }
+            }
+            button{
+                min-width:0;
+                width:auto;
+                height:0.6rem;
+                margin:0;
+                padding:0;
+                font-size:0.3rem;
+                border:0;   
+                @include color;
+                margin-top:0.1rem;
+                background-color:transparent;
+                box-shadow:none !important;
+            }
+        }
+    }
+}
+
+ion-tabs {
+    .show-tabbar {
+        height: 0.98rem;
+        a.tab-button {
+            min-height: 0;
+            @include fonts;
+            @include fontf;
+            ion-icon.tab-button-icon {
+                font-size:0.6rem;
+            }
+            .tab-button-text {
+                @include fonts;
+            }
+        }
+    }
+}
+ion-content{
+        .fixed-content{
+            margin:0 !important;
+        }
+        .clear{
+            width:5rem;
+            height:5rem;
+            border:1px solid red;
+            background-color:black;
+            position:relative;
+           &:before{
+               @include shaodwblue;
+           }
+        }
+}
+.ion-page >ion-content{
+    position:relative;
+    padding:0 !important;
+}

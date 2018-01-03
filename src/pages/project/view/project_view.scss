@@ -1,0 +1,190 @@
+.project_view {
+    background-color: #2590c7;
+    color: white;
+    .toolbar {
+        .back-button {
+            .button-inner {
+                ion-icon {
+                    font-size: 0.5rem;
+                    color: white;
+                    line-height: 0.88rem;
+                }
+            }
+        }
+        .toolbar-content {
+            .title {
+                .toolbar-title {
+                    font-size: 0.3rem;
+                    color: white;
+                    @include fontf;
+                }
+            }
+        }
+    }
+}
+ion-content.project_about_projectDetails{
+    text-align: center;
+    font-size: .36rem;
+    h5{
+        color: #464646;
+        font-size: .36rem;
+        text-align: center;
+        margin-top:.5rem;
+        margin-bottom: .2rem;
+    }
+    .project_about_projectLink{
+        position: relative;
+        left: 2rem;
+        font-size: .26rem;
+        
+    }
+    ion-card{
+        border-radius: 10px;
+        margin: .5rem auto;
+        position:relative;
+        overflow:visible;
+        &:after{
+            @include shaodwblue;
+        }
+        ion-card-header {
+            font-size: .3rem;
+            background: #C0D8F4;
+            color:#999999;
+        }
+        &:after{
+            content:"";
+            
+        }
+        ion-card-content{
+            &.card-content {
+                letter-spacing: .02rem;
+                font-size: .24rem;
+                text-indent: 2em;
+                text-align: left;
+                padding-top: 0rem;
+                padding-left:0;
+                padding-right:0;
+                color: #999999;
+                p{
+                    font-size: .24rem;
+                    text-indent: 2em;
+                    text-align: left;
+                    padding-top: .3rem;
+                    color: #999999;  
+                }
+                h5{
+                    margin-top:0;
+                }
+            }
+            &.project_about_projectDetails_Slide{
+                ion-slides{
+                    padding-top:.5rem;
+                    ion-slide{
+                        width:100% !important;
+                        padding:0 0.2rem;
+                        h5{
+                            width:100;
+                            margin-left:-5%;
+                            text-align:center;
+                            font-size: .3rem;
+                        }
+                    }
+                }
+                .swiper-pagination{
+                    // display:none;
+                    // margin-top:0.4rem;
+                    bottom:0;
+                    font-size:0.2rem;
+                }
+            }
+        }
+
+    }
+    .project_about_projectDetails_UserTeach{
+            border-radius: 0;
+            box-shadow: 0 0 0 0;
+            ion-card-header{
+                background: #f6f6f6;
+                color:#999999;
+            }
+           ion-card-content{
+                padding: 0;
+                .project_about_projectDetails_UserTeach_header{
+                    display: flex;
+                    background: #f6f6f6;
+                    ion-item{
+                        min-height:0;
+                        font-size: .36rem;
+                        background: #C0D8F4;
+                        &.about_projectUserTeach_header_midd{
+                            border-left:1ps solid #fff;
+                            border-right:1ps solid #fff;
+                            
+                        }
+                    }
+                }
+                .project_about_projectDetails_UserTeach_List{
+                    sdisplay: flex;
+                    border-top: 1px solid #999;
+                    border-left: 1px solid #999;
+                    border-right: 1px solid #999;
+                    box-sizing: content-box;
+                    &:last-child{
+                        border-bottom: 1px solid #999;
+                    }
+                    ion-item{
+                        font-size: .3rem;
+                        background: #fff;
+                        color:#2590C7;
+                    }
+                }
+            }
+    }
+    ion-list{
+        ion-item{
+            padding-left: 0px;
+            min-height: 0rem;
+            border-top:none !important;
+            .item-inner{
+                .input-wrapper{
+                    .label{
+                        display: flex;
+                        justify-content: center;
+                        h2{
+                           font-size: .36rem;
+                           margin-right:.3rem;  
+                        }
+                        p{
+                           font-size: .36rem; 
+                           text-indent:0; 
+                        }
+                    }
+                }
+            }
+            
+        }
+        &.project_about_projectDetails_List{
+            padding-top: .3rem;
+            ion-item{
+                background: rgba(0,0,0,0);
+               .item-inner{
+                    border:0;
+                    .input-wrapper{
+                        .label{
+                            margin-top:0;
+                            justify-content:inherit;
+                            padding: 0 .2rem;
+                            margin-bottom: 0px;
+                            h2,p{
+                                font-size: 0.3rem;
+                                line-height: .6rem;
+                            }
+                        }
+                    }
+                }   
+            }    
+        }
+
+    }
+
+}
