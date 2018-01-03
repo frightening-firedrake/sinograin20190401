@@ -76,17 +76,8 @@
       "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-camera": {},
       "cordova-plugin-geolocation": {},
-      "cordova-plugin-wechat": {
-        "WECHATAPPID": "wx0e04723fdce24839"
-      },
       "cordova-hot-code-push-plugin": {},
-      "cordova-hot-code-push-local-dev-addon": {},
-      "cordova-plugin-qqsdk": {
-        "QQ_APP_ID": "1106641280"
-      },
-      "cordova-plugin-weibosdk": {
-        "WEIBO_APP_ID": "4200262781"
-      }
+      "cordova-hot-code-push-local-dev-addon": {}
     }
   }
 }

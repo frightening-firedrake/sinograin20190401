@@ -5,6 +5,7 @@ ion-header.home_hearder{
         background-image:none;
     }
     ion-navbar{
+        padding:0;
         .toolbar-background{
             background-color:#38b63a;
         }
@@ -23,6 +24,9 @@ ion-header.home_hearder{
 .home_content{
     width:100%;
     background-color:#f2f2f2;
+    .content_box{
+        padding:0.18rem 0.28rem 0 0.3rem;
+    }
     .scroll-content{
     padding:0!important;
     height:auto;
@@ -66,11 +70,10 @@ ion-header.home_hearder{
         }
     }
     .list{
-        padding:0.17rem 0.28rem 0 0.2rem;
+        margin-bottom:0.17rem;
         .item-wrapper{
             border-radius: 10px;
             height:1.74rem;
-            overflow: visible;
             padding:0.17rem 0 0 0;
             .item{
                 min-height:0;
@@ -123,6 +126,52 @@ ion-header.home_hearder{
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+    .work{
+        background-color:white;
+        padding:0.36rem 0.39rem 0.42rem 0.43rem;
+        .row{
+            &.first{
+                .col{
+                    padding-top:0.25rem;
+                }
+                .col:nth-child(1){
+                    border-right:1px solid #dbdbdb;
+                    border-bottom:1px solid #dbdbdb
+                }
+                .col:nth-child(2){
+                     border-bottom:1px solid #dbdbdb
+                }
+            }
+            &.two{
+                .col{
+                    padding-top:0.42rem;
+                }
+                .col:nth-child(1){
+                     border-right:1px solid #dbdbdb;
+                }
+            }
+            .col{
+                width:3.1rem;
+                height:2.2rem;
+                text-align:center;
+                font-size:0.3rem;
+                color:#666666;
+
+                ion-img{
+                    background-color:transparent;
+                    width:1.13rem;
+                    height:1.13rem;
+                    img{
+                        box-shadow: 0 0 10px rgba(0,0,0,0.35)
+                    }
+                }
+                .label{
+                    margin:0;
+                    margin-top:0.1rem;
                 }
             }
         }

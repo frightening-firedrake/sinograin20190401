@@ -12,57 +12,123 @@
 </ion-content>-->
 
 
-<app-header title='about'></app-header>
-<!--<ion-header class="common_heard blue">
-  <ion-toolbar class="blue">
-    <img src="assets/image/logo_white.png" alt="" />
-   	<span class="icon-sousuo"></span>
-  </ion-toolbar>
-</ion-header>-->
-<ion-header class="project_header">
+<app-header title='扦样列表'></app-header>
+<ion-header class="search" no-border>
 	<ion-toolbar>
-		<ion-segment [(ngModel)]="project">
-			<ion-segment-button value="pc">
-				<span class="left"></span>
-				<font>
-					<font>
-						PC端
-					</font>
-				</font>
-				<span class="right"></span>
-			</ion-segment-button>
-			<ion-segment-button value="phone">
-				<span class="left"></span>
-				<font>
-					<font>
-						移动端
-					</font>
-				</font>
-				<span class="right"></span>
-			</ion-segment-button>
-		</ion-segment>
+		<ion-item>
+			<ion-select placeholder="选择被查库点" [(ngModel)]="genders" interface="popover">
+				<ion-option [value]="i" *ngFor="let list of optionarr;index as i ">{{list}}{{i}}</ion-option>
+			</ion-select>
+			<ion-label>筛选
+				<ion-icon name="arrow-up"></ion-icon>
+			</ion-label>
+		</ion-item>
 	</ion-toolbar>
 </ion-header>
-<ion-content padding class="project_content">
+<ion-content>
 	<ion-refresher (ionRefresh)="doRefresh($event)">
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
-	<ion-card (click)="listPage()" *ngFor="let item of items;let i=index;" [ngClass]="{'margin':i%2!=0}">
-		<img [src]=item.thumb />
-		<ion-card-content>
-			<ion-card-title>
-				{{item.name}}
-				<p>{{item.date}}</p>
-			</ion-card-title>
-			<div class="line">
-				<span></span>
-				<p></p>
-			</div>
-			<p>
-				{{item.content}}
-			</p>
-		</ion-card-content>
-	</ion-card>
+	<ion-grid>
+		<ion-row class="thead">
+			<ion-col col-4>
+				<ion-label>扦样编号</ion-label>
+			</ion-col>
+			<ion-col col-2>
+				<ion-label>货位号</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>品种</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>状态</ion-label>
+			</ion-col>
+		</ion-row>
+		<ion-row class="tbody">
+			<ion-col col-4>
+				<ion-label>襄垣-玉米-110</ion-label>
+			</ion-col>
+			<ion-col col-2>
+				<ion-label>7</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>玉米</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>未扦样</ion-label>
+			</ion-col>
+		</ion-row>
+		<ion-row class="tbody">
+			<ion-col col-4>
+				<ion-label>襄垣-玉米-110</ion-label>
+			</ion-col>
+			<ion-col col-2>
+				<ion-label>7</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>玉米</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>未扦样</ion-label>
+			</ion-col>
+		</ion-row>
+		<ion-row class="tbody">
+			<ion-col col-4>
+				<ion-label>襄垣-玉米-110</ion-label>
+			</ion-col>
+			<ion-col col-2>
+				<ion-label>7</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>玉米</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>未扦样</ion-label>
+			</ion-col>
+		</ion-row>
+		<ion-row class="tbody">
+			<ion-col col-4>
+				<ion-label>襄垣-玉米-110</ion-label>
+			</ion-col>
+			<ion-col col-2>
+				<ion-label>7</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>玉米</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>未扦样</ion-label>
+			</ion-col>
+		</ion-row>
+		<ion-row class="tbody">
+			<ion-col col-4>
+				<ion-label>襄垣-玉米-110</ion-label>
+			</ion-col>
+			<ion-col col-2>
+				<ion-label>7</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>玉米</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>未扦样</ion-label>
+			</ion-col>
+		</ion-row>
+		<ion-row class="tbody">
+			<ion-col col-4>
+				<ion-label>襄垣-玉米-110</ion-label>
+			</ion-col>
+			<ion-col col-2>
+				<ion-label>7</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>玉米</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>未扦样</ion-label>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
 		<ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载">
 		</ion-infinite-scroll-content>

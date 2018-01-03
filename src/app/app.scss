@@ -38,7 +38,7 @@
 }
 
 .icon{
-    font-family: ionics;
+    font-family: ionics,Ionicons;
 }
 
 ion-tabs{
@@ -51,9 +51,9 @@ ion-tabs{
         }
     }
 }
-// html{
-//     font-size:625%;
-// }
+html{
+    font-size:625%;
+}
 $design-size:750px;
 $list:320px,
 360px,
@@ -94,7 +94,7 @@ ion-content .scroll-content p{
 }
 
 @mixin fonts {
-    font-size: 0.24rem;
+    font-size: 0.18rem !important;
 }
 
 @mixin color {
@@ -145,15 +145,9 @@ ion-header {
         //padding-top:0;
         padding-top: 0.02rem;
         .toolbar-background {
-            background-color:#2590C7;
+            background-color:#38b63a;
             box-shadow:none;
             border: 0;
-        }
-        &.blue {
-            .toolbar-background {
-                background-color: #2590c7;
-                border: 0;
-            }
         }
         .toolbar-content {
             min-height: 0;
@@ -161,74 +155,13 @@ ion-header {
             display: flex;
             justify-content: space-around;
             line-height: 0.88rem;
-            img {
-                width: 0.48rem;
-                display: inline-block;
-                height: 0.48rem;
-                margin-top: 0.15rem;
-            }
-            label {
-                line-height: 0.6rem;
-                width: 5.63rem;
-                background-color: white;
-                border-radius: 5px;
-                height: 0.6rem;
-                margin-top: 0.1rem;
-                padding-right: 0.2rem;
-               .searchbar {
-                    min-height:0;
-                    max-height:0.6rem;
-                    min-width:5.36rem;
-                    max-width:5.36rem;
-                    padding-left:0;
-                    padding-right:0;
-                    top:0.001rem;   
-                    width:100%;
-                    height:100%;
-                    .searchbar-input{
-                        width:100%;
-                         background:white;
-                         padding-left:0.07rem;
-                         box-shadow: none;
-                    }
-                    .searchbar-search-icon{
-                        left:90%;
-                        background-size:120%;
-                        top:7%;
-                    }
+            ion-title{
+                text-align:center;
+                .toolbar-title{
+                    font-size:0.36rem;
+                    color:#fff;
+                    font-weight:normal;
                 }
-                input {
-                    width: 4.85rem;
-                    height: 0.6rem;
-                    font-size: 0.22rem;
-                    border-radius: 5px;
-                    vertical-align: top;
-                    line-height: 0.6rem;
-                    box-sizing: border-box;
-                    @include color;
-                    //              padding-top:0.2rem;
-                    padding-left: 0.25rem;
-                    border: 0;
-                }
-                span {
-                    font-family: icon;
-                    font-size: 0.4rem;
-                    color: #e7e7e7;
-                    float: right;
-                }
-            }
-            button{
-                min-width:0;
-                width:auto;
-                height:0.6rem;
-                margin:0;
-                padding:0;
-                font-size:0.3rem;
-                border:0;   
-                @include color;
-                margin-top:0.1rem;
-                background-color:transparent;
-                box-shadow:none !important;
             }
         }
     }
@@ -236,16 +169,29 @@ ion-header {
 
 ion-tabs {
     .show-tabbar {
-        height: 0.98rem;
+        height:1rem;
         a.tab-button {
+            background-repeat: no-repeat;
+            background-size: 12%;
+            background-position: center 10%;
+            &:nth-child(1){
+                background-image:url(../assets/image/index/11.png);
+                &.tab-button[aria-selected=true]{
+                     background-image:url(../assets/image/index/1.png);
+                }
+            }
+            &:nth-child(2){
+                background-image:url(../assets/image/index/2.png);
+                &.tab-button[aria-selected=true]{
+                     background-image:url(../assets/image/index/22.png);
+                }
+            }
             min-height: 0;
             @include fonts;
             @include fontf;
-            ion-icon.tab-button-icon {
-                font-size:0.6rem;
-            }
             .tab-button-text {
                 @include fonts;
+                line-height:1.4rem !important;
             }
         }
     }
@@ -268,4 +214,63 @@ ion-content{
 .ion-page >ion-content{
     position:relative;
     padding:0 !important;
+}
+
+ng-component{
+    ion-tabs{
+        .show-tabbar{
+            a{
+                display:inline-block;
+                height:100%;
+                line-height:0.8rem;
+            }
+            .tab-button[aria-selected=false]{
+                    border-bottom:0.05rem solid white;
+            }
+            .tab-button[aria-selected=true]{
+                .tab-button-text{
+                    transform: none;
+                }
+                color:rgba(60, 60, 60, 0.7);
+                border-bottom:0.05rem solid #38b63a;
+            }
+
+        }
+    }
+}
+.popover-md{
+    .popover-wrapper{
+        .popover-content{
+            top:78px !important;
+        }
+    }
+}
+ion-popover{
+    .popover-wrapper{
+        .popover-arrow{
+            display:none;
+        }
+        .popover-content{
+            width:5.09rem;
+            border-radius: 0;
+            background-color:transparent;
+            ion-list{
+                .item{
+                    min-height:0;
+                    width:100%;
+                    height:0.6rem;
+                    font-size:0.3rem;
+                    color:#333333;
+                    .item-inner{
+                        border:none;
+                        ion-radio{
+                            .radio-icon{
+                                display:none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
