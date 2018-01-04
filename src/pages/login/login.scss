@@ -1,0 +1,93 @@
+login{
+    ion-content{
+        margin-top:0.88rem;
+        .scroll-content{
+            padding:1rem 1.07rem 0 1.07rem !important;
+            form{
+                .list{
+                    .item{
+                        margin-bottom:0.4rem;
+                        width:5.38rem;
+                        height:0.72rem;
+                        border:1px solid #38b63a;   
+                        min-height:0;
+                        padding:0;
+                        border-radius:5px;
+                        padding:0.06rem 0 0.06rem 0.11rem;
+                        &.code{
+                            // display:inline-block;
+                            width:3.66rem;
+                        }
+                        &.code_img{
+                            padding:0;
+                            display:inline-block;
+                            width:1.54rem;
+                            .item-inner{
+                                padding:0;
+                                height:100%;
+                                margin:0;
+                                .input-wrapper{
+                                    height:100%;
+                                    .label{
+                                        margin:0;
+                                        height:100%;
+                                        width:100%;
+                                        line-height:0;
+                                        ion-img{
+                                            width:100%;
+                                            height:100%;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                      .user_icon{
+                        border-radius:50%;
+                        background-color:#38b63a;
+                        border:1px solid white;
+                        color:white;
+                        box-shadow:0 0 10px rgba(56,182,58,0.5)
+                      }
+                      .close_icon{
+                          color:red;
+                          font-size:0.6rem;
+                          line-height:0.6rem;
+                      }
+                      ion-icon{
+                        text-align:center;
+                        width:0.57rem;
+                        height:0.57rem;
+                        font-size:0.3rem;
+                        height:100%;
+                        margin:0;
+                        min-height:0;
+                        line-height:0.5rem;
+                      }  
+                      .item-inner{
+                          margin-left:0;
+                          background-image:url(../../assets/image/index/login_03.png);
+                          background-position:0.1rem;
+                          background-size:contain;
+                          background-repeat: no-repeat;
+                          .input-wrapper{
+                              ion-input{
+                                  height:100%;
+                                  line-height: 0;
+                                  input{
+                                      padding-left:0.35rem;
+                                      margin:0;
+                                      line-height:0;
+                                        vertical-align: text-top;
+                                      height:100%;
+                                      font-size:0.26rem;
+                                      color:#999999;
+                                  }
+                              }
+                          }
+                      }
+                    }
+                }
+            }
+        }
+    }   
+}

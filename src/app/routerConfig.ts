@@ -7,7 +7,7 @@ import { SearchPage } from '../pages/home/search/search';
 
 export const linkConfig: DeepLinkConfig = {
   links: [
-    { component: TabsPage, name: 'Tabs', segment: 'tab' },
+    // { component: TabsPage, name: 'Tabs', segment: 'tab' },
     // { component: HomePage, name: 'Home', segment: 'home' },
     // { component: TeamsPage, name: 'Teams', segment: 'teams' },
     // { component: TechPage, name: 'Tech', segment: 'tech' },

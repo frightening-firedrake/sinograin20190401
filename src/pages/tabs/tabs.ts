@@ -3,7 +3,6 @@ import { NavParams } from 'ionic-angular';
 
 import { ProjectPage } from '../project/project';
 import { HomePage } from '../home/home';
-import { Mypage } from '../my/my.component';
 
 
 @Component({
@@ -13,7 +12,6 @@ export class TabsPage {
 
   homeRoot = HomePage;
   projectRoot = ProjectPage;
-  myRoot = Mypage;
   // public id: number;
   // public selectTabIndex: number;
 

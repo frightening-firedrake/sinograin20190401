@@ -4,15 +4,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { TabsPage } from '../pages/tabs/tabs';
+import { loginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = TabsPage;
+  rootPage: any = loginPage;
 
   constructor(platform: Platform,geolocation: Geolocation, statusBar: StatusBar, splashScreen: SplashScreen) {
+
     platform.ready().then(() => {
 
       // get current position

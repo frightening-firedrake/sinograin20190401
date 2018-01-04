@@ -1,0 +1,31 @@
+<app-header title='登录'></app-header>
+<ion-content>
+    <form action="" (ngSubmit)="onSubmit(loginForm)" >
+        <ion-list>
+            <ion-item>
+                <!--lock-->
+                <ion-icon name='icon-test' class="user_icon" item-start></ion-icon>
+                <!---->
+                <ion-input type="text" placeholder="请输入您的账号"></ion-input>
+                <ion-icon name='ios-close-outline' class="close_icon" item-end color="secondary"></ion-icon>
+            </ion-item>
+            <ion-item>
+                <!--lock-->
+                <ion-icon name='lock' class="user_icon" item-start></ion-icon>
+                <!---->
+                <ion-input type="password" placeholder="请输入您的密码"></ion-input>
+                <ion-icon name='ios-close-outline' class="close_icon" item-end color="secondary"></ion-icon>
+            </ion-item>
+             <ion-item class="code">
+                <!--lock-->
+                <ion-icon name='verification-code' class="user_icon" item-start></ion-icon>
+                <!---->
+                <ion-input type="password" placeholder="请输入您的验证码"></ion-input>
+                <!--<ion-icon name='ios-close-outline' class="close_icon" item-end color="secondary"></ion-icon>-->
+            </ion-item>
+             <ion-item class="code_img">
+               <ion-img  src="assets/image/index/banner_03.png"></ion-img>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>
