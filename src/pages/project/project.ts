@@ -1,18 +1,75 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { projectViewPage } from './view/project_view';
+import { HomeService } from '../home/home.serve';
+
+import { safePage } from './safe/safe'
+
 
 @Component({
   selector: 'page-about',
   templateUrl: 'project.html'
 })
 export class ProjectPage {
-  genders:string;
-  public optionarr:any = [
-    "本库","XX分库","XX分库","XX分库","XX分库","XX分库","XX分库","XX分库","XX分库"
+  genders: string;
+  gendersNav:any = ""
+  public optionarr: any = [
+    "本库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库"
   ]
-  constructor(public navCtrl: NavController) {
+  gendrslist = [
+    {
+      id: 1,
+      name: "咸阳-玉米-110",
+      position: "4",
+      breen: "玉米",
+      stat: 2
+    },
+    {
+      id: 2,
+      name: "咸阳-玉米-510",
+      position: "4",
+      breen: "玉米",
+      stat: 1
+    },
+    {
+      id: 3,
+      name: "咸阳-玉米-150",
+      position: "77",
+      breen: "玉米",
+      stat: 1
+    },
+    {
+      id: 4,
+      name: "咸阳-玉米-10",
+      position: "57",
+      breen: "玉米",
+      stat: 2
+    }, {
+      id: 5,
+      name: "咸阳-玉米-4",
+      position: "3",
+      breen: "大米",
+      stat: 1
+    },
+
+  ]
+  constructor(public navCtrl: NavController, public Home: HomeService) {
+
+  }
+  ionViewWillEnter() {
+    this.Home.getgenders().subscribe((res) => {
+        this.gendersNav = res
+    })
+  }
+  // 不同点击，改变页面
+  setNavPush(key:any){
+    switch(this.gendersNav){
+      case 3:
+        this.navCtrl.push(safePage,{
+          "json":key
+        })
+      break;
+    }
   }
   // 下拉刷新
   doRefresh(refresher) {
@@ -23,8 +80,6 @@ export class ProjectPage {
   // 上啦加载
   doInfinite(infiniteScroll) {
     {
- 
-
       setTimeout(() => {
         infiniteScroll.complete();
       }, 500);

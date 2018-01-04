@@ -34,7 +34,8 @@ import { Utils } from '../providers/Utils';
     IonicModule.forRoot(MyApp, {
       backButtonText: " ",
       backButtonIcon: "arrow-back",
-      tabsHideOnSubPages: 'true'
+      tabsHideOnSubPages: 'true',
+       iconMode: 'ios',
     }, linkConfig),
     IonicStorageModule.forRoot({
       name: 'webapp',

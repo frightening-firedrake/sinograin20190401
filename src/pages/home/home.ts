@@ -13,52 +13,10 @@ import { NewListPage } from './newlist/newlist';
 })
 export class HomePage {
   public login:string = "在线"
-  constructor(public navCtrl: NavController) {
-
+  constructor(public navCtrl: NavController,public Home:HomeService ) {
   }
-  gotosearch() {
-    this.navCtrl.push(SearchPage);
-  }
-  introduce() {
-    this.navCtrl.push(IntroducePage)
-  }
-  support() {
-    window.localStorage.setItem('tech', 'support');
-    this.navCtrl.parent.select(2);
-  }
-  features() {
-    window.localStorage.setItem('tech', 'features');
-    this.navCtrl.parent.select(2);
-  }
-  framework() {
-    window.localStorage.setItem('teams', 'framework');
-    this.navCtrl.parent.select(3);
-  }
-  culture() {
-    window.localStorage.setItem('teams', 'culture');
-    this.navCtrl.parent.select(3);
-  }
-  move() {
-    window.localStorage.setItem('project', 'phone');
+  new(parpam){
+    this.Home.setgender(parpam)
     this.navCtrl.parent.select(1);
-  }
-  PC() {
-    window.localStorage.setItem('project', 'pc');
-    this.navCtrl.parent.select(1);
-  }
-  department() {
-    this.navCtrl.push(DepartmentPage)
-  }
-  advantage() {
-    window.localStorage.setItem('tech', 'advantage');
-    this.navCtrl.parent.select(2);
-  }
-  gotonewlist(param) {
-    this.navCtrl.push(NewListPage, {
-      params: {
-        title: param.title,
-        id: param.id
-      }
-    })
   }
 }

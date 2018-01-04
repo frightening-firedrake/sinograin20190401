@@ -1,0 +1,119 @@
+safe_speech{
+    ion-content{
+        top:0.88rem;
+        .scroll-content{
+            padding:0 !important;
+            padding-top:0.2rem !important;
+                padding-bottom: 1.3rem !important;
+            form{
+                position:relative;
+            }
+            .add{
+                width:1.64rem;
+                height:0.5rem;
+                font-size:0.3rem;
+                color:#58b481;
+                border:1px solid #58b481;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                margin:0;
+                right:0;
+                position:absolute;
+                bottom:1.45rem;
+            }
+            .sumbit{
+                height:0.9rem;
+                width:6rem;
+                margin:0 auto;
+                background-color:#38b63a;
+                display:block;
+                margin-top:1.07rem;
+                .button-inner{
+                    font-size:0.36rem;
+                }
+            }
+        }
+        .list{
+            margin-bottom:0.2rem; 
+            border-top:1px solid #dbdbdb;
+            border-bottom:1px solid #dbdbdb;
+            background-color:white;
+              padding:0 16px;
+            .item{
+                min-height:0;
+                padding:0;
+                height:0.99rem;
+                line-height:0.99rem;
+                font-size:0.3rem;
+                color:#999999;
+                border-bottom:1px solid #dbdbdb;
+                .item-inner{
+                    .input-wrapper{
+                        padding:0 0.65rem;
+                        .label{
+                            margin:0;
+                            span{
+                                float:right;
+                            }
+                        }
+                    }
+                }
+                &:last-child{
+                    border-bottom:none;
+                }   
+                }
+                &.problem{
+                    .item{
+                        height:auto;
+                         .item-inner{
+                        .input-wrapper{
+                            // padding-top:0.33rem;
+                            .label{
+                                color:#333333;
+                                font-size:0.3rem;
+                                    align-self: flex-start;
+                            }
+                            ion-textarea{
+                               height:2.7rem; 
+                               caret-color: #38b63a;
+                            //    line-height:0;
+                               textarea{
+                                   margin:0;
+                                   height:100%;
+                                //    line-height:1px;
+                                   padding-left:0.2rem;
+                                   font-size:0.3rem;
+                               }
+                            }
+                         
+                        }
+                    }
+                    &.phont{
+                             min-height: 1.84rem;
+                             .label{
+                                 ion-icon{
+                                     border:1px solid #38b63a;
+                                     width:1.6rem;
+                                     height:1.1rem;
+                                     text-align:center;
+                                     line-height:1.1rem;
+                                     color:#38b63a;
+                                     font-size:0.7rem;
+                                     margin-left:0.1rem;
+                                     vertical-align: text-top;
+                                 }
+                                 img{
+                                    width:1.6rem;
+                                    height:1.1rem;
+                                    margin-left:0.1rem;
+                                    vertical-align: text-top;
+                                    border:1px solid  #38b63a;
+                                 }
+                             }
+                          }
+                    }
+                }
+            }
+        }
+    
+}

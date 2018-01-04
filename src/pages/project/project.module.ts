@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicPageModule } from 'ionic-angular';
+import { HomeService } from '../home/home.serve';
+import { Camera } from '@ionic-native/camera';
 
 import { CommonsModule } from '../common/common.module';
 import { ProjectPage } from './project';
-import { projectViewPage } from './view/project_view';
+import { safePage } from './safe/safe'
+import { safeViewPage } from './safe/safe_view/safe_view'
 
 @NgModule({
     declarations: [
         ProjectPage,
-        projectViewPage
+        safePage,
+        safeViewPage
     ],
     imports: [
         CommonModule,
@@ -18,7 +22,12 @@ import { projectViewPage } from './view/project_view';
     ],
     entryComponents: [
         ProjectPage,
-        projectViewPage
+        safePage,
+        safeViewPage
+    ],
+     providers:[
+        HomeService,
+        Camera
     ]
 })
 export class ProjectModule {
