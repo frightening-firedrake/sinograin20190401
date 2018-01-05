@@ -4,12 +4,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import { loginPage } from '../pages/login/login'
 import { ProjectPage } from '../pages/project/project';
-import { SearchPage } from '../pages/home/search/search';
 
 export const linkConfig: DeepLinkConfig = {
   links: [
     { component: loginPage, name: 'login' ,segment: 'login' },
-    { component: TabsPage, name: 'Tabs', segment: 'tab' },
+    { component: TabsPage, name: 'Tabs', segment: 'tab', defaultHistory: [loginPage]},
     // { component: HomePage, name: 'Home', segment: 'home' },
     // { component: TeamsPage, name: 'Teams', segment: 'teams' },
     // { component: TechPage, name: 'Tech', segment: 'tech' },

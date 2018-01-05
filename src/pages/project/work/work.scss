@@ -1,0 +1,36 @@
+work{
+ion-header{
+    position:relative;
+    &:after{
+        background-image:none;
+    }
+    ion-navbar{
+        padding:0;
+        .toolbar-background{
+            background-color:#38b63a;
+        }
+        .toolbar-content{
+            position:relative;
+           ion-title{
+               .toolbar-title{
+                   width: 100%;
+                   font-size:0.36rem;
+                   color:white;
+                   font-weight: normal;
+                   text-align: center;
+               }
+           }
+           .label{
+               position:absolute;
+               right:0.2rem;
+                   margin:0;
+                   font-size:0.3rem;
+                   color:white;
+                   float:right;
+
+               }
+        }
+    }
+    
+}
+}

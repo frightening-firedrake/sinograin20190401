@@ -3,17 +3,24 @@ import { CommonModule } from '@angular/common';
 import { IonicPageModule } from 'ionic-angular';
 import { HomeService } from '../home/home.serve';
 import { Camera } from '@ionic-native/camera';
+import { _alertBomb } from '../common/_alert'
 
 import { CommonsModule } from '../common/common.module';
 import { ProjectPage } from './project';
 import { safePage } from './safe/safe'
 import { safeViewPage } from './safe/safe_view/safe_view'
+import { newSamp } from './new/new'
+import { workPage } from './work/work'
+import { workViewPage } from './work/work_view/work_view'
 
 @NgModule({
     declarations: [
         ProjectPage,
         safePage,
-        safeViewPage
+        safeViewPage,
+        newSamp,
+        workPage,
+        workViewPage
     ],
     imports: [
         CommonModule,
@@ -23,11 +30,15 @@ import { safeViewPage } from './safe/safe_view/safe_view'
     entryComponents: [
         ProjectPage,
         safePage,
-        safeViewPage
+        safeViewPage,
+        newSamp,
+        workPage,
+        workViewPage
     ],
      providers:[
         HomeService,
-        Camera
+        Camera,
+        _alertBomb
     ]
 })
 export class ProjectModule {

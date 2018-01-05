@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ActionSheetController, AlertController } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -15,8 +15,6 @@ export class safePage {
     lists=[1]
     constructor(
         public params: NavParams,
-        public Alert: ActionSheetController,
-        public alertCtrl: AlertController,
         public FormBuilder: FormBuilder,
         public camera: Camera, ) {
         this.data = this.params.get('json');
