@@ -353,7 +353,46 @@ derails {
                 }
                 .safe{
                     .list{
+                        &.problem{
+                    .item{
+                        // height:auto;
+                         .item-inner{
+                        .input-wrapper{
+                            // padding-top:0.33rem;
+                            .label{
+                                color:#333333;
+                                font-size:0.3rem;
+                                    align-self: flex-start;
+                            }
+                        }
+                    }
+                    &.phont{
+                             min-height: 1.84rem;
+                             .label{
+                                 ion-icon{
+                                     border:1px solid #38b63a;
+                                     width:1.6rem;
+                                     height:1.1rem;
+                                     text-align:center;
+                                     line-height:1.1rem;
+                                     color:#38b63a;
+                                     font-size:0.7rem;
+                                     margin-left:0.1rem;
+                                     vertical-align: text-top;
+                                 }
+                                 img{
+                                    width:1.6rem;
+                                    height:1.1rem;
+                                    margin-left:0.1rem;
+                                    vertical-align: text-top;
+                                    border:1px solid  #38b63a;
+                                 }
+                             }
+                          }
+                    }
+                }
                         .item{
+                            min-height:0;
                             .item-inner{
                                 .input-wrapper{
                                     .label{
