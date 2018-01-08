@@ -12,6 +12,7 @@ import { safeViewPage } from './safe/safe_view/safe_view'
 import { newSamp } from './new/new'
 import { workPage } from './work/work'
 import { workViewPage } from './work/work_view/work_view'
+import { detaildPage } from './details/details'
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { workViewPage } from './work/work_view/work_view'
         safeViewPage,
         newSamp,
         workPage,
-        workViewPage
+        workViewPage,
+        detaildPage
     ],
     imports: [
         CommonModule,
@@ -33,7 +35,8 @@ import { workViewPage } from './work/work_view/work_view'
         safeViewPage,
         newSamp,
         workPage,
-        workViewPage
+        workViewPage,
+        detaildPage
     ],
      providers:[
         HomeService,

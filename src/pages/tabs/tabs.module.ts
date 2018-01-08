@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
+import { HomeService } from '../home/home.serve';
+
 
 import { TabsPage } from "./tabs";
 import { ProjectPage } from '../project/project';
@@ -15,7 +17,7 @@ import { ProjectPage } from '../project/project';
   entryComponents: [
       TabsPage
       ],
-  providers: [],
+  providers: [HomeService],
 })
 export class TabModule {
 }

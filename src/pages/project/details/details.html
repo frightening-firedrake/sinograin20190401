@@ -1,0 +1,331 @@
+<app-header title='扦样列表详情'></app-header>
+<ion-header class="details_header">
+    <ion-segment [(ngModel)]="classify">
+        <ion-segment-button value="new">
+            扦样信息
+        </ion-segment-button>
+        <ion-segment-button value="work">
+            工作底稿
+        </ion-segment-button>
+        <ion-segment-button value="safe">
+            安全报告
+        </ion-segment-button>
+    </ion-segment>
+</ion-header>
+<ion-content>
+
+
+    <div [ngSwitch]="classify" class="classify">
+        <div class="new" *ngSwitchCase="'new'">
+            <ion-list class="new_informations" *ngIf="false">
+                <ion-item class="new_information">
+                    <ion-icon name="xinjian"></ion-icon>
+                    <p>立即创建扦样</p>
+                </ion-item>
+            </ion-list>
+            <div>
+                <ion-list>
+                    <button type="button" ion-item>
+                <span class="span_title">创建时间:</span>
+                <span>2017.12.12</span>
+            </button>
+                    <button type="button" ion-item>
+                <span class="span_title">状态:</span>
+                <span>未扦样</span>
+            </button>
+                    <button type="button" class="num" ion-item>
+                <span class="span_title">扦样编号:</span>
+                <span>咸阳-玉米-110</span>
+            </button>
+                    <button type="button" ion-item>
+                <span class="span_title">货位号:</span>
+                <span>慢水-1</span>
+            </button>
+                </ion-list>
+                <ion-list>
+                    <button type="button" ion-item>
+                <span class="span_title">品牌:</span>
+                <span>玉米</span>
+            </button>
+                    <button type="button" ion-item>
+                <span class="span_title">性质:</span>
+                <span>ZC</span>
+            </button>
+                    <button type="button" class="num" ion-item>
+                <span class="span_title">代表数量(吨):</span>
+                <span>22000</span>
+            </button>
+                    <button type="button" ion-item>
+                <span class="span_title">产地:</span>
+                <span>山西</span>
+            </button>
+                </ion-list>
+                <ion-list>
+                    <button type="button" ion-item>
+                <span class="span_title">收获年度:</span>
+                <span>2017</span>
+            </button>
+                    <button type="button" ion-item>
+                <span class="span_title">入库时间:</span>
+                <span>2017.12</span>
+            </button>
+                    <button type="button" class="num" ion-item>
+                <span class="span_title">扦样日期:</span>
+                <span>2017.12.12</span>
+            </button>
+                    <button type="button" ion-item>
+                <span class="span_title">备注:</span>
+                <span>秋季普查</span>
+            </button>
+                </ion-list>
+                <button ion-button color="secondary" class="sumbit">打印条形码</button>
+            </div>
+        </div>
+        <div *ngSwitchCase="'work'" class="work">
+            <ion-list class="new_informations" *ngIf="false">
+                <ion-item class="new_information">
+                    <ion-icon name="xinjian"></ion-icon>
+                    <p>立即创建工作底稿</p>
+                </ion-item>
+            </ion-list>
+            <div>
+                <ion-list>
+                    <button type="button" ion-item>
+                <span class="title_span">货位号:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" class="fixed" ion-item>
+                <span class="title_span">品种:</span>
+               <span>111</span>
+            </button>
+                    <button type="button" ion-item>
+                <span class="title_span">性质:</span>
+                <span>ZC</span>
+            </button>
+                    <button type="button" ion-item>
+                <span class="title_span">所在库区:</span>
+                <span>99</span>
+            </button>
+                    <button type="button" ion-item>
+                <span class="title_span">仓库类型:</span>
+                <span>999</span>
+                </button>
+                    <button type="button" ion-item>
+                <span class="title_span">收获年度:</span>
+                <span>111</span>
+                </button>
+                    <button type="button" ion-item class="num">
+                <span class="title_span">保管帐数量(kg):</span>
+               <span>111</span>
+                </button>
+                    <button type="button" ion-item>
+                <span class="title_span">质量等级:</span>
+                <span>111</span>
+               
+                </button>
+                    <!--这里的复选框有问题，稍后解决-->
+                    <button type="button" ion-item>
+                <span class="title_span">入仓方式:</span>
+            </button>
+                </ion-list>
+                <ion-list class="lists_input">
+                    <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">粮食入库质量:</span>
+                </button>
+                    <button type="button" ion-item class="num first_item no_border">
+                <span class="title_span">容重（g/l）:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num ">
+                <span class="title_span">水分（%）:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num ">
+                <span class="title_span">杂质（%）:</span>
+                <span>111</span>
+            </button>
+                </ion-list>
+                <ion-list class="lists_input">
+                    <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">实测入库质量:</span>
+                </button>
+                    <button type="button" ion-item class="num first_item no_border">
+                <span class="title_span">容重（g/l）:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num ">
+                <span class="title_span">水分（%）:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num ">
+                <span class="title_span">杂质（%）:</span>
+              <span>111</span>
+            </button>
+                </ion-list>
+                <ion-list class="lists_input">
+                    <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">粮堆形状及基本尺寸:</span>
+
+                </button>
+                    <ion-item class="list_img">
+                        <ion-img src="assets/image/index/banner_03.png"></ion-img>
+                    </ion-item>
+                    <button type="button" ion-item class="num first_item no_border">
+                <span class="title_span">长（m）:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num ">
+                <span class="title_span">宽（m）:</span>
+               <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num ">
+                <span class="title_span">高（m）:</span>
+                <span>111</span>
+            </button>
+                </ion-list>
+                <ion-list class="lists_input">
+                    <button type="button" ion-item class="list_input ">
+                <span class="title_span title_span_font">1.计算粮堆体积:</span>
+                </button>
+                    <button type="button" ion-item class="num first_item no_border long_item">
+                <span class="title_span">粮堆测量体积（m3）:</span>
+               <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num long_item">
+                <span class="title_span">需要扣除体积（m3）:</span>
+                 <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num long_item">
+                <span class="title_span">粮堆实体体积（m3）:</span>
+               <span>111</span>
+            </button>
+                </ion-list>
+                <ion-list class="lists_input">
+                    <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">2.计算粮堆平均密度:</span>
+                </button>
+                    <button type="button" ion-item class="no_border first_item first_item_font">
+                <ion-label>标准容重器法√</ion-label>
+                 <!--<ion-input type="number"></ion-input>-->
+            </button>
+                    <button type="button" ion-item class="num  data long_item">
+                <span class="title_span">粮食容重（g/l）:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num data long_item">
+                <span class="title_span">校正后修正系数:</span>
+               <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num data long_item">
+                <span class="title_span">粮堆平均密度（kg/m）:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="no_border first_item first_item_font">
+                <ion-label>特制大容器法□</ion-label>
+                 <!--<ion-input type="number"></ion-input>-->
+            </button>
+                    <button type="button" ion-item class="num first_item no_border long_item">
+                <span class="title_span">单位体积粮食重量(kg/m):</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num long_item">
+                <span class="title_span">校正后修正系数:</span>
+               <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num long_item">
+                <span class="title_span">粮堆平均密度(kg/m):</span>
+               <span>111</span>
+            </button>
+                </ion-list>
+
+                <ion-list class="lists_input">
+                    <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">3.计算粮食数量:</span>
+                </button>
+                    <button type="button" ion-item class="num  data long_item no_border first_item">
+                <span class="title_span">测量计算数(kg):</span>
+                 <span>111</span>
+            </button>
+                    <button type="button" ion-item class="no_border first_item first_item_font">
+                <ion-label>应记粮食损耗(kg)</ion-label>
+                 <!--<ion-input type="number"></ion-input>-->
+            </button>
+                    <button type="button" ion-item class="num long_item">
+                <span class="title_span">水分减量:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num long_item">
+                <span class="title_span">保管自然损耗:</span>
+                 <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num long_item">
+                <span class="title_span">合计:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">检查计算数(kg):</ion-label>
+                <span>111</span>
+            </button>
+                </ion-list>
+
+                <ion-list class="lists_input">
+                    <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">4.认定粮食实际数量:</span>
+                </button>
+                    <button type="button" ion-item class="no_border first_item first_item_font">
+                <ion-label>检查计算数与保管账数量比较</ion-label>
+                 <!--<ion-input type="number"></ion-input>-->
+            </button>
+                    <button type="button" ion-item class="num  data long_item">
+                <span class="title_span">差数(kg):</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num data long_item">
+                <span class="title_span">差率(%):</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num data long_item">
+                <span class="title_span">账实是否相符:</span>
+                <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num long_item">
+                <span class="title_span">粮食实际数量(kg):</span>
+               <span>111</span>
+            </button>
+                    <button type="button" ion-item class="num long_item">
+                <span class="title_span">账实不符原因:</span>
+                <span>111</span>
+            </button>
+                </ion-list>
+                <ion-list>
+                    <button type="button" ion-item class="num text_left">
+                <span class="title_span">备注:</span>
+               <span>111</span>
+            </button>
+                </ion-list>
+                <button ion-button large color="secondary" class="sumbit" type="submit">提交</button>
+            </div>
+        </div>
+        <div *ngSwitchCase="'safe'" class="safe">
+            <ion-list class="new_informations" *ngIf="false">
+                <ion-item class="new_information">
+                    <ion-icon name="xinjian"></ion-icon>
+                    <p>立即创建安全报告</p>
+                </ion-item>
+            </ion-list>
+            <div>
+                <ion-list class="position">
+                    <ion-item>
+                        被查库点:
+                        <span>111</span>
+                    </ion-item>
+                    <ion-item>
+                        货位号:
+                        <span>111</span>
+                    </ion-item>
+                </ion-list>
+                 <button ion-button  large color="secondary" class="sumbit" type="submit">提交</button>
+            </div>
+        </div>
+    </div>
+</ion-content>

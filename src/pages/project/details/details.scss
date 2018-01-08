@@ -1,0 +1,373 @@
+derails {
+    .details_header {
+        top: 0.88rem;
+        height: auto;
+        position: relative;
+        .segment {
+            background-color: white;
+            .segment-button {
+                height: 1rem;
+                font-size: 0.3rem;
+                color: #333333;
+                line-height: 1rem;
+                border-width: 4px;
+                border-color: white;
+                &.segment-activated {
+                    border-color: #38b63a;
+                }
+            }
+        }
+        &:after {
+            content: none;
+        }
+    }
+    ion-content {
+        // top:1.6rem;
+        // margin-top:0.2rem;
+        .scroll-content {
+            // top:0.88rem;
+            //  margin-top:0.2rem !;
+            padding-bottom: 1.2rem;
+            .classify {
+                .new,.work,.safe{
+                .list.new_informations {
+                    margin:0;
+                    border:none;
+                    padding:0;
+                    .item.new_information {
+                        height:auto;
+                        min-height: 0;
+                        padding:0;
+                        padding-bottom: 0.7rem;
+                        line-height:0;
+                        padding-top: 0.7rem;
+                        .item-inner {
+                            padding:0;
+                            .input-wrapper {
+                                padding:0;
+                                .label {
+                                    text-align: center;
+                                    margin: 0;
+                                    ion-icon {
+                                        width: 1.7rem;
+                                        height: 1.7rem;
+                                        border-radius: 50%;
+                                        background-color: #38b63a;
+                                        color: white;
+                                        font-size: 1rem;
+                                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+                                        line-height: 1.7rem;
+                                    }
+                                    p {
+                                        margin:0;
+                                        margin-top: 0.3rem;
+                                        font-size: 0.32rem;
+                                        color: #38b63a;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                }
+                .sumbit {
+                    height: 0.9rem;
+                    width: 6rem;
+                    margin: 0 auto;
+                    background-color: #38b63a;
+                    display: block;
+                    margin-top: 0.4rem;
+                    .button-inner {
+                        font-size: 0.36rem;
+                    }
+                }
+                // margin-top:0.2rem;
+                .new {
+                    .list {
+                        margin-bottom: 0.2rem;
+                        border-top: 1px solid #dbdbdb;
+                        border-bottom: 1px solid #dbdbdb;
+                        background-color: white;
+                        padding: 0 0.35rem;
+                        .item {
+                            min-height: 0;
+                            padding: 0;
+                            height: 0.99rem;
+                            line-height: 0.99rem;
+                            font-size: 0.3rem;
+                            color: #999999;
+                            border-bottom: 1px solid #dbdbdb;
+                            .item-inner {
+                                .input-wrapper {
+                                    // padding: 0 0.65rem;
+                                    padding-right: 0;
+                                    ion-datetime {
+                                        padding: 0;
+                                        line-height: 0.99rem;
+                                        text-align: left;
+                                        // margin-right:1rem;
+                                    }
+                                    .label {
+                                        margin: 0;
+                                        .span_title {
+                                            float: left;
+                                            text-align: right;
+                                            width: 1.7rem;
+                                        }
+                                        span {
+                                            color: #333333;
+                                            font-size: 0.3rem;
+                                            float: right;
+                                        }
+                                    }
+                                }
+                                button {
+                                    margin: 0;
+                                    height: 100%;
+                                    .button-inner {
+                                        ion-icon {
+                                            font-weight: normal;
+                                            height: 100%;
+                                            font-size: 0.5rem;
+                                            line-height: 0.99rem;
+                                            color: #c8c8c8;
+                                        }
+                                    }
+                                }
+                            }
+                            &:last-child {
+                                border-bottom: none;
+                            }
+                            &.num {
+                                .item-inner {
+                                    .input-wrapper {
+                                        padding-left: 0;
+                                        ion-input {
+                                            height: 100%;
+                                            input {
+                                                height: 100%;
+                                                margin: 0;
+                                                padding-left: 50%;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &.data {
+                                .item-inner {
+                                    .input-wrapper {
+                                        padding-left: 0.65rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .work {
+                    .list {
+                        margin: 0;
+                        margin-top: 0.2rem;
+                        border-top: 1px solid #dbdbdb;
+                        border-bottom: 1px solid #dbdbdb;
+                        padding: 0 0.35rem;
+                        background-color: white;
+                        border-bottom: 1px solid #dbdbdb;
+                        .item {
+                            &.activated {
+                                background-color: transparent;
+                            }
+                            min-height: 0;
+                            padding: 0;
+                            height: 0.99rem;
+                            line-height: 0.99rem;
+                            font-size: 0.3rem;
+                            color: #666666;
+                            border-bottom: 1px solid #dbdbdb;
+                            .item-inner {
+                                padding-right: 0.55rem;
+                                height: 100%;
+                                .input-wrapper {
+                                    // padding: 0 0.65rem;
+                                    padding-right: 0;
+                                    ion-datetime {
+                                        padding: 0;
+                                        line-height: 0.99rem;
+                                        text-align: left;
+                                        // margin-right:1rem;
+                                    }
+                                    .label {
+                                        margin: 0;
+                                        .title_span {
+                                            width: 2.13rem;
+                                            text-align: right;
+                                            float: left;
+                                        }
+                                        span {
+                                            color: #333333;
+                                            font-size: 0.3rem;
+                                            float: right;
+                                        }
+                                    }
+                                }
+                                button {
+                                    margin: 0;
+                                    height: 100%;
+                                    .button-inner {
+                                        ion-icon {
+                                            font-weight: normal;
+                                            height: 100%;
+                                            font-size: 0.5rem;
+                                            line-height: 0.99rem;
+                                            color: #c8c8c8;
+                                        }
+                                    }
+                                }
+                            }
+                            &:last-child {
+                                border-bottom: none;
+                                .item-inner {
+                                    border-bottom: none !important;
+                                }
+                            }
+                            &:first-child {
+                                .item-inner {
+                                    border-top: none !important;
+                                }
+                            }
+                            &.num_data {
+                                .item-inner {
+                                    .input-wrapper {
+                                        padding-left: 0.43rem;
+                                    }
+                                }
+                            }
+                            &.num {
+                                .item-inner {
+                                    .input-wrapper {
+                                        // padding-left: 0.15rem;
+                                        ion-input {
+                                            height: 100%;
+                                            input {
+                                                height: 100%;
+                                                margin: 0;
+                                                text-align: right;
+                                                padding-left: 50%;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &.data {
+                                .item-inner {
+                                    .input-wrapper {
+                                        padding-left: 0.65rem;
+                                    }
+                                }
+                            }
+                            &.list_input {
+                                background-color: #f2f2f2;
+                                .item-inner {
+                                    border-bottom: none !important;
+                                    .input-wrapper {
+                                        .label {
+                                            span {
+                                                font-size: 0.3rem;
+                                                color: #000000;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &.text_left {
+                                .item-inner {
+                                    .input-wrapper {
+                                        padding: 0;
+                                        .title_span {
+                                            text-align: left;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        &.lists_input {
+                            margin-top: 0;
+                            border-top: none;
+                            padding: 0;
+                            .item {
+                                padding: 0 0.35rem;
+                                border: none;
+                                .item-inner {
+                                    border-top: 1px solid #dbdbdb;
+                                    .input-wrapper {
+                                        //    .label.title_span{
+                                        //        width:3.6rem;
+                                        //    }
+                                    }
+                                }
+                                &.first_item_font {
+                                    color: #000000;
+                                }
+                                &.first_item {
+                                    border-top: 1px solid #dbdbdb
+                                }
+                                &.no_border {
+                                    .item-inner {
+                                        border-top: none !important;
+                                    }
+                                }
+                                &.long_item {
+                                    .item-inner {
+                                        .input-wrapper {
+                                            padding: 0;
+                                            .title_span {
+                                                width: 3.6rem;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .list_img {
+                                height: 3.2rem;
+                                padding: 0;
+                                .item-inner {
+                                    .input-wrapper {
+                                        .label {
+                                            width: 100%;
+                                            height: 100%;
+                                            ion-img {
+                                                width: 100%;
+                                                height: 100%;
+                                                background-color: transparent;
+                                                img {
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    display: block;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .safe{
+                    .list{
+                        .item{
+                            .item-inner{
+                                .input-wrapper{
+                                    .label{
+                                        color:#000000;
+                                    }
+                                    span{
+                                        color:#000000;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

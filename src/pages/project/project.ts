@@ -6,6 +6,7 @@ import { HomeService } from '../home/home.serve';
 import { safePage } from './safe/safe'
 import { newSamp } from './new/new'
 import { workPage } from './work/work'
+import { detaildPage } from './details/details'
 
 @Component({
   selector: 'page-about',
@@ -68,6 +69,11 @@ export class ProjectPage {
         break;
         case 2:
           this.navCtrl.push(workPage,{
+            "json":key
+          })
+          break;
+         default:
+          this.navCtrl.push(detaildPage,{
             "json":key
           })
     }

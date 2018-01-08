@@ -13,7 +13,7 @@ export class HomePage {
   constructor(public navCtrl: NavController,public Home:HomeService, public viewCtrl: ViewController
       ,public appCtrl: App) {
   }
-  new(parpam){
+  newpage(parpam){
     this.Home.setgender(parpam)
     this.navCtrl.parent.select(1);
   }
