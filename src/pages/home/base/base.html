@@ -1,0 +1,13 @@
+<app-header title='选择库点'></app-header>
+<ion-content>
+    <ion-list>
+        <ion-item class="title">
+            <span>选择被查库点</span>
+        </ion-item>
+    </ion-list>
+    <ion-list class="base_list">
+        <button  ion-item (click)="newpage(i)" *ngFor="let list of lists;let i=index">
+            <span>{{list.text}}</span>
+        </button>
+    </ion-list>
+</ion-content>

@@ -1,4 +1,4 @@
-import { Component,OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 
@@ -8,12 +8,11 @@ import { NavController } from 'ionic-angular';
     templateUrl: 'headerPage.html'
 })
 export class HeaderPage implements OnInit {
-    @Input() title: string ;
+    @Input() title: string;
     constructor(public nav: NavController) {
-        
+
     }
     ngOnInit() {
-        
-    }
 
+    }
 }

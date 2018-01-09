@@ -19,13 +19,30 @@
 			<ion-select placeholder="选择被查库点" [(ngModel)]="genders" interface="popover">
 				<ion-option [value]="i" *ngFor="let list of optionarr;index as i ">{{list}}{{i}}</ion-option>
 			</ion-select>
-			<ion-label>筛选
+			<ion-label class="search_state">筛选
 				<ion-icon name="arrow-up"></ion-icon>
 			</ion-label>
 		</ion-item>
+
 	</ion-toolbar>
 </ion-header>
 <ion-content>
+	<div class="zhezhao"></div>
+	<div class="screen">
+		<div class="state">
+			<span>状态:</span>
+		</div>
+		<div class="buttons"> 
+			<button ion-button class="active">全部</button>
+			<button ion-button>未扦样</button>
+			<button ion-button>已扦样</button>
+		</div>
+		<div class="search_screen">
+			<ion-searchbar cancelButtonText="wwww" placeholder="请输入品种进行搜索"></ion-searchbar>
+			<button ion-button block outline color="secondary"  class="submit">完成</button>
+		</div>
+		
+	</div>
 	<ion-refresher (ionRefresh)="doRefresh($event)">
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>

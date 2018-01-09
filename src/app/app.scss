@@ -596,7 +596,8 @@ ion-alert.outsuccse {
 				text-align: center;
 				height: 100%;
 				span {
-					justify-content: space-evenly;
+					padding-right:20%;
+					// justify-content: space-evenly;
 					text-align: center;
 				}
 				&:first-child {
@@ -605,6 +606,9 @@ ion-alert.outsuccse {
 					height: 69%;
 					border-right: 1px solid rgba(153, 153, 153, 0.2);
 					line-height: 0.8rem;
+					span{
+						padding-right:30%;
+					}
 				}
 				&:last-child {
 					width: 3.56rem;

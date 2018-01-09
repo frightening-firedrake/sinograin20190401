@@ -3,6 +3,7 @@ import { NavController,App, ViewController } from 'ionic-angular';
 
 import { HomeService } from './home.serve';
 import { loginPage } from '../login/login'
+import { basePage } from './base/base'
 
 @Component({
   selector: 'page-home',
@@ -16,6 +17,9 @@ export class HomePage {
   newpage(parpam){
     this.Home.setgender(parpam)
     this.navCtrl.parent.select(1);
+  }
+  newyang(){
+    this.navCtrl.push(basePage)
   }
 
 }

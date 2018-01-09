@@ -29,46 +29,48 @@ derails {
             //  margin-top:0.2rem !;
             padding-bottom: 1.2rem;
             .classify {
-                .new,.work,.safe{
-                .list.new_informations {
-                    margin:0;
-                    border:none;
-                    padding:0;
-                    .item.new_information {
-                        height:auto;
-                        min-height: 0;
-                        padding:0;
-                        padding-bottom: 0.7rem;
-                        line-height:0;
-                        padding-top: 0.7rem;
-                        .item-inner {
-                            padding:0;
-                            .input-wrapper {
-                                padding:0;
-                                .label {
-                                    text-align: center;
-                                    margin: 0;
-                                    ion-icon {
-                                        width: 1.7rem;
-                                        height: 1.7rem;
-                                        border-radius: 50%;
-                                        background-color: #38b63a;
-                                        color: white;
-                                        font-size: 1rem;
-                                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-                                        line-height: 1.7rem;
-                                    }
-                                    p {
-                                        margin:0;
-                                        margin-top: 0.3rem;
-                                        font-size: 0.32rem;
-                                        color: #38b63a;
+                .new,
+                .work,
+                .safe {
+                    .list.new_informations {
+                        margin: 0;
+                        border: none;
+                        padding: 0;
+                        .item.new_information {
+                            height: auto;
+                            min-height: 0;
+                            padding: 0;
+                            padding-bottom: 0.7rem;
+                            line-height: 0;
+                            padding-top: 0.7rem;
+                            .item-inner {
+                                padding: 0;
+                                .input-wrapper {
+                                    padding: 0;
+                                    .label {
+                                        text-align: center;
+                                        margin: 0;
+                                        ion-icon {
+                                            width: 1.7rem;
+                                            height: 1.7rem;
+                                            border-radius: 50%;
+                                            background-color: #38b63a;
+                                            color: white;
+                                            font-size: 1rem;
+                                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+                                            line-height: 1.7rem;
+                                        }
+                                        p {
+                                            margin: 0;
+                                            margin-top: 0.3rem;
+                                            font-size: 0.32rem;
+                                            color: #38b63a;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
                 }
                 .sumbit {
                     height: 0.9rem;
@@ -351,55 +353,55 @@ derails {
                         }
                     }
                 }
-                .safe{
-                    .list{
-                        &.problem{
-                    .item{
-                        // height:auto;
-                         .item-inner{
-                        .input-wrapper{
-                            // padding-top:0.33rem;
-                            .label{
-                                color:#333333;
-                                font-size:0.3rem;
-                                    align-self: flex-start;
+                .safe {
+                    .list {
+                        &.problem {
+                            .item {
+                                // height:auto;
+                                .item-inner {
+                                    .input-wrapper {
+                                        // padding-top:0.33rem;
+                                        .label {
+                                            color: #333333;
+                                            font-size: 0.3rem;
+                                            align-self: flex-start;
+                                        }
+                                    }
+                                }
+                                &.phont {
+                                    min-height: 1.84rem;
+                                    .label {
+                                        ion-icon {
+                                            border: 1px solid #38b63a;
+                                            width: 1.6rem;
+                                            height: 1.1rem;
+                                            text-align: center;
+                                            line-height: 1.1rem;
+                                            color: #38b63a;
+                                            font-size: 0.7rem;
+                                            margin-left: 0.1rem;
+                                            vertical-align: text-top;
+                                        }
+                                        img {
+                                            width: 1.6rem;
+                                            height: 1.1rem;
+                                            margin-left: 0.1rem;
+                                            vertical-align: text-top;
+                                            border: 1px solid #38b63a;
+                                        }
+                                    }
+                                }
                             }
                         }
-                    }
-                    &.phont{
-                             min-height: 1.84rem;
-                             .label{
-                                 ion-icon{
-                                     border:1px solid #38b63a;
-                                     width:1.6rem;
-                                     height:1.1rem;
-                                     text-align:center;
-                                     line-height:1.1rem;
-                                     color:#38b63a;
-                                     font-size:0.7rem;
-                                     margin-left:0.1rem;
-                                     vertical-align: text-top;
-                                 }
-                                 img{
-                                    width:1.6rem;
-                                    height:1.1rem;
-                                    margin-left:0.1rem;
-                                    vertical-align: text-top;
-                                    border:1px solid  #38b63a;
-                                 }
-                             }
-                          }
-                    }
-                }
-                        .item{
-                            min-height:0;
-                            .item-inner{
-                                .input-wrapper{
-                                    .label{
-                                        color:#000000;
+                        .item {
+                            min-height: 0;
+                            .item-inner {
+                                .input-wrapper {
+                                    .label {
+                                        color: #000000;
                                     }
-                                    span{
-                                        color:#000000;
+                                    span {
+                                        color: #000000;
                                     }
                                 }
                             }

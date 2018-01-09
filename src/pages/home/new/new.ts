@@ -1,5 +1,5 @@
 import { Component,ViewChild  } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams,NavController } from 'ionic-angular';
 import { _alertBomb } from '../../common/_alert'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
@@ -19,7 +19,7 @@ export class newSamp {
     private addButton:any = {
         text:"确认"
     }
-    constructor(public params: NavParams, public _alert: _alertBomb, public FormBuilder: FormBuilder) {
+    constructor(public params: NavParams, public _alert: _alertBomb,public navCtrl:NavController, public FormBuilder: FormBuilder) {
         this.data = this.params.get('json');
         this.Sampling = FormBuilder.group({
             myDate:['', [Validators.minLength(4)]],
@@ -40,7 +40,7 @@ export class newSamp {
                 {
                     text:"返回",
                     handler:()=>{
-                        // console.log("")
+                       this.navCtrl.pop()
                     }
                 },
                 {
@@ -69,7 +69,7 @@ export class newSamp {
                 {
                     text:"返回",
                     handler:()=>{
-                        // console.log("")
+                       this.navCtrl.pop()
                     }
                 },
                 {
