@@ -46,8 +46,7 @@
 	<ion-refresher (ionRefresh)="doRefresh($event)">
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
-	<ion-grid>
-		<ion-row class="thead">
+	<ion-row class="thead">
 			<ion-col col-4>
 				<ion-label>扦样编号</ion-label>
 			</ion-col>
@@ -61,6 +60,8 @@
 				<ion-label>状态</ion-label>
 			</ion-col>
 		</ion-row>
+	<ion-grid>
+		
 		<ion-row class="tbody" (click)="setNavPush(list)" *ngFor="let list of gendrslist">
 			<ion-col col-4>
 				<ion-label>{{list.name}}</ion-label>

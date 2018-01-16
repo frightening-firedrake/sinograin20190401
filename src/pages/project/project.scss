@@ -176,7 +176,24 @@ page-about{
        .scroll-content{
            background-color:white !important;
            border-top:none !important;
-         
+         .thead{
+             text-align:center;
+             padding: 0 0.3rem ;
+             height:1rem;
+                   position:fixed;
+                   width:100%;
+                   z-index: 11;
+                   .col{
+                       line-height:1rem;
+                       padding:0;
+                       background-color:#509cfa;
+                       ion-label{
+                           margin:0;
+                           font-size:0.3rem;
+                           color:white;
+                       }
+                   }
+               }
            .grid{
                padding:0;
                  padding:0 0.3rem !important;
@@ -187,15 +204,7 @@ page-about{
                        text-align:center;
                    }
                }
-               .thead{
-                   .col{
-                       background-color:#509cfa;
-                       ion-label{
-                           font-size:0.3rem;
-                           color:white;
-                       }
-                   }
-               }
+               
                .tbody{
                    padding:0 0.01rem;
                    .col{

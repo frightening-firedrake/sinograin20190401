@@ -76,6 +76,8 @@ safe_speech{
                             ion-textarea{
                                height:2.7rem; 
                                caret-color: #38b63a;
+                                   line-height: 1.5;
+    padding-top: 0.26rem;
                             //    line-height:0;
                                textarea{
                                    margin:0;
@@ -90,7 +92,16 @@ safe_speech{
                     }
                     &.phont{
                              min-height: 1.84rem;
+                             padding-bottom:0.2rem;
+                             .input-wrapper{
+                                 padding-right:0;
+                             }
                              .label{
+                                     white-space: normal;
+                                     span{
+                                         float: left;
+                                     }
+                                    //  position: relative;
                                  ion-icon{
                                      border:1px solid #38b63a;
                                      width:1.6rem;
@@ -102,12 +113,17 @@ safe_speech{
                                      margin-left:0.1rem;
                                      vertical-align: text-top;
                                  }
+                                 .imgs{
+                                     float:left;
+                                     width:5.3rem;
+                                 }
                                  img{
                                     width:1.6rem;
                                     height:1.1rem;
                                     margin-left:0.1rem;
                                     vertical-align: text-top;
                                     border:1px solid  #38b63a;
+                                    
                                  }
                              }
                           }

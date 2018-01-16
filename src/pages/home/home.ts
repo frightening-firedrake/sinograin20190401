@@ -3,7 +3,7 @@ import { NavController,App, ViewController } from 'ionic-angular';
 
 import { HomeService } from './home.serve';
 import { loginPage } from '../login/login'
-import { basePage } from './base/base'
+import { noticePage } from './notice/notice'
 
 @Component({
   selector: 'page-home',
@@ -19,7 +19,7 @@ export class HomePage {
     this.navCtrl.parent.select(1);
   }
   newyang(){
-    this.navCtrl.push(basePage)
+    this.navCtrl.push(noticePage)
   }
 
 }

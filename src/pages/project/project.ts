@@ -23,106 +23,193 @@ export class ProjectPage {
     {
       id: 1,
       name: "咸阳-玉米-510",
-      safe:"被查库点",
-      position:5,
+      safe: "被查库点",
+      position: 5,
       breen: "玉米",
       stat: 2
     },
-      {
+    {
       id: 1,
       name: "咸阳-玉米-510",
-      safe:"被查库点",
-      position:5,
+      safe: "被查库点",
+      position: 5,
       breen: "玉米",
       stat: 1
     },
-      {
+    {
       id: 1,
       name: "咸阳-玉米-510",
-      safe:"被查库点",
-      position:5,
+      safe: "被查库点",
+      position: 5,
       breen: "玉米",
       stat: 2
     }, {
       id: 1,
       name: "咸阳-玉米-510",
-      safe:"被查库点",
-      position:5,
+      safe: "被查库点",
+      position: 5,
       breen: "玉米",
       stat: 2
     }, {
       id: 1,
       name: "咸阳-玉米-510",
-      safe:"被查库点",
-      position:5,
+      safe: "被查库点",
+      position: 5,
       breen: "玉米",
       stat: 2
     }, {
       id: 1,
       name: "咸阳-玉米-510",
-      safe:"被查库点",
-      position:5,
+      safe: "被查库点",
+      position: 5,
       breen: "玉米",
       stat: 2
     }, {
       id: 1,
       name: "咸阳-玉米-510",
-      safe:"被查库点",
-      position:5,
+      safe: "被查库点",
+      position: 5,
       breen: "玉米",
       stat: 2
     }, {
       id: 1,
       name: "咸阳-玉米-510",
-      safe:"被查库点",
-      position:5,
+      safe: "被查库点",
+      position: 5,
       breen: "玉米",
       stat: 2
     },
-    
+{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },{
+      id: 1,
+      name: "咸阳-玉米-510",
+      safe: "被查库点",
+      position: 5,
+      breen: "玉米",
+      stat: 2
+    },
 
   ]
   constructor(public navCtrl: NavController, public Home: HomeService) {
-    
+
   }
   ionViewWillEnter() {
-    $(".search_state").off().on("click",function(){
-      
+    $(".search_state").off().on("click", function () {
+
       $(".zhezhao").toggle()
       $(".screen").toggle()
+      $(".tabbar").toggle()
     })
-    $(".buttons").off().on("click","button",function(){
+    $(".buttons").off().on("click", "button", function () {
       $(".buttons button").removeClass("active")
       $(this).addClass("active")
+      $(".tabbar").toggle()
     })
-     $(".zhezhao").off().on("click",function(){
-       $(this).hide()
-         $(".screen").hide()
-     })
+    $(".zhezhao").off().on("click", function () {
+      $(this).hide()
+      $(".screen").hide()
+      $(".tabbar").toggle()
+    })
     this.Home.getgenders().subscribe((res) => {
       this.gendersNav = res
     })
   }
   // 不同点击，改变页面
   setNavPush(key: any) {
-   
+
     switch (this.gendersNav) {
       case 3:
         this.navCtrl.push(safePage, {
           "json": key,
-          "newpage":this.gendersNav
+          "newpage": this.gendersNav
         })
         break;
-        case 2:
-          this.navCtrl.push(workPage,{
-            "json":key,
-          "newpage":this.gendersNav
-          })
-          break;
-         default:
-          this.navCtrl.push(detaildPage,{
-            "json":key
-          })
+      case 2:
+        this.navCtrl.push(workPage, {
+          "json": key,
+          "newpage": this.gendersNav
+        })
+        break;
+      default:
+        this.navCtrl.push(detaildPage, {
+          "json": key
+        })
     }
   }
   // 下拉刷新

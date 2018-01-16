@@ -25,19 +25,22 @@ export class safeViewPage {
         this.key.emit(event)
     }
     cancel(index){
-        let AlertSheet = this.Alert.create({
+        console.log(index)
+        let AlertSheetcancl = this.Alert.create({
             title:null,
             buttons:[
                 {
-                    text:"取消",
+                    text:"删除",
                     handler:()=>{
                         this.imgdatalist = this.imgdatalist.filter(function(i,v){
                             return index!=v
                         })
+                        console.log(this.imgdatalist)
                     }
                 }
             ]
         }) 
+          AlertSheetcancl.present();
     }
     getphone() {
         let AlertSheet = this.Alert.create({

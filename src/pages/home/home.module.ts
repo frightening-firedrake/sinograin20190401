@@ -4,17 +4,16 @@ import { IonicModule } from 'ionic-angular';
 
 import { CommonsModule } from '../common/common.module';
 import { HomePage } from './home';
-import { newSamp } from './new/new'
-import { basePage } from './base/base'
-
+import { noticePage } from './notice/notice'
+import { noticeViewPage } from './notice/notice_view/notice_view'
 
 import { HomeService } from './home.serve';
 
 @NgModule({
     declarations: [
         HomePage,
-        newSamp,
-        basePage
+        noticePage,
+        noticeViewPage
     ],
     imports: [
         CommonModule,
@@ -24,8 +23,8 @@ import { HomeService } from './home.serve';
     ],
     entryComponents: [
         HomePage,
-        newSamp,
-        basePage
+        noticePage,
+        noticeViewPage
     ],
     providers:[
         HomeService

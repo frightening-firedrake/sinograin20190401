@@ -4,8 +4,11 @@
         <ion-textarea (keyup)="even($event)"  [value]="lists.textarea" name="textarea" placeholder="请描述问题" type="textarea"></ion-textarea>
     </ion-item>
     <ion-item class="phont">
-        图片:
-        <img [src]="image" *ngFor="let image of imgdatalist" (click)="cancel(index)" />
-        <ion-icon name="ios-add-circle-outline" (click)="getphone()"></ion-icon>
+        <span>图片:</span>
+        <div class="imgs">
+        <img [src]="image" *ngFor="let image of imgdatalist let i=index" (click)="cancel(i)" />
+            
+        <ion-icon name="ios-add-circle-outline" (click)="getphone()"></ion-icon>        
+        </div>
     </ion-item>
 </ion-list>

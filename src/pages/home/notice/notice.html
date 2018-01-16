@@ -1,0 +1,436 @@
+<app-header title='通知'></app-header>
+<ion-header class="notice_header">
+    <ion-segment [(ngModel)]="classify">
+        <ion-segment-button value="applye">
+            <div class="notice_box">
+                <p>申请通知<span></span></p>
+            </div>
+        </ion-segment-button>
+        <ion-segment-button value="work">
+            <div class="notice_box">
+                <p>系统通知<span></span></p>
+            </div>
+        </ion-segment-button>
+    </ion-segment>
+</ion-header>
+<ion-content>
+    <div [ngSwitch]="classify" class="classify">
+        <div class="applye" *ngSwitchCase="'applye'">
+            <ion-list>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item (click)="notice(applye)">
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                <ion-item>
+                    <ion-avatar item-start>
+                        <ion-icon name="shenqingchenggong"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{applye}}<span>太原库</span></h2>
+                    <p>请您尽快到电脑上查看迁样申请！</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div class="system" *ngSwitchCase="'work'">
+            <ion-list>
+                <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+                 <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+             <ion-item (click)="notice(system)">
+                    <ion-avatar item-start>
+                        <ion-icon class="system"  name="xitong"></ion-icon>
+                    </ion-avatar>
+                    <h2 class="system_h2">{{system}}<span>官方</span></h2>
+                    <p>您好，你需要升级到最新版本</p>
+                    <ion-note item-end>18/01/02</ion-note>
+                </ion-item>
+            
+            </ion-list>
+        </div>
+    </div>
+</ion-content>
