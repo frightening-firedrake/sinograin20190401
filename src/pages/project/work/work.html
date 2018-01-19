@@ -21,7 +21,7 @@
             <span>2017.12.12</span>
         </ion-item>
     </ion-list>
-    <form [formGroup]="Work">
+    <form [formGroup]="Work" (ngSubmit)="onSubmit(Work)">
         <ion-list>
             <button type="button" ion-item>
                 <span class="title_span">货位号:</span>
@@ -33,8 +33,8 @@
             <button type="button" class="fixed" ion-item (click)="strain()">
                 <span class="title_span">品种:</span>
                 <span>{{_strain}}</span>
-                <button ion-button icon-only item-end clear color="light">
-                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                <button ion-button icon-only item-end clear color="light" type="button">
+                    <ion-icon  name="ios-arrow-forward-outline"></ion-icon>
                 </button>
             </button>
             <button type="button" ion-item>

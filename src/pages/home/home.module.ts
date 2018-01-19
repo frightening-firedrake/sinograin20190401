@@ -8,6 +8,7 @@ import { noticePage } from './notice/notice'
 import { noticeViewPage } from './notice/notice_view/notice_view'
 
 import { HomeService } from './home.serve';
+import { _alertBomb } from '../common/_alert'
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { HomeService } from './home.serve';
         noticeViewPage
     ],
     providers:[
-        HomeService
+        HomeService,
+        _alertBomb
     ]
 })
 export class HomeModule {

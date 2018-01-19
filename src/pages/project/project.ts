@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,NavParams } from 'ionic-angular';
 
 import { HomeService } from '../home/home.serve';
 
@@ -166,7 +166,8 @@ export class ProjectPage {
     },
 
   ]
-  constructor(public navCtrl: NavController, public Home: HomeService) {
+  constructor(public navCtrl: NavController, public parpam: NavParams) {
+    this.gendersNav = this.parpam.get("num")
 
   }
   ionViewWillEnter() {
@@ -175,20 +176,21 @@ export class ProjectPage {
       $(".zhezhao").toggle()
       $(".screen").toggle()
       $(".tabbar").toggle()
+      $(".thead").toggle()
     })
-    $(".buttons").off().on("click", "button", function () {
+    $(".buttons").off().on("click", "button", function (e) {
       $(".buttons button").removeClass("active")
       $(this).addClass("active")
-      $(".tabbar").toggle()
     })
     $(".zhezhao").off().on("click", function () {
       $(this).hide()
       $(".screen").hide()
       $(".tabbar").toggle()
+      $(".thead").toggle()
     })
-    this.Home.getgenders().subscribe((res) => {
-      this.gendersNav = res
-    })
+    // this.Home.getgenders().subscribe((res) => {
+    //   this.gendersNav = res
+    // })
   }
   // 不同点击，改变页面
   setNavPush(key: any) {
@@ -222,8 +224,10 @@ export class ProjectPage {
   doInfinite(infiniteScroll) {
     {
       setTimeout(() => {
+
+        
         infiniteScroll.complete();
-      }, 500);
+      }, 5000);
     }
   }
 }

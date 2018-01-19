@@ -1,0 +1,28 @@
+<app-header title="修改密码"></app-header>
+<ion-content>
+    <form action="" (ngSubmit)="onSubmit(setpass)">
+        <ion-list>
+             <span stacked>请输入原始密码</span>
+            <ion-item>
+               
+
+                <ion-icon name='test' class="user_icon" item-start></ion-icon>
+                <!---->
+                <ion-input type="text"></ion-input>
+                <ion-icon name='ios-close-outline' class="close_icon" item-end color="secondary"></ion-icon>
+
+            </ion-item>
+        </ion-list>
+        <ion-list>
+             <span stacked>请输入新的密码</span>
+            <ion-item>
+               
+                <ion-icon name='lock' class="user_icon" item-start></ion-icon>
+                <!---->
+                <ion-input type="password"></ion-input>
+                <ion-icon name='ios-close-outline' class="close_icon" item-end color="secondary"></ion-icon>
+            </ion-item>
+        </ion-list>
+         <button ion-button full color="secondary">立即修改</button>
+    </form>
+</ion-content>

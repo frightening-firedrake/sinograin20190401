@@ -33,8 +33,10 @@ work {
     }
     ion-content {
         .scroll-content {
-            margin: 0 !important;
-            padding-bottom: 1.2rem !important;
+            // margin: 0 !important;
+            margin-top:0.88rem;
+            margin-bottom:0 !important;
+            // padding-bottom: 1.2rem !important;
             .list {
                 margin: 0;
                 margin-top: 0.2rem;

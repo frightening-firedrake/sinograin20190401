@@ -4,7 +4,6 @@ import { HomeService } from '../home/home.serve';
 
 
 import { TabsPage } from "./tabs";
-import { ProjectPage } from '../project/project';
 
 @NgModule({
 

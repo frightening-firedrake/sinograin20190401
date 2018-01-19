@@ -42,7 +42,8 @@ notice{
     }
     .content{
         .scroll-content{
-            padding-bottom:1rem;
+           margin-top:1.76rem !important;
+           margin-bottom:0 !important;
             .classify{
                 .applye,.system{
                    .list{
@@ -102,11 +103,11 @@ notice{
                                             text-align:center;
                                             margin-left:0.1rem;
                                             border-radius:3px;
-                                            padding:0.04rem 0.12rem;
-                        vertical-align: inherit;
+                                            padding:0.05rem 0.12rem;
+    vertical-align: top;
                                             line-height:0.24rem;
                                             // width:0.7rem;
-                                            height:0.24rem;
+                                            // height:0.24rem;
                                             display:inline-block;
 
                                       }

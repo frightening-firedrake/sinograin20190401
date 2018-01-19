@@ -4,7 +4,7 @@ safe_speech{
         .scroll-content{
             padding:0 !important;
             padding-top:0.2rem !important;
-                padding-bottom: 1.3rem !important;
+                // padding-bottom:   1.3rem !important;
             form{
                 position:relative;
             }
@@ -116,6 +116,7 @@ safe_speech{
                                  .imgs{
                                      float:left;
                                      width:5.3rem;
+                                     padding-bottom:0.2rem;
                                  }
                                  img{
                                     width:1.6rem;

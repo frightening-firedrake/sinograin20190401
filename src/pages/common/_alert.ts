@@ -15,7 +15,7 @@ export class _alertBomb {
             buttons: parpam.buttons,
             cssClass:parpam.cssClass
         });
-        if (addInput.length) {
+        if (addInput.length||addInput) {
             $(addInput).each(function (i, v) {
                 $alert.addInput(v);
             })

@@ -1,0 +1,27 @@
+<app-header title="个人中心"></app-header>
+<ion-content>
+	<ion-list class="list_img">
+		<ion-item-sliding>
+			<ion-item>
+				<ion-avatar item-start>
+					<img src="https://ionicframework.com/dist/preview-app/www/assets/img/venkman.jpg">
+				</ion-avatar>
+				<h2>扦样员（12345号）</h2>
+				<p><span></span>在线</p>
+			</ion-item>
+		</ion-item-sliding>
+	</ion-list>
+	<ion-list>
+		<button type="button" ion-item (click)="setpass()">
+			<ion-icon name="mima1" item-start></ion-icon>
+			修改密码
+			<ion-icon name="ios-arrow-forward-outline" item-end></ion-icon>
+        </button>
+		<button type="button" ion-item (click)="update()">
+			<ion-icon name="update" item-start></ion-icon>
+			检查升级
+			<ion-icon name="ios-arrow-forward-outline" item-end></ion-icon>
+        </button>
+	</ion-list>
+	<button class="sumbit" ion-button color="danger" clear>退出登录</button>
+</ion-content>

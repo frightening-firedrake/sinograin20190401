@@ -5,7 +5,6 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { loginPage } from '../pages/login/login';
-
 @Component({
   templateUrl: 'app.html'
 })

@@ -25,9 +25,22 @@
 		</ion-item>
 
 	</ion-toolbar>
+	<ion-row class="thead">
+			<ion-col col-4>
+				<ion-label>扦样编号</ion-label>
+			</ion-col>
+			<ion-col col-2>
+				<ion-label>货位号</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>品种</ion-label>
+			</ion-col>
+			<ion-col col-3>
+				<ion-label>状态</ion-label>
+			</ion-col>
+		</ion-row>
 </ion-header>
-<ion-content>
-	<div class="zhezhao"></div>
+<div class="zhezhao"></div>
 	<div class="screen">
 		<div class="state">
 			<span>状态:</span>
@@ -43,23 +56,12 @@
 		</div>
 		
 	</div>
+<ion-content>
+	
 	<ion-refresher (ionRefresh)="doRefresh($event)">
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
-	<ion-row class="thead">
-			<ion-col col-4>
-				<ion-label>扦样编号</ion-label>
-			</ion-col>
-			<ion-col col-2>
-				<ion-label>货位号</ion-label>
-			</ion-col>
-			<ion-col col-3>
-				<ion-label>品种</ion-label>
-			</ion-col>
-			<ion-col col-3>
-				<ion-label>状态</ion-label>
-			</ion-col>
-		</ion-row>
+	
 	<ion-grid>
 		
 		<ion-row class="tbody" (click)="setNavPush(list)" *ngFor="let list of gendrslist">

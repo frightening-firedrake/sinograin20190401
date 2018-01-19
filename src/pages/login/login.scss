@@ -15,7 +15,7 @@ login{
                     position:relative;
                     .item{
                         margin-bottom:0.4rem;
-                        width:5.38rem;
+                        width:100%;
                         height:0.72rem;
                         border:1px solid #38b63a;   
                         min-height:0;
@@ -24,7 +24,7 @@ login{
                         padding:0.06rem 0 0.06rem 0.11rem;
                         &.code{
                             // display:inline-block;
-                            width:3.66rem;
+                            width:70%;
                         }
                         &.code_img{
                             position:absolute;
@@ -77,19 +77,21 @@ login{
                         line-height:0.5rem;
                       }  
                       .item-inner{
+                          height:100%;
                           margin-left:0;
                           background-image:url(../../assets/image/index/login_03.png);
                           background-position:0.1rem;
                           background-size:contain;
                           background-repeat: no-repeat;
                           .input-wrapper{
+                              height:100%;
                               ion-input{
                                   height:100%;
                                   line-height: 0;
                                   input{
                                       padding-left:0.35rem;
                                       margin:0;
-                                      line-height:0;
+                                      line-height:0.72rem;
                                         vertical-align: text-top;
                                       height:100%;
                                       font-size:0.26rem;
