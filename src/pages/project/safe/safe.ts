@@ -15,6 +15,7 @@ export class safePage {
     gender:any;
     loginForm: any;
     lists=[1]
+    keyVule:any=[];
     constructor(
         public params: NavParams,
         public FormBuilder: FormBuilder,
@@ -27,11 +28,14 @@ export class safePage {
         this.Home.setgender(this.gender)
     }
     keyoff(event,index){
-        console.log(event.srcElement.value,index)
+        this.keyVule[index] = event.srcElement.value
     }
     add(){
+        // console.log(this.keyVule)
+        if(this.keyVule[this.lists.length-1]){
+            this.lists.push(1)
+        }
 
-        this.lists.push(1)
     }
     onSubmit(e) {
         console.log(e)

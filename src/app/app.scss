@@ -308,7 +308,7 @@ ion-tabs {
 			@include fontf;
 			.tab-button-text {
 				@include fonts;
-				line-height: 1.4rem !important;
+				line-height: 1.6rem !important;
 			}
 		}
 	}
@@ -719,4 +719,9 @@ ion-infinite-scroll{
 		.scroll-content{
 			// margin-top:0.88rem !important;
 			margin-bottom:1rem !important;
+		}
+
+		ion-header ion-navbar.toolbar .back-button{
+			height:100%;
+			line-height:0.88rem;
 		}

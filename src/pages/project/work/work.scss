@@ -139,6 +139,7 @@ work {
                                     input {
                                         height: 100%;
                                         margin: 0;
+                                        line-height:1;
                                         text-align: right;
                                         padding-left: 50%;
                                     }
@@ -242,6 +243,7 @@ work {
                 }
             }
             form {
+                margin-bottom:0.6rem;
                 .list {
                     .item {
                         &.fixed {
@@ -296,6 +298,7 @@ work {
                 background-color:#38b63a;
                 display:block;
                 margin-top:0.55rem;
+                
                 .button-inner{
                     font-size:0.36rem;
                 }

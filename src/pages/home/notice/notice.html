@@ -1,21 +1,7 @@
 <app-header title='通知'></app-header>
-<ion-header class="notice_header">
-    <ion-segment [(ngModel)]="classify">
-        <ion-segment-button value="applye">
-            <div class="notice_box">
-                <p>申请通知<span></span></p>
-            </div>
-        </ion-segment-button>
-        <ion-segment-button value="work">
-            <div class="notice_box">
-                <p>系统通知<span></span></p>
-            </div>
-        </ion-segment-button>
-    </ion-segment>
-</ion-header>
 <ion-content>
-    <div [ngSwitch]="classify" class="classify">
-        <div class="applye" *ngSwitchCase="'applye'">
+    <div class="classify">
+        <!--<div class="applye" *ngSwitchCase="'applye'">
             <ion-list>
                 <ion-item (click)="notice(applye)">
                     <ion-avatar item-start>
@@ -162,8 +148,8 @@
                     <ion-note item-end>18/01/02</ion-note>
                 </ion-item>
             </ion-list>
-        </div>
-        <div class="system" *ngSwitchCase="'work'">
+        </div>-->
+        <div class="system" >
             <ion-list>
                 <ion-item (click)="notice(system)">
                     <ion-avatar item-start>

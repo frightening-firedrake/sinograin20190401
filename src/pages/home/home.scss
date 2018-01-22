@@ -136,6 +136,7 @@ ion-header.home_hearder{
         // margin-bottom:1rem;
         background-color:white;
         padding:0.36rem 0.39rem 0.42rem 0.43rem;
+        margin-bottom:0.8rem;
         .row{
             &.first{
                 .col{
@@ -172,8 +173,8 @@ ion-header.home_hearder{
                         width:0.2rem;
                         height:0.2rem;
                         position:absolute;
-                        right:0;
-                        top:0;
+                        right: -5%;
+                        top: -8%;
                         background-color:red;
                         border-radius: 50%;
                     }
