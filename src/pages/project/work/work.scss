@@ -72,7 +72,7 @@ work {
                     min-height: 0;
                     padding: 0;
                    
-                    height: 0.99rem;
+                    height:1rem;
                     line-height: 0.99rem;
                     font-size: 0.3rem;
                     color: #666666;
@@ -246,6 +246,12 @@ work {
                 margin-bottom:0.6rem;
                 .list {
                     .item {
+                        &.ng-invalid{
+                            .item-inner{
+                            border-bottom:1px solid red;
+
+                            }
+                        }
                         &.fixed {
                             span {
                                 color: #333333;
