@@ -4,7 +4,6 @@ import { NavController,ViewController  } from "ionic-angular";
 import { _alertBomb } from '../common/_alert'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
-import { TabsPage } from '../tabs/tabs'
 
 @Component({
     selector:"login",
@@ -16,7 +15,6 @@ export class loginPage{
         
     }
     onSubmit(e){
-        // this.viewCtrl.dismiss()
-        this.NavCtrl.push(TabsPage)
+       this.NavCtrl.pop()
     }
 }

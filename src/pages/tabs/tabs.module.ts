@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 import { HomeService } from '../home/home.serve';
 
-
+import { loginModule } from "../login/login.module"
 import { TabsPage } from "./tabs";
 
 @NgModule({
@@ -11,6 +11,7 @@ import { TabsPage } from "./tabs";
       TabsPage
       ],
   imports: [
+      loginModule,
       IonicModule.forRoot(TabsPage)
     ],
   entryComponents: [

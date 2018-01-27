@@ -1,4 +1,7 @@
 login{
+    .list .item-block .item-inner{
+        border:none;
+    }
     ion-content{
         margin-top:0.88rem;
         .scroll-content{
@@ -14,6 +17,7 @@ login{
                     margin-bottom:0.85rem;
                     position:relative;
                     .item{
+                        overflow: visible;
                         margin-bottom:0.4rem;
                         width:100%;
                         height:0.72rem;
@@ -84,6 +88,7 @@ login{
                           background-size:contain;
                           background-repeat: no-repeat;
                           .input-wrapper{
+                              overflow: visible;
                               height:100%;
                               ion-input{
                                   height:100%;

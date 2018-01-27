@@ -170,7 +170,7 @@ ion-content .scroll-content p {
 }
 
 .list .item-block .item-inner {
-
+	border-bottom:none;
 }
 
 .item.item-input.input-has-focus .item-inner {
@@ -724,4 +724,14 @@ ion-infinite-scroll{
 		ion-header ion-navbar.toolbar .back-button{
 			height:100%;
 			line-height:0.88rem;
+		}
+		ion-toast{
+			.toast-wrapper{
+				// bottom:1rem;
+				.toast-container{
+					.toast-message{
+						font-size:0.3rem;
+					}
+				}
+			}
 		}
