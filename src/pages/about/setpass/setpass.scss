@@ -97,6 +97,8 @@ setpass{
                           background-repeat: no-repeat;
                           .input-wrapper{
                               height:100%;
+                            //   position: relative;
+                            //   top: 20%;
                               ion-input{
                                   height:100%;
                                   line-height: 0;
@@ -104,7 +106,7 @@ setpass{
                                       padding-left:0.35rem;
                                       margin:0;
                                       line-height:0.6rem;
-                                        vertical-align: text-top;
+                                        // vertical-align: text-top;
                                       height:100%;
                                       font-size:0.26rem;
                                       color:#999999;

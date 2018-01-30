@@ -25,7 +25,6 @@ export class safeViewPage {
         this.key.emit(event)
     }
     cancel(index){
-        console.log(index)
         let AlertSheetcancl = this.Alert.create({
             title:null,
             buttons:[
@@ -61,12 +60,13 @@ export class safeViewPage {
                         }).then((imageData) => {
                             this.imgdatalist.push(imageData)
                         }, (err) => {
-                            let alert = this.alertCtrl.create({
-                                title: 'New Friend!',
-                                subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!',
-                                buttons: ['OK']
-                            });
-                            alert.present();
+
+                            // let alert = this.alertCtrl.create({
+                            //     title: 'New Friend!',
+                            //     subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!',
+                            //     buttons: ['OK']
+                            // });
+                            // alert.present();
                         })
                     }
                 },
@@ -85,12 +85,12 @@ export class safeViewPage {
                         }).then((imageData) => {
                             this.imgdatalist.push(imageData)
                         }, (err) => {
-                            let alert = this.alertCtrl.create({
-                                title: "内容",
-                                subTitle: err,
-                                buttons: ['OK']
-                            });
-                            alert.present();
+                            // let alert = this.alertCtrl.create({
+                            //     title: "内容",
+                            //     subTitle: err,
+                            //     buttons: ['OK']
+                            // });
+                            // alert.present();
                         })
                     }
                 }

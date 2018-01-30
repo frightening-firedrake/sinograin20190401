@@ -31,7 +31,6 @@ export class safePage {
         this.keyVule[index] = event.srcElement.value
     }
     add(){
-        // console.log(this.keyVule)
         if(this.keyVule[this.lists.length-1]){
             this.lists.push(1)
         }
