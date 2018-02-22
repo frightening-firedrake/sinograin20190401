@@ -22,70 +22,70 @@ export class ProjectPage {
     "本库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库"
   ]
   gendrslist = [
-    {
-      id:1,
-      sampleNo:"襄阳-漫水-1",
-      position:"7",
-      sort:"玉米",
-      state:1
-    },
-    {
-      id:1,
-      sampleNo:"襄阳-漫水-1",
-      position:"7",
-      sort:"玉米",
-      state:1
-    },
-    {
-      id:1,
-      sampleNo:"襄阳-漫水-1",
-      position:"7",
-      sort:"玉米",
-      state:1
-    },
-    {
-      id:1,
-      sampleNo:"襄阳-漫水-1",
-      position:"7",
-      sort:"玉米",
-      state:1
-    },
-    {
-      id:1,
-      sampleNo:"襄阳-漫水-1",
-      position:"7",
-      sort:"玉米",
-      state:1
-    },
-    {
-      id:1,
-      sampleNo:"襄阳-漫水-1",
-      position:"7",
-      sort:"玉米",
-      state:1
-    },
-    {
-      id:1,
-      sampleNo:"襄阳-漫水-1",
-      position:"7",
-      sort:"玉米",
-      state:1
-    },
-    {
-      id:1,
-      sampleNo:"襄阳-漫水-1",
-      position:"7",
-      sort:"玉米",
-      state:0
-    }
+    // {
+    //   id:1,
+    //   sampleNo:"襄阳-漫水-1",
+    //   position:"7",
+    //   sort:"玉米",
+    //   state:1
+    // },
+    // {
+    //   id:1,
+    //   sampleNo:"襄阳-漫水-1",
+    //   position:"7",
+    //   sort:"玉米",
+    //   state:1
+    // },
+    // {
+    //   id:1,
+    //   sampleNo:"襄阳-漫水-1",
+    //   position:"7",
+    //   sort:"玉米",
+    //   state:1
+    // },
+    // {
+    //   id:1,
+    //   sampleNo:"襄阳-漫水-1",
+    //   position:"7",
+    //   sort:"玉米",
+    //   state:1
+    // },
+    // {
+    //   id:1,
+    //   sampleNo:"襄阳-漫水-1",
+    //   position:"7",
+    //   sort:"玉米",
+    //   state:1
+    // },
+    // {
+    //   id:1,
+    //   sampleNo:"襄阳-漫水-1",
+    //   position:"7",
+    //   sort:"玉米",
+    //   state:1
+    // },
+    // {
+    //   id:1,
+    //   sampleNo:"襄阳-漫水-1",
+    //   position:"7",
+    //   sort:"玉米",
+    //   state:1
+    // },
+    // {
+    //   id:1,
+    //   sampleNo:"襄阳-漫水-1",
+    //   position:"7",
+    //   sort:"玉米",
+    //   state:0
+    // }
   ];
-  
-  constructor(public navCtrl: NavController, public parpam: NavParams,public Http:HttpService) {
-    this.gendersNav = this.parpam.get("num")
-    // this.Http.get("grain/sample/data").subscribe(res =>{
 
-    //   this.gendrslist = res.json()['rows']
-    // })
+  constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService) {
+    this.gendersNav = this.parpam.get("num")
+    this.Http.get("grain/sample/data").subscribe(res => {
+      console.log(res.json())
+      this.gendrslist = res.json()['rows']
+    })
   }
   ionViewWillEnter() {
     $(".search_state").off().on("click", function () {
