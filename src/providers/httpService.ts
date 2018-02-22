@@ -20,7 +20,7 @@ export class HttpService {
 
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
     url = HttpService.replaceUrl(url);
-    console.info(url);
+    // console.info(url);
     if (options.headers) {
       options.headers.append('token', this.globalData.token);
     } else {
@@ -30,13 +30,13 @@ export class HttpService {
     }
       // return this.http.request(url,options);
     return Observable.create((observer) => {
-      console.info(12);
+      // console.info(12);
       this.nativeService.showLoading();
-      console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
+      // console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
       
       this.http.request(url, options).subscribe(res => {
         this.nativeService.hideLoading();
-        console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
+        // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
         observer.next(res);
       }, err => {
         this.requestFailed(url, options, err);//处理请求失败
@@ -58,7 +58,7 @@ export class HttpService {
       method: RequestMethod.Post,
       body: body,
       headers: new Headers({
-        'Content-Type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8',
       })
     }));
   }

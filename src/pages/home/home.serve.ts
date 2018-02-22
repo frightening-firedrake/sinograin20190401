@@ -13,4 +13,5 @@ export class HomeService {
     setgender(parpam){
         this.gendersclass = parpam
     }
+    // 登录信息
 }

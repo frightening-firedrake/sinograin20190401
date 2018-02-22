@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicPageModule } from 'ionic-angular';
 import { HomeService } from '../home/home.serve';
 import { Camera } from '@ionic-native/camera';
+import { BLE } from '@ionic-native/ble';
 import { _alertBomb } from '../common/_alert'
 
 import { CommonsModule } from '../common/common.module';
@@ -38,7 +39,8 @@ import { detaildPage } from './details/details'
      providers:[
         HomeService,
         Camera,
-        _alertBomb
+        _alertBomb,
+        BLE,
     ]
 })
 export class ProjectModule {

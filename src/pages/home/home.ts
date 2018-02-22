@@ -16,8 +16,10 @@ export class HomePage {
   public login: string = "在线"
   constructor(public _alert: _alertBomb, public navCtrl: NavController, public Home: HomeService, public viewCtrl: ViewController
     , public appCtrl: App) {
+      
   }
-  newpage(parpam) {
+  newpage(parpam,event) {
+    // console.log(event)
     this.navCtrl.push(ProjectPage,{"num":parpam})
     // this.Home.setgender(parpam)
     

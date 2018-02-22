@@ -27,47 +27,50 @@
                 <ion-list>
                     <button type="button" ion-item>
                 <span class="span_title">创建时间:</span>
-                <span>2017.12.12</span>
+                <span>{{ sample.createTime }}</span>
             </button>
                     <button type="button" ion-item>
                 <span class="span_title">状态:</span>
-                <span>未扦样</span>
+                <div [ngSwitch]="sample.state">
+                    <span  *ngSwitchCase="1">已扦样</span>
+                     <span *ngSwitchCase="0">未扦样</span>
+                </div>
             </button>
                     <button type="button" class="num" ion-item>
                 <span class="span_title">扦样编号:</span>
-                <span>咸阳-玉米-110</span>
+                <span>{{ sample.sampleNo }}</span>
             </button>
                     <button type="button" ion-item>
                 <span class="span_title">货位号:</span>
-                <span>慢水-1</span>
+                <span>{{ sample.position}}</span>
             </button>
                 </ion-list>
                 <ion-list>
                     <button type="button" ion-item>
-                <span class="span_title">品牌:</span>
-                <span>玉米</span>
+                <span class="span_title">品种:</span>
+                <span>{{ sample.sort }}</span>
             </button>
                     <button type="button" ion-item>
                 <span class="span_title">性质:</span>
-                <span>ZC</span>
+                <span>{{ sample.quality }}</span>
             </button>
                     <button type="button" class="num" ion-item>
                 <span class="span_title">代表数量(吨):</span>
-                <span>22000</span>
+                <span>{{ sample.amount }}</span>
             </button>
                     <button type="button" ion-item>
                 <span class="span_title">产地:</span>
-                <span>山西</span>
+                <span>{{ sample.originPlace }}</span>
             </button>
                 </ion-list>
                 <ion-list>
                     <button type="button" ion-item>
                 <span class="span_title">收获年度:</span>
-                <span>2017</span>
+                <span>{{ sample.gainTime }}</span>
             </button>
                     <button type="button" ion-item>
                 <span class="span_title">入库时间:</span>
-                <span>2017.12</span>
+                <span>{{ sample.createTime }}</span>
             </button>
                     <button type="button" class="num" ion-item>
                 <span class="span_title">扦样日期:</span>
@@ -75,7 +78,7 @@
             </button>
                     <button type="button" ion-item>
                 <span class="span_title">备注:</span>
-                <span>秋季普查</span>
+                <span>{{ sample.remark }}</span>
             </button>
                 </ion-list>
                 <button ion-button color="secondary" class="sumbit">打印条形码</button>
