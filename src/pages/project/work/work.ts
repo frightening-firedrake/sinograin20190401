@@ -165,24 +165,9 @@ export class workPage {
             },
             {
                 type: 'radio',
-                label: '小麦',
-                value: '小麦'
+                label: '食用油',
+                value: '食用油'
             },
-            {
-                type: 'radio',
-                label: '玉米',
-                value: '玉米'
-            },
-            {
-                type: 'radio',
-                label: '小麦',
-                value: '小麦'
-            },
-            {
-                type: 'radio',
-                label: '玉米',
-                value: '玉米'
-            }
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             this.Workfrom._strain = data
@@ -225,7 +210,7 @@ export class workPage {
             }
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            this.Workfrom._strain = data
+            this.Workfrom._type = data
         })
     }
 }

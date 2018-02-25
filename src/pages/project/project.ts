@@ -19,7 +19,7 @@ export class ProjectPage {
   genders: string;
   gendersNav: any = ""
   public optionarr: any = [
-    "本库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库", "XX分库"
+    "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
   ]
   gendrslist = [
     // {
@@ -103,7 +103,7 @@ export class ProjectPage {
     $(".zhezhao").off().on("click", function () {
       $(this).hide()
       $(".screen").hide()
-      $(".tabbar").toggle()
+      // $(".tabbar").toggle()
       $(".thead").toggle()
     })
     // this.Home.getgenders().subscribe((res) => {
@@ -115,10 +115,10 @@ export class ProjectPage {
 
     switch (this.gendersNav) {
       case 3:
-        this.navCtrl.push(safePage, {
-          "json": key,
-          "newpage": this.gendersNav
-        })
+          this.navCtrl.push(safePage, {
+            "json": key,
+            "newpage": this.gendersNav
+          })
         break;
       case 2:
         this.navCtrl.push(workPage, {

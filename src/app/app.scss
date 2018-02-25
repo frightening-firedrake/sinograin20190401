@@ -522,6 +522,11 @@ ion-alert {
 		padding-left: 0.5rem;
 		padding-right: 0.5rem;
 		border-radius: 5px;
+		.alert-message{
+			font-size:0.24rem;
+			text-align:center;
+			overflow: hidden;
+		}
 		.alert-radio-group {
 			height: auto;
 			.alert-tappable {
@@ -636,7 +641,9 @@ ion-alert.outsuccse {
 		.alert-head {
 			// height:2.25rem;
 			// margin-top:0.85rem;
-			padding: 0 1.4rem;
+			// padding: 0 1.4rem;
+			display:block;
+			margin:0 auto;
 			text-align: center;
 			color: #666666;
 			.alert-sub-title {
@@ -647,6 +654,7 @@ ion-alert.outsuccse {
 		.alert-button-group {
 			padding: 0;
 			bottom: 0;
+			width:100%;
 			position: absolute;
 			margin-top: 0.23rem;
 			height: 0.8rem;
@@ -660,22 +668,25 @@ ion-alert.outsuccse {
 				text-align: center;
 				height: 100%;
 				span {
-					padding-right:20%;
+					// padding-right:20%;
 					// justify-content: space-evenly;
 					text-align: center;
+					display:block;
 				}
 				&:first-child {
-					width: 1.95rem;
+					// width: 1.95rem;
+					width:50%;
 					align-self: center;
-					height: 69%;
+					height: 100%;
 					border-right: 1px solid rgba(153, 153, 153, 0.2);
 					line-height: 0.8rem;
-					span{
-						padding-right:30%;
-					}
+					// span{
+					// 	padding-right:30%;
+					// }
 				}
 				&:last-child {
-					width: 3.56rem;
+					width:50%;
+					// width: 3.56rem;
 					color: #38b738;
 					line-height: 0.8rem;
 				}
@@ -735,5 +746,21 @@ ion-infinite-scroll{
 						font-size:0.3rem;
 					}
 				}
+			}
+		}
+		ion-loading{
+			.loading-wrapper{
+				background-color:transparent !important;
+				box-shadow: none !important;
+				.loading-spinner{
+						ion-spinner{
+							width:1rem;
+							height:1rem;
+							circle{
+								stroke:#38b63a;
+							}
+				}
+				}
+				
 			}
 		}

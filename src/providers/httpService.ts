@@ -13,9 +13,9 @@ import { APP_SERVE_URL } from "./config";
 export class HttpService {
 
   constructor(public http: Http,
-              private globalData: GlobalData,
-              private nativeService: NativeService,
-              private alertCtrl: AlertController) {
+    private globalData: GlobalData,
+    private nativeService: NativeService,
+    private alertCtrl: AlertController) {
   }
 
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
@@ -28,12 +28,12 @@ export class HttpService {
         'token': this.globalData.token
       });
     }
-      // return this.http.request(url,options);
+    // return this.http.request(url,options);
     return Observable.create((observer) => {
       // console.info(12);
       this.nativeService.showLoading();
       // console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
-      
+
       this.http.request(url, options).subscribe(res => {
         this.nativeService.hideLoading();
         // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
@@ -150,9 +150,17 @@ export class HttpService {
       }
     }
     this.alertCtrl.create({
-      title: msg,
-      subTitle: status,
-      buttons: [{text: '确定'}]
+      title: "提示",
+      subTitle: msg,
+      buttons: [
+        {
+          text: "确认",
+          handler: () => {
+
+          }
+        }
+      ],
+      cssClass: "outsuccse only"
     }).present();
   }
 

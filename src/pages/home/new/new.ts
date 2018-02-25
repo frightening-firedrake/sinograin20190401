@@ -103,29 +103,24 @@ export class newSamp {
             },
             {
                 type: 'radio',
-                label: 'ZC',
-                value: 'ZC'
+                label: 'ZD',
+                value: 'ZD'
             },
             {
                 type: 'radio',
-                label: 'ZC',
-                value: 'ZC'
+                label: 'LC',
+                value: 'LC'
             },
             {
                 type: 'radio',
-                label: 'ZC',
-                value: 'ZC'
+                label: 'SP',
+                value: 'SP'
             },
             {
                 type: 'radio',
-                label: 'ZC',
-                value: 'ZC'
+                label: 'TD',
+                value: 'TD'
             },
-            {
-                type: 'radio',
-                label: 'ZC',
-                value: 'ZC'
-            }
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             this._nature = data
@@ -148,24 +143,9 @@ export class newSamp {
             },
             {
                 type: 'radio',
-                label: '小麦',
-                value: '小麦'
+                label: '食用油',
+                value: '食用油'
             },
-            {
-                type: 'radio',
-                label: '玉米',
-                value: '玉米'
-            },
-            {
-                type: 'radio',
-                label: '小麦',
-                value: '小麦'
-            },
-            {
-                type: 'radio',
-                label: '玉米',
-                value: '玉米'
-            }
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             this._strain = data

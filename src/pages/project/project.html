@@ -17,7 +17,7 @@
 	<ion-toolbar>
 		<ion-item>
 			<ion-select placeholder="选择被查库点" [(ngModel)]="genders" interface="popover">
-				<ion-option [value]="i" *ngFor="let list of optionarr;index as i ">{{list}}{{i}}</ion-option>
+				<ion-option [value]="i" *ngFor="let list of optionarr;index as i ">{{list}}</ion-option>
 			</ion-select>
 			<ion-label class="search_state">筛选
 				<ion-icon name="arrow-up"></ion-icon>
