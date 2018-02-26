@@ -2,6 +2,7 @@ import { Component } from "@angular/core"
 import { NavController } from "ionic-angular"
 
 import { _alertBomb } from '../common/_alert'
+import { StorageService } from '../../providers/locationstorageService'
 
 import { setpassPage } from './setpass/setpass'
 
@@ -11,10 +12,18 @@ import { setpassPage } from './setpass/setpass'
 })
 
 export class AboutPage{
+    public userName:string;
     constructor(
         public _alert:_alertBomb,
-        public navCtrl:NavController
-    ){}
+        public navCtrl:NavController,
+        public Storage: StorageService
+    ){
+        this.Storage.GetStorage("userLogin").subscribe(res=>{
+            res.then(suc=>{
+                this.userName = suc.userName
+            })
+        })
+    }
     update(){
         var parpam = {
             title:"提示",

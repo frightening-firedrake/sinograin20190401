@@ -54,11 +54,12 @@ export class HttpService {
   }
 
   public post(url: string, body: any = null): Observable<Response> {
+    body = HttpService.transformRequest(body)
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
-      body: body,
+      body:body,
       headers: new Headers({
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       })
     }));
   }
@@ -175,5 +176,14 @@ export class HttpService {
       url = APP_SERVE_URL + url;
     }
     return 'http://' + url.substring(7).replace(/\/\//g, '/');
+  }
+  /**
+   *post请求中的参数序列化，使其成为formdata
+   */
+  private static transformRequest(data) {
+    var str = [];
+    for (var p in data)
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(data[p]));
+    return str.join("&");
   }
 }

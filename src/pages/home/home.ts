@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, App, ViewController } from 'ionic-angular';
 import { _alertBomb } from '../common/_alert'
+import { StorageService } from '../../providers/locationstorageService'
 
 import { HomeService } from './home.serve';
 import { ProjectPage } from '../project/project'
@@ -14,9 +15,20 @@ import { noticePage } from './notice/notice'
 })
 export class HomePage {
   public login: string = "在线"
-  constructor(public _alert: _alertBomb, public navCtrl: NavController, public Home: HomeService, public viewCtrl: ViewController
-    , public appCtrl: App) {
-      
+  public userName:string;
+  constructor(
+    public _alert: _alertBomb, 
+    public navCtrl: NavController, 
+    public Home: HomeService, 
+    public viewCtrl: ViewController, 
+    public appCtrl: App,
+    public Storage: StorageService
+    ) {
+      this.Storage.GetStorage("userLogin").subscribe(res=>{
+        res.then(suc=>{
+          this.userName = suc.userName
+        })
+      })
   }
   newpage(parpam,event) {
     // console.log(event)

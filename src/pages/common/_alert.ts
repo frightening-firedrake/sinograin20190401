@@ -8,7 +8,8 @@ export class _alertBomb {
 
     }
     //addInput是单选框每一个选项
-    _alertSmlpe(parpam, addButton, addInput, callback) {
+
+    _alertSmlpe(parpam, addButton:any=null, addInput:any=null, callback) {
         let $alert = this._alert.create({
             title: parpam.title,
             message:parpam.message,

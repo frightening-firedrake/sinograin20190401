@@ -31,7 +31,7 @@
             </button>
                     <button type="button" ion-item>
                 <span class="span_title">状态:</span>
-                <div [ngSwitch]="sample.state">
+                <div [ngSwitch]="sample.sampleState">
                     <span  *ngSwitchCase="1">已扦样</span>
                      <span *ngSwitchCase="-1">未扦样</span>
                      <span *ngSwitchCase="2">入库</span>
@@ -82,7 +82,7 @@
                 <span>{{ sample.remark }}</span>
             </button>
                 </ion-list>
-                <button ion-button color="secondary" class="sumbit">打印条形码</button>
+                <button ion-button color="secondary" class="sumbit" (click)="_sample()" [disabled]="sample.sampleState==1||sample.sampleState>=2">打印条形码</button>
             </div>
         </div>
         <div *ngSwitchCase="'work'" class="work">

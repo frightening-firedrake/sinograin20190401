@@ -9,6 +9,7 @@ import { noticeViewPage } from './notice/notice_view/notice_view'
 
 import { HomeService } from './home.serve';
 import { _alertBomb } from '../common/_alert'
+import { StorageService } from '../../providers/locationstorageService'
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { _alertBomb } from '../common/_alert'
     ],
     providers:[
         HomeService,
-        _alertBomb
+        _alertBomb,
+        StorageService
     ]
 })
 export class HomeModule {

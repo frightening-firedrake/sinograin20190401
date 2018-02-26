@@ -21,64 +21,7 @@ export class ProjectPage {
   public optionarr: any = [
     "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
   ]
-  gendrslist = [
-    // {
-    //   id:1,
-    //   sampleNo:"襄阳-漫水-1",
-    //   position:"7",
-    //   sort:"玉米",
-    //   state:1
-    // },
-    // {
-    //   id:1,
-    //   sampleNo:"襄阳-漫水-1",
-    //   position:"7",
-    //   sort:"玉米",
-    //   state:1
-    // },
-    // {
-    //   id:1,
-    //   sampleNo:"襄阳-漫水-1",
-    //   position:"7",
-    //   sort:"玉米",
-    //   state:1
-    // },
-    // {
-    //   id:1,
-    //   sampleNo:"襄阳-漫水-1",
-    //   position:"7",
-    //   sort:"玉米",
-    //   state:1
-    // },
-    // {
-    //   id:1,
-    //   sampleNo:"襄阳-漫水-1",
-    //   position:"7",
-    //   sort:"玉米",
-    //   state:1
-    // },
-    // {
-    //   id:1,
-    //   sampleNo:"襄阳-漫水-1",
-    //   position:"7",
-    //   sort:"玉米",
-    //   state:1
-    // },
-    // {
-    //   id:1,
-    //   sampleNo:"襄阳-漫水-1",
-    //   position:"7",
-    //   sort:"玉米",
-    //   state:1
-    // },
-    // {
-    //   id:1,
-    //   sampleNo:"襄阳-漫水-1",
-    //   position:"7",
-    //   sort:"玉米",
-    //   state:0
-    // }
-  ];
+  gendrslist = [];
 
   constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService) {
     this.gendersNav = this.parpam.get("num")

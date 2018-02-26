@@ -74,9 +74,10 @@
 			<ion-col col-3>
 				<ion-label>{{list.sort}}</ion-label>
 			</ion-col>
-			<ion-col col-3 [ngSwitch]="list.state">
+			<ion-col col-3 [ngSwitch]="list.sampleState">
 				<ion-label *ngSwitchCase="1">已扦样</ion-label>
-				<ion-label *ngSwitchCase="0">未扦样</ion-label>
+				<ion-label *ngSwitchCase="-1">未扦样</ion-label>
+				<ion-label *ngSwitchCase="2">入库</ion-label>
 				<ion-label *ngSwitchDefault>未扦样</ion-label>
 			</ion-col>
 		</ion-row>
