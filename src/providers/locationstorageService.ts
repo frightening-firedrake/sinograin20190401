@@ -31,9 +31,9 @@ export class StorageService {
         return this.Storage.remove(key).then((val) => {
             if (this.GetStorage(val)) {
                 let alert = this.alertCtrl.create({
-                    title: '删除成功!',
-                    subTitle: '',
-                    buttons: ['OK']
+                    title: '退出成功!',
+                    buttons: ['OK'],
+                    cssClass:"outsuccse only"
                 });
                 alert.present();
             }

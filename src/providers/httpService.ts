@@ -57,7 +57,7 @@ export class HttpService {
     body = HttpService.transformRequest(body)
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
-      body:body,
+      body: body,
       headers: new Headers({
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       })

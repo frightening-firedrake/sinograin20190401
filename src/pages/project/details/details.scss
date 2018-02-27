@@ -84,12 +84,12 @@ derails {
                     z-index: 50;
                     bottom:0.2rem;
                     left:0;
-                    right:0;
+                    right:0; 
                     margin:0 auto;
                     &:disabled{
                         opacity: 1;
                         background-color:#999999;
-                        
+
                     }
                     .button-inner {
                         font-size: 0.36rem;

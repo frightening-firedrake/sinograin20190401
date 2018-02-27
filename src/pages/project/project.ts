@@ -16,18 +16,35 @@ declare var $;
 })
 
 export class ProjectPage {
-  genders: string;
+  genders;
   gendersNav: any = ""
   public optionarr: any = [
-    "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
+    // "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
   ]
   gendrslist = [];
-
   constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService) {
     this.gendersNav = this.parpam.get("num")
-    this.Http.get("grain/sample/data").subscribe(res => {
-      console.log(res.json())
-      this.gendrslist = res.json()['rows']
+    // 所有库点
+    this.Http.get("grain/library/getAll").subscribe(res => {
+      // console.log(res.json())
+      this.optionarr = res.json()
+      this.genders = this.optionarr[0].id
+    })
+    // 库点的扦样
+    let data = {
+      params: '{"libId":1}'
+    }
+    this.Http.post("grain/sample/data", data).subscribe(res => {
+      this.gendrslist = res.json()["rows"]
+    })
+  }
+  // 选择库点
+  changeVersion(list) {
+    let data = {
+      params: '{"libId":' + list + '}'
+    }
+    this.Http.post("grain/sample/data", data).subscribe(res => {
+      this.gendrslist = res.json()["rows"]
     })
   }
   ionViewWillEnter() {
@@ -35,33 +52,38 @@ export class ProjectPage {
 
       $(".zhezhao").toggle()
       $(".screen").toggle()
-      // $(".tabbar").toggle()
       $(".thead").toggle()
     })
     $(".buttons").off().on("click", "button", function (e) {
       $(".buttons button").removeClass("active")
       $(this).addClass("active")
-      // $(".tabbar").toggle()
     })
     $(".zhezhao").off().on("click", function () {
       $(this).hide()
       $(".screen").hide()
-      // $(".tabbar").toggle()
       $(".thead").toggle()
     })
-    // this.Home.getgenders().subscribe((res) => {
-    //   this.gendersNav = res
-    // })
+  }
+
+  //筛选框的三种分类
+  select_smaple(event = null) {
+    let data = {
+      params: '{"libId":1,"sampleState":' + event + '}'
+    }
+    this.Http.post("grain/sample/data", data).subscribe(res => {
+      // console.log(res.json(),"color:blue")
+      this.gendrslist = res.json()["rows"]
+    })
   }
   // 不同点击，改变页面
   setNavPush(key: any) {
 
     switch (this.gendersNav) {
       case 3:
-          this.navCtrl.push(safePage, {
-            "json": key,
-            "newpage": this.gendersNav
-          })
+        this.navCtrl.push(safePage, {
+          "json": key,
+          "newpage": this.gendersNav
+        })
         break;
       case 2:
         this.navCtrl.push(workPage, {
@@ -85,8 +107,6 @@ export class ProjectPage {
   doInfinite(infiniteScroll) {
     {
       setTimeout(() => {
-
-
         infiniteScroll.complete();
       }, 5000);
     }

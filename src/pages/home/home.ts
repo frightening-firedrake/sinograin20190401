@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, App, ViewController } from 'ionic-angular';
+import { NavController, App, ViewController, NavParams } from 'ionic-angular';
 import { _alertBomb } from '../common/_alert'
 import { StorageService } from '../../providers/locationstorageService'
 
@@ -15,26 +15,31 @@ import { noticePage } from './notice/notice'
 })
 export class HomePage {
   public login: string = "在线"
-  public userName:string;
+  public userName: string;
   constructor(
-    public _alert: _alertBomb, 
-    public navCtrl: NavController, 
-    public Home: HomeService, 
-    public viewCtrl: ViewController, 
+    public _alert: _alertBomb,
+    public navCtrl: NavController,
+    public Home: HomeService,
+    public viewCtrl: ViewController,
     public appCtrl: App,
-    public Storage: StorageService
-    ) {
-      this.Storage.GetStorage("userLogin").subscribe(res=>{
-        res.then(suc=>{
-          this.userName = suc.userName
-        })
-      })
+    public Storage: StorageService,
+    public params: NavParams
+  ) {
   }
-  newpage(parpam,event) {
+  ionViewDidEnter() {
+    this.Storage.GetStorage("userLogin").subscribe(res => {
+      res.then(suc => {
+        if (suc) {
+          this.userName = suc.userName
+        }
+      })
+    })
+  }
+  newpage(parpam, event) {
     // console.log(event)
-    this.navCtrl.push(ProjectPage,{"num":parpam})
+    this.navCtrl.push(ProjectPage, { "num": parpam })
     // this.Home.setgender(parpam)
-    
+
   }
   newyang() {
     this.navCtrl.push(noticePage)

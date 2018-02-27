@@ -7,20 +7,22 @@ import { StorageService } from '../../providers/locationstorageService'
 import { AboutPage } from './about'
 import { CommonsModule } from '../common/common.module';
 import { setpassPage } from './setpass/setpass'
+import { loginModule } from "../login/login.module"
 
 @NgModule({
     declarations: [
         AboutPage,
-        setpassPage
+        setpassPage,
     ],
     imports: [
         CommonModule,
         IonicPageModule.forChild(AboutPage), 
-        CommonsModule
+        CommonsModule,
+        loginModule
     ],
     entryComponents: [
        AboutPage ,
-       setpassPage
+       setpassPage,
     ],
     providers: [
         _alertBomb,
