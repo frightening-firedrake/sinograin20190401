@@ -199,6 +199,9 @@ page-about{
                 font-size:0.3rem;
                 border-radius: 5px;
                 overflow: visible;
+                &:disabled{
+                    opacity: 0.6;
+                }
             }
         }
     ion-content{

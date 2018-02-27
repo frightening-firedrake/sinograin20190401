@@ -51,8 +51,8 @@
 			<button ion-button (click)="select_smaple(1)">已扦样</button>
 		</div>
 		<div class="search_screen">
-			<ion-searchbar cancelButtonText="wwww" placeholder="请输入品种进行搜索"></ion-searchbar>
-			<button ion-button block outline color="secondary"  class="submit">完成</button>
+			<ion-searchbar cancelButtonText="wwww" placeholder="请输入品种进行搜索" [(ngModel)]="myInput"></ion-searchbar>
+			<button ion-button block outline color="secondary"  class="submit" (click)="secondary()" >完成</button>
 		</div>
 		
 	</div>

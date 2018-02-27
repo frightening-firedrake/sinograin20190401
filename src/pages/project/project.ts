@@ -18,6 +18,8 @@ declare var $;
 export class ProjectPage {
   genders;
   gendersNav: any = ""
+  _select_smaple = null;
+  myInput;
   public optionarr: any = [
     // "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
   ]
@@ -63,14 +65,39 @@ export class ProjectPage {
       $(".screen").hide()
       $(".thead").toggle()
     })
+    $(".submit").off().on("click", function () {
+      $(".zhezhao").toggle()
+      $(".screen").toggle()
+      $(".thead").toggle()
+    })
   }
 
   //筛选框的三种分类
   select_smaple(event = null) {
-    let data = {
-      params: '{"libId":1,"sampleState":' + event + '}'
+    this._select_smaple = event
+    // let data = {
+    //   params: '{"libId":1,"sampleState":' + event + '}'
+    // }
+    // this.Http.post("grain/sample/data", data).subscribe(res => {
+    //   // console.log(res.json(),"color:blue")
+    //   this.gendrslist = res.json()["rows"]
+    // })
+  }
+  // 点击完成时连接后台
+  secondary() {
+    let data;
+    if (!this.myInput) {
+      data = {
+        params: `{"libId":${this.genders},"sampleState":${this._select_smaple}}`
+      }
+    } else {
+      data = {
+        params: `{"libId":${this.genders},"sampleState":${this._select_smaple},"sort":"${this.myInput}"}`
+        // params: '{"libId":'+this.genders+',"sampleState":' + this._select_smaple+',"sort":'+this./+'}'
+      }
     }
     this.Http.post("grain/sample/data", data).subscribe(res => {
+      console.log(res)
       // console.log(res.json(),"color:blue")
       this.gendrslist = res.json()["rows"]
     })

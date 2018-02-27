@@ -68,8 +68,9 @@ export class safePage {
     ) {
         this.data = this.params.get('json');
         this.gender = this.params.get("newpage")
+        console.log(this.data)
         // 判断是否是有安全报告的
-        if(this.data.state == 1){
+        if(this.data.sampleState == 1){
             this._state = true
         }
         this.SafeForm =  FormBuilder.group({
