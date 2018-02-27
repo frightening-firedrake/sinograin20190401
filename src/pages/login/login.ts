@@ -15,7 +15,7 @@ export class loginPage {
     private login: FormGroup;
     private User = {
         username: {},
-        passwork: {}
+        password: {}
     }
     private data: any;
     constructor(public _alert: _alertBomb,
@@ -26,17 +26,17 @@ export class loginPage {
         public Http: HttpService
     ) {
         this.login = FormBuilder.group({
-            username: ['', [Validators.minLength(4)]],
-            passwork: ['', [Validators.minLength(4)]]
+            username: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+            password: ['', Validators.compose([Validators.required, Validators.minLength(4)])]
         })
         this.User.username = this.login.controls['username']
-        this.User.passwork = this.login.controls["passwork"]
+        this.User.password = this.login.controls["password"]
     }
     onSubmit(e) {
         // userName,userPass
         let parpam = {
             userName: e.value.username,
-            userPass: e.value.passwork
+            userPass: e.value.password
         }
         this.Http.post('/grain/login', parpam).subscribe(res => {
             this.data = res.json()
