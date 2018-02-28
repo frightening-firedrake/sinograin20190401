@@ -92,45 +92,50 @@
                     <p>立即创建工作底稿</p>
                 </ion-item>
             </ion-list>
-            <div >
+            <div>
                 <ion-list class="lists_input">
                     <button type="button" ion-item>
                 <span class="title_span">货位号:</span>
-                <span>111</span>
+                <!--sample-->
+                <span>{{sample.position}}</span>
             </button>
                     <button type="button" class="fixed" ion-item>
                 <span class="title_span">品种:</span>
-               <span>111</span>
+               <span>{{sample.sort}}</span>
             </button>
                     <button type="button" ion-item>
                 <span class="title_span">性质:</span>
-                <span>ZC</span>
+                <span>{{sample.quality}}</span>
             </button>
                     <button type="button" ion-item>
                 <span class="title_span">所在库区:</span>
-                <span>99</span>
+                <span>{{sample.libraryName}}</span>
             </button>
                     <button type="button" ion-item>
-                <span class="title_span">仓库类型:</span>
-                <span>999</span>
+                <span class="title_span">仓房类型:</span>
+                <span>{{Work.branType}}</span>
                 </button>
                     <button type="button" ion-item>
                 <span class="title_span">收获年度:</span>
-                <span>111</span>
+                <span>{{sample.gainTime}}</span>
                 </button>
                     <button type="button" ion-item class="num">
                 <span class="title_span">保管帐数量(kg):</span>
-               <span>111</span>
+               <span>{{Work.grainQuality}}</span>
                 </button>
                     <button type="button" ion-item>
                 <span class="title_span">质量等级:</span>
-                <span>111</span>
+                <span>{{Work.qualityGrade}}</span>
                
                 </button>
                     <!--这里的复选框有问题，稍后解决-->
                     <button type="button" ion-item>
-                <span class="title_span">入仓方式:</span>
-            </button>
+                        <span class="title_span">入仓方式:</span>
+                        <div [ngSwitch]="Work.putWay">
+                            <span *ngSwitchCase="1">机械入仓</span>
+                             <span *ngSwitchCase="2">人工入仓</span>
+                        </div>
+                    </button>
                 </ion-list>
                 <ion-list class="lists_input">
                     <button type="button" ion-item class="list_input">
@@ -138,15 +143,15 @@
                 </button>
                     <button type="button" ion-item class="num first_item no_border">
                 <span class="title_span">容重（g/l）:</span>
-                <span>111</span>
+                <span>{{Work.storageCapacity}}</span>
             </button>
                     <button type="button" ion-item class="num ">
                 <span class="title_span">水分（%）:</span>
-                <span>111</span>
+                <span>{{Work.storageWater}}</span>
             </button>
                     <button type="button" ion-item class="num ">
                 <span class="title_span">杂质（%）:</span>
-                <span>111</span>
+                <span>{{Work.storageImpurity}}</span>
             </button>
                 </ion-list>
                 <ion-list class="lists_input">
@@ -155,15 +160,15 @@
                 </button>
                     <button type="button" ion-item class="num first_item no_border">
                 <span class="title_span">容重（g/l）:</span>
-                <span>111</span>
+                <span>{{Work.realCapacity}}</span>
             </button>
                     <button type="button" ion-item class="num ">
                 <span class="title_span">水分（%）:</span>
-                <span>111</span>
+                <span>{{Work.realWater}}</span>
             </button>
                     <button type="button" ion-item class="num ">
                 <span class="title_span">杂质（%）:</span>
-              <span>111</span>
+              <span>{{Work.realImpurity}}</span>
             </button>
                 </ion-list>
                 <ion-list class="lists_input">
@@ -172,19 +177,19 @@
 
                 </button>
                     <ion-item class="list_img">
-                        <img src="assets/image/index/work.png"/>
+                        <img src="assets/image/index/work.png" />
                     </ion-item>
                     <button type="button" ion-item class="num first_item no_border">
                 <span class="title_span">长（m）:</span>
-                <span>111</span>
+                <span>{{Work.length}}</span>
             </button>
                     <button type="button" ion-item class="num ">
                 <span class="title_span">宽（m）:</span>
-               <span>111</span>
+               <span>{{Work.wide}}</span>
             </button>
                     <button type="button" ion-item class="num ">
                 <span class="title_span">高（m）:</span>
-                <span>111</span>
+                <span>{{Work.high}}</span>
             </button>
                 </ion-list>
                 <ion-list class="lists_input">
@@ -193,15 +198,15 @@
                 </button>
                     <button type="button" ion-item class="num first_item no_border long_item">
                 <span class="title_span">粮堆测量体积（m3）:</span>
-               <span>111</span>
+               <span>{{Work.measuredVolume}}</span>
             </button>
                     <button type="button" ion-item class="num long_item">
                 <span class="title_span">需要扣除体积（m3）:</span>
-                 <span>111</span>
+                 <span>{{Work.deductVolume}}</span>
             </button>
                     <button type="button" ion-item class="num long_item">
                 <span class="title_span">粮堆实体体积（m3）:</span>
-               <span>111</span>
+               <span>{{Work.realVolume}}</span>
             </button>
                 </ion-list>
                 <ion-list class="lists_input">
@@ -214,23 +219,23 @@
             </button>
                     <button type="button" ion-item class="num  data long_item">
                 <span class="title_span">粮食容重（g/l）:</span>
-                <span>111</span>
+                <span>{{Work.realCapacity}}</span>
             </button>
                     <button type="button" ion-item class="num data long_item">
                 <span class="title_span">校正后修正系数:</span>
-               <span>111</span>
+               <span>{{Work.correctioFactor}}</span>
             </button>
                     <button type="button" ion-item class="num data long_item">
                 <span class="title_span">粮堆平均密度（kg/m）:</span>
-                <span>111</span>
+                <span>{{Work.aveDensity}}</span>
             </button>
-                    <button type="button" ion-item class="no_border first_item first_item_font">
+                    <!--<button type="button" ion-item class="no_border first_item first_item_font">
                 <ion-label>特制大容器法□</ion-label>
-                 <!--<ion-input type="number"></ion-input>-->
+                
             </button>
                     <button type="button" ion-item class="num first_item no_border long_item">
                 <span class="title_span">单位体积粮食重量(kg/m):</span>
-                <span>111</span>
+                <span></span>
             </button>
                     <button type="button" ion-item class="num long_item">
                 <span class="title_span">校正后修正系数:</span>
@@ -239,7 +244,7 @@
                     <button type="button" ion-item class="num long_item">
                 <span class="title_span">粮堆平均密度(kg/m):</span>
                <span>111</span>
-            </button>
+            </button>-->
                 </ion-list>
 
                 <ion-list class="lists_input">
@@ -248,7 +253,7 @@
                 </button>
                     <button type="button" ion-item class="num  data long_item no_border first_item">
                 <span class="title_span">测量计算数(kg):</span>
-                 <span>111</span>
+                 <span>{{Work.unQuality}}</span>
             </button>
                     <button type="button" ion-item class="no_border first_item first_item_font">
                 <ion-label>应记粮食损耗(kg)</ion-label>
@@ -256,19 +261,19 @@
             </button>
                     <button type="button" ion-item class="num long_item">
                 <span class="title_span">水分减量:</span>
-                <span>111</span>
+                <span>{{Work.lossWater}}</span>
             </button>
                     <button type="button" ion-item class="num long_item">
                 <span class="title_span">保管自然损耗:</span>
-                 <span>111</span>
+                 <span>{{Work.lossNature}}</span>
             </button>
                     <button type="button" ion-item class="num long_item">
                 <span class="title_span">合计:</span>
-                <span>111</span>
+                <span>{{Work.loss}}</span>
             </button>
                     <button type="button" ion-item class="num long_item">
-                <ion-label class="title_span">检查计算数(kg):</ion-label>
-                <span>111</span>
+                <span class="title_span">检查计算数(kg):</span>
+                <span>{{Work.checkNum}}</span>
             </button>
                 </ion-list>
 
@@ -282,29 +287,29 @@
             </button>
                     <button type="button" ion-item class="num  data long_item">
                 <span class="title_span">差数(kg):</span>
-                <span>111</span>
+                <span>{{Work.difference}}</span>
             </button>
                     <button type="button" ion-item class="num data long_item">
                 <span class="title_span">差率(%):</span>
-                <span>111</span>
+                <span>{{Work.slip}}</span>
             </button>
                     <button type="button" ion-item class="num data long_item">
                 <span class="title_span">账实是否相符:</span>
-                <span>111</span>
+                <span>{{Work.slip>=-3&&Work.slip<=3?"符合":"不符合"}}</span>
             </button>
                     <button type="button" ion-item class="num long_item">
                 <span class="title_span">粮食实际数量(kg):</span>
-               <span>111</span>
+               <span>{{Work.grainQuality}}</span>
             </button>
                     <button type="button" ion-item class="num long_item">
                 <span class="title_span">账实不符原因:</span>
-                <span>111</span>
+                <span>{{Work.result}}</span>
             </button>
                 </ion-list>
                 <ion-list>
                     <button type="button" ion-item class="num text_left">
                 <span class="title_span">备注:</span>
-               <span>111</span>
+               <span>{{Work.remark}}</span>
             </button>
                 </ion-list>
                 <button ion-button large color="secondary" class="sumbit" type="submit">提交</button>
@@ -321,21 +326,24 @@
                 <ion-list class="position">
                     <ion-item>
                         被查库点:
-                        <span>111</span>
+                        <span>{{sample.libraryName}}</span>
                     </ion-item>
                     <ion-item>
                         货位号:
-                        <span>111</span>
+                        <span>{{sample.position}}</span>
                     </ion-item>
                 </ion-list>
-                <ion-list class="position problem">
+                <ion-list class="position problem" *ngFor="let sam of Safe">
                     <ion-item>
-                        <ion-label>问题1: </ion-label>
-                        <span>dfasdf</span>
+                        问题1:
+                        <span>{{sam.problem}}</span>
                     </ion-item>
                     <ion-item class="phont">
-                        图片:
-                        <img src="assets/image/index/banner_03.png" />
+                        <span>图片:</span>
+                        
+                        <div class="imgs" >
+                                <img [src]="img" *ngFor="let img of sam.image"  alt="">
+                            </div>
                     </ion-item>
                 </ion-list>
                 <button ion-button large color="secondary" class="sumbit" type="submit">提交</button>

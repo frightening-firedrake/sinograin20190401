@@ -14,6 +14,8 @@ export class detaildPage {
     sample: any
     dateStr: string
     data: any;
+    Work:any;
+    Safe:any;
     constructor(
         public params: NavParams,
         public _alert: _alertBomb,
@@ -21,7 +23,25 @@ export class detaildPage {
     ) {
         this.classify = "new"
         this.sample = this.params.get('json')
+        console.log(this.sample)
+        //工作底稿的数据
+        let sampleId ={
+            params:`{"sampleId":"${this.sample.id}"}`
+        }
+        this.Http.post("/grain/manuscript/data",sampleId).subscribe(res=>{
+            console.log(res.json())
+            let work = res.json()
+            this.Work = work["rows"][0]
+        })
+        // 安全报告的数据
+        this.Http.post("/grain/safetyReport/data",sampleId).subscribe(res=>{
+            console.log(res.json())
+            let safe = res.json()
+            this.Safe = safe["rows"]
+        })
+        // safetyReport/data
     }
+    // 扦样信息中的打印条形码的功能
     _sample() {
         let parpam = {
             title: "是否确认扦样",

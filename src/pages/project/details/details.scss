@@ -382,8 +382,27 @@ derails {
                                     }
                                 }
                                 &.phont {
+                                    .item-inner{
+                                        .input-wrapper{
+                                            padding-right:0;
+                                            span{
+                                        float:left;
+                                    }
                                     min-height: 1.84rem;
+                                    .imgs {
+								float: left;
+								width: 5.3rem;
+								padding-bottom: 0.2rem;
+                                img {
+                                            width: 1.6rem;
+                                            height: 1.1rem;
+                                            margin-left: 0.1rem;
+                                           
+                                            border: 1px solid #38b63a;
+                                        }
+							}
                                     .label {
+                                        white-space: normal;
                                         ion-icon {
                                             border: 1px solid #38b63a;
                                             width: 1.6rem;
@@ -395,14 +414,11 @@ derails {
                                             margin-left: 0.1rem;
                                             vertical-align: text-top;
                                         }
-                                        img {
-                                            width: 1.6rem;
-                                            height: 1.1rem;
-                                            margin-left: 0.1rem;
-                                            vertical-align: text-top;
-                                            border: 1px solid #38b63a;
+                                        
+                                    }
                                         }
                                     }
+                                    
                                 }
                             }
                         }

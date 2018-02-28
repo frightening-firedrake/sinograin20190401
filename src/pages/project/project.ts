@@ -31,14 +31,15 @@ export class ProjectPage {
       // console.log(res.json())
       this.optionarr = res.json()
       this.genders = this.optionarr[0].id
+      // 库点的扦样
+      let data = {
+        params: '{"libId":1}'
+      }
+      this.Http.post("grain/sample/data", data).subscribe(res => {
+        this.gendrslist = res.json()["rows"]
+      })
     })
-    // 库点的扦样
-    let data = {
-      params: '{"libId":1}'
-    }
-    this.Http.post("grain/sample/data", data).subscribe(res => {
-      this.gendrslist = res.json()["rows"]
-    })
+
   }
   // 选择库点
   changeVersion(list) {
@@ -126,6 +127,7 @@ export class ProjectPage {
   }
   // 下拉刷新
   doRefresh(refresher) {
+    this.secondary()
     setTimeout(() => {
       refresher.complete();
     }, 2000);
