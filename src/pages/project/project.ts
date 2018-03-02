@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { BLE } from '@ionic-native/ble';
 
 import { HomeService } from '../home/home.serve';
 import { HttpService } from '../../providers/httpService'
@@ -24,7 +25,7 @@ export class ProjectPage {
     // "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
   ]
   gendrslist = [];
-  constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService) {
+  constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService, public BLE: BLE, ) {
     this.gendersNav = this.parpam.get("num")
     // 所有库点
     this.Http.get("grain/library/getAll").subscribe(res => {

@@ -30,12 +30,12 @@ export class StorageService {
     public RemoveStorage(key: string) {
         return this.Storage.remove(key).then((val) => {
             if (this.GetStorage(val)) {
-                let alert = this.alertCtrl.create({
-                    title: '退出成功!',
-                    buttons: ['OK'],
-                    cssClass:"outsuccse only"
-                });
-                alert.present();
+                // let alert = this.alertCtrl.create({
+                //     title: '退出成功!',
+                //     buttons: ['OK'],
+                //     cssClass:"outsuccse only"
+                // });
+                // alert.present();
             }
         })
     }

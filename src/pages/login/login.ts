@@ -41,7 +41,8 @@ export class loginPage {
         this.Http.post('/grain/login', parpam).subscribe(res => {
             this.data = res.json()
             if (this.data.success) {
-                this.NavCtrl.pop()
+        this.NavCtrl.pop()
+                
                 this.Storage.SetStorage("userLogin", this.data.user)
             }
         })

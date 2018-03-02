@@ -83,6 +83,7 @@
             </button>
                 </ion-list>
                 <button ion-button color="secondary" class="sumbit" (click)="_sample()" [disabled]="sample.sampleState==1||sample.sampleState>=2">打印条形码</button>
+                  <button ion-button  large color="secondary" (click)="_ble()" class="sumbit" type="button">链接蓝牙</button>
             </div>
         </div>
         <div *ngSwitchCase="'work'" class="work">

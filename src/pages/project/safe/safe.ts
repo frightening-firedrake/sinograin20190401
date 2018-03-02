@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
-import { BLE } from '@ionic-native/ble';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { HomeService } from '../../home/home.serve'
 import { _alertBomb } from '../../common/_alert'
@@ -63,7 +63,6 @@ export class safePage {
         public FormBuilder: FormBuilder,
         public camera: Camera,
         public Home: HomeService,
-        public ble: BLE,
         public _alert: _alertBomb
     ) {
         this.data = this.params.get('json');
@@ -136,23 +135,5 @@ export class safePage {
     }
     onSubmit(e) {
         console.log(e)
-    }
-    _ble() {
-        this.ble.enable().then(res => {
-            console.log(res)
-            this.ble.showBluetoothSettings().then(res => {
-                this.ble.scan([], 10).subscribe(res => {
-                    console.log(111)
-                    console.log(res.id)
-                    this.ble.connect(res.id).subscribe(res=>{
-                        console.log(res)
-                    })
-                    //     //    var adData = new Uint8Array(res.advertising)
-                    //     //    console.log(adData)
-                })
-            })
-
-        })
-
     }
 }
