@@ -13,7 +13,6 @@ export class detailsWorkPage {
     private detaWork;
     private _slip;
     private Workfrom = {
-        bgzsl: '',//保管帐数量（kg）
         gainTime: '',//收货年度
         enterprise: "",//被查企业
 
@@ -62,8 +61,6 @@ export class detailsWorkPage {
         // :['', [Validators.minLength(4)]]
         this.detaWork = FormBuilder.group({
             gainTime: ['',Validators.compose([Validators.required])],
-            bgzsl: ['',Validators.compose([Validators.required])],
-
             enterprise: ['',Validators.compose([Validators.required])],
             checkedTime: ['',Validators.compose([Validators.required])],
             realCheckedTime: ['',Validators.compose([Validators.required])],
@@ -98,11 +95,7 @@ export class detailsWorkPage {
         })
         // this.Workfrom.myDate = this.detaWork.controls["myDate"]
 
-
         this.Workfrom.gainTime = this.detaWork.controls["gainTime"],
-
-            this.Workfrom.bgzsl = this.detaWork.controls["bgzsl"],
-
 
             this.Workfrom.enterprise = this.detaWork.controls["enterprise"],
             this.Workfrom.checkedTime = this.detaWork.controls["checkedTime"],
@@ -152,5 +145,31 @@ export class detailsWorkPage {
         }else{
             this._slip = "不符合"
         }
+    }
+    mianji(e) { 
+        var length = this.detaWork.value.length || 1
+        var wide = this.detaWork.value.wide || 1
+        var high = this.detaWork.value.high || 1
+        this.detaWork.value.measuredVolume  = length*wide*high
+    }
+    //粮堆实体体积（m3）
+    sttj(e) {
+        var deductVolume = this.detaWork.value.deductVolume || 0
+        this.detaWork.value.realVolume = this.detaWork.value.measuredVolume - deductVolume
+    }
+    //容重
+    rongzhong(e) {
+        this.detaWork.value.realCapacity = this.detaWork.value.realCapacity
+    }
+    //粮堆平均密度（kg/m）
+    ldpjmd(e) {
+        var correctioFactor = this.detaWork.value.correctioFactor || 1
+        this.detaWork.value.aveDensity = this.detaWork.value.realCapacity * correctioFactor
+    }
+    bgzrsh(e) {
+        var date = new Date();
+        var newDate = date.getFullYear();
+        this.detaWork.value.lossNature = this.detaWork.value.grainQuality * 0.002 * (newDate - this.detaWork.value.gainTime)
+    
     }
 }
