@@ -39,12 +39,17 @@ export class loginPage {
             userPass: e.value.password
         }
         this.Http.post('/grain/login', parpam).subscribe(res => {
-            this.data = res.json()
+            try{
+                res.json()
+                this.data = res.json()
             if (this.data.success) {
-        this.NavCtrl.pop()
-                
+                this.NavCtrl.pop()
                 this.Storage.SetStorage("userLogin", this.data.user)
             }
+            }catch(e){
+                alert("用户名或密码错误")
+            }
+            
         })
         // this.NavCtrl.pop()
         // this.Storage.SetStorage("userLogin", { "username": e.value.username, "passwork": e.value.passwork })

@@ -1,0 +1,21 @@
+<app-header title='安全报告'></app-header>
+<ion-content>
+    <form action="" (ngSubmit)="onSubmit(detaSafeForm)" [formGroup]="detaSafeForm">
+        <ion-list class="position">
+            <ion-item>
+                被查库点:
+                <span>{{data.libraryName}}</span>
+            </ion-item>
+            <ion-item>
+                货位号:
+                <span>{{data.position}}</span>
+            </ion-item>
+        </ion-list>
+        <div >
+            <detasafe-view *ngFor="let list of lists ;let i = index" [num]=i+1 (key)="keyoff($event,i)"></detasafe-view>
+            <p ion-button outline color="secondary" class="add" (click)="add()">问题加一</p>
+            <p ion-button outline color="secondary" class="remove" (click)="remove()" *ngIf="lists.length>1">问题减一</p>
+            <button ion-button large color="secondary" class="sumbit" type="submit">提交</button>
+        </div>
+    </form>
+</ion-content>

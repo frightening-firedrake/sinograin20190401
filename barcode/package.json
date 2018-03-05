@@ -1,0 +1,14 @@
+{
+  "name": "com.liang.barcode",
+  "version": "0.0.1",
+  "description": "",
+  "cordova": {
+    "id": "com.liang.barcode",
+    "platforms": []
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "",
+  "license": "ISC"
+}

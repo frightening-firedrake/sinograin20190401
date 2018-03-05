@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, App, ViewController, NavParams } from 'ionic-angular';
 import { _alertBomb } from '../common/_alert'
+import { BLE } from '@ionic-native/ble';
 import { StorageService } from '../../providers/locationstorageService'
 
 import { HomeService } from './home.serve';
@@ -16,6 +17,13 @@ import { noticePage } from './notice/notice'
 export class HomePage {
   public login: string = "在线"
   public userName: string;
+  devices: any;
+  device: any;
+  characteristics: any;
+  serviceUUID: any;
+  characteristicUUID: any;
+  deviceId: any;
+  buffered;
   constructor(
     public _alert: _alertBomb,
     public navCtrl: NavController,
@@ -23,8 +31,10 @@ export class HomePage {
     public viewCtrl: ViewController,
     public appCtrl: App,
     public Storage: StorageService,
-    public params: NavParams
+    public params: NavParams,
+    public BLE: BLE
   ) {
+    this.devices = [];
   }
   ionViewDidEnter() {
     this.Storage.GetStorage("userLogin").subscribe(res => {
@@ -35,6 +45,11 @@ export class HomePage {
       })
     })
   }
+  
+
+
+
+
   newpage(parpam, event) {
     // console.log(event)
     this.navCtrl.push(ProjectPage, { "num": parpam })

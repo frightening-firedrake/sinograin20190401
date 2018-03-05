@@ -66,11 +66,13 @@ login{
                         border-radius:50%;
                         background-color:#38b63a;
                         border:1px solid white;
+                        z-index: 111;
                         color:white;
                         box-shadow:0 0 10px rgba(56,182,58,0.5)
                       }
                       .close_icon{
                           color:red;
+                          z-index: 111;
                           font-size:0.6rem;
                           line-height:0.6rem;
                       }

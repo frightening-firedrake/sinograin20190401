@@ -9,6 +9,7 @@ import { noticeViewPage } from './notice/notice_view/notice_view'
 
 import { HomeService } from './home.serve';
 import { _alertBomb } from '../common/_alert'
+import { BLE } from '@ionic-native/ble';
 import { StorageService } from '../../providers/locationstorageService'
 
 @NgModule({
@@ -31,7 +32,8 @@ import { StorageService } from '../../providers/locationstorageService'
     providers:[
         HomeService,
         _alertBomb,
-        StorageService
+        StorageService,
+        BLE
     ]
 })
 export class HomeModule {

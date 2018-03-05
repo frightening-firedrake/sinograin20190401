@@ -30,6 +30,7 @@
     "@ionic-native/toast": "^3.10.2",
     "@ionic/storage": "^2.0.1",
     "angularx-qrcode": "^1.0.1",
+    "com.liang.barcode": "file:barcode",
     "cordova-android": "^5.1.0",
     "cordova-plugin-ble-central": "^1.1.4",
     "cordova-plugin-camera": "~2.4.1",
@@ -79,7 +80,8 @@
       "cordova-plugin-camera": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-screen-orientation": {},
-      "cordova-plugin-ble-central": {}
+      "cordova-plugin-ble-central": {},
+      "com.liang.barcode": {}
     }
   }
 }

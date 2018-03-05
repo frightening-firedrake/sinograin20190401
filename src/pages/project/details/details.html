@@ -83,17 +83,17 @@
             </button>
                 </ion-list>
                 <button ion-button color="secondary" class="sumbit" (click)="_sample()" [disabled]="sample.sampleState==1||sample.sampleState>=2">打印条形码</button>
-                  <button ion-button  large color="secondary" (click)="_ble()" class="sumbit" type="button">链接蓝牙</button>
+                  <button ion-button  large color="secondary" (click)="_ble()" class="sumbit" type="button" [hidden]="(sample.sampleState==1||sample.sampleState>=2)||ble_falg">链接蓝牙</button>
             </div>
         </div>
         <div *ngSwitchCase="'work'" class="work">
-            <ion-list class="new_informations" *ngIf="false">
-                <ion-item class="new_information">
+            <ion-list class="new_informations" *ngIf="!Work_flag">
+                <ion-item class="new_information" (click)="Workdetails()">
                     <ion-icon name="xinjian"></ion-icon>
                     <p>立即创建工作底稿</p>
                 </ion-item>
             </ion-list>
-            <div>
+            <div *ngIf="Work_flag">
                 <ion-list class="lists_input">
                     <button type="button" ion-item>
                 <span class="title_span">货位号:</span>
@@ -317,13 +317,13 @@
             </div>
         </div>
         <div *ngSwitchCase="'safe'" class="safe">
-            <ion-list class="new_informations" *ngIf="false">
+            <ion-list class="new_informations" *ngIf="!Safe_flag" (click)="Safedetails()">
                 <ion-item class="new_information">
                     <ion-icon name="xinjian"></ion-icon>
                     <p>立即创建安全报告</p>
                 </ion-item>
             </ion-list>
-            <div>
+            <div *ngIf="Safe_flag">
                 <ion-list class="position">
                     <ion-item>
                         被查库点:

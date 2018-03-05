@@ -13,6 +13,9 @@ import { safeViewPage } from './safe/safe_view/safe_view'
 import { workPage } from './work/work'
 import { workViewPage } from './work/work_view/work_view'
 import { detaildPage } from './details/details'
+import { detailsWorkPage } from './details/detailsWork/detailsWork'
+import { detaSafePage } from './details/detailsSafe/detailsSafe'
+import { detasafeViewPage } from './details/detailsSafe/detasafe_view/detasafe_view'
 
 @NgModule({
     declarations: [
@@ -21,7 +24,10 @@ import { detaildPage } from './details/details'
         safeViewPage,
         workPage,
         workViewPage,
-        detaildPage
+        detaildPage,
+        detailsWorkPage,
+        detaSafePage,
+        detasafeViewPage
     ],
     imports: [
         CommonModule,
@@ -34,7 +40,10 @@ import { detaildPage } from './details/details'
         safeViewPage,
         workPage,
         workViewPage,
-        detaildPage
+        detaildPage,
+        detailsWorkPage,
+        detaSafePage,
+        detasafeViewPage
     ],
      providers:[
         HomeService,

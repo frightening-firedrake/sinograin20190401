@@ -1,0 +1,14 @@
+<ion-list class="problem" >
+    <ion-item>
+        <ion-label>{{lists.label}}{{num}}: </ion-label>
+        <ion-textarea (keyup)="even($event)"  [value]="lists.textarea" name="textarea" placeholder="请描述问题" type="textarea"></ion-textarea>
+    </ion-item>
+    <ion-item class="phont">
+        <span>图片:</span>
+        <div class="imgs">
+        <img [src]="image" *ngFor="let image of imgdatalist let i=index" (click)="cancel(i)" />
+            
+        <ion-icon name="ios-add-circle-outline" (click)="getphone()"></ion-icon>        
+        </div>
+    </ion-item>
+</ion-list>

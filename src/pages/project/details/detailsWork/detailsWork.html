@@ -1,0 +1,304 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            创建底稿
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="detaWork" (ngSubmit)="onSubmit(detaWork)">
+        <ion-list class=" lists_input">
+            <button ion-item class="num" type="button">
+                <ion-label class="title_span">被检查企业:</ion-label>
+                <ion-input type="text"  [formControl]="Workfrom.enterprise"></ion-input>
+                <!--<span>{{Workfrom.enterprise}}</span>-->
+            </button>
+            <button ion-item class="num " type="button">
+                <ion-label ><span class="title_span">检查时点:</span></ion-label>
+                <ion-datetime min="1981" cancelText="取消" doneText="选择" displayFormat="YYYY/DD/MM" [formControl]="Workfrom.checkedTime"></ion-datetime>
+                <button ion-button icon-only item-end clear color="light" type="button" class="no_button">
+                    <ion-icon  name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button ion-item class="num " type="button">
+                <ion-label class="title_span"><span class="title_span">实际查库日:</span></ion-label>
+                <ion-datetime min="1981" cancelText="取消" doneText="选择" displayFormat="YYYY/DD/MM" [formControl]="Workfrom.realCheckedTime"></ion-datetime>
+                <button ion-button icon-only item-end clear color="light" type="button" class="no_button">
+                    <ion-icon  name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+        </ion-list>
+        <ion-list>
+            <button type="button" ion-item class="num ">
+                <span class="title_span">货位号:</span>
+                <!--<ion-input type="text" [formControl]="Workfrom.enterprise"></ion-input>-->
+                <span>{{data.position}}</span>
+                 <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" class="num " ion-item>
+                <span class="title_span">品种:</span>
+                 <!--<ion-input type="text" [formControl]="Workfrom.sort"></ion-input>-->
+                <span>{{data.sort}}</span>
+                <button ion-button icon-only item-end clear color="light" type="button" class="no_button">
+                    <ion-icon  name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item class="num " >
+                <span class="title_span">性质:</span>
+                <span>{{data.quality}}</span>
+                 <!--<ion-input type="text" [formControl]="Workfrom.quality"></ion-input>-->
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item  class="num ">
+                <span class="title_span">所在库区:</span>
+                <span >{{data.libraryName}}</span>
+                 <!--<ion-input type="text" [formControl]="Workfrom.libraryName"></ion-input>-->
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item  class="num ">
+                <ion-label class="title_span">仓库类型:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.barnType"></ion-input>
+                <!--<span>{{Workfrom.barnType}}</span>-->
+                <!--<button ion-button icon-only item-end clear color="light">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>-->
+            </button>
+            <button type="button" ion-item class="num ">
+                <ion-label ><span class="title_span">收获年度:</span></ion-label>
+                <ion-datetime min="1981" cancelText="取消" doneText="选择"  displayFormat="YYYY" [formControl]="Workfrom.gainTime"></ion-datetime>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item class="num num_kg">
+                <ion-label class="title_span">保管帐数量(kg):</ion-label>
+                <ion-input type="text" [formControl]="Workfrom.bgzsl" ></ion-input>
+                <!--<button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>-->
+            </button>
+            <button type="button" ion-item  class="num ">
+                <ion-label class="title_span">质量等级:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.qualityGrade" ></ion-input>
+                <!--<span>{{Workfrom.qualityGrade}}</span>-->
+                <!--<button ion-button icon-only item-end clear color="light">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>-->
+            </button>
+            <!--这里的复选框有问题，稍后解决-->
+            <ion-item type="button" ion-item class="num ">
+                <ion-label class="title_span">入仓方式:</ion-label>
+                <ion-input type="text" [formControl]="Workfrom.putWay"></ion-input>
+                <!--<span>{{Workfrom.putWay}}</span>-->
+                <!--<button ion-button icon-only item-end clear color="light">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>-->
+            </ion-item>
+        </ion-list>
+        <ion-list class="lists_input">
+            <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">粮食入库质量:</span>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item class="num first_item no_border">
+                <ion-label class="title_span">容重（g/l）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.storageCapacity"></ion-input>
+            </button>
+            <button type="button" ion-item class="num ">
+                <ion-label class="title_span">水分（%）:</ion-label>
+                 <ion-input type="text"  [formControl]="Workfrom.storageWater"></ion-input>
+            </button>
+            <button type="button" ion-item class="num ">
+                <ion-label class="title_span">杂质（%）:</ion-label>
+                 <ion-input type="text"  [formControl]="Workfrom.storageImpurity"></ion-input>
+            </button>
+        </ion-list>
+        <ion-list class="lists_input">
+            <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">实测入库质量:</span>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item class="num first_item no_border">
+                <ion-label class="title_span">容重（g/l）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.realCapacity"></ion-input>
+            </button>
+            <button type="button" ion-item class="num ">
+                <ion-label class="title_span">水分（%）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.realWater"></ion-input>
+            </button>
+            <button type="button" ion-item class="num ">
+                <ion-label class="title_span">杂质（%）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.realImpurity"></ion-input>
+            </button>
+        </ion-list>
+        <ion-list class="lists_input">
+            <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">粮堆形状及基本尺寸:</span>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <ion-item class="list_img">
+                <ion-img src="assets/image/index/work.png"></ion-img>
+            </ion-item>
+            <button type="button" ion-item class="num first_item no_border">
+                <ion-label class="title_span">长（m）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.length"></ion-input>
+            </button>
+            <button type="button" ion-item class="num ">
+                <ion-label class="title_span">宽（m）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.wide"></ion-input>
+            </button>
+            <button type="button" ion-item class="num ">
+                <ion-label class="title_span">高（m）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.high"></ion-input>
+            </button>
+        </ion-list>
+        <ion-list class="lists_input">
+            <button type="button" ion-item class="list_input ">
+                <span class="title_span title_span_font">1.计算粮堆体积:</span>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item class="num first_item no_border long_item">
+                <ion-label class="title_span">粮堆测量体积（m3）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.measuredVolume"></ion-input>
+            </button>
+            <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">需要扣除体积（m3）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.deductVolume"></ion-input>
+            </button>
+            <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">粮堆实体体积（m3）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.realVolume"></ion-input>
+            </button>
+        </ion-list>
+        <ion-list class="lists_input">
+            <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">2.计算粮堆平均密度:</span>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item class="no_border first_item first_item_font">
+                <ion-label>标准容重器法√</ion-label>
+                 <!--<ion-input type="text"></ion-input>-->
+            </button>
+            <button type="button" ion-item class="num  data long_item">
+                <ion-label class="title_span">粮食容重（g/l）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.realCapacity"></ion-input>
+            </button>
+            <button type="button" ion-item class="num data long_item">
+                <ion-label class="title_span">校正后修正系数:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.correctioFactor"></ion-input>
+            </button>
+            <button type="button" ion-item class="num data long_item">
+                <ion-label class="title_span">粮堆平均密度（kg/m）:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.aveDensity"></ion-input>
+            </button>
+            <!--<button type="button" ion-item class="no_border first_item first_item_font">
+                <ion-label>特制大容器法□</ion-label>
+                 <ion-input type="text"></ion-input>
+            </button>
+            <button type="button" ion-item class="num first_item no_border long_item">
+                <ion-label class="title_span">单位体积粮食重量(kg/m):</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.unit_volume_weight_tz"></ion-input>
+            </button>
+            <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">校正后修正系数:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.correction_factor_tz"></ion-input>
+            </button>
+            <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">粮堆平均密度(kg/m):</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.average_density_tz"></ion-input>
+            </button>-->
+        </ion-list>
+
+        <ion-list class="lists_input">
+            <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">3.计算粮食数量:</span>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item class="num  data long_item no_border first_item">
+                <ion-label class="title_span">测量计算数(kg):</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.unQuality"></ion-input>
+            </button>
+            <button type="button" ion-item class="no_border first_item first_item_font">
+                <ion-label>应记粮食损耗(kg)</ion-label>
+                 <!--<ion-input type="text"></ion-input>-->
+            </button>
+            <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">水分减量:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.lossWater"></ion-input>
+            </button>
+            <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">保管自然损耗:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.lossNature"></ion-input>
+            </button>
+            <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">合计:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.loss"></ion-input>
+            </button>
+            <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">检查计算数(kg):</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.checkNum"></ion-input>
+            </button>
+        </ion-list>
+
+        <ion-list class="lists_input">
+            <button type="button" ion-item class="list_input">
+                <span class="title_span title_span_font">4.认定粮食实际数量:</span>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item class="no_border first_item first_item_font">
+                <ion-label>检查计算数与保管账数量比较</ion-label>
+                 <!--<ion-input type="text"></ion-input>-->
+            </button>
+            <button type="button" ion-item class="num  data long_item">
+                <ion-label class="title_span">差数(kg):</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.difference"></ion-input>
+            </button>
+            <button type="button" ion-item class="num data long_item">
+                <ion-label class="title_span">差率(%):</ion-label>
+                 <ion-input type="text"   (blur)="onKey($event)" [formControl]="Workfrom.slip"></ion-input>
+            </button>
+            <button type="button" ion-item class="num data long_item">
+                <span class="title_span">账实是否相符:</span>
+                <span >{{_slip}}</span>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
+                    <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+                </button>
+            </button>
+            <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">粮食实际数量(kg):</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.grainQuality"></ion-input>
+            </button>
+            <button type="button" ion-item class="num long_item">
+                <ion-label class="title_span">账实不符原因:</ion-label>
+                 <ion-input type="text" [formControl]="Workfrom.result"></ion-input>
+            </button>
+        </ion-list>
+        <ion-list>
+            <button type="button" ion-item class="num text_left">
+                <ion-label class="title_span">备注:</ion-label>
+                <ion-input type="text"  [formControl]="Workfrom.remark"></ion-input>
+            </button>
+        </ion-list>
+        <button ion-button large color="secondary"  class="sumbit" type="submit" [disabled]="!(detaWork.valid)">提交</button>
+    </form>
+</ion-content>
