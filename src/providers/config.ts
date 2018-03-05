@@ -1,6 +1,6 @@
 export const FILE_SERVE_URL = '';//文件存储地址
-export const APP_SERVE_URL = 'http://192.168.1.223:80/'; 
-// export const APP_SERVE_URL = 'http://localhost:80/'; 
+// export const APP_SERVE_URL = 'http://192.168.1.223:80/'; 
+export const APP_SERVE_URL = 'http://192.168.0.103:80/'; 
 
 
 export const DEFAULT_AVATAR = './assets/image/header.png';//用户默认头像

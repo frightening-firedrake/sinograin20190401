@@ -1,10 +1,12 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
 import { ActionSheetController, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { dateSafeServe } from '../detasafeSever'
 
 @Component({
     selector: "detasafe-view",
-    templateUrl: "./detasafe_view.html"
+    templateUrl: "./detasafe_view.html",
+    providers:[dateSafeServe]
 })
 
 export class detasafeViewPage {
@@ -14,7 +16,9 @@ export class detasafeViewPage {
    constructor(
         public Alert: ActionSheetController,
         public alertCtrl: AlertController,
-        public camera: Camera, ) {
+        public camera: Camera,
+        public dateser:dateSafeServe
+         ) {
             
     }
     lists = {
@@ -31,7 +35,9 @@ export class detasafeViewPage {
                 {
                     text:"删除",
                     handler:()=>{
+                        var that = this
                         this.imgdatalist = this.imgdatalist.filter(function(i,v){
+                            that.dateser.deleteImg(index,that.num)
                             return index!=v
                         })
                         console.log(this.imgdatalist)
@@ -59,6 +65,7 @@ export class detasafeViewPage {
                             sourceType: 1,
                         }).then((imageData) => {
                             this.imgdatalist.push(imageData)
+                            this.dateser.setImg(this.imgdatalist,this.num)
                         }, (err) => {
 
                             // let alert = this.alertCtrl.create({
@@ -84,6 +91,7 @@ export class detasafeViewPage {
                             sourceType: 0,
                         }).then((imageData) => {
                             this.imgdatalist.push(imageData)
+                            this.dateser.setImg(this.imgdatalist,this.num)
                         }, (err) => {
                             // let alert = this.alertCtrl.create({
                             //     title: "内容",

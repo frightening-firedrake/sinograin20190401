@@ -70,8 +70,9 @@
                 </button>-->
             </button>
             <button type="button" ion-item class="num ">
-                <ion-label ><span class="title_span">收获年度:</span></ion-label>
-                <ion-datetime min="1981" cancelText="取消" doneText="选择"  displayFormat="YYYY" [formControl]="Workfrom.gainTime"></ion-datetime>
+                <span class="title_span">收获年度:</span>
+                <!--<ion-datetime min="1981" cancelText="取消" doneText="选择"  displayFormat="YYYY" [formControl]="Workfrom.gainTime"></ion-datetime>-->
+                <span>{{data.gainTime}}</span>
                 <button ion-button icon-only item-end clear color="light" class="no_button">
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>
@@ -83,22 +84,22 @@
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>-->
             </button>
-            <button type="button" ion-item  class="num ">
-                <ion-label class="title_span">质量等级:</ion-label>
-                 <ion-input type="text" [formControl]="Workfrom.qualityGrade" ></ion-input>
-                <!--<span>{{Workfrom.qualityGrade}}</span>-->
-                <!--<button ion-button icon-only item-end clear color="light">
+            <button type="button" ion-item  class="num " (click)="qualityGrade()">
+                <span class="title_span">质量等级:</span>
+                 <!--<ion-input type="text" [formControl]="Workfrom.qualityGrade" ></ion-input>-->
+                <span>{{detaWork.value.qualityGrade}}</span>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
-                </button>-->
+                </button>
             </button>
             <!--这里的复选框有问题，稍后解决-->
-            <ion-item type="button" ion-item class="num ">
-                <ion-label class="title_span">入仓方式:</ion-label>
-                <ion-input type="text" [formControl]="Workfrom.putWay"></ion-input>
-                <!--<span>{{Workfrom.putWay}}</span>-->
-                <!--<button ion-button icon-only item-end clear color="light">
+            <ion-item type="button" ion-item class="num "(click)="putWay()">
+                <span class="title_span">入仓方式:</span>
+                <!--<ion-input type="text" [formControl]="Workfrom.putWay"></ion-input>-->
+                <span>{{detaWork.value.putWay}}</span>
+                <button ion-button icon-only item-end clear color="light" class="no_button">
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
-                </button>-->
+                </button>
             </ion-item>
         </ion-list>
         <ion-list class="lists_input">

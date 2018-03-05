@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { HttpService } from '../../../../providers/httpService'
+import { _alertBomb } from '../../../common/_alert'
 
 @Component({
     selector: "Work",
@@ -49,11 +50,14 @@ export class detailsWorkPage {
         barnType: "",//仓房类型
 
     }
-   
+     private addButton: any = {
+        text: "确认"
+    }
     constructor(
         public parpam: NavParams,
         public FormBuilder: FormBuilder,
-        public Http:HttpService
+        public Http:HttpService,
+        public _alert :_alertBomb
     ) {
         console.log(this.parpam.get("params"))
         this.data = this.parpam.get("params")
@@ -139,6 +143,7 @@ export class detailsWorkPage {
 
     }
     onKey(e){
+        
         // console.log(this.detaWork.value.slip>-3&&this.detaWork.value.slip<3)
         if(this.detaWork.value.slip>-3&&this.detaWork.value.slip<3){
            this._slip = "符合"
@@ -171,5 +176,54 @@ export class detailsWorkPage {
         var newDate = date.getFullYear();
         this.detaWork.value.lossNature = this.detaWork.value.grainQuality * 0.002 * (newDate - this.detaWork.value.gainTime)
     
+    }
+    // 质量的弹框
+    qualityGrade() {
+        var that = this
+        const parpam = {
+            title: "选择质量",
+        }
+        const addInput = [
+            {
+                type: 'radio',
+                label: '上等',
+                value: '上等'
+            },
+            {
+                type: 'radio',
+                label: '中等',
+                value: '中等'
+            },
+            {
+                type: 'radio',
+                label: '下等',
+                value: '下等'
+            },
+        ]
+        this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
+            that.detaWork.value.qualityGrade = data
+        })
+    }
+    // 入库方式
+    putWay(){
+       var that = this
+        const parpam = {
+            title: "选择质量",
+        }
+        const addInput = [
+            {
+                type: 'radio',
+                label: '人工入仓',
+                value: '人工入仓 '
+            },
+            {
+                type: 'radio',
+                label: '机械入仓 ',
+                value: '机械入仓 '
+            },
+        ]
+        this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
+            that.detaWork.value.putWay = data
+        }) 
     }
 }
