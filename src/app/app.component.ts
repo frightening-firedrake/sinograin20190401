@@ -3,6 +3,7 @@ import { Platform,Keyboard, ToastController,Nav  } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NativeService } from '../providers/nativeService'
 
 import { TabsPage } from '../pages/tabs/tabs';
 @Component({
@@ -19,6 +20,7 @@ export class MyApp {
     splashScreen: SplashScreen,
     public Keyboard:Keyboard,
     public toastCtrl: ToastController,
+    public nativeService:NativeService
     ) {
      
     platform.ready().then(() => {
@@ -41,7 +43,10 @@ export class MyApp {
     
   }
   registerBackButtonAction() {
+    
+    
      this.platform.registerBackButtonAction(()=>{
+      
        if(this.Keyboard.isOpen()){
          this.Keyboard.close()
          return
@@ -51,12 +56,16 @@ export class MyApp {
       let activeVC = tab.getActive();//通过当前选中的tab获取ViewController
       let activeNav = activeVC.getNav();//通过当前视图的ViewController获取的NavController
       console.log(tabs,tab,activeVC,activeNav)
+       console.log(this.nativeService.hideLoading())
+       this.nativeService.hideLoading()
       return activeNav.canGoBack() ? activeNav.pop() :  this.showExit();//this.showExit()
      })
    }
    
   //双击退出提示框
   showExit() {
+    
+    
     if (this.backButtonPressed) { //当触发标志为true时，即2秒内双击返回按键则退出APP
       this.platform.exitApp();
     } else {

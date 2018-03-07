@@ -87,7 +87,7 @@
             <button type="button" ion-item  class="num " (click)="qualityGrade()">
                 <span class="title_span">质量等级:</span>
                  <!--<ion-input type="text" [formControl]="Workfrom.qualityGrade" ></ion-input>-->
-                <span>{{detaWork.value.qualityGrade}}</span>
+                <span>{{ _qualityGrade}}</span>
                 <button ion-button icon-only item-end clear color="light" class="no_button">
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>
@@ -96,7 +96,7 @@
             <ion-item type="button" ion-item class="num "(click)="putWay()">
                 <span class="title_span">入仓方式:</span>
                 <!--<ion-input type="text" [formControl]="Workfrom.putWay"></ion-input>-->
-                <span>{{detaWork.value.putWay}}</span>
+                <span>{{_putWay}}</span>
                 <button ion-button icon-only item-end clear color="light" class="no_button">
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>

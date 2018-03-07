@@ -16,6 +16,7 @@ import { detaildPage } from './details/details'
 import { detailsWorkPage } from './details/detailsWork/detailsWork'
 import { detaSafePage } from './details/detailsSafe/detailsSafe'
 import { detasafeViewPage } from './details/detailsSafe/detasafe_view/detasafe_view'
+import { dateSafeServe } from './details/detailsSafe/detasafeSever'
 
 @NgModule({
     declarations: [
@@ -50,6 +51,7 @@ import { detasafeViewPage } from './details/detailsSafe/detasafe_view/detasafe_v
         Camera,
         _alertBomb,
         BLE,
+        dateSafeServe
     ]
 })
 export class ProjectModule {

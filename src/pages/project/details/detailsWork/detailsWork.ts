@@ -50,6 +50,8 @@ export class detailsWorkPage {
         barnType: "",//仓房类型
 
     }
+    _putWay;
+    _qualityGrade;
      private addButton: any = {
         text: "确认"
     }
@@ -140,7 +142,7 @@ export class detailsWorkPage {
         this.Http.post("grain/manuscript/saveMan",data).subscribe(res=>{
             console.log(res)
         })
-
+        console.log(e)
     }
     onKey(e){
         
@@ -202,6 +204,7 @@ export class detailsWorkPage {
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.detaWork.value.qualityGrade = data
+           
         })
     }
     // 入库方式
@@ -224,6 +227,7 @@ export class detailsWorkPage {
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.detaWork.value.putWay = data
+            // console.log(data)
         }) 
     }
 }

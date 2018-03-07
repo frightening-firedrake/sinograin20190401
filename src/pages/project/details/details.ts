@@ -7,6 +7,7 @@ import { _alertBomb } from '../../common/_alert'
 import { HttpService } from '../../../providers/httpService'
 import { detailsWorkPage } from './detailsWork/detailsWork'
 import { detaSafePage } from './detailsSafe/detailsSafe'
+import { APP_SERVE_URL } from "../../../providers/config";
 
 declare var cordova;
 @Component({
@@ -16,12 +17,13 @@ declare var cordova;
 
 export class detaildPage {
     classify: any
+    Safe_img  = [];
     sample: any
     dateStr: string
     data: any;
     Work: any;
     Work_flag = true;
-    ble_falg = false
+    ble_falg = true
     Safe: any;
     devices: any;
     device: any;
@@ -30,7 +32,7 @@ export class detaildPage {
     characteristicUUID: any;
     deviceId: any;
     buffered;
-    Safe_flag= true;
+    Safe_flag = true;
     sampleId;
     private pringarr = ["8C:DE:52:FA:A6:19"]
     constructor(
@@ -41,13 +43,12 @@ export class detaildPage {
         public navCtrl: NavController,
         private nativeService: NativeService,
     ) {
-        this.ble_falg = false
         this.devices = [];
         this.serviceUUID = "1800";
         this.characteristicUUID = "180a";
         this.classify = "new"
         this.sample = this.params.get('json')
-        // console.log(this.sample)
+        console.log(this.sample)
         //工作底稿的数据
         this.sampleId = {
             params: `{"sampleId":"${this.sample.id}"}`
@@ -65,28 +66,53 @@ export class detaildPage {
         })
         // 安全报告的数据
         this.Http.post("/grain/safetyReport/data", this.sampleId).subscribe(res => {
-            // console.log(res.json())
-             let safe = res.json()
+            console.log(res.json())
+            let safe = res.json()
             if (safe["rows"].length) {
                 this.Safe_flag = true
                 this.Safe = safe["rows"]
+                console.log(this.Safe[0].images.split(","))
+                this.Safe[0].images.split(",").forEach((i,v)=>{
+                    this.Safe_img.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
+                })
             } else {
                 this.Safe_flag = false
             }
-           
+
         })
         // safetyReport/data
+    }
+    ionViewDidEnter() {
+        // alert(111)
+        this.BLE.enable();        
+        // this.BLE.showBluetoothSettings()        
+        
+        this.nativeService.showLoading();
+        this.pringarr.forEach((i, v) => {
+            console.log(i)                        
+            cordova.plugins.barcode.open(i, res => {
+                console.log("js"+res)
+                this.nativeService.hideLoading();                
+                this.ble_falg = false
+            }, err => {
+                console.log("nojs"+err)
+                this.nativeService.hideLoading();
+                alert("请关闭蓝牙重新连接")
+                this.ble_falg = true
+            })
+        })
     }
     // 没有工作底稿的时候
     Workdetails() {
         this.navCtrl.push(detailsWorkPage, { "params": this.sample })
     }
     // 没有安全报告的时候
-    Safedetails(){
-        this.navCtrl.push(detaSafePage,{"params":this.sample})
+    Safedetails() {
+        this.navCtrl.push(detaSafePage, { "params": this.sample })
     }
     // 扦样信息中的打印条形码的功能
     _sample() {
+        this._ble()
         let parpam = {
             title: "是否确认扦样",
             subTitle: "此操作不可逆，请谨慎选择",
@@ -108,6 +134,11 @@ export class detaildPage {
                         }
                         this.Http.post("/grain/sample/edit", parpam).subscribe(res => {
                             this.data = res.json()
+                            cordova.plugins.barcode.printBarCode("http://www.ityyedu.com/barcode.png", "0", "200", "200", "150", res => {
+                                console.log(res)
+                            }, err => {
+                                console.log(err)
+                            })
                             if (this.data.success) {
                                 let params = {
                                     title: "提示",
@@ -116,11 +147,6 @@ export class detaildPage {
                                         {
                                             text: "确认",
                                             handler: () => {
-                                                cordova.plugins.barcode.printBarCode("http://www.ityyedu.com/barcode.png", "0", "200", "200", "150", res => {
-                                                    console.log(res)
-                                                }, err => {
-                                                    console.log(err)
-                                                })
                                             }
                                         }
                                     ],
@@ -151,18 +177,18 @@ export class detaildPage {
     }
     _ble() {
 
-        this.BLE.enable();
-        // this.BLE.showBluetoothSettings()
+        this.nativeService.showLoading();
+        // this.connect("8C:DE:52:FA:A6:19")
         console.log("扫描开始");
-        this.devices = [];
+        // this.devices = [];
 
         this.BLE.startScan([]).subscribe(device => {
-            this.nativeService.hideLoading();
             this.devices.push(device);
             console.log("扫描结果" + JSON.stringify(device))
             this.pringarr.forEach((i, v) => {
                 if (device.id = i) {
                     console.log("ID" + device.id)
+                    console.log(device)
                     this.ble_falg = true
                     this.connect(device)
                 }
@@ -187,7 +213,7 @@ export class detaildPage {
         console.log(device)
 
         cordova.plugins.barcode.open(device.id, res => {
-            this.nativeService.showLoading();
+            this.nativeService.hideLoading();
             console.log(res)
         }, err => {
             alert("请关闭蓝牙重新连接")

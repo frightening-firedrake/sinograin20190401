@@ -11,7 +11,6 @@ import { dateSafeServe } from './detasafeSever'
 @Component({
     selector: "detailsSafe",
     templateUrl: "./detailsSafe.html",
-    providers:[dateSafeServe]
 })
 
 export class detaSafePage {
@@ -24,10 +23,10 @@ export class detaSafePage {
         public FormBuilder: FormBuilder,
         public camera: Camera,
         public Home: HomeService,
-        public dateser:dateSafeServe,
+        public dateser: dateSafeServe,
         public _alert: _alertBomb,
         public Http: HttpService
-        ) {
+    ) {
         this.data = this.params.get("params")
         console.log(this.data)
         this.detaSafeForm = FormBuilder.group({
@@ -40,13 +39,15 @@ export class detaSafePage {
     add() {
         if (this.keyVule[this.lists.length - 1]) {
             this.lists.push(1)
-            this.dateser.getImg().subscribe(res=>{
-                res.forEach((i,v) => {
-                    this.ImgJson.push(`{"problem":"问题${this.lists.length-1}","images:${i.arr}","sampleId:${this.data.id}"}`)
-                    console.log(this.ImgJson)
-                });
+            this.dateser.getImg().subscribe(res => {
+                // res.forEach((i, v) => {
+                //     var imgstr = i.Imgarr.join()
+                //     let succc = { "problem": this.keyVule[i.id - 1], "images": imgstr, "sampleId": this.data.id }
+                //     this.ImgJson.push(succc)
+                // });
+                // 
             })
-            
+
         }
     }
     remove() {
@@ -54,10 +55,29 @@ export class detaSafePage {
         this.ImgJson.pop()
     }
     onSubmit(e) {
-        this.Http.post("grain/safetyReport/save",this.ImgJson).subscribe(res=>{
-            console.log(res)
+        console.log(e)
+        // console.log(this.ImgJson)
+        this.dateser.getImg().subscribe(res => {
+            res.forEach((i, v) => {
+                console.log(i.Imgarr.join())
+                var imgstr = i.Imgarr.join()
+                console.log(succc)
+                var succc = { "problem": this.keyVule[i.id - 1], "images": imgstr, "sampleId": this.data.id }
+                console.log(succc)
+                this.ImgJson.push(JSON.stringify(succc))
+                console.log(111)
+                let data ={
+                    params:`[${this.ImgJson}]`
+                }
+                console.log(this.ImgJson,data)
+                this.Http.post("grain/safetyReport/save",data).subscribe(res => {
+                    console.log(res)
+                })
+            });
+            
         })
-        console.log(this.keyVule)
+
+        // console.log(this.keyVule)
 
     }
 }

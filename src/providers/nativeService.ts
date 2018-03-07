@@ -161,10 +161,10 @@ export class NativeService {
         content: content
       });
       this.loading.present();
-      setTimeout(() => {//最长显示10秒
-        this.loadingIsOpen && this.loading.dismiss();
-        this.loadingIsOpen = false;
-      }, 10000);
+      // setTimeout(() => {//最长显示10秒
+      //   this.loadingIsOpen && this.loading.dismiss();
+      //   this.loadingIsOpen = false;
+      // }, 10000);
     }
   };
 

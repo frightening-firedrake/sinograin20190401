@@ -71,7 +71,7 @@
             </button>
                     <button type="button" ion-item>
                 <span class="span_title">入库时间:</span>
-                <span>{{ sample.createTime }}</span>
+                <span></span>
             </button>
                     <button type="button" class="num" ion-item>
                 <span class="span_title">扦样日期:</span>
@@ -82,8 +82,8 @@
                 <span>{{ sample.remark }}</span>
             </button>
                 </ion-list>
-                <button ion-button color="secondary" class="sumbit" (click)="_sample()" [disabled]="sample.sampleState==1||sample.sampleState>=2">打印条形码</button>
-                  <button ion-button  large color="secondary" (click)="_ble()" class="sumbit" type="button" [hidden]="(sample.sampleState==1||sample.sampleState>=2)||ble_falg">链接蓝牙</button>
+                <button ion-button color="secondary" class="sumbit" (click)="_sample()" [disabled]="(sample.sampleState==1||sample.sampleState>=2)||ble_falg">打印条形码</button>
+                  <!--<button ion-button  large color="secondary" (click)="_ble()" class="sumbit" type="button" [hidden]="ble_falg||(sample.sampleState==1||sample.sampleState>=2)">链接蓝牙</button>-->
             </div>
         </div>
         <div *ngSwitchCase="'work'" class="work">
@@ -343,7 +343,7 @@
                         <span>图片:</span>
                         
                         <div class="imgs" >
-                                <img [src]="img" *ngFor="let img of sam.image"  alt="">
+                                <img [src]="img" *ngFor="let img of Safe_img"  alt="">
                             </div>
                     </ion-item>
                 </ion-list>

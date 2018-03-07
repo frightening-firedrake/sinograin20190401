@@ -1,51 +1,69 @@
-import { Component,Input,Output,EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActionSheetController, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { HttpService } from '../../../../../providers/httpService'
+// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+// import { Transfer } from "ionic-native";
 import { dateSafeServe } from '../detasafeSever'
 
 @Component({
     selector: "detasafe-view",
     templateUrl: "./detasafe_view.html",
-    providers:[dateSafeServe]
 })
 
 export class detasafeViewPage {
-    imgdatalist=[]
-     @Input() num;
-     @Output() key = new EventEmitter()
-   constructor(
+    imgdatalist = []
+    imgdata = []
+    @Input() num;
+    @Output() key = new EventEmitter()
+    constructor(
         public Alert: ActionSheetController,
         public alertCtrl: AlertController,
         public camera: Camera,
-        public dateser:dateSafeServe
-         ) {
-            
+        public dateser: dateSafeServe,
+        public Http: HttpService,
+        // private transfer: FileTransfer,
+    ) {
+
     }
     lists = {
-        label:"问题",
-        textarea:""
+        label: "问题",
+        textarea: ""
     }
-    even(event){
+    even(event) {
         this.key.emit(event)
     }
-    cancel(index){
+    GetImgUrl(Url, callback) {
+        let data = {
+            pictureFile: Url
+        }
+        // const fileTransfer: FileTransferObject = this.transfer.create();
+        // fileTransfer.upload(Url, this.Http.encode(Url)).then(res=>{
+        //     console.log(res)
+        // })
+
+        this.Http.post("grain/safetyReport/uploadBase64", data).subscribe(res => {
+            callback(res.json()["msg"])
+        })
+    }
+    cancel(index) {
         let AlertSheetcancl = this.Alert.create({
-            title:null,
-            buttons:[
+            title: null,
+            buttons: [
                 {
-                    text:"删除",
-                    handler:()=>{
+                    text: "删除",
+                    handler: () => {
                         var that = this
-                        this.imgdatalist = this.imgdatalist.filter(function(i,v){
-                            that.dateser.deleteImg(index,that.num)
-                            return index!=v
+                        this.imgdatalist = this.imgdatalist.filter(function (i, v) {
+                            that.dateser.deleteImg(index, that.num)
+                            return index != v
                         })
                         console.log(this.imgdatalist)
                     }
                 }
             ]
-        }) 
-          AlertSheetcancl.present();
+        })
+        AlertSheetcancl.present();
     }
     getphone() {
         let AlertSheet = this.Alert.create({
@@ -59,13 +77,29 @@ export class detasafeViewPage {
                             allowEdit: true,
                             encodingType: this.camera.EncodingType.JPEG,
                             saveToPhotoAlbum: false,
-                            // destinationType: this.useURI ? this.camera.DestinationType.FILE_URI : this.camera.DestinationType.DATA_URL,
+                            destinationType: 1,
                             targetHeight: 800,
                             targetWidth: 800,
                             sourceType: 1,
                         }).then((imageData) => {
-                            this.imgdatalist.push(imageData)
-                            this.dateser.setImg(this.imgdatalist,this.num)
+                            // imageData是图片
+                            var that = this
+                            // this.GetImgUrl(imageData, data => {
+                            // this.imgdatalist.push("data:image/jpeg;base64,"+imageData)
+                            // console.log(imageData, "data:image/jpeg;base64," + imageData)
+                            //     this.dateser.setImg(data,this.num)
+                            // })
+                            var img = imageData;
+                            var image = new Image();
+                            image.src = img;
+                            image.onload = function () {
+                                var base64 = that.getBase64Image(image);
+                                that.GetImgUrl(base64, (data) => {
+                                    that.imgdatalist.push(imageData)
+                                    that.imgdata.push(data)
+                                    that.dateser.setImg(that.imgdata, that.num)
+                                })
+                            }
                         }, (err) => {
 
                             // let alert = this.alertCtrl.create({
@@ -86,12 +120,29 @@ export class detasafeViewPage {
                             encodingType: this.camera.EncodingType.JPEG,
                             saveToPhotoAlbum: false,
                             // destinationType: this.useURI ? this.camera.DestinationType.FILE_URI : this.camera.DestinationType.DATA_URL,
+                            destinationType: 1,
                             targetHeight: 800,
                             targetWidth: 800,
                             sourceType: 0,
                         }).then((imageData) => {
-                            this.imgdatalist.push(imageData)
-                            this.dateser.setImg(this.imgdatalist,this.num)
+                            var that = this
+                            var img = imageData;
+                            var image = new Image();
+                            image.src = img;
+                            image.onload = function () {
+                                var base64 = that.getBase64Image(image);
+                                console.log(base64)
+                                that.GetImgUrl(base64, (data) => {
+                                    that.imgdatalist.push(imageData)
+                                    that.imgdata.push(data)
+                                    that.dateser.setImg(that.imgdata, that.num)
+                                })
+                            }
+                            // this.GetImgUrl(imageData, data => {
+                            //     this.imgdatalist.push("data:image/jpeg;base64,"+data)
+                            //     this.dateser.setImg(data,this.num)
+                            // })
+                            // this.dateser.setImg(this.imgdatalist,this.num)
                         }, (err) => {
                             // let alert = this.alertCtrl.create({
                             //     title: "内容",
@@ -105,6 +156,19 @@ export class detasafeViewPage {
             ]
         })
         AlertSheet.present();
+    }
+    getBase64Image(img) {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+        var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+        var dataURL = canvas.toDataURL("image/jpeg" + ext);
+        var index = dataURL.indexOf(",")
+        var dateURLTO = dataURL.slice(index+1)
+        console.log(index,dataURL)
+        return dateURLTO;
     }
 
 }

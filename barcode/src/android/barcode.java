@@ -33,13 +33,13 @@ public class barcode extends CordovaPlugin {
             this.open(ble_mac_address, callbackContext);
             return true;
         }else if(action.equals("printBarCode")){
-            String bar_code = args.getString(0);
+            String img_url = args.getString(0);
             String offset = args.getString(1);
             String xDpi = args.getString(2);
             String hDpi = args.getString(3);
             String h = args.getString(4);
 
-            this.printBarCode(bar_code,offset,xDpi,hDpi,h,callbackContext);
+            this.printBarCode(img_url,offset,xDpi,hDpi,h,callbackContext);
             return true;
         }else if(action.equals("close")){
             this.close(callbackContext);
@@ -51,45 +51,53 @@ public class barcode extends CordovaPlugin {
     private void open(String ble_mac_address, CallbackContext callbackContext) {
         // HPRTPrinterHelper HPRTPrinter=new HPRTPrinterHelper(Context,PrinterName);
         try{
-            if(!HPRTPrinterHelper.IsOpened()){
+            // if(!HPRTPrinterHelper.IsOpened()){
                 HPRTPrinterHelper.PortOpen("Bluetooth,"+ble_mac_address);
-            }
+                callbackContext.success("连接步不知道是不是成功");
+            // }
+        	
         }catch(Exception e){
-           
             callbackContext.error( "连接错误："+e.getMessage().toString());
         }
-        callbackContext.success("连接成功");
     }
 
-    private void printBarCode(String bar_code,String offset,String xDpi,String hDpi,String h, CallbackContext callbackContext) {
+    private void printBarCode(String img_url,String offset,String xDpi,String hDpi,String h, CallbackContext callbackContext) {
         // HPRTPrinterHelper HPRTPrinter=new HPRTPrinterHelper(Context,PrinterName);
         try{
-            HPRTPrinterHelper.printAreaSize(offset,xDpi,hDpi,h,"1");
-            HPRTPrinterHelper.Expanded("0","0",getPictureString(bar_code));
-            HPRTPrinterHelper.Form();
-            HPRTPrinterHelper.Print();
-            // HPRTPrinterHelper.PageWidth(500);
-            // HPRTPrinterHelper.Align(HPRTPrinterHelper.CENTER);
-            // HPRTPrinterHelper.Barcode(HPRTPrinterHelper.BARCODE,HPRTPrinterHelper.code93,"1","1","150","0","0",true,"7","0","5",bar_code);
-            // HPRTPrinterHelper.Form();
- 
-           HPRTPrinterHelper.Print();
+        	if(HPRTPrinterHelper.IsOpened()){
+
+	            HPRTPrinterHelper.printAreaSize(offset,xDpi,hDpi,h,"4");
+	            HPRTPrinterHelper.Expanded("0","0",getPictureString(img_url));
+	            HPRTPrinterHelper.Form();
+	            HPRTPrinterHelper.Print();
+	            // HPRTPrinterHelper.PageWidth(500);
+	            // HPRTPrinterHelper.Align(HPRTPrinterHelper.CENTER);
+	            // HPRTPrinterHelper.Barcode(HPRTPrinterHelper.BARCODE,HPRTPrinterHelper.code93,"1","1","150","0","0",true,"7","0","5",bar_code);
+	            // HPRTPrinterHelper.Form();
+	 
+	           	HPRTPrinterHelper.Print();
+
+        		callbackContext.success("条码打印指令已发出");
+        	}else{
+        		callbackContext.error("打印错误：设备未连接");
+        	}
 
         }catch(Exception e){
             callbackContext.error("打印错误："+ e.getMessage().toString());
         }  
-        callbackContext.success("调用打印条形码结束！");
     }
 
 
     private void close(CallbackContext callbackContext) {
         // HPRTPrinterHelper HPRTPrinter=new HPRTPrinterHelper(Context,PrinterName);
         try{
-            HPRTPrinterHelper.PortClose();
+        	if(HPRTPrinterHelper.IsOpened()){
+            	HPRTPrinterHelper.PortClose();
+        	}
+        	callbackContext.success("连接已关闭");
         }catch(Exception e){
             callbackContext.success("关闭错误："+ e.getMessage().toString());
         }  
-        callbackContext.success("连接已关闭");
     }
     public Bitmap getHttpBitmap(String url) 
     { 

@@ -17,7 +17,9 @@ export class HttpService {
     private nativeService: NativeService,
     private alertCtrl: AlertController) {
   }
-
+  public encode(url){
+      return encodeURI(url)
+  }
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
     url = HttpService.replaceUrl(url);
     // console.info(url);

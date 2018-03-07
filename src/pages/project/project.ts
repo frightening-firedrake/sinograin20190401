@@ -32,16 +32,15 @@ export class ProjectPage {
       // console.log(res.json())
       this.optionarr = res.json()
       this.genders = this.optionarr[0].id
-      // 库点的扦样
-      let data = {
-        params: '{"libraryId":1,"regState":2,"sampleState":-1}'
-      }
-      this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
-        console.log(res.json())
-        this.gendrslist = res.json()["rows"]
-      })
     })
-
+    // 库点的扦样
+    let data = {
+      params: '{"libraryId":1,"regState":2,"sampleState":-1}'
+    }
+    this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
+      console.log(res.json())
+      this.gendrslist = res.json()["rows"]
+    })
   }
   // 选择库点
   changeVersion(list) {
