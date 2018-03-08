@@ -204,7 +204,7 @@ export class detailsWorkPage {
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.detaWork.value.qualityGrade = data
-           
+            that._qualityGrade = data
         })
     }
     // 入库方式
@@ -228,6 +228,7 @@ export class detailsWorkPage {
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.detaWork.value.putWay = data
             // console.log(data)
+             that._putWay = data
         }) 
     }
 }

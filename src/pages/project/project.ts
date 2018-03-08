@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { BLE } from '@ionic-native/ble';
 
@@ -21,33 +21,56 @@ export class ProjectPage {
   gendersNav: any = ""
   _select_smaple = "-1";
   myInput;
-  public optionarr: any = [
+  Company;
+  public Companyarr;
+  public gendersarr: any = [
     // "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
   ]
   gendrslist = [];
-  constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService, public BLE: BLE, ) {
+  constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService, public BLE: BLE, public cd: ChangeDetectorRef) {
+
     this.gendersNav = this.parpam.get("num")
-    // 所有库点
-    this.Http.get("grain/library/getAll").subscribe(res => {
-      // console.log(res.json())
-      this.optionarr = res.json()
-      this.genders = this.optionarr[0].id
-    })
-    // 库点的扦样
-    let data = {
-      params: '{"libraryId":1,"regState":2,"sampleState":-1}'
+    // // 所有库点
+    // this.Http.get("grain/library/getAll").subscribe(res => {
+    //   // console.log(res.json())
+    //   this.gendersarr = res.json()
+
+    // })
+    // 被查单位
+    let Company = {
+      "pLibraryId": "-1"
     }
-    this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
+    this.Http.post("grain/library/data", Company).subscribe(res => {
       console.log(res.json())
-      this.gendrslist = res.json()["rows"]
+      this.Companyarr = res.json()["rows"]
+      // this.Company = this.Companyarr[0].id
     })
   }
-  // 选择库点
+  // 每次进页面下拉刷新
+  ionViewDidEnter() {
+
+
+    // this.doRefresh()
+  }
+  // 选择被查库点
   changeVersion(list) {
     let data = {
-      params: '{"libraryId":' + list + ',"regState":2,"sampleState":-1}'
+      params: '{"pLibraryId":' + list + '}'
     }
+    this.Http.post("grain/sample/data", data).subscribe(res => {
+      this.gendersarr = res.json()["rows"]
+      console.log(this.gendersarr)
+      // this.genders = this.gendersarr[0].id
+    })
+  }
+  getlist(listId) {
+    let data = {
+      params: `{"libraryId":${listId},"sampleState":${this._select_smaple},"regState":2}`
+    }
+    this.genders = listId
     this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
+      console.log(res)
+      // console.log(res.json(),"color:blue")
       this.gendrslist = res.json()["rows"]
     })
   }
@@ -129,6 +152,7 @@ export class ProjectPage {
   // 下拉刷新
   doRefresh(refresher) {
     this.secondary()
+    console.log(refresher)
     setTimeout(() => {
       refresher.complete();
     }, 2000);

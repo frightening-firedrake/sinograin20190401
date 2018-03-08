@@ -16,8 +16,11 @@
 <ion-header class="search" no-border>
 	<ion-toolbar>
 		<ion-item>
-			<ion-select placeholder="选择被查库点" [(ngModel)]="genders" interface="popover"  (ngModelChange)="changeVersion(genders)">
-				<ion-option [value]="list.id" *ngFor="let list of optionarr;index as i " >{{list.libraryName}}</ion-option>
+			<ion-select placeholder="选择被查库点" [(ngModel)]="genders" interface="popover" (ngModelChange)="getlist(genders)">
+				<ion-option [value]="list.id" *ngFor="let list of gendersarr;index as i " >{{list.libraryName}}</ion-option>
+			</ion-select>
+			<ion-select placeholder="选择被查单位" [(ngModel)]="Company" interface="popover"  (ngModelChange)="changeVersion(Company)" >
+				<ion-option [value]="list.id" *ngFor="let list of Companyarr;index as i " >{{list.libraryName}}</ion-option>
 			</ion-select>
 			<ion-label class="search_state">筛选
 				<ion-icon name="arrow-up"></ion-icon>
@@ -58,7 +61,7 @@
 	</div>
 <ion-content>
 	
-	<ion-refresher (ionRefresh)="doRefresh($event)">
+	<ion-refresher (ionRefresh)="doRefresh($event)" >
 		<ion-refresher-content></ion-refresher-content>
 	</ion-refresher>
 	

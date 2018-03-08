@@ -53,18 +53,19 @@ public class barcode extends CordovaPlugin {
         try{
             // if(!HPRTPrinterHelper.IsOpened()){
                 HPRTPrinterHelper.PortOpen("Bluetooth,"+ble_mac_address);
-                callbackContext.success("连接步不知道是不是成功");
             // }
         	
         }catch(Exception e){
-            callbackContext.error( "连接错误："+e.getMessage().toString());
+            callbackContext.error( "连接错误：调用PortOpen时抛出异常");
         }
+        callbackContext.success("不知道到底链接上了没有");
+
     }
 
     private void printBarCode(String img_url,String offset,String xDpi,String hDpi,String h, CallbackContext callbackContext) {
         // HPRTPrinterHelper HPRTPrinter=new HPRTPrinterHelper(Context,PrinterName);
         try{
-        	if(HPRTPrinterHelper.IsOpened()){
+        	// if(HPRTPrinterHelper.IsOpened()){
 
 	            HPRTPrinterHelper.printAreaSize(offset,xDpi,hDpi,h,"4");
 	            HPRTPrinterHelper.Expanded("0","0",getPictureString(img_url));
@@ -76,11 +77,11 @@ public class barcode extends CordovaPlugin {
 	            // HPRTPrinterHelper.Form();
 	 
 	           	HPRTPrinterHelper.Print();
-
+                HPRTPrinterHelper.PortClose();
         		callbackContext.success("条码打印指令已发出");
-        	}else{
-        		callbackContext.error("打印错误：设备未连接");
-        	}
+        	// }else{
+        	// 	callbackContext.error("打印错误：设备未连接");
+        	// }
 
         }catch(Exception e){
             callbackContext.error("打印错误："+ e.getMessage().toString());
@@ -91,9 +92,9 @@ public class barcode extends CordovaPlugin {
     private void close(CallbackContext callbackContext) {
         // HPRTPrinterHelper HPRTPrinter=new HPRTPrinterHelper(Context,PrinterName);
         try{
-        	if(HPRTPrinterHelper.IsOpened()){
+        	// if(HPRTPrinterHelper.IsOpened()){
             	HPRTPrinterHelper.PortClose();
-        	}
+        	// }
         	callbackContext.success("连接已关闭");
         }catch(Exception e){
             callbackContext.success("关闭错误："+ e.getMessage().toString());

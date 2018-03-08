@@ -17,13 +17,13 @@ declare var cordova;
 
 export class detaildPage {
     classify: any
-    Safe_img  = [];
+    Safe_img = [];
     sample: any
     dateStr: string
     data: any;
     Work: any;
     Work_flag = true;
-    ble_falg = true
+    ble_falg = false
     Safe: any;
     devices: any;
     device: any;
@@ -72,7 +72,7 @@ export class detaildPage {
                 this.Safe_flag = true
                 this.Safe = safe["rows"]
                 console.log(this.Safe[0].images.split(","))
-                this.Safe[0].images.split(",").forEach((i,v)=>{
+                this.Safe[0].images.split(",").forEach((i, v) => {
                     this.Safe_img.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
                 })
             } else {
@@ -84,23 +84,10 @@ export class detaildPage {
     }
     ionViewDidEnter() {
         // alert(111)
-        this.BLE.enable();        
         // this.BLE.showBluetoothSettings()        
-        
-        this.nativeService.showLoading();
-        this.pringarr.forEach((i, v) => {
-            console.log(i)                        
-            cordova.plugins.barcode.open(i, res => {
-                console.log("js"+res)
-                this.nativeService.hideLoading();                
-                this.ble_falg = false
-            }, err => {
-                console.log("nojs"+err)
-                this.nativeService.hideLoading();
-                alert("请关闭蓝牙重新连接")
-                this.ble_falg = true
-            })
-        })
+
+        // this.nativeService.showLoading();
+
     }
     // 没有工作底稿的时候
     Workdetails() {
@@ -112,112 +99,156 @@ export class detaildPage {
     }
     // 扦样信息中的打印条形码的功能
     _sample() {
-        this._ble()
-        let parpam = {
-            title: "是否确认扦样",
-            subTitle: "此操作不可逆，请谨慎选择",
-            buttons: [
-                {
-                    text: '取消',
-                    // role: 'destructive',
-                    handler: () => {
+        this.nativeService.showLoading()
+        // this._ble()
+        this.BLE.enable();
+        var flag = false;
+        var time = 0;
+        var is_conn = false;
+        this.BLE.startScan([]).subscribe(res => {
+            console.log(res)
+            if (res.name == "HM-Z3" && !flag) {
+                flag = true;
+                var ble_mac = res.id;
+                console.log(ble_mac, flag)
+                this.print(ble_mac);
+                setTimeout(function () { return 0 }, 1000);
+                this._ble(res => {
+                    let parpam = {
+                        id: this.sample.id,
+                        sampleState: 1
+                    }
+                    this.Http.post("/grain/sample/edit", parpam).subscribe(res => {
+                        this.data = res.json()
 
-                    }
-                },
-                {
-                    text: '确认',
-                    //   role: 'destructive',
-                    handler: () => {
-                        let parpam = {
-                            id: this.sample.id,
-                            sampleState: 1
-                        }
-                        this.Http.post("/grain/sample/edit", parpam).subscribe(res => {
-                            this.data = res.json()
-                            cordova.plugins.barcode.printBarCode("http://www.ityyedu.com/barcode.png", "0", "200", "200", "150", res => {
-                                console.log(res)
-                            }, err => {
-                                console.log(err)
-                            })
-                            if (this.data.success) {
-                                let params = {
-                                    title: "提示",
-                                    subTitle: "扦样成功",
-                                    buttons: [
-                                        {
-                                            text: "确认",
-                                            handler: () => {
-                                            }
+                        if (this.data.success) {
+                            let params = {
+                                title: "提示",
+                                subTitle: "扦样成功",
+                                buttons: [
+                                    {
+                                        text: "确认",
+                                        handler: () => {
                                         }
-                                    ],
-                                    cssClass: "outsuccse only"
-                                }
-                                let addbuton = {
-                                    text: null
-                                }
-                                let addInput = []
-                                this._alert._alertSmlpe(params, addbuton, addInput, data => {
-                                    console.log(data)
-                                })
-                                this.sample.sampleState = 1
+                                    }
+                                ],
+                                cssClass: "outsuccse only"
                             }
-                        })
-                    }
-                }
-            ],
-            cssClass: "outsuccse succse"
-        }
-        let addbuton = {
-            text: null
-        }
-        let addInput = []
-        this._alert._alertSmlpe(parpam, addbuton, addInput, data => {
-            return 0
+                            let addbuton = {
+                                text: null
+                            }
+                            let addInput = []
+                            this._alert._alertSmlpe(params, addbuton, addInput, data => {
+                                console.log(data)
+                            })
+                            this.sample.sampleState = 1
+                        }
+                    })
+                });
+            }
         })
     }
-    _ble() {
+    print(ble_mac) {
+        console.log(ble_mac)
+        this.BLE.stopScan()
+        cordova.plugins.barcode.open(ble_mac, res => {
+            console.log("js" + res)
+            this.nativeService.hideLoading();
+            let parpam = {
+                title: "是否确认扦样",
+                subTitle: "此操作不可逆，请谨慎选择",
+                buttons: [
+                    {
+                        text: '取消',
+                        // role: 'destructive',
+                        handler: () => {
 
-        this.nativeService.showLoading();
-        // this.connect("8C:DE:52:FA:A6:19")
-        console.log("扫描开始");
-        // this.devices = [];
-
-        this.BLE.startScan([]).subscribe(device => {
-            this.devices.push(device);
-            console.log("扫描结果" + JSON.stringify(device))
-            this.pringarr.forEach((i, v) => {
-                if (device.id = i) {
-                    console.log("ID" + device.id)
-                    console.log(device)
-                    this.ble_falg = true
-                    this.connect(device)
-                }
+                        }
+                    },
+                    {
+                        text: '确认',
+                        //   role: 'destructive',
+                        handler: () => {
+                            // this._ble()
+                        }
+                    }
+                ],
+                cssClass: "outsuccse succse"
+            }
+            let addbuton = {
+                text: null
+            }
+            let addInput = []
+            this._alert._alertSmlpe(parpam, addbuton, addInput, data => {
+                return 0
             })
-            //  this.sendMsg(device,"jfsdkfsjdkfdsjk")
-        },
-            err => {
-                console.log("扫描结果" + JSON.parse(err))
-                //this.message = "Error";
-            });
+        }, err => {
+            console.log("nojs" + err)
+            this.nativeService.hideLoading();
+            alert("请关闭蓝牙重新连接")
+            this.ble_falg = true
+        })
+    }
+    _ble(callback) {
+        let data = {
+         "id":`${this.sample.id}`
+        }
+        this.Http.post("grain/sample/get",data).subscribe(res => {
+            var urlpng = res.json()["samplePic"]
+            console.log(urlpng)
+            var url = `${APP_SERVE_URL}upload/barcode/${urlpng}`
+            console.log(url)
+            cordova.plugins.barcode.printBarCode(url, "0", "200", "200", "300", res => {
+                // this.Httpupdate()
+                callback()
+            }, err => {
+                console.log(err)
+            })
+        })
 
-        setTimeout(() => {
-            this.BLE.stopScan().then(
-                function () { console.log("扫描完成"); },
-                function () { console.log("扫描失败"); }
-            )
-        }, 5000);
+
+        // this.BLE.enable();
+        // this.nativeService.showLoading();
+        // // this.connect("8C:DE:52:FA:A6:19")
+        // console.log("扫描开始");
+        // // this.devices = [];
+
+        // this.BLE.startScan([]).subscribe(device => {
+        //     this.devices.push(device);
+        //     console.log("扫描结果" + JSON.stringify(device))
+        //     this.pringarr.forEach((i, v) => {
+        //         if (device.id = i) {
+        //             console.log("ID" + device.id)
+        //             console.log(device)
+        //             // this.ble_falg = true
+        //             this.connect(device)
+        //         }
+        //     })
+        //     //  this.sendMsg(device,"jfsdkfsjdkfdsjk")
+        // },
+        //     err => {
+        //         console.log("扫描结果" + JSON.parse(err))
+        //         //this.message = "Error";
+        //     });
+
+        // setTimeout(() => {
+        //     this.BLE.stopScan().then(
+        //         function () { console.log("扫描完成"); },
+        //         function () { console.log("扫描失败"); }
+        //     )
+        // }, 5000);
 
     }
     connect(device) {
         this.characteristics = [];
         console.log(device)
+        // cordova.plugins.barcode.open(device.id, res => {
+        //             this.nativeService.hideLoading();
 
-        cordova.plugins.barcode.open(device.id, res => {
-            this.nativeService.hideLoading();
-            console.log(res)
-        }, err => {
-            alert("请关闭蓝牙重新连接")
-        })
+        //         }, err => {
+        //             alert("请关闭蓝牙重新连接")
+        //         })
+
     }
     // _ble() {
     //     this.BLE.enable();
