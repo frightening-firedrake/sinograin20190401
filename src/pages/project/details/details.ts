@@ -17,7 +17,10 @@ declare var cordova;
 })
 
 export class detaildPage {
+    private detaWork;
+    private _isMatch;
     Worknew;
+    dateTime;
     private Workfrom = {
         isMatch: '',//账实是否相符
         realCheckedTime: "",//实际查库日
@@ -61,14 +64,19 @@ export class detaildPage {
     Safe: any;
     devices: any;
     device: any;
+    problem;
     characteristics: any;
     serviceUUID: any;
     characteristicUUID: any;
     deviceId: any;
     buffered;
-
+    plibraryName;
     Safe_flag = true;
     sampleId;
+    _unsolved
+    _solve
+    _unsolvedimg = []
+    _solveimg = []
     private pringarr = ["8C:DE:52:FA:A6:19"]
     constructor(
         public params: NavParams,
@@ -79,6 +87,8 @@ export class detaildPage {
         public navCtrl: NavController,
         private nativeService: NativeService,
     ) {
+
+        this.dateTime = new Date().toISOString();
         this.Worknew = FormBuilder.group({
             isMatch: ['', Validators.compose([Validators.required])],
             realCheckedTime: ['', Validators.compose([Validators.required])],
@@ -137,10 +147,10 @@ export class detaildPage {
             this.Workfrom.result = this.Worknew.controls["result"],
             this.Workfrom.barnType = this.Worknew.controls["barnType"]
         this.devices = [];
-        this.serviceUUID = "1800";
-        this.characteristicUUID = "180a";
+        this.problem = "all"
         this.classify = "new"
         this.sample = this.params.get('json')
+        console.log(this.sample)
         this.sample.amount = this.sample.amount * 1000
         console.log(this.sample)
         //工作底稿的数据
@@ -157,6 +167,13 @@ export class detaildPage {
             } else {
                 this.Work_flag = false
             }
+        })
+        let library = {
+            "id": this.sample.pLibraryId
+        }
+        this.Http.post("/grain/library/get", library).subscribe(res => {
+            console.log(res)
+            this.plibraryName = res.json()["libraryName"]
         })
         // 安全报告的数据
         this.Http.post("/grain/safetyReport/data", this.sampleId).subscribe(res => {
@@ -182,6 +199,67 @@ export class detaildPage {
 
         // this.nativeService.showLoading();
 
+    }
+    segmentChanged(event) {
+        console.log(event)
+        switch (event.value) {
+            case "unsolved":
+                this._unsolvedimg = []
+                this._unsolved = this.Safe.filter((i, v) => {
+                    return i.isDeal == -1
+                })
+                if (this._unsolved.length) {
+                    this._unsolved[0].images.split(",").forEach((i, v) => {
+                        this._unsolvedimg.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
+                    })
+                }
+
+                console.log(this._unsolvedimg)
+                break;
+            case "solve":
+                this._solveimg = []
+
+                this._solve = this.Safe.filter((i, v) => {
+                    return i.isDeal == 1
+                })
+                if (this._solve.length) {
+                    this._solve[0].images.split(",").forEach((i, v) => {
+                        this._solveimg.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
+                    })
+                }
+
+
+        }
+    }
+    solve(e) {
+        // console.log(e)
+        let data = {
+            "isDeal": 1,
+            "id": e.id
+        }
+        this.Http.post("grain/safetyReport/edit", data).subscribe(res => {
+            this.Safe_img = []
+            this.problem = "all"
+            this.Http.post("/grain/safetyReport/data", this.sampleId).subscribe(res => {
+                console.log(res.json())
+                let safe = res.json()
+                this.Safe = safe["rows"]
+                console.log(this.Safe[0].images.split(","))
+                this.Safe[0].images.split(",").forEach((i, v) => {
+                    this.Safe_img.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
+                })
+
+            })
+        })
+    }
+    onSubmit(e) {
+        console.log(e, this.Work.id)
+        e.value.id = this.Work.id
+        let data = e.value
+        this.Http.post("grain/manuscript/edit", data).subscribe(res => {
+            console.log(res)
+        })
+        console.log(e)
     }
     // 没有工作底稿的时候
     Workdetails() {
@@ -344,26 +422,53 @@ export class detaildPage {
         //         })
 
     }
-    // mianji(e) {
-    //     var length = this.Worknew.value.length || 1
-    //     var wide = this.Worknew.value.wide || 1
-    //     var high = this.Worknew.value.high || 1
-    //     // this.Worknew.value.measuredVolume = (length * wide * high).toFixed(1);
-    // }
-    // //粮堆实体体积（m3）
-    // sttj(e) {
-    //     var deductVolume = this.Worknew.value.deductVolume || 0
-    //     this.Worknew.value.realVolume = (this.Worknew.value.measuredVolume - deductVolume).toFixed(1)
-    // }
+    // 测量计算数
+    unQuality() {
+        this.Work.unQuality = Math.round(this.Work.realVolume * this.Work.aveDensity)
+    }
+    mianji(e) {
+        var length = this.Worknew.value.length || 1
+        var wide = this.Worknew.value.wide || 1
+        var high = this.Worknew.value.high || 1
+        this.Work.measuredVolume = (length * wide * high).toFixed(1);
+    }
+    //粮堆实体体积（m3）
+    sttj(e) {
+        var deductVolume = this.Worknew.value.deductVolume || 0
+        this.Work.realVolume = (this.Work.measuredVolume - deductVolume).toFixed(1)
+    }
     // //容重
     // rongzhong(e) {
     //     this.Worknew.value.realCapacity = this.Worknew.value.realCapacity
     // }
-    // //粮堆平均密度（kg/m）
-    // ldpjmd(e) {
-    //     var correctioFactor = this.Worknew.value.correctioFactor || 1
-    //     this.Worknew.value.aveDensity = (this.Worknew.value.realCapacity * correctioFactor).toFixed(1)
-    // }
+    //粮堆平均密度（kg/m）
+    ldpjmd(e) {
+        var correctioFactor = this.Worknew.value.correctioFactor || 1
+        this.Work.aveDensity = (this.Worknew.value.realCapacity * correctioFactor).toFixed(1)
+    }
+    // 账实是否相符
+    slip() {
+        var that = this
+        const parpam = {
+            title: "账实是否相符",
+        }
+        const addInput = [
+            {
+                type: 'radio',
+                label: '是',
+                value: '是',
+            },
+            {
+                type: 'radio',
+                label: '否',
+                value: '否'
+            },
+        ]
+        this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
+            that.Worknew.value.isMatch = data
+            that.Work.isMatch = data
+        })
+    }
     // 仓房类型
     barnType() {
         var that = this
@@ -427,7 +532,7 @@ export class detaildPage {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            // that.Worknew.value.qualityGrade = data
+            that.Worknew.value.qualityGrade = data
             // switch (data) {
             //     case 1:
             //         that._qualityGrade = "一等";
@@ -463,18 +568,12 @@ export class detaildPage {
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             // that.Worknew.value.putWay = data
             // console.log(data)
-            that.Work.value.putWay = data
+            that.Worknew.value.putWay = data
             console.log(data)
-            // switch (data) {
-            //     case 1:
-            //         that._putWay = "人工入仓";
-            //         break;
-            //     case 2:
-            //         that._putWay = "机械入仓"
-
-            // }
+            that.Work.putWay = data
         })
     }
+
     // _ble() {
     //     this.BLE.enable();
     //     // this.BLE.showBluetoothSettings()

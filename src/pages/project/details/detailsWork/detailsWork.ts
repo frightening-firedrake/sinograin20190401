@@ -52,6 +52,39 @@ export class detailsWorkPage {
     dateTime;
     _qualityGrade;
     _unQuality;
+    sampleId
+    Work: any= {
+         isMatch: '',//账实是否相符
+
+        realCheckedTime: "",//实际查库日
+
+        qualityGrade: "",//质量等级,
+        putWay: "",//入仓方式
+        storageCapacity: "",//入库容重
+        storageWater: "",//入库水分
+        storageImpurity: "",//入库杂质
+        realCapacity: "",//实测容重
+        realWater: "",//实测水分
+        realImpurity: "",//实测杂质
+        measuredVolume: "",//粮堆测量体积
+        deductVolume: "",//扣除体积
+        realVolume: "",//粮堆实际体积
+        correctioFactor: "",//校正后修正系数
+        aveDensity: "",//粮堆平均密度
+        length: "",//长
+        wide: "",//宽
+        high: "",//高
+        unQuality: "",//测量计算数
+        lossWater: "",//水分减量
+        lossNature: "",//自然损耗
+        loss: "",//合计
+        checkNum: "",//检查计算数
+        difference: "",//差数
+        slip: "",//差率
+        result: "",//不符原因
+
+        barnType: "",//仓房类型
+    };
     private addButton: any = {
         text: "确认"
     }
@@ -61,14 +94,26 @@ export class detailsWorkPage {
         public Http: HttpService,
         public _alert: _alertBomb
     ) {
-        
+        this.dateTime = new Date().toISOString();
+        console.log(this.parpam.get("params"))
+        this.data = this.parpam.get("params")
+        // 工作底稿
+        this.sampleId = {
+            params: `{"sampleId":"${this.data.id}"}`
+        }
+       this.Http.post("/grain/manuscript/data", this.sampleId).subscribe(res => {
+            console.log(res.json())
+            let work = res.json()
+            // console.log(work["rows"].length)
+            if (work["rows"].length) {
+                this.Work = work["rows"][0]
+            } else {
+            }
+        })
         var DateY = new Date().getFullYear()
         var DateM = new Date().getMonth() + 1
         var DateD = new Date().getDate()
         // this.dateTime = `${DateY}-${DateM}-${DateD}`
-        this.dateTime = new Date().toISOString();
-        console.log(this.parpam.get("params"))
-        this.data = this.parpam.get("params")
         this.data.amount = this.data.amount * 1000
         let library = {
             "id": this.data.pLibraryId
@@ -138,9 +183,10 @@ export class detailsWorkPage {
             this.Workfrom.slip = this.detaWork.controls["slip"],
             this.Workfrom.result = this.detaWork.controls["result"],
             this.Workfrom.barnType = this.detaWork.controls["barnType"]
+
     }
     // 测量计算数
-    unQuality(){
+    unQuality() {
         this._unQuality = Math.round(this.detaWork.value.realVolume * this.detaWork.value.aveDensity)
     }
     // tiji(){
@@ -148,8 +194,10 @@ export class detailsWorkPage {
     // }
     ionViewDidEnter() {
         var datastr = this.dateTime.indexOf("T")
-        datastr = this.dateTime.slice(0,datastr)
+        datastr = this.dateTime.slice(0, datastr)
         this.detaWork.value.realCheckedTime = datastr
+
+
     }
     onSubmit(e) {
         let data = {

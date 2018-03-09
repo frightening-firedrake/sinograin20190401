@@ -7,6 +7,8 @@ import { HomeService } from '../../../home/home.serve'
 import { _alertBomb } from '../../../common/_alert'
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { dateSafeServe } from './detasafeSever'
+import { APP_SERVE_URL } from "../../../../providers/config";
+
 
 @Component({
     selector: "detailsSafe",
@@ -18,45 +20,17 @@ export class detaSafePage {
     keyVule: any = [];
     detaSafeForm: FormGroup;
     data;
+    _unsolvedimg
+    _solveimg
     ImgJson = []
     _state = true;
-    _unsolved:any = []
-    _solve:any = []
+    _unsolved: any = []
+    _solve: any = []
+    problem = "all"
+    report_img = [];
     // 报告
     // 1是解决，2是未解决
-    report:any = [
-        {
-            creatTime:"2017-9-25",
-            problem:"没有解决",
-            thumb:["http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"],
-            state:2, 
-        },
-        {
-            creatTime:"2017-1-25",
-            problem:"没有解决",
-            thumb:["http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"],
-            state:2, 
-        },
-        {
-            creatTime:"2017-3-25",
-            problem:"没有解决",
-            thumb:["http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"],
-            state:2, 
-        },
-        {
-            creatTime:"2017-4-25",
-            problem:"解决",
-            thumb:["http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"],
-            state:1, 
-        },
-        {
-            creatTime:"2017-5-25",
-            problem:"没有解决",
-            thumb:["http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"],
-            state:2, 
-        }
-        
-    ]
+    report: any
     constructor(public params: NavParams,
         public FormBuilder: FormBuilder,
         public camera: Camera,
@@ -71,13 +45,17 @@ export class detaSafePage {
 
         })
         let data = {
-            params:`{"sampleId":${this.data.id}}`
+            params: `{"sampleId":${this.data.id}}`
         }
-        this.Http.post("grain/safetyReport/data",data).subscribe(res=>{
-            console.log(res.json()["rows"].length)
-            if(res.json()["rows"].length){
+        this.Http.post("grain/safetyReport/data", data).subscribe(res => {
+            console.log(res.json()["rows"][0])
+            if (res.json()["rows"].length) {
                 this._state = true
-            }else{
+                this.report = res.json()["rows"]
+                this.report[0].images.split(",").forEach((i, v) => {
+                    this.report_img.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
+                })
+            } else {
                 this._state = false
             }
         })
@@ -103,6 +81,28 @@ export class detaSafePage {
         this.lists.pop()
         this.ImgJson.pop()
     }
+     solve(e) {
+        // console.log(e)
+        let data = {
+            "isDeal": 1,
+            "id": e.id
+        }
+        let id = {
+              params: `{"sampleId":${this.data.id}}`
+        }
+        this.Http.post("grain/safetyReport/edit", data).subscribe(res => {
+            this.report_img = []
+            this.problem = "all"
+            this.Http.post("/grain/safetyReport/data", id).subscribe(res => {
+                this._state = true
+                this.report = res.json()["rows"]
+                this.report[0].images.split(",").forEach((i, v) => {
+                    this.report_img.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
+                })
+
+            })
+        })
+    }
     onSubmit(e) {
         console.log(e)
         // console.log(this.ImgJson)
@@ -115,31 +115,49 @@ export class detaSafePage {
                 console.log(succc)
                 this.ImgJson.push(JSON.stringify(succc))
                 console.log(111)
-                let data ={
-                    params:`[${this.ImgJson}]`
+                let data = {
+                    params: `[${this.ImgJson}]`
                 }
-                console.log(this.ImgJson,data)
-                this.Http.post("grain/safetyReport/save",data).subscribe(res => {
+                console.log(this.ImgJson, data)
+                this.Http.post("grain/safetyReport/save", data).subscribe(res => {
                     console.log(res)
                 })
             });
-            
+
         })
 
         // console.log(this.keyVule)
 
     }
-     segmentChanged(event){
-        switch(event.value){
+    segmentChanged(event) {
+        console.log(event)
+        switch (event.value) {
             case "unsolved":
-               this._unsolved = this.report.filter((i,v)=>{
-                   return i.state == 2
-               })
-            break;
-            case "solve":
-                this._solve = this.report.filter((i,v)=>{
-                    return i.state == 1
+                this._unsolvedimg = []
+                this._unsolved = this.report.filter((i, v) => {
+                    return i.isDeal == -1
                 })
+                if (this._unsolved.length) {
+                    this._unsolved[0].images.split(",").forEach((i, v) => {
+                        this._unsolvedimg.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
+                    })
+                }
+
+                console.log(this._unsolvedimg)
+                break;
+            case "solve":
+                this._solveimg = []
+
+                this._solve = this.report.filter((i, v) => {
+                    return i.isDeal == 1
+                })
+                if (this._solve.length) {
+                    this._solve[0].images.split(",").forEach((i, v) => {
+                        this._solveimg.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
+                    })
+                }
+
+
         }
     }
 }

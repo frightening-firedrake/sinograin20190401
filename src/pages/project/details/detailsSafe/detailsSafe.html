@@ -36,7 +36,7 @@
                     <ion-list [ngClass]="{'active':pro.state==1?true:false}" *ngFor="let pro of report">
                         <ion-item>
                             <ion-label>创建时间:</ion-label>
-                            <ion-input type="text" readonly [value]="pro.creatTime"></ion-input>
+                            <ion-input type="text" readonly="true" [value]="pro.createTime"></ion-input>
                         </ion-item>
                         <ion-item class="textarea_item problem_textarea">
                             <span>问题1:</span>
@@ -44,16 +44,16 @@
                             <p class="textarea_content" >
                                 {{pro.problem}}
                             </p>
-                            <img src="assets/image/safe/succse.png" *ngIf="pro.state==1?true:false" alt="">
+                            <img src="assets/image/safe/succse.png" *ngIf="pro.isDeal==1?true:false" alt="">
                         </ion-item>
                         <ion-item class="phont">
                             <span>图片:</span>
                             <div class="imgs" >
-                                <img [src]="img" *ngFor="let img of pro.thumb"  alt="">
+                                <img [src]="img" *ngFor="let img of report_img"  alt="">
                             </div>
                         </ion-item>
                         <ion-item class="succse">
-                            <button ion-button color="secondary" [disabled]="pro.state==1?true:false" (click)="solve(pro)">已解决</button>
+                            <button ion-button color="secondary" [disabled]="pro.isDeal==1?true:false" (click)="solve(pro)">已解决</button>
                         </ion-item>
                     </ion-list>
                 </div>
@@ -61,7 +61,7 @@
                     <ion-list [ngClass]="{'active':pro.state==1?true:false}" *ngFor="let pro of _unsolved">
                         <ion-item>
                             <ion-label>创建时间:</ion-label>
-                            <ion-input type="text" readonly [value]="pro.creatTime"></ion-input>
+                            <ion-input type="text" readonly [value]="pro.createTime"></ion-input>
                         </ion-item>
                         <ion-item class="textarea_item problem_textarea">
                             <span>问题1:</span>
@@ -69,23 +69,23 @@
                             <p class="textarea_content" >
                                 {{pro.problem}}
                             </p>
-                            <img src="assets/image/safe/succse.png" *ngIf="pro.state==1?true:false" alt="">
+                            <img src="assets/image/safe/succse.png" *ngIf="pro.isDeal==-1?true:false" alt="">
                         </ion-item>
                         <ion-item class="phont">
                             <span>图片:</span>
                             <div class="imgs" >
-                                <img [src]="img" *ngFor="let img of pro.thumb"  alt="">
+                                <img [src]="img" *ngFor="let img of _unsolved"  alt="">
                             </div>
                         </ion-item>
                         <ion-item class="succse">
-                            <button ion-button color="secondary" [disabled]="pro.state==1?true:false" (click)="solve(pro)">已解决</button>
+                            <button ion-button color="secondary" [disabled]="pro.isDeal==-1?true:false" (click)="solve(pro)">已解决</button>
                         </ion-item>
                     </ion-list></div>
                 <div *ngSwitchCase="'solve'">
                      <ion-list [ngClass]="{'active':pro.state==1?true:false}" *ngFor="let pro of _solve">
                         <ion-item>
                             <ion-label>创建时间:</ion-label>
-                            <ion-input type="text" readonly [value]="pro.creatTime"></ion-input>
+                            <ion-input type="text" readonly [value]="pro.createTime"></ion-input>
                         </ion-item>
                         <ion-item class="textarea_item problem_textarea">
                             <span>问题1:</span>
@@ -93,16 +93,16 @@
                             <p class="textarea_content" >
                                 {{pro.problem}}
                             </p>
-                            <img src="assets/image/safe/succse.png" *ngIf="pro.state==1?true:false" alt="">
+                            <img src="assets/image/safe/succse.png" *ngIf="pro.isDeal==1?true:false" alt="">
                         </ion-item>
                         <ion-item class="phont">
                             <span>图片:</span>
                             <div class="imgs" >
-                                <img [src]="img" *ngFor="let img of pro.thumb"  alt="">
+                                <img [src]="img" *ngFor="let img of _solveimg"  alt="">
                             </div>
                         </ion-item>
                         <ion-item class="succse">
-                            <button ion-button color="secondary" [disabled]="pro.state==1?true:false" (click)="solve(pro)">已解决</button>
+                            <button ion-button color="secondary" [disabled]="pro.isDeal==1?true:false" (click)="solve(pro)">已解决</button>
                         </ion-item>
                     </ion-list> </div>
             </div>
