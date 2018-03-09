@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, enableProdMode } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { HttpService } from '../../../../providers/httpService'
 import { _alertBomb } from '../../../common/_alert'
-
+enableProdMode();
 @Component({
     selector: "detailsWork",
     templateUrl: "./detailsWork.html"
@@ -15,7 +15,7 @@ export class detailsWorkPage {
     private _slip;
     private _barnType;
     private plibraryName;
-    private Workfrom = {
+    private Work: any = {
         isMatch: '',//账实是否相符
 
         realCheckedTime: "",//实际查库日
@@ -46,15 +46,14 @@ export class detailsWorkPage {
         result: "",//不符原因
 
         barnType: "",//仓房类型
-
-    }
+    };;
     _putWay;
     dateTime;
     _qualityGrade;
     _unQuality;
     sampleId
-    Work: any= {
-         isMatch: '',//账实是否相符
+    Workfrom: any = {
+        isMatch: '',//账实是否相符
 
         realCheckedTime: "",//实际查库日
 
@@ -85,6 +84,7 @@ export class detailsWorkPage {
 
         barnType: "",//仓房类型
     };
+    _isfinsh = false
     private addButton: any = {
         text: "确认"
     }
@@ -101,12 +101,14 @@ export class detailsWorkPage {
         this.sampleId = {
             params: `{"sampleId":"${this.data.id}"}`
         }
-       this.Http.post("/grain/manuscript/data", this.sampleId).subscribe(res => {
+        this.Http.post("/grain/manuscript/data", this.sampleId).subscribe(res => {
             console.log(res.json())
             let work = res.json()
             // console.log(work["rows"].length)
             if (work["rows"].length) {
                 this.Work = work["rows"][0]
+                this.callback()
+                // this._isfinsh = true
             } else {
             }
         })
@@ -124,35 +126,49 @@ export class detailsWorkPage {
         })
         // console.log(this.data)        
         // :['', [Validators.minLength(4)]]
-        this.detaWork = FormBuilder.group({
-            isMatch: ['', Validators.compose([Validators.required])],
-            realCheckedTime: ['', Validators.compose([Validators.required])],
-            qualityGrade: ['', Validators.compose([Validators.required])],
-            putWay: ['', Validators.compose([Validators.required])],
-            storageCapacity: ['', Validators.compose([Validators.required])],
-            storageWater: ['', Validators.compose([Validators.required])],
-            storageImpurity: ['', Validators.compose([Validators.required])],
-            realCapacity: ['', Validators.compose([Validators.required])],
-            realWater: ['', Validators.compose([Validators.required])],
-            realImpurity: ['', Validators.compose([Validators.required])],
-            measuredVolume: ['', Validators.compose([Validators.required])],
-            deductVolume: ['', Validators.compose([Validators.required])],
-            realVolume: ['', Validators.compose([Validators.required])],
-            correctioFactor: ['', Validators.compose([Validators.required])],
-            aveDensity: ['', Validators.compose([Validators.required])],
-            length: ['', Validators.compose([Validators.required])],
-            wide: ['', Validators.compose([Validators.required])],
-            high: ['', Validators.compose([Validators.required])],
-            unQuality: ['', Validators.compose([Validators.required])],
-            lossWater: ['', Validators.compose([Validators.required])],
-            lossNature: ['', Validators.compose([Validators.required])],
-            loss: ['', Validators.compose([Validators.required])],
-            checkNum: ['', Validators.compose([Validators.required])],
-            difference: ['', Validators.compose([Validators.required])],
-            slip: ['', Validators.compose([Validators.required])],
-            result: ['', Validators.compose([Validators.required])],
 
-            barnType: ['', Validators.compose([Validators.required])],
+    }
+    callback() {
+
+    }
+    // 测量计算数
+
+    unQuality() {
+        this._unQuality = Math.round(this.detaWork.value.realVolume * this.detaWork.value.aveDensity)
+    }
+    // tiji(){
+    //     return this.detaWork.value.realVolume * this.detaWork.value.aveDensity
+    // }
+    ionViewDidEnter() {
+        this.detaWork = this.FormBuilder.group({
+            isMatch: [this.Work.isMatch, Validators.compose([Validators.required])],
+            realCheckedTime: [this.Work.realCheckedTime, Validators.compose([Validators.required])],
+            qualityGrade: [this.Work.qualityGrade, Validators.compose([Validators.required])],
+            putWay: [, Validators.compose([Validators.required])],
+            storageCapacity: [this.Work.storageCapacity, Validators.compose([Validators.required])],
+            storageWater: [this.Work.storageWater, Validators.compose([Validators.required])],
+            storageImpurity: [this.Work.storageImpurity, Validators.compose([Validators.required])],
+            realCapacity: [this.Work.realCapacity, Validators.compose([Validators.required])],
+            realWater: [this.Work.realWater, Validators.compose([Validators.required])],
+            realImpurity: [this.Work.realImpurity, Validators.compose([Validators.required])],
+            measuredVolume: [this.Work.measuredVolume, Validators.compose([Validators.required])],
+            deductVolume: [this.Work.deductVolume, Validators.compose([Validators.required])],
+            realVolume: [this.Work.realVolume, Validators.compose([Validators.required])],
+            correctioFactor: [this.Work.correctioFactor, Validators.compose([Validators.required])],
+            aveDensity: [this.Work.aveDensity, Validators.compose([Validators.required])],
+            length: [this.Work.length, Validators.compose([Validators.required])],
+            wide: [this.Work.wide, Validators.compose([Validators.required])],
+            high: [this.Work.high, Validators.compose([Validators.required])],
+            unQuality: [this.Work.unQuality, Validators.compose([Validators.required])],
+            lossWater: [this.Work.lossWater, Validators.compose([Validators.required])],
+            lossNature: [this.Work.lossNature, Validators.compose([Validators.required])],
+            loss: [this.Work.loss, Validators.compose([Validators.required])],
+            checkNum: [this.Work.checkNum, Validators.compose([Validators.required])],
+            difference: [this.Work.difference, Validators.compose([Validators.required])],
+            slip: [this.Work.slip, Validators.compose([Validators.required])],
+            result: [this.Work.result, Validators.compose([Validators.required])],
+
+            barnType: [this.Work.barnType, Validators.compose([Validators.required])],
         })
         // this.Workfrom.myDate = this.detaWork.controls["myDate"]
 
@@ -183,21 +199,13 @@ export class detailsWorkPage {
             this.Workfrom.slip = this.detaWork.controls["slip"],
             this.Workfrom.result = this.detaWork.controls["result"],
             this.Workfrom.barnType = this.detaWork.controls["barnType"]
-
-    }
-    // 测量计算数
-    unQuality() {
-        this._unQuality = Math.round(this.detaWork.value.realVolume * this.detaWork.value.aveDensity)
-    }
-    // tiji(){
-    //     return this.detaWork.value.realVolume * this.detaWork.value.aveDensity
-    // }
-    ionViewDidEnter() {
+        for (var obj in this.detaWork.value) {
+            this.detaWork.value[obj] = this.Work[obj]
+        }
         var datastr = this.dateTime.indexOf("T")
         datastr = this.dateTime.slice(0, datastr)
         this.detaWork.value.realCheckedTime = datastr
-
-
+        this._isfinsh = true
     }
     onSubmit(e) {
         let data = {
@@ -221,6 +229,7 @@ export class detailsWorkPage {
         var length = this.detaWork.value.length || 1
         var wide = this.detaWork.value.wide || 1
         var high = this.detaWork.value.high || 1
+
         this.detaWork.value.measuredVolume = (length * wide * high).toFixed(1);
     }
     //粮堆实体体积（m3）
@@ -263,7 +272,7 @@ export class detailsWorkPage {
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.detaWork.value.isMatch = data
-            that._slip = data
+            that.Work.isMatch = data
         })
     }
     // 仓房类型
@@ -276,32 +285,32 @@ export class detailsWorkPage {
             {
                 type: 'radio',
                 label: '平房仓',
-                value: '平房仓'
+                value: '1'
             },
             {
                 type: 'radio',
                 label: '高大平房仓',
-                value: '高大平房仓'
+                value: '2'
             },
             {
                 type: 'radio',
                 label: '苏式仓',
-                value: '苏式仓'
+                value: '3'
             },
             {
                 type: 'radio',
                 label: '窑洞仓',
-                value: '窑洞仓'
+                value: '4'
             },
             {
                 type: 'radio',
                 label: '地下仓',
-                value: '地下仓'
+                value: '5'
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.detaWork.value.barnType = data
-            that._barnType = data
+            that.Work.barnType = data
         })
     }
     // 质量的弹框
@@ -314,32 +323,22 @@ export class detailsWorkPage {
             {
                 type: 'radio',
                 label: '一等',
-                value: '一等'
+                value: '1'
             },
             {
                 type: 'radio',
                 label: '二等',
-                value: '二等'
+                value: '2'
             },
             {
                 type: 'radio',
                 label: '三等',
-                value: '三等'
+                value: '3'
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.detaWork.value.qualityGrade = data
-            switch (data) {
-                case 1:
-                    that._qualityGrade = "一等";
-                    break;
-                case 2:
-                    that._qualityGrade = "二等"
-                    break;
-                case 3:
-                    that._qualityGrade = "三等"
-
-            }
+            that.Work.qualityGrade = data
         })
     }
     // 入库方式
@@ -362,16 +361,10 @@ export class detailsWorkPage {
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.detaWork.value.putWay = data
+            that.Work.putWay = data
             // console.log(data)
             console.log(data)
-            switch (data) {
-                case 1:
-                    that._putWay = "人工入仓";
-                    break;
-                case 2:
-                    that._putWay = "机械入仓"
 
-            }
         })
     }
 }

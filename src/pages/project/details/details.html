@@ -55,7 +55,7 @@
             </button>
                     <button type="button" class="num" ion-item>
                 <span class="span_title">代表数量(吨):</span>
-                <span>{{ sample.amount }}</span>
+                <span>{{ _amount }}</span>
             </button>
                     <button type="button" ion-item>
                 <span class="span_title">产地:</span>
@@ -139,7 +139,7 @@
                     </button>
                         <button type="button" ion-item class="num">
                         <span class="title_span">保管帐数量(kg):</span>
-                        <span>{{sample.amount}}</span>
+                        <span>{{_amount}}</span>
                     </button>
                         <button type="button" ion-item (click)="qualityGrade()">
                         <ion-label class="title_span">质量等级:</ion-label>
@@ -321,7 +321,7 @@
                     </button>
                         <button type="button" ion-item class="num long_item">
                         <span class="title_span">粮食实际数量(kg):</span>
-                        <span>{{sample.amount}}</span>
+                        <span>{{_amount}}</span>
                     </button>
                         <button type="button" ion-item class="num long_item">
                         <ion-label class="title_span">账实不符原因:</ion-label>

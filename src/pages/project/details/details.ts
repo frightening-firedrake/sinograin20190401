@@ -77,6 +77,7 @@ export class detaildPage {
     _solve
     _unsolvedimg = []
     _solveimg = []
+    _amount;
     private pringarr = ["8C:DE:52:FA:A6:19"]
     constructor(
         public params: NavParams,
@@ -150,8 +151,8 @@ export class detaildPage {
         this.problem = "all"
         this.classify = "new"
         this.sample = this.params.get('json')
-        console.log(this.sample)
-        this.sample.amount = this.sample.amount * 1000
+        this._amount = this.sample.amount*1000
+        console.log(this.sample.amount)
         console.log(this.sample)
         //工作底稿的数据
         this.sampleId = {
@@ -367,10 +368,10 @@ export class detaildPage {
         }
         this.Http.post("grain/sample/get", data).subscribe(res => {
             var urlpng = res.json()["samplePic"]
-            console.log(urlpng)
-            var url = `${APP_SERVE_URL}upload/barcode/${urlpng}`
+            console.log(urlpng,res)
+            var url = "123-45-678"
             console.log(url)
-            cordova.plugins.barcode.printBarCode(url, "0", "200", "200", "300", res => {
+            cordova.plugins.barcode.printBarCode(url, "300", "0", "50", "180", res => {
                 // this.Httpupdate()
                 callback()
             }, err => {

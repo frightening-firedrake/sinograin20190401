@@ -33,13 +33,13 @@ public class barcode extends CordovaPlugin {
             this.open(ble_mac_address, callbackContext);
             return true;
         }else if(action.equals("printBarCode")){
-            String img_url = args.getString(0);
-            String offset = args.getString(1);
-            String xDpi = args.getString(2);
-            String hDpi = args.getString(3);
-            String h = args.getString(4);
+            String barcode = args.getString(0);
+            String h = args.getString(1);
+            String x = args.getString(2);
+            String y = args.getString(3);
+            String codeh = args.getString(4);
 
-            this.printBarCode(img_url,offset,xDpi,hDpi,h,callbackContext);
+            this.printBarCode(barcode,h,x,y,codeh,callbackContext);
             return true;
         }else if(action.equals("close")){
             this.close(callbackContext);
@@ -62,21 +62,20 @@ public class barcode extends CordovaPlugin {
 
     }
 
-    private void printBarCode(String img_url,String offset,String xDpi,String hDpi,String h, CallbackContext callbackContext) {
+    private void printBarCode(String barcode,String h,String x,String y,String codeh, CallbackContext callbackContext) {
         // HPRTPrinterHelper HPRTPrinter=new HPRTPrinterHelper(Context,PrinterName);
         try{
         	// if(HPRTPrinterHelper.IsOpened()){
 
-	            HPRTPrinterHelper.printAreaSize(offset,xDpi,hDpi,h,"4");
-	            HPRTPrinterHelper.Expanded("0","0",getPictureString(img_url));
-	            HPRTPrinterHelper.Form();
-	            HPRTPrinterHelper.Print();
-	            // HPRTPrinterHelper.PageWidth(500);
-	            // HPRTPrinterHelper.Align(HPRTPrinterHelper.CENTER);
-	            // HPRTPrinterHelper.Barcode(HPRTPrinterHelper.BARCODE,HPRTPrinterHelper.code93,"1","1","150","0","0",true,"7","0","5",bar_code);
+	            HPRTPrinterHelper.printAreaSize("0","200","200",h,"1");
+	            // HPRTPrinterHelper.Expanded("0","0",getPictureString(img_url));
 	            // HPRTPrinterHelper.Form();
-	 
-	           	HPRTPrinterHelper.Print();
+	            // HPRTPrinterHelper.Print();
+	            // HPRTPrinterHelper.PageWidth(500);
+	            HPRTPrinterHelper.Align(HPRTPrinterHelper.CENTER);
+	            HPRTPrinterHelper.Barcode(HPRTPrinterHelper.BARCODE,HPRTPrinterHelper.code39,"1","1",codeh,x,y,true,"7","0","5",barcode);
+                HPRTPrinterHelper.Form();
+                HPRTPrinterHelper.Print();
                 HPRTPrinterHelper.PortClose();
         		callbackContext.success("条码打印指令已发出");
         	// }else{

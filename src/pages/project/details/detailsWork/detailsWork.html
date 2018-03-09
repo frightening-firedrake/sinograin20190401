@@ -6,7 +6,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <form [formGroup]="detaWork" (ngSubmit)="onSubmit(detaWork)">
+    <form [formGroup]="detaWork" (ngSubmit)="onSubmit(detaWork)" *ngIf="_isfinsh">
         <ion-list class=" lists_input">
             <button ion-item class="num" type="button">
                 <span class="title_span">被检查企业:</span>
@@ -50,7 +50,7 @@
                     <ion-icon  name="ios-arrow-forward-outline"></ion-icon>
                 </button>
             </button>
-            <button type="button" ion-item class="num " >
+            <button type="button" ion-item class="num ">
                 <span class="title_span">性质:</span>
                 <span>{{data.quality}}</span>
                  <!--<ion-input type="number" [formControl]="Workfrom.quality"></ion-input>-->
@@ -58,7 +58,7 @@
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>
             </button>
-            <button type="button" ion-item  class="num ">
+            <button type="button" ion-item class="num ">
                 <span class="title_span">所在库区:</span>
                 <span >{{data.libraryName}}</span>
                  <!--<ion-input type="number" [formControl]="Workfrom.libraryName"></ion-input>-->
@@ -66,7 +66,7 @@
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>
             </button>
-            <button type="button" ion-item  class="num " (click)="barnType()">
+            <button type="button" ion-item class="num " (click)="barnType()">
                 <ion-label class="title_span">仓库类型:</ion-label>
                 <ion-input type="text" [formControl]="Workfrom.barnType" readonly="true"   [value]="detaWork.value.barnType"></ion-input>
                 <!--<span>{{detaWork.value.barnType}}</span>-->
@@ -90,14 +90,19 @@
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>
             </button>
-            <button  type="button" ion-item class="num "(click)="putWay()">
+            <button type="button" ion-item class="num " (click)="putWay()">
                 <ion-label class="title_span">入仓方式:</ion-label>
-                <ion-input type="text" [formControl]="Workfrom.putWay"  readonly="true" [value]="detaWork.value.putWay"></ion-input>
+                
+                <ion-label class="float_label" [ngSwitch]="Work.putWay">
+                    <ion-input type="text" *ngSwitchCase="1" readonly="true" value="机械入仓" [formControl]="Workfrom.putWay"></ion-input>
+                    <ion-input type="text" *ngSwitchCase="2" readonly="true" value="人工入仓" [formControl]="Workfrom.putWay"></ion-input>
+                    <ion-input type="text" *ngSwitchDefault readonly="true" value="" [formControl]="Workfrom.putWay"></ion-input>
+                </ion-label>
                 <!--<span>{{_putWay}}</span>-->
                 <!--<button ion-button icon-only item-end clear color="light" class="no_button">
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>-->
-            </button >
+            </button>
         </ion-list>
         <ion-list class="lists_input">
             <button type="button" ion-item class="list_input">
@@ -106,24 +111,30 @@
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>
             </button>
-            <button type="button" ion-item  class="num first_item no_border" (click)="qualityGrade()">
+            <button type="button" ion-item class="num first_item no_border" (click)="qualityGrade()">
                 <ion-label class="title_span">质量等级:</ion-label>
-                 <ion-input type="text" [formControl]="Workfrom.qualityGrade"  readonly="true" [value]="detaWork.value.qualityGrade"></ion-input>
+                 <ion-label class="float_label" [ngSwitch]="Work.qualityGrade">
+                    <ion-input type="text" *ngSwitchCase="1" readonly="true"   value="一等" [formControl]="Workfrom.qualityGrade" >一等</ion-input>
+                    <ion-input type="text" *ngSwitchCase="2" readonly="true"   value="二等" [formControl]="Workfrom.qualityGrade" >二等</ion-input>
+                    <ion-input type="text" *ngSwitchCase="3" readonly="true"   value="三等" [formControl]="Workfrom.qualityGrade" >三等</ion-input>  
+                    <ion-input type="text" *ngSwitchDefault [formControl]="Workfrom.qualityGrade"  readonly="true" [value]=""></ion-input>              
+                </ion-label>
+                 
                 <!--<button ion-button icon-only item-end clear color="light" class="no_button">
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>-->
             </button>
             <button type="button" ion-item class="num ">
                 <ion-label class="title_span">容重（g/l）:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.storageCapacity" [value]="Work.storageCapacity"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.storageCapacity"  [value]="detaWork.value.storageCapacity"></ion-input>
             </button>
             <button type="button" ion-item class="num ">
                 <ion-label class="title_span">水分（%）:</ion-label>
-                 <ion-input type="number"  [formControl]="Workfrom.storageWater"></ion-input>
+                 <ion-input type="number"  [formControl]="Workfrom.storageWater" [value]="detaWork.value.storageWater"></ion-input>
             </button>
             <button type="button" ion-item class="num ">
                 <ion-label class="title_span">杂质（%）:</ion-label>
-                 <ion-input type="number"  [formControl]="Workfrom.storageImpurity"></ion-input>
+                 <ion-input type="number"  [formControl]="Workfrom.storageImpurity" [value]="detaWork.value.storageImpurity"></ion-input>
             </button>
         </ion-list>
         <ion-list class="lists_input">
@@ -135,15 +146,15 @@
             </button>
             <button type="button" ion-item class="num first_item no_border">
                 <ion-label class="title_span">容重（g/l）:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.realCapacity" (keyup)="rongzhong($event)" (keydown)="ldpjmd($event)"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.realCapacity" [value]="detaWork.value.realCapacity" (keyup)="rongzhong($event)" (keydown)="ldpjmd($event)"></ion-input>
             </button>
             <button type="button" ion-item class="num ">
                 <ion-label class="title_span">水分（%）:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.realWater"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.realWater" [value]="detaWork.value.realWater"></ion-input>
             </button>
             <button type="button" ion-item class="num ">
                 <ion-label class="title_span">杂质（%）:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.realImpurity"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.realImpurity"  [value]="detaWork.value.realImpurity"></ion-input>
             </button>
         </ion-list>
         <ion-list class="lists_input">
@@ -154,19 +165,19 @@
                 </button>
             </button>
             <ion-item class="list_img">
-                <ion-img src="assets/image/index/work.png"></ion-img>
+                <img src="assets/image/index/work.png"/>
             </ion-item>
             <button type="button" ion-item class="num first_item no_border">
                 <ion-label class="title_span">长（m）:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.length" (keyup)="mianji($event)"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.length" [value]="detaWork.value.length" (keyup)="mianji($event)"></ion-input>
             </button>
             <button type="button" ion-item class="num ">
                 <ion-label class="title_span">宽（m）:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.wide" (keyup)="mianji($event)"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.wide" [value]="detaWork.value.wide" (keyup)="mianji($event)"></ion-input>
             </button>
             <button type="button" ion-item class="num ">
                 <ion-label class="title_span">高（m）:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.high" (keyup)="mianji($event)"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.high" [value]="detaWork.value.high" (keyup)="mianji($event)"></ion-input>
             </button>
         </ion-list>
         <ion-list class="lists_input">
@@ -182,7 +193,7 @@
             </button>
             <button type="button" ion-item class="num long_item">
                 <ion-label class="title_span">需要扣除体积（m3）:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.deductVolume" (keyup)="sttj($event)"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.deductVolume" [value]="detaWork.value.deductVolume" (keyup)="sttj($event)"></ion-input>
             </button>
             <button type="button" ion-item class="num long_item">
                 <ion-label class="title_span">粮堆实体体积（m3）:</ion-label>
@@ -206,7 +217,7 @@
             </button>
             <button type="button" ion-item class="num data long_item">
                 <ion-label class="title_span">校正后修正系数:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.correctioFactor" (keyup)="ldpjmd($event)"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.correctioFactor" [value]="detaWork.value.correctioFactor" (keyup)="ldpjmd($event)"></ion-input>
             </button>
             <button type="button" ion-item class="num data long_item" (keydown)="unQuality()">
                 <ion-label class="title_span">粮堆平均密度（kg/m）:</ion-label>
@@ -247,11 +258,11 @@
             </button>
             <button type="button" ion-item class="num long_item">
                 <ion-label class="title_span">水分减量:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.lossWater" ></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.lossWater"  [value]="detaWork.value.lossWater" ></ion-input>
             </button>
             <button type="button" ion-item class="num long_item">
                 <ion-label class="title_span">保管自然损耗:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.lossNature" ></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.lossNature" [value]="detaWork.value.lossNature"></ion-input>
             </button>
             <button type="button" ion-item class="num long_item">
                 <ion-label class="title_span">合计:</ion-label>
@@ -299,7 +310,7 @@
             </button>
             <button type="button" ion-item class="num long_item">
                 <ion-label class="title_span">账实不符原因:</ion-label>
-                 <ion-input type="text" [formControl]="Workfrom.result"></ion-input>
+                 <ion-input type="text" [formControl]="Workfrom.result" [value]="detaWork.value.result"></ion-input>
             </button>
         </ion-list>
         <ion-list>
@@ -309,9 +320,9 @@
                 <button ion-button icon-only item-end clear color="light" class="no_button">
                     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
                 </button>
-                <!--<ion-input type="number"  [formControl]="Workfrom.remark"></ion-input>-->
+            <!--<ion-input type="number"  [formControl]="Workfrom.remark"></ion-input>-->
             </button>
         </ion-list>
-        <button ion-button large color="secondary"  class="sumbit" type="submit" [disabled]="!(detaWork.valid)">提交</button>
+        <button ion-button large color="secondary" class="sumbit" type="submit" [disabled]="!(detaWork.valid)">提交</button>
     </form>
 </ion-content>

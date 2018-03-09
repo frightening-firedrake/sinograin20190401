@@ -82,6 +82,7 @@ detailsWork {
                         padding-right: 0.55rem;
                         height: 100%;
                         .input-wrapper {
+                            
                             // padding: 0 0.65rem;
                             padding-right: 0;
                             ion-datetime {
@@ -134,6 +135,7 @@ detailsWork {
                     &.num {
                         .item-inner {
                             .input-wrapper {
+                                justify-content: space-between;
                                 padding-left: 0.15rem;
                                 ion-input {
                                     height: 100%;

@@ -22,7 +22,7 @@
 			<ion-select placeholder="被查直属库" [(ngModel)]="Company" interface="popover"  (ngModelChange)="changeVersion(Company)" >
 				<ion-option [value]="list.id" *ngFor="let list of Companyarr;index as i " >{{list.libraryName}}</ion-option>
 			</ion-select>
-			<ion-label class="search_state">筛选
+			<ion-label class="search_states">筛选
 				<ion-icon name="arrow-up"></ion-icon>
 			</ion-label>
 		</ion-item>
