@@ -239,7 +239,7 @@
             </button>
             <button type="button" ion-item class="num  data long_item no_border first_item">
                 <ion-label class="title_span">测量计算数(kg):</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.unQuality" [value]="_unQuality" readonly="true"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.unQuality" [value]="detaWork.value.realVolume * detaWork.value.aveDensity" readonly="true"></ion-input>
             </button>
             <button type="button" ion-item class="no_border first_item first_item_font">
                 <ion-label>应记粮食损耗(kg)</ion-label>
@@ -255,11 +255,11 @@
             </button>
             <button type="button" ion-item class="num long_item">
                 <ion-label class="title_span">合计:</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.loss" [value]="detaWork.value.lossWater + detaWork.value.lossNature"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.loss" [value]="detaWork.value.lossWater + detaWork.value.lossNature" readonly="true"></ion-input>
             </button>
             <button type="button" ion-item class="num long_item">
                 <ion-label class="title_span">检查计算数(kg):</ion-label>
-                 <ion-input type="number" [formControl]="Workfrom.checkNum" [value]="detaWork.value.unQuality + detaWork.value.loss"></ion-input>
+                 <ion-input type="number" [formControl]="Workfrom.checkNum" [value]="detaWork.value.unQuality + detaWork.value.loss" readonly="true"></ion-input>
             </button>
         </ion-list>
 
