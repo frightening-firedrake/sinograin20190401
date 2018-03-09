@@ -3,6 +3,7 @@ import { NavParams, NavController } from 'ionic-angular';
 import { DatePipe } from '@angular/common';
 import { BLE } from '@ionic-native/ble';
 import { NativeService } from '../../../providers/nativeService';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { _alertBomb } from '../../common/_alert'
 import { HttpService } from '../../../providers/httpService'
 import { detailsWorkPage } from './detailsWork/detailsWork'
@@ -16,6 +17,39 @@ declare var cordova;
 })
 
 export class detaildPage {
+    Worknew;
+    private Workfrom = {
+        isMatch: '',//账实是否相符
+        realCheckedTime: "",//实际查库日
+        qualityGrade: "",//质量等级,
+        putWay: "",//入仓方式
+        storageCapacity: "",//入库容重
+        storageWater: "",//入库水分
+        storageImpurity: "",//入库杂质
+        realCapacity: "",//实测容重
+        realWater: "",//实测水分
+        realImpurity: "",//实测杂质
+        measuredVolume: "",//粮堆测量体积
+        deductVolume: "",//扣除体积
+        realVolume: "",//粮堆实际体积
+        correctioFactor: "",//校正后修正系数
+        aveDensity: "",//粮堆平均密度
+        length: "",//长
+        wide: "",//宽
+        high: "",//高
+        unQuality: "",//测量计算数
+        lossWater: "",//水分减量
+        lossNature: "",//自然损耗
+        loss: "",//合计
+        checkNum: "",//检查计算数
+        difference: "",//差数
+        slip: "",//差率
+        result: "",//不符原因
+        barnType: "",//仓房类型
+    }
+    private addButton: any = {
+        text: "确认"
+    }
     classify: any
     Safe_img = [];
     sample: any
@@ -32,6 +66,7 @@ export class detaildPage {
     characteristicUUID: any;
     deviceId: any;
     buffered;
+
     Safe_flag = true;
     sampleId;
     private pringarr = ["8C:DE:52:FA:A6:19"]
@@ -39,15 +74,74 @@ export class detaildPage {
         public params: NavParams,
         public _alert: _alertBomb,
         public Http: HttpService,
+        public FormBuilder: FormBuilder,
         public BLE: BLE,
         public navCtrl: NavController,
         private nativeService: NativeService,
     ) {
+        this.Worknew = FormBuilder.group({
+            isMatch: ['', Validators.compose([Validators.required])],
+            realCheckedTime: ['', Validators.compose([Validators.required])],
+            qualityGrade: ['', Validators.compose([Validators.required])],
+            putWay: ['', Validators.compose([Validators.required])],
+            storageCapacity: ['', Validators.compose([Validators.required])],
+            storageWater: ['', Validators.compose([Validators.required])],
+            storageImpurity: ['', Validators.compose([Validators.required])],
+            realCapacity: ['', Validators.compose([Validators.required])],
+            realWater: ['', Validators.compose([Validators.required])],
+            realImpurity: ['', Validators.compose([Validators.required])],
+            measuredVolume: ['', Validators.compose([Validators.required])],
+            deductVolume: ['', Validators.compose([Validators.required])],
+            realVolume: ['', Validators.compose([Validators.required])],
+            correctioFactor: ['', Validators.compose([Validators.required])],
+            aveDensity: ['', Validators.compose([Validators.required])],
+            length: ['', Validators.compose([Validators.required])],
+            wide: ['', Validators.compose([Validators.required])],
+            high: ['', Validators.compose([Validators.required])],
+            unQuality: ['', Validators.compose([Validators.required])],
+            lossWater: ['', Validators.compose([Validators.required])],
+            lossNature: ['', Validators.compose([Validators.required])],
+            loss: ['', Validators.compose([Validators.required])],
+            checkNum: ['', Validators.compose([Validators.required])],
+            difference: ['', Validators.compose([Validators.required])],
+            slip: ['', Validators.compose([Validators.required])],
+            result: ['', Validators.compose([Validators.required])],
+
+            barnType: ['', Validators.compose([Validators.required])],
+        })
+        this.Workfrom.isMatch = this.Worknew.controls["isMatch"]
+        this.Workfrom.realCheckedTime = this.Worknew.controls["realCheckedTime"],
+            this.Workfrom.qualityGrade = this.Worknew.controls["qualityGrade"],
+            this.Workfrom.putWay = this.Worknew.controls["putWay"],
+            this.Workfrom.storageCapacity = this.Worknew.controls["storageCapacity"],
+            this.Workfrom.storageWater = this.Worknew.controls["storageWater"],
+            this.Workfrom.storageImpurity = this.Worknew.controls["storageImpurity"],
+            this.Workfrom.realCapacity = this.Worknew.controls["realCapacity"],
+            this.Workfrom.realWater = this.Worknew.controls["realWater"],
+            this.Workfrom.realImpurity = this.Worknew.controls["realImpurity"],
+            this.Workfrom.measuredVolume = this.Worknew.controls["measuredVolume"],
+            this.Workfrom.deductVolume = this.Worknew.controls["deductVolume"],
+            this.Workfrom.realVolume = this.Worknew.controls["realVolume"],
+            this.Workfrom.correctioFactor = this.Worknew.controls["correctioFactor"],
+            this.Workfrom.aveDensity = this.Worknew.controls["aveDensity"],
+            this.Workfrom.length = this.Worknew.controls["length"],
+            this.Workfrom.wide = this.Worknew.controls["wide"],
+            this.Workfrom.high = this.Worknew.controls["high"],
+            this.Workfrom.unQuality = this.Worknew.controls["unQuality"],
+            this.Workfrom.lossWater = this.Worknew.controls["lossWater"],
+            this.Workfrom.lossNature = this.Worknew.controls["lossNature"],
+            this.Workfrom.loss = this.Worknew.controls["loss"],
+            this.Workfrom.checkNum = this.Worknew.controls["checkNum"],
+            this.Workfrom.difference = this.Worknew.controls["difference"],
+            this.Workfrom.slip = this.Worknew.controls["slip"],
+            this.Workfrom.result = this.Worknew.controls["result"],
+            this.Workfrom.barnType = this.Worknew.controls["barnType"]
         this.devices = [];
         this.serviceUUID = "1800";
         this.characteristicUUID = "180a";
         this.classify = "new"
         this.sample = this.params.get('json')
+        this.sample.amount = this.sample.amount * 1000
         console.log(this.sample)
         //工作底稿的数据
         this.sampleId = {
@@ -191,9 +285,9 @@ export class detaildPage {
     }
     _ble(callback) {
         let data = {
-         "id":`${this.sample.id}`
+            "id": `${this.sample.id}`
         }
-        this.Http.post("grain/sample/get",data).subscribe(res => {
+        this.Http.post("grain/sample/get", data).subscribe(res => {
             var urlpng = res.json()["samplePic"]
             console.log(urlpng)
             var url = `${APP_SERVE_URL}upload/barcode/${urlpng}`
@@ -249,6 +343,137 @@ export class detaildPage {
         //             alert("请关闭蓝牙重新连接")
         //         })
 
+    }
+    // mianji(e) {
+    //     var length = this.Worknew.value.length || 1
+    //     var wide = this.Worknew.value.wide || 1
+    //     var high = this.Worknew.value.high || 1
+    //     // this.Worknew.value.measuredVolume = (length * wide * high).toFixed(1);
+    // }
+    // //粮堆实体体积（m3）
+    // sttj(e) {
+    //     var deductVolume = this.Worknew.value.deductVolume || 0
+    //     this.Worknew.value.realVolume = (this.Worknew.value.measuredVolume - deductVolume).toFixed(1)
+    // }
+    // //容重
+    // rongzhong(e) {
+    //     this.Worknew.value.realCapacity = this.Worknew.value.realCapacity
+    // }
+    // //粮堆平均密度（kg/m）
+    // ldpjmd(e) {
+    //     var correctioFactor = this.Worknew.value.correctioFactor || 1
+    //     this.Worknew.value.aveDensity = (this.Worknew.value.realCapacity * correctioFactor).toFixed(1)
+    // }
+    // 仓房类型
+    barnType() {
+        var that = this
+        const parpam = {
+            title: "仓房类型",
+        }
+        const addInput = [
+            {
+                type: 'radio',
+                label: '平房仓',
+                value: '平房仓'
+            },
+            {
+                type: 'radio',
+                label: '高大平房仓',
+                value: '高大平房仓'
+            },
+            {
+                type: 'radio',
+                label: '苏式仓',
+                value: '苏式仓'
+            },
+            {
+                type: 'radio',
+                label: '窑洞仓',
+                value: '窑洞仓'
+            },
+            {
+                type: 'radio',
+                label: '地下仓',
+                value: '地下仓'
+            },
+        ]
+        this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
+            // that.Worknew.value.barnType = data
+            // that._barnType = data
+            that.Work.barnType = data
+        })
+    }
+    // 质量的弹框
+    qualityGrade() {
+        var that = this
+        const parpam = {
+            title: "选择质量",
+        }
+        const addInput = [
+            {
+                type: 'radio',
+                label: '一等',
+                value: '1'
+            },
+            {
+                type: 'radio',
+                label: '二等',
+                value: '2'
+            },
+            {
+                type: 'radio',
+                label: '三等',
+                value: '3'
+            },
+        ]
+        this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
+            // that.Worknew.value.qualityGrade = data
+            // switch (data) {
+            //     case 1:
+            //         that._qualityGrade = "一等";
+            //         break;
+            //     case 2:
+            //         that._qualityGrade = "二等"
+            //         break;
+            //     case 3:
+            //         that._qualityGrade = "三等"
+
+            // }
+            that.Work.qualityGrade = data
+        })
+    }
+    // 入库方式
+    putWay() {
+        var that = this
+        const parpam = {
+            title: "入仓方式",
+        }
+        const addInput = [
+            {
+                type: 'radio',
+                label: '人工入仓',
+                value: '2 '
+            },
+            {
+                type: 'radio',
+                label: '机械入仓 ',
+                value: '1 '
+            },
+        ]
+        this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
+            // that.Worknew.value.putWay = data
+            // console.log(data)
+            that.Work.value.putWay = data
+            console.log(data)
+            // switch (data) {
+            //     case 1:
+            //         that._putWay = "人工入仓";
+            //         break;
+            //     case 2:
+            //         that._putWay = "机械入仓"
+
+            // }
+        })
     }
     // _ble() {
     //     this.BLE.enable();

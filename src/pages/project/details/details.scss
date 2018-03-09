@@ -203,6 +203,18 @@ derails {
                                 padding-right: 0.55rem;
                                 height: 100%;
                                 .input-wrapper {
+                                    justify-content:space-between;
+                                    ion-input {
+                                    height: 100%;
+                                    input {
+                                        width:100%;
+                                        height: 100%;
+                                        margin: 0;
+                                        line-height:1;
+                                        text-align: right;
+                                        padding-left: 20%;
+                                    }
+                                }
                                     // padding: 0 0.65rem;
                                     padding-right: 0;
                                     ion-datetime {
@@ -213,6 +225,13 @@ derails {
                                     }
                                     .label {
                                         margin: 0;
+                                        color:#333333;
+                                        &.float_label{
+                                            float:right;
+                                            display:inline-block;
+                                            max-width:100%;
+                                            text-align:right;
+                                        }
                                         .title_span {
                                             width: 2.13rem;
                                             text-align: right;
@@ -223,6 +242,16 @@ derails {
                                             font-size: 0.3rem;
                                             float: right;
                                         }
+                                         &.title_span {
+                                        width: 2.13rem;
+                                        text-align: right;
+                                        float: left;
+                                        font-size: 0.3rem;
+                                        color: #333333;
+                                        &.title_span_font{
+                                            color:#000000;
+                                        }
+                                    }
                                     }
                                 }
                                 button {

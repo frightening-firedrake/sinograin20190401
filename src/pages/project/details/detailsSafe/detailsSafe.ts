@@ -19,6 +19,44 @@ export class detaSafePage {
     detaSafeForm: FormGroup;
     data;
     ImgJson = []
+    _state = true;
+    _unsolved:any = []
+    _solve:any = []
+    // 报告
+    // 1是解决，2是未解决
+    report:any = [
+        {
+            creatTime:"2017-9-25",
+            problem:"没有解决",
+            thumb:["http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"],
+            state:2, 
+        },
+        {
+            creatTime:"2017-1-25",
+            problem:"没有解决",
+            thumb:["http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"],
+            state:2, 
+        },
+        {
+            creatTime:"2017-3-25",
+            problem:"没有解决",
+            thumb:["http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"],
+            state:2, 
+        },
+        {
+            creatTime:"2017-4-25",
+            problem:"解决",
+            thumb:["http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"],
+            state:1, 
+        },
+        {
+            creatTime:"2017-5-25",
+            problem:"没有解决",
+            thumb:["http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg","http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"],
+            state:2, 
+        }
+        
+    ]
     constructor(public params: NavParams,
         public FormBuilder: FormBuilder,
         public camera: Camera,
@@ -31,6 +69,17 @@ export class detaSafePage {
         console.log(this.data)
         this.detaSafeForm = FormBuilder.group({
 
+        })
+        let data = {
+            params:`{"sampleId":${this.data.id}}`
+        }
+        this.Http.post("grain/safetyReport/data",data).subscribe(res=>{
+            console.log(res.json()["rows"].length)
+            if(res.json()["rows"].length){
+                this._state = true
+            }else{
+                this._state = false
+            }
         })
     }
     keyoff(event, index) {
@@ -79,5 +128,18 @@ export class detaSafePage {
 
         // console.log(this.keyVule)
 
+    }
+     segmentChanged(event){
+        switch(event.value){
+            case "unsolved":
+               this._unsolved = this.report.filter((i,v)=>{
+                   return i.state == 2
+               })
+            break;
+            case "solve":
+                this._solve = this.report.filter((i,v)=>{
+                    return i.state == 1
+                })
+        }
     }
 }

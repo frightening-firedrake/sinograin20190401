@@ -33,6 +33,7 @@ export class loginPage {
         this.User.password = this.login.controls["password"]
     }
     onSubmit(e) {
+        console.log(e)
         // userName,userPass
         let parpam = {
             userName: e.value.username,

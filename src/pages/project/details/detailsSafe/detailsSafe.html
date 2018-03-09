@@ -1,4 +1,4 @@
-<app-header title='安全报告'></app-header>
+<app-header title='监督检查'></app-header>
 <ion-content>
     <form action="" (ngSubmit)="onSubmit(detaSafeForm)" [formGroup]="detaSafeForm">
         <ion-list class="position">
@@ -11,11 +11,101 @@
                 <span>{{data.position}}</span>
             </ion-item>
         </ion-list>
-        <div >
+        <div *ngIf="!_state">
             <detasafe-view *ngFor="let list of lists ;let i = index" [num]=i+1 (key)="keyoff($event,i)"></detasafe-view>
             <p ion-button outline color="secondary" class="add" (click)="add()">问题加一</p>
             <p ion-button outline color="secondary" class="remove" (click)="remove()" *ngIf="lists.length>1">问题减一</p>
             <button ion-button large color="secondary" class="sumbit" type="submit">提交</button>
         </div>
     </form>
+    <div *ngIf="_state">
+        <div padding class="problem_select">
+            <ion-segment [(ngModel)]="problem" (ionChange)="segmentChanged($event)">
+                <ion-segment-button value="all">
+                    全部问题
+                </ion-segment-button>
+                <ion-segment-button value="unsolved">
+                    未解决
+                </ion-segment-button>
+                <ion-segment-button value="solve">
+                    已解决
+                </ion-segment-button>
+            </ion-segment>
+            <div [ngSwitch]="problem" class="problem_content">
+                <div *ngSwitchCase="'all'">
+                    <ion-list [ngClass]="{'active':pro.state==1?true:false}" *ngFor="let pro of report">
+                        <ion-item>
+                            <ion-label>创建时间:</ion-label>
+                            <ion-input type="text" readonly [value]="pro.creatTime"></ion-input>
+                        </ion-item>
+                        <ion-item class="textarea_item problem_textarea">
+                            <span>问题1:</span>
+                            <!--不断发射点发射点发射点发射点发射点发射点发发阿瑟东法撒旦倒萨发生地方阿斯蒂芬士大夫阿瑟东士大夫撒旦思考还是v本身的v本来是考虑开始吧 是开车吧看哈不是不插卡ABC几把坑教案设计擦机布爱吃Jack就你撒擦口水啊检查阿姐存款机是-->
+                            <p class="textarea_content" >
+                                {{pro.problem}}
+                            </p>
+                            <img src="assets/image/safe/succse.png" *ngIf="pro.state==1?true:false" alt="">
+                        </ion-item>
+                        <ion-item class="phont">
+                            <span>图片:</span>
+                            <div class="imgs" >
+                                <img [src]="img" *ngFor="let img of pro.thumb"  alt="">
+                            </div>
+                        </ion-item>
+                        <ion-item class="succse">
+                            <button ion-button color="secondary" [disabled]="pro.state==1?true:false" (click)="solve(pro)">已解决</button>
+                        </ion-item>
+                    </ion-list>
+                </div>
+                <div *ngSwitchCase="'unsolved'">
+                    <ion-list [ngClass]="{'active':pro.state==1?true:false}" *ngFor="let pro of _unsolved">
+                        <ion-item>
+                            <ion-label>创建时间:</ion-label>
+                            <ion-input type="text" readonly [value]="pro.creatTime"></ion-input>
+                        </ion-item>
+                        <ion-item class="textarea_item problem_textarea">
+                            <span>问题1:</span>
+                            <!--不断发射点发射点发射点发射点发射点发射点发发阿瑟东法撒旦倒萨发生地方阿斯蒂芬士大夫阿瑟东士大夫撒旦思考还是v本身的v本来是考虑开始吧 是开车吧看哈不是不插卡ABC几把坑教案设计擦机布爱吃Jack就你撒擦口水啊检查阿姐存款机是-->
+                            <p class="textarea_content" >
+                                {{pro.problem}}
+                            </p>
+                            <img src="assets/image/safe/succse.png" *ngIf="pro.state==1?true:false" alt="">
+                        </ion-item>
+                        <ion-item class="phont">
+                            <span>图片:</span>
+                            <div class="imgs" >
+                                <img [src]="img" *ngFor="let img of pro.thumb"  alt="">
+                            </div>
+                        </ion-item>
+                        <ion-item class="succse">
+                            <button ion-button color="secondary" [disabled]="pro.state==1?true:false" (click)="solve(pro)">已解决</button>
+                        </ion-item>
+                    </ion-list></div>
+                <div *ngSwitchCase="'solve'">
+                     <ion-list [ngClass]="{'active':pro.state==1?true:false}" *ngFor="let pro of _solve">
+                        <ion-item>
+                            <ion-label>创建时间:</ion-label>
+                            <ion-input type="text" readonly [value]="pro.creatTime"></ion-input>
+                        </ion-item>
+                        <ion-item class="textarea_item problem_textarea">
+                            <span>问题1:</span>
+                            <!--不断发射点发射点发射点发射点发射点发射点发发阿瑟东法撒旦倒萨发生地方阿斯蒂芬士大夫阿瑟东士大夫撒旦思考还是v本身的v本来是考虑开始吧 是开车吧看哈不是不插卡ABC几把坑教案设计擦机布爱吃Jack就你撒擦口水啊检查阿姐存款机是-->
+                            <p class="textarea_content" >
+                                {{pro.problem}}
+                            </p>
+                            <img src="assets/image/safe/succse.png" *ngIf="pro.state==1?true:false" alt="">
+                        </ion-item>
+                        <ion-item class="phont">
+                            <span>图片:</span>
+                            <div class="imgs" >
+                                <img [src]="img" *ngFor="let img of pro.thumb"  alt="">
+                            </div>
+                        </ion-item>
+                        <ion-item class="succse">
+                            <button ion-button color="secondary" [disabled]="pro.state==1?true:false" (click)="solve(pro)">已解决</button>
+                        </ion-item>
+                    </ion-list> </div>
+            </div>
+        </div>
+    </div>
 </ion-content>

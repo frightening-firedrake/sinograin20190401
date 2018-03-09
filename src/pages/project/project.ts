@@ -5,8 +5,8 @@ import { BLE } from '@ionic-native/ble';
 import { HomeService } from '../home/home.serve';
 import { HttpService } from '../../providers/httpService'
 
-import { safePage } from './safe/safe'
-import { workPage } from './work/work'
+import { detaSafePage } from './details/detailsSafe/detailsSafe'
+import { detailsWorkPage } from './details/detailsWork/detailsWork'
 import { detaildPage } from './details/details'
 
 declare var $;
@@ -38,7 +38,7 @@ export class ProjectPage {
     // })
     // 被查单位
     let Company = {
-      "pLibraryId": "-1"
+     params:`{"pLibraryId": "-1","page":"1","rows":"100"}` 
     }
     this.Http.post("grain/library/data", Company).subscribe(res => {
       console.log(res.json())
@@ -54,10 +54,12 @@ export class ProjectPage {
   }
   // 选择被查库点
   changeVersion(list) {
+    console.log(list)
     let data = {
       params: '{"pLibraryId":' + list + '}'
     }
-    this.Http.post("grain/sample/data", data).subscribe(res => {
+    this.Http.post("grain/library/data", data).subscribe(res => {
+
       this.gendersarr = res.json()["rows"]
       console.log(this.gendersarr)
       // this.genders = this.gendersarr[0].id
@@ -132,14 +134,14 @@ export class ProjectPage {
 
     switch (this.gendersNav) {
       case 3:
-        this.navCtrl.push(safePage, {
-          "json": key,
+        this.navCtrl.push(detaSafePage, {
+          "params": key,
           "newpage": this.gendersNav
         })
         break;
       case 2:
-        this.navCtrl.push(workPage, {
-          "json": key,
+        this.navCtrl.push(detailsWorkPage, {
+          "params": key,
           "newpage": this.gendersNav
         })
         break;
