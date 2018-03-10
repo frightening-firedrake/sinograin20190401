@@ -315,6 +315,27 @@ export class detaildPage {
                                 console.log(data)
                             })
                             this.sample.sampleState = 1
+                        }else{
+                            let params = {
+                                title: "提示",
+                                subTitle: "扦样失败,请重新点击打印条形码",
+                                buttons: [
+                                    {
+                                        text: "确认",
+                                        handler: () => {
+                                        }
+                                    }
+                                ],
+                                cssClass: "outsuccse only"
+                            }
+                            let addbuton = {
+                                text: null
+                            }
+                            let addInput = []
+                            this._alert._alertSmlpe(params, addbuton, addInput, data => {
+                                console.log(data)
+                            })
+                           
                         }
                     })
                 });
@@ -369,7 +390,7 @@ export class detaildPage {
         this.Http.post("grain/sample/get", data).subscribe(res => {
             var urlpng = res.json()["samplePic"]
             console.log(urlpng,res)
-            var url = "123-45-678"
+            var url = res.json()["sampleNo"]
             console.log(url)
             cordova.plugins.barcode.printBarCode(url, "300", "0", "50", "180", res => {
                 // this.Httpupdate()

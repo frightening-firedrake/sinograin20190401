@@ -1,9 +1,9 @@
-import { Component, enableProdMode } from '@angular/core';
+import { Component,enableProdMode } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { HttpService } from '../../../../providers/httpService'
 import { _alertBomb } from '../../../common/_alert'
-enableProdMode();
+// enableProdMode();
 @Component({
     selector: "detailsWork",
     templateUrl: "./detailsWork.html"
@@ -144,7 +144,7 @@ export class detailsWorkPage {
             isMatch: [this.Work.isMatch, Validators.compose([Validators.required])],
             realCheckedTime: [this.Work.realCheckedTime, Validators.compose([Validators.required])],
             qualityGrade: [this.Work.qualityGrade, Validators.compose([Validators.required])],
-            putWay: [, Validators.compose([Validators.required])],
+            putWay: [this.Work.putWay, Validators.compose([Validators.required])],
             storageCapacity: [this.Work.storageCapacity, Validators.compose([Validators.required])],
             storageWater: [this.Work.storageWater, Validators.compose([Validators.required])],
             storageImpurity: [this.Work.storageImpurity, Validators.compose([Validators.required])],

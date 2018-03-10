@@ -69,16 +69,16 @@
                             <p class="textarea_content" >
                                 {{pro.problem}}
                             </p>
-                            <img src="assets/image/safe/succse.png" *ngIf="pro.isDeal==-1?true:false" alt="">
+                            <img src="assets/image/safe/succse.png" *ngIf="pro.isDeal==1?true:false" alt="">
                         </ion-item>
                         <ion-item class="phont">
                             <span>图片:</span>
                             <div class="imgs" >
-                                <img [src]="img" *ngFor="let img of _unsolved"  alt="">
+                                <img [src]="img" *ngFor="let img of _unsolvedimg"  alt="">
                             </div>
                         </ion-item>
                         <ion-item class="succse">
-                            <button ion-button color="secondary" [disabled]="pro.isDeal==-1?true:false" (click)="solve(pro)">已解决</button>
+                            <button ion-button color="secondary" [disabled]="pro.isDeal==1?true:false" (click)="solve(pro)">已解决</button>
                         </ion-item>
                     </ion-list></div>
                 <div *ngSwitchCase="'solve'">

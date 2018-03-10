@@ -54,6 +54,7 @@ export class detasafeViewPage {
                     text: "删除",
                     handler: () => {
                         var that = this
+                        console.log(that.imgdatalist)
                         this.imgdatalist = this.imgdatalist.filter(function (i, v) {
                             that.dateser.deleteImg(index, that.num)
                             return index != v
@@ -74,7 +75,7 @@ export class detasafeViewPage {
                     handler: () => {
                         this.camera.getPicture({
                             quality: 50,
-                            allowEdit: true,
+                            // allowEdit: true,
                             encodingType: this.camera.EncodingType.JPEG,
                             saveToPhotoAlbum: false,
                             destinationType: 1,
@@ -116,7 +117,7 @@ export class detasafeViewPage {
                     handler: () => {
                         this.camera.getPicture({
                             quality: 50,
-                            allowEdit: true,
+                            // allowEdit: true,
                             encodingType: this.camera.EncodingType.JPEG,
                             saveToPhotoAlbum: false,
                             // destinationType: this.useURI ? this.camera.DestinationType.FILE_URI : this.camera.DestinationType.DATA_URL,

@@ -107,6 +107,9 @@ detailssafe {
 									.input {
 										height: 100%;
 										line-height: 1;
+										.input-cover{
+											display:none;
+										}
 										// color:#333333;
 									}
 								}
@@ -197,6 +200,11 @@ detailssafe {
 			border-bottom: 1px solid #dbdbdb;
 			background-color: white;
 			padding: 0 16px;
+			&:first-child{
+				.item{
+						border-bottom: 1px solid #dbdbdb;
+				}
+			}
 			.item {
 				min-height: 0;
 				padding: 0;
@@ -204,7 +212,7 @@ detailssafe {
 				line-height: 0.99rem;
 				font-size: 0.3rem;
 				color: #999999;
-				border-bottom: 1px solid #dbdbdb;
+				border-bottom: 2px solid #dbdbdb;
 				.item-inner {
 					.input-wrapper {
 						padding: 0 0.65rem;
@@ -242,7 +250,7 @@ detailssafe {
 									color: #333333;
 									font-size: 0.3rem;
 									//  padding-bottom:1.5rem;
-									vertical-align: text-top;
+									vertical-align: middle;
 									
 								}
 							}

@@ -22,6 +22,7 @@ export class ProjectPage {
   _select_smaple = "-1";
   myInput;
   Company;
+  titleName;
   public Companyarr;
   public gendersarr: any = [
     // "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
@@ -30,6 +31,15 @@ export class ProjectPage {
   constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService, public BLE: BLE, public cd: ChangeDetectorRef) {
 
     this.gendersNav = this.parpam.get("num")
+    console.log(this.gendersNav)
+    if(this.gendersNav == "4"){
+      this.titleName = "扦样列表"
+      console.log(this.titleName)
+    }else if(this.gendersNav == "3"){
+      this.titleName = "监督检查"
+    }else if(this.gendersNav == "2"){
+      this.titleName = "工作底稿"
+    }
     // // 所有库点
     // this.Http.get("grain/library/getAll").subscribe(res => {
     //   // console.log(res.json())
