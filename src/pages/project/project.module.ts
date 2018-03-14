@@ -17,6 +17,7 @@ import { detailsWorkPage } from './details/detailsWork/detailsWork'
 import { detaSafePage } from './details/detailsSafe/detailsSafe'
 import { detasafeViewPage } from './details/detailsSafe/detasafe_view/detasafe_view'
 import { dateSafeServe } from './details/detailsSafe/detasafeSever'
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { dateSafeServe } from './details/detailsSafe/detasafeSever'
     imports: [
         CommonModule,
         IonicPageModule.forChild(ProjectPage), 
-        CommonsModule
+        CommonsModule,
+        IonicImageViewerModule
     ],
     entryComponents: [
         ProjectPage,

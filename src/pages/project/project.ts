@@ -19,10 +19,12 @@ declare var $;
 export class ProjectPage {
   genders;
   gendersNav: any = ""
-  _select_smaple = "-1";
+  _select_smaple = "0";
   myInput;
   Company;
+  shaixuan = "筛选"
   titleName;
+  listId;
   public Companyarr;
   public gendersarr: any = [
     // "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
@@ -76,6 +78,7 @@ export class ProjectPage {
     })
   }
   getlist(listId) {
+    this.listId = listId
     let data = {
       params: `{"libraryId":${listId},"sampleState":${this._select_smaple},"regState":2}`
     }
@@ -110,8 +113,19 @@ export class ProjectPage {
   }
 
   //筛选框的三种分类
-  select_smaple(event = "-1") {
+  select_smaple(event = '0') {
+    if(event == "-1"){
+      this.shaixuan = "未扦样"
+    }else if(event == "1"){
+      this.shaixuan = "已扦样"
+    }else{
+      this.shaixuan = "筛选"
+    }
     this._select_smaple = event
+    this.getlist(this.listId)
+     $(".zhezhao").toggle()
+      $(".screen").hide()
+      $(".thead").toggle()
     // let data = {
     //   params: '{"libraryId":1,"sampleState":' + event + '}'
     // }

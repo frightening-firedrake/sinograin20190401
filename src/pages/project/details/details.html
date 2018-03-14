@@ -24,61 +24,61 @@
             <div>
                 <ion-list>
                     <ion-item type="ion-item" ion-item>
-                <span class="span_title">创建时间:</span>
-                <span>{{ sample.createTime }}</span>
-            </ion-item>
+                        <span class="span_title">创建时间:</span>
+                        <span>{{ sample.createTime }}</span>
+                    </ion-item>
                     <ion-item type="ion-item" ion-item>
-                <span class="span_title">状态:</span>
-                <div [ngSwitch]="sample.sampleState">
-                    <span  *ngSwitchCase="1">已扦样</span>
-                     <span *ngSwitchCase="-1">未扦样</span>
-                     <span *ngSwitchCase="2">入库</span>
-                </div>
-            </ion-item>
+                        <span class="span_title">状态:</span>
+                        <div [ngSwitch]="sample.sampleState">
+                            <span *ngSwitchCase="1">已扦样</span>
+                            <span *ngSwitchCase="-1">未扦样</span>
+                            <span *ngSwitchCase="2">入库</span>
+                        </div>
+                    </ion-item>
                     <ion-item type="ion-item" class="num" ion-item>
-                <span class="span_title">扦样编号:</span>
-                <span>{{ sample.sampleWord }}</span>
-            </ion-item>
+                        <span class="span_title">扦样编号:</span>
+                        <span>{{ sample.sampleWord }}</span>
+                    </ion-item>
                     <ion-item type="ion-item" ion-item>
-                <span class="span_title">货位号:</span>
-                <span>{{ sample.position}}</span>
-            </ion-item>
+                        <span class="span_title">货位号:</span>
+                        <span>{{ sample.position}}</span>
+                    </ion-item>
                 </ion-list>
                 <ion-list>
                     <ion-item type="ion-item" ion-item>
-                <span class="span_title">品种:</span>
-                <span>{{ sample.sort }}</span>
-            </ion-item>
+                        <span class="span_title">品种:</span>
+                        <span>{{ sample.sort }}</span>
+                    </ion-item>
                     <ion-item type="ion-item" ion-item>
-                <span class="span_title">性质:</span>
-                <span>{{ sample.quality }}</span>
-            </ion-item>
+                        <span class="span_title">性质:</span>
+                        <span>{{ sample.quality }}</span>
+                    </ion-item>
                     <ion-item type="ion-item" class="num" ion-item>
-                <span class="span_title">代表数量(吨):</span>
-                <span>{{ _amount }}</span>
-            </ion-item>
+                        <span class="span_title">代表数量(吨):</span>
+                        <span>{{ _amount }}</span>
+                    </ion-item>
                     <ion-item type="ion-item" ion-item>
-                <span class="span_title">产地:</span>
-                <span>{{ sample.originPlace }}</span>
-            </ion-item>
+                        <span class="span_title">产地:</span>
+                        <span>{{ sample.originPlace }}</span>
+                    </ion-item>
                 </ion-list>
                 <ion-list>
                     <ion-item type="ion-item" ion-item>
-                <span class="span_title">收获年度:</span>
-                <span>{{ sample.gainTime }}</span>
-            </ion-item>
+                        <span class="span_title">收获年度:</span>
+                        <span>{{ sample.gainTime }}</span>
+                    </ion-item>
                     <ion-item type="ion-item" ion-item>
-                <span class="span_title">入库时间:</span>
-                <span>{{ sample.barnTime }}</span>
-            </ion-item>
+                        <span class="span_title">入库时间:</span>
+                        <span>{{ _barnTime }}</span>
+                    </ion-item>
                     <ion-item type="ion-item" class="num" ion-item>
-                <span class="span_title">扦样日期:</span>
-                <span>{{ sample.sampleTime }}</span>
-            </ion-item>
+                        <span class="span_title">扦样日期:</span>
+                        <span>{{ sample.sampleTime }}</span>
+                    </ion-item>
                     <ion-item type="ion-item" ion-item>
-                <span class="span_title">备注:</span>
-                <span>{{ sample.remark }}</span>
-            </ion-item>
+                        <span class="span_title">备注:</span>
+                        <span>{{ sample.remark }}</span>
+                    </ion-item>
                 </ion-list>
                 <button ion-button color="secondary" class="sumbit" (click)="_sample()">打印条形码</button>
                 <!--<ion-item ion-ion-item  large color="secondary" (click)="_ble()" class="sumbit" type="ion-item" [hidden]="ble_falg||(sample.sampleState==1||sample.sampleState>=2)">链接蓝牙</ion-item>-->
@@ -95,27 +95,27 @@
                 <form action="" [formGroup]="Worknew" (ngSubmit)="onSubmit(Worknew)">
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item>
-                        <span class="title_span">货位号:</span>
-                        <!--sample-->
-                        <span>{{sample.position}}</span>
-                    </ion-item>
+                            <span class="title_span">货位号:</span>
+                            <!--sample-->
+                            <span>{{sample.position}}</span>
+                        </ion-item>
                         <ion-item type="ion-item" class="fixed" ion-item>
-                        <span class="title_span">品种:</span>
-                        <span>{{sample.sort}}</span>
-                    </ion-item>
+                            <span class="title_span">品种:</span>
+                            <span>{{sample.sort}}</span>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item>
-                        <span class="title_span">性质:</span>
-                        <span>{{sample.quality}}</span>
-                    </ion-item>
+                            <span class="title_span">性质:</span>
+                            <span>{{sample.quality}}</span>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item>
-                        <span class="title_span">所在库区:</span>
-                        <span>{{sample.libraryName}}</span>
-                    </ion-item>
+                            <span class="title_span">所在库区:</span>
+                            <span>{{sample.libraryName}}</span>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item (click)="barnType()">
-                        <ion-label class="title_span">仓房类型:</ion-label>
-                        <ion-input type="text" readonly="true"   [value]="Work.barnType" [formControl]="Workfrom.barnType"></ion-input>
-                        <!--<span>{{Work.barnType}}</span>-->
-                    </ion-item>
+                            <ion-label class="title_span">仓房类型:</ion-label>
+                            <ion-input type="text" readonly="true" [value]="Work.barnType" [formControl]="Workfrom.barnType"></ion-input>
+                            <!--<span>{{Work.barnType}}</span>-->
+                        </ion-item>
                         <ion-item ion-item class="num" type="ion-item">
                             <span class="title_span">被检查企业:</span>
                             <!--<ion-input type="number"  [formControl]="Workfrom.enterprise"></ion-input>-->
@@ -127,214 +127,200 @@
                         <ion-item ion-item class="num " type="ion-item">
                             <ion-label class="title_span"><span class="title_span">实际查库日:</span></ion-label>
                             <!--<ion-datetime min="1981" cancelText="取消" doneText="选择" displayFormat="YYYY/DD/MM" pickerFormat="YYYY MM DD" [formControl]="Workfrom.realCheckedTime" [(ngModel)]="dateTime"></ion-datetime>-->
-                            
-                            <ion-datetime min="1981" cancelText="取消" doneText="选择"  pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD"  [formControl]="Workfrom.realCheckedTime" [(ngModel)]="dateTime"></ion-datetime>
+
+                            <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [formControl]="Workfrom.realCheckedTime"
+                                [(ngModel)]="dateTime"></ion-datetime>
                             <!--<ion-item ion-ion-item icon-only item-end clear color="light" type="ion-item" class="no_ion-item">
                                 <ion-icon  name="ios-arrow-forward-outline"></ion-icon>
                             </ion-item>-->
                         </ion-item>
                         <ion-item type="ion-item" ion-item>
-                        <span class="title_span">收获年度:</span>
-                        <span>{{sample.gainTime}}</span>
-                    </ion-item>
+                            <span class="title_span">收获年度:</span>
+                            <span>{{sample.gainTime}}</span>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num">
-                        <span class="title_span">保管帐数量(kg):</span>
-                        <span>{{_amount}}</span>
-                    </ion-item>
-                        <ion-item type="ion-item" ion-item (click)="qualityGrade()">
-                        <ion-label class="title_span">质量等级:</ion-label>
-                        <ion-label class="float_label" [ngSwitch]="Work.qualityGrade">
-                            <ion-input type="text" *ngSwitchCase="1" readonly="true"   value="一等" [formControl]="Workfrom.qualityGrade" >一等</ion-input>
-                            <ion-input type="text" *ngSwitchCase="2" readonly="true"   value="二等" [formControl]="Workfrom.qualityGrade" >二等</ion-input>
-                            <ion-input type="text" *ngSwitchCase="3" readonly="true"   value="三等" [formControl]="Workfrom.qualityGrade" >三等</ion-input>                
-                        </ion-label>
-                    </ion-item>
+                            <span class="title_span">保管帐数量(kg):</span>
+                            <span>{{_amount*1000}}</span>
+                        </ion-item>
                         <!--这里的复选框有问题，稍后解决-->
                         <ion-item type="ion-item" ion-item (click)="putWay()">
-                        <ion-label class="title_span">入仓方式:</ion-label>
-                        <ion-label class="float_label" [ngSwitch]="Work.putWay">
-                             <ion-input type="text" *ngSwitchCase="1" readonly="true" value="机械入仓" [formControl]="Workfrom.putWay"></ion-input>
-                            <ion-input type="text" *ngSwitchCase="2" readonly="true" value="人工入仓" [formControl]="Workfrom.putWay"></ion-input>
-                        </ion-label>
-                    </ion-item>
+                            <ion-label class="title_span">入仓方式:</ion-label>
+                            <ion-label class="float_label" [ngSwitch]="Work.putWay">
+                                <ion-input type="text" *ngSwitchCase="1" readonly="true" value="机械入仓" [formControl]="Workfrom.putWay"></ion-input>
+                                <ion-input type="text" *ngSwitchCase="2" readonly="true" value="人工入仓" [formControl]="Workfrom.putWay"></ion-input>
+                            </ion-label>
+                        </ion-item>
                     </ion-list>
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item class="list_input">
-                        <span class="title_span title_span_font">粮食入库质量:</span>
-                    </ion-item>
+                            <span class="title_span title_span_font">粮食入库质量:</span>
+                        </ion-item>
+                        <ion-item type="ion-item" ion-item (click)="qualityGrade()">
+                            <ion-label class="title_span">质量等级:</ion-label>
+                            <ion-label class="float_label" [ngSwitch]="Work.qualityGrade">
+                                <ion-input type="text" *ngSwitchCase="1" readonly="true" value="一等" [formControl]="Workfrom.qualityGrade">一等</ion-input>
+                                <ion-input type="text" *ngSwitchCase="2" readonly="true" value="二等" [formControl]="Workfrom.qualityGrade">二等</ion-input>
+                                <ion-input type="text" *ngSwitchCase="3" readonly="true" value="三等" [formControl]="Workfrom.qualityGrade">三等</ion-input>
+                            </ion-label>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num first_item no_border">
-                        <ion-label class="title_span">容重（g/l）:</ion-label>
-                         <!--<ion-input type="number" [formControl]="Workfrom.storageCapacity"></ion-input>-->
-                          <ion-input type="number" [formControl]="Workfrom.storageCapacity" [value]="Work.storageCapacity"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">容重（g/l）:</ion-label>
+                            <!--<ion-input type="number" [formControl]="Workfrom.storageCapacity"></ion-input>-->
+                            <ion-input type="number" [formControl]="Workfrom.storageCapacity" [value]="Work.storageCapacity"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
-                        <ion-label class="title_span">水分（%）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.storageWater" [value]="Work.storageWater"></ion-input>
-                        <!--<span>{{Work.storageWater}}</span>-->
-                    </ion-item>
+                            <ion-label class="title_span">水分（%）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.storageWater" [value]="Work.storageWater"></ion-input>
+                            <!--<span>{{Work.storageWater}}</span>-->
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
-                        <ion-label class="title_span">杂质（%）:</ion-label>
-                        <ion-input type="number"  [formControl]="Workfrom.storageImpurity" [value]="Work.storageImpurity"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">杂质（%）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.storageImpurity" [value]="Work.storageImpurity"></ion-input>
+                        </ion-item>
                     </ion-list>
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item class="list_input">
-                <span class="title_span title_span_font">实测入库质量:</span>
-                </ion-item>
-                        <ion-item type="ion-item" ion-item class="num first_item no_border">
-                        <ion-label class="title_span">容重（g/l）:</ion-label>
-                         <ion-input type="number" [formControl]="Workfrom.realCapacity" [value]="Work.realCapacity"></ion-input>
-                    </ion-item>
+                            <span class="title_span title_span_font">实测入库质量:</span>
+                        </ion-item>
+                        <ion-item type="ion-item" ion-item class="num first_item no_border" (keyup)="realCapacity()">
+                            <ion-label class="title_span">容重（g/l）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.realCapacity" [value]="Work.realCapacity"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
-                        <ion-label class="title_span">水分（%）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.realWater" [value]="Work.realWater"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">水分（%）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.realWater" [value]="Work.realWater"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
-                        <ion-label class="title_span">杂质（%）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.realImpurity" [value]="Work.realImpurity"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">杂质（%）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.realImpurity" [value]="Work.realImpurity"></ion-input>
+                        </ion-item>
                     </ion-list>
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item class="list_input">
-                    <span class="title_span title_span_font">粮堆形状及基本尺寸:</span>
-                </ion-item>
+                            <span class="title_span title_span_font">粮堆形状及基本尺寸:</span>
+                        </ion-item>
                         <ion-item class="list_img">
                             <img src="assets/image/index/work.png" />
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num first_item no_border">
-                        <ion-label class="title_span">长（m）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.length" [value]="Work.length" (keyup)="mianji($event)"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">长（m）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.length" [value]="Work.length" (keyup)="mianji($event)"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
-                        <ion-label class="title_span">宽（m）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.wide" [value]="Work.wide" (keyup)="mianji($event)"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">宽（m）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.wide" [value]="Work.wide" (keyup)="mianji($event)"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
-                        <ion-label class="title_span">高（m）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.high" [value]="Work.high" (keyup)="mianji($event)"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">高（m）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.high" [value]="Work.high" (keyup)="mianji($event)"></ion-input>
+                        </ion-item>
                     </ion-list>
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item class="list_input ">
-                <span class="title_span title_span_font">1.计算粮堆体积:</span>
-                </ion-item>
+                            <span class="title_span title_span_font">1.计算粮堆体积:</span>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num first_item no_border long_item">
-                        <ion-label class="title_span">粮堆测量体积（m3）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.measuredVolume" [value]="Work.measuredVolume" readonly="true"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">粮堆测量体积（m3）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.measuredVolume" [value]="Work.measuredVolume" readonly="true"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num long_item">
-                        <ion-label class="title_span">需要扣除体积（m3）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.deductVolume"  [value]="Work.deductVolume" (keyup)="sttj($event)"></ion-input>                        
-                    </ion-item>
+                            <ion-label class="title_span">需要扣除体积（m3）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.deductVolume" [value]="Work.deductVolume" (keyup)="sttj($event)"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num long_item">
-                        <ion-label class="title_span">粮堆实体体积（m3）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.realVolume"  [value]="Work.realVolume" readonly="true"></ion-input>   
-                    </ion-item>
+                            <ion-label class="title_span">粮堆实体体积（m3）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.realVolume" [value]="Work.realVolume" readonly="true"></ion-input>
+                        </ion-item>
                     </ion-list>
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item class="list_input">
-                <span class="title_span title_span_font">2.计算粮堆平均密度:</span>
-                </ion-item>
+                            <span class="title_span title_span_font">2.计算粮堆平均密度:</span>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="no_border first_item first_item_font">
-                <ion-label>标准容重器法√</ion-label>
-                 <!--<ion-input type="number"></ion-input>-->
-            </ion-item>
+                            <ion-label>标准容重器法√</ion-label>
+                            <!--<ion-input type="number"></ion-input>-->
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num  data long_item">
-                        <ion-label class="title_span">粮食容重（g/l）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.realCapacity" [value]="Work.realCapacity" readonly="true"></ion-input>                           
-                    </ion-item>
+                            <ion-label class="title_span">粮食容重（g/l）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.realCapacity" [value]="Work.realCapacity" readonly="true"></ion-input>
+                        </ion-item>
+                        <ion-item type="ion-item" ion-item class="num data long_item" (keyup)="unQuality()">
+                            <ion-label class="title_span">校正后修正系数:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.correctioFactor" [value]="Work.correctioFactor" (keyup)="ldpjmd($event)"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num data long_item">
-                        <ion-label class="title_span">校正后修正系数:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.correctioFactor" [value]="Work.correctioFactor" (keyup)="ldpjmd($event)"></ion-input>                                                   
-                    </ion-item>
-                        <ion-item type="ion-item" ion-item class="num data long_item" (keydown)="unQuality()">
-                        <ion-label class="title_span">粮堆平均密度（kg/m）:</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.aveDensity"  [value]="Work.aveDensity" readonly="true"></ion-input>                                                   
-                    </ion-item>
-                        <!--<ion-item type="ion-item" ion-item class="no_border first_item first_item_font">
-                <ion-label>特制大容器法□</ion-label>
-                
-            </ion-item>
-                    <ion-item type="ion-item" ion-item class="num first_item no_border long_item">
-                <span class="title_span">单位体积粮食重量(kg/m):</span>
-                <span></span>
-            </ion-item>
-                    <ion-item type="ion-item" ion-item class="num long_item">
-                <span class="title_span">校正后修正系数:</span>
-               <span>111</span>
-            </ion-item>
-                    <ion-item type="ion-item" ion-item class="num long_item">
-                <span class="title_span">粮堆平均密度(kg/m):</span>
-               <span>111</span>
-            </ion-item>-->
+                            <ion-label class="title_span">粮堆平均密度（kg/m）:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.aveDensity" [value]="Work.aveDensity" readonly="true"></ion-input>
+                        </ion-item>
                     </ion-list>
 
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item class="list_input">
-                <span class="title_span title_span_font">3.计算粮食数量:</span>
-                </ion-item>
+                            <span class="title_span title_span_font">3.计算粮食数量:</span>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num  data long_item no_border first_item">
-                        <ion-label class="title_span">测量计算数(kg):</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.unQuality" [value]="Work.unQuality" readonly="true"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">测量计算数(kg):</ion-label>
+
+                            <ion-input type="number" [formControl]="Workfrom.unQuality" [value]="Work.unQuality" readonly="true"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="no_border first_item first_item_font">
-                        <ion-label>应记粮食损耗(kg)</ion-label>
-                        <!--<ion-input type="number"></ion-input>-->
-                    </ion-item>
+                            <ion-label>应记粮食损耗(kg)</ion-label>
+                            <!--<ion-input type="number"></ion-input>-->
+                        </ion-item>
+                        <ion-item type="ion-item" ion-item class="num long_item" (keyup)="loss()">
+                            <ion-label class="title_span">水分减量:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.lossWater" [value]="Work.lossWater"></ion-input>
+                        </ion-item>
+                        <ion-item type="ion-item" ion-item class="num long_item" (keyup)="loss()">
+                            <ion-label class="title_span">保管自然损耗:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.lossNature" [value]="Work.lossNature"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num long_item">
-                        <ion-label class="title_span">水分减量:</ion-label>
-                         <ion-input type="number" [formControl]="Workfrom.lossWater"  [value]="Work.lossWater" ></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">合计:</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.loss" [value]="Work.loss" readonly="true"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num long_item">
-                        <ion-label class="title_span">保管自然损耗:</ion-label>
-                         <ion-input type="number" [formControl]="Workfrom.lossNature"  [value]="Work.lossNature" ></ion-input>
-                    </ion-item>
-                        <ion-item type="ion-item" ion-item class="num long_item">
-                        <ion-label class="title_span">合计:</ion-label>
-                         <ion-input type="number" [formControl]="Workfrom.loss"  [value]="Work.lossWater + Work.lossNature" readonly="true"></ion-input>
-                    </ion-item>
-                        <ion-item type="ion-item" ion-item class="num long_item">
-                        <ion-label class="title_span">检查计算数(kg):</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.checkNum"  [value]="Work.unQuality + Work.loss" readonly="true"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">检查计算数(kg):</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.checkNum" [value]="Work.checkNum " readonly="true"></ion-input>
+                        </ion-item>
                     </ion-list>
 
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item class="list_input">
-                <span class="title_span title_span_font">4.认定粮食实际数量:</span>
-                </ion-item>
+                            <span class="title_span title_span_font">4.认定粮食实际数量:</span>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="no_border first_item first_item_font">
-                <ion-label>检查计算数与保管账数量比较</ion-label>
-                 <!--<ion-input type="number"></ion-input>-->
-            </ion-item>
-                        <ion-item  ion-item class="num  data long_item">
-                        <ion-label class="title_span">差数(kg):</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.difference"  [value]="sample.amount - Work.checkNum" readonly="true"></ion-input>
-                    </ion-item>
-                        <ion-item  ion-item class="num data long_item">
-                        <ion-label class="title_span">差率(%):</ion-label>
-                        <ion-input type="number" [formControl]="Workfrom.slip"  [value]="Work.difference/sample.amount" readonly="true"></ion-input>
-                    </ion-item>
-                        <ion-item type="ion-item" ion-item class="num data long_item" (click)="slip()">
-                        <ion-label class="title_span">账实是否相符:</ion-label>
-                        <ion-input type="text" [formControl]="Workfrom.isMatch"   readonly="true" [value]="Work.isMatch"></ion-input>
-                    </ion-item>
+                            <ion-label>检查计算数与保管账数量比较</ion-label>
+                            <!--<ion-input type="number"></ion-input>-->
+                        </ion-item>
+                        <ion-item ion-item class="num  data long_item">
+                            <ion-label class="title_span">差数(kg):</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.difference" [value]="Work.difference" readonly="true"></ion-input>
+                        </ion-item>
+                        <ion-item ion-item class="num data long_item">
+                            <ion-label class="title_span">差率(%):</ion-label>
+                            <ion-input type="number" [formControl]="Workfrom.slip" [value]="Work.slip" readonly="true"></ion-input>
+                        </ion-item>
+                        <ion-item type="ion-item" ion-item class="num data long_item" (click)="isMatch()">
+                            <ion-label class="title_span">账实是否相符:</ion-label>
+                            <ion-input type="text" [formControl]="Workfrom.isMatch" readonly="true" [value]="Work.isMatch"></ion-input>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num long_item">
-                        <span class="title_span">粮食实际数量(kg):</span>
-                        <span>{{_amount}}</span>
-                    </ion-item>
+                            <span class="title_span">粮食实际数量(kg):</span>
+                            <span>{{_amount * 1000}}</span>
+                        </ion-item>
                         <ion-item type="ion-item" ion-item class="num long_item">
-                        <ion-label class="title_span">账实不符原因:</ion-label>
-                        <ion-input type="text" [formControl]="Workfrom.result" [value]="Work.result"></ion-input>
-                    </ion-item>
+                            <ion-label class="title_span">账实不符原因:</ion-label>
+                            <ion-input type="text" [formControl]="Workfrom.result" [readonly]="isresult" [value]="Work.result"></ion-input>
+                        </ion-item>
                     </ion-list>
                     <ion-list>
                         <ion-item type="ion-item" ion-item class="num text_left">
-                        <span class="title_span">备注:</span>
-                        <span>{{Work.remark}}</span>
-                    </ion-item>
+                            <ion-label class="title_span">备注:</ion-label>
+                            <ion-input type="text" [formControl]="Workfrom.remark" [value]="Work.remark"></ion-input>
+                        </ion-item>
                     </ion-list>
-                    <button ion-button large color="secondary" class="sumbit" type="submit">提交</button>
+                    <button ion-button large color="secondary" class="sumbit" type="submit">修改</button>
                 </form>
             </div>
         </div>
@@ -369,6 +355,7 @@
                         </div>
                     </ion-item>
                 </ion-list>-->
+                <button ion-button large color="secondary" class="sumbit" (click)="Safedetails()" >添加问题</button>
                 <div padding class="problem_select">
                     <ion-segment [(ngModel)]="problem" (ionChange)="segmentChanged($event)">
                         <ion-segment-button value="all">
@@ -383,13 +370,13 @@
                     </ion-segment>
                     <div [ngSwitch]="problem" class="problem_content">
                         <div *ngSwitchCase="'all'">
-                            <ion-list [ngClass]="{'active':pro.isDeal==-1?true:false}" *ngFor="let pro of Safe">
+                            <ion-list [ngClass]="{'active':pro.isDeal==-1?true:false}" *ngFor="let pro of Safe ;let i = index">
                                 <ion-item>
                                     <ion-label>创建时间:</ion-label>
                                     <ion-input type="text" readonly="true" [value]="pro.createTime"></ion-input>
                                 </ion-item>
                                 <ion-item class="textarea_item problem_textarea">
-                                    <span>问题1:</span>
+                                    <span>问题{{i+1}}:</span>
                                     <!--不断发射点发射点发射点发射点发射点发射点发发阿瑟东法撒旦倒萨发生地方阿斯蒂芬士大夫阿瑟东士大夫撒旦思考还是v本身的v本来是考虑开始吧 是开车吧看哈不是不插卡ABC几把坑教案设计擦机布爱吃Jack就你撒擦口水啊检查阿姐存款机是-->
                                     <p class="textarea_content">
                                         {{pro.problem}}
@@ -399,7 +386,7 @@
                                 <ion-item class="phont">
                                     <span>图片:</span>
                                     <div class="imgs">
-                                        <img [src]="img" *ngFor="let img of Safe_img" alt="">
+                                        <img [src]="img" *ngFor="let img of pro.images" alt="" #imageToView (click)="lookPicture(imageToView)">
                                     </div>
                                 </ion-item>
                                 <ion-item class="succse">
@@ -408,13 +395,13 @@
                             </ion-list>
                         </div>
                         <div *ngSwitchCase="'unsolved'">
-                            <ion-list [ngClass]="{'active':pro.isDeal==-1?true:false}" *ngFor="let pro of _unsolved">
+                            <ion-list [ngClass]="{'active':pro.isDeal==-1?true:false}" *ngFor="let pro of _unsolved ;let i = index">
                                 <ion-item>
                                     <ion-label>创建时间:</ion-label>
                                     <ion-input type="text" readonly [value]="pro.createTime"></ion-input>
                                 </ion-item>
                                 <ion-item class="textarea_item problem_textarea">
-                                    <span>问题1:</span>
+                                    <span>问题{{i+1}}:</span>
                                     <!--不断发射点发射点发射点发射点发射点发射点发发阿瑟东法撒旦倒萨发生地方阿斯蒂芬士大夫阿瑟东士大夫撒旦思考还是v本身的v本来是考虑开始吧 是开车吧看哈不是不插卡ABC几把坑教案设计擦机布爱吃Jack就你撒擦口水啊检查阿姐存款机是-->
                                     <p class="textarea_content">
                                         {{pro.problem}}
@@ -424,7 +411,7 @@
                                 <ion-item class="phont">
                                     <span>图片:</span>
                                     <div class="imgs">
-                                        <img [src]="img" *ngFor="let img of _unsolvedimg" alt="">
+                                        <img [src]="img" *ngFor="let img of pro.images" alt="" #imageToView (click)="lookPicture(imageToView)">
                                     </div>
                                 </ion-item>
                                 <ion-item class="succse">
@@ -433,13 +420,13 @@
                             </ion-list>
                         </div>
                         <div *ngSwitchCase="'solve'">
-                            <ion-list [ngClass]="{'active':pro.isDeal==1?true:false}" *ngFor="let pro of _solve">
+                            <ion-list [ngClass]="{'active':pro.isDeal==1?true:false}" *ngFor="let pro of _solve;let i = index">
                                 <ion-item>
                                     <ion-label>创建时间:</ion-label>
                                     <ion-input type="text" readonly [value]="pro.createTime"></ion-input>
                                 </ion-item>
                                 <ion-item class="textarea_item problem_textarea">
-                                    <span>问题1:</span>
+                                    <span>问题{{i+1}}:</span>
                                     <!--不断发射点发射点发射点发射点发射点发射点发发阿瑟东法撒旦倒萨发生地方阿斯蒂芬士大夫阿瑟东士大夫撒旦思考还是v本身的v本来是考虑开始吧 是开车吧看哈不是不插卡ABC几把坑教案设计擦机布爱吃Jack就你撒擦口水啊检查阿姐存款机是-->
                                     <p class="textarea_content">
                                         {{pro.problem}}
@@ -449,7 +436,7 @@
                                 <ion-item class="phont">
                                     <span>图片:</span>
                                     <div class="imgs">
-                                        <img [src]="img" *ngFor="let img of _solveimg" alt="">
+                                        <img [src]="img" *ngFor="let img of pro.images" alt="" #imageToView (click)="lookPicture(imageToView)">
                                     </div>
                                 </ion-item>
                                 <ion-item class="succse">

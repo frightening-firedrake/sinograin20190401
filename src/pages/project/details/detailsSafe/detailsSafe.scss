@@ -4,10 +4,14 @@ detailssafe {
 		.scroll-content {
 			padding: 0 !important;
 			padding-top: 0.2rem !important;
-			// padding-bottom:   1.3rem !important;
+			padding-bottom:   1.4rem !important;
 			form {
 				position: relative;
 				margin-bottom: 0.2rem;
+				.margin_div{
+					height:0.4rem;
+					// padding-bottom:0.5rem;
+				}
 			}
 			.add {
 				width: 1.64rem;
@@ -21,7 +25,7 @@ detailssafe {
 				padding: 0;
 				right: 2%;
 				position: absolute;
-				bottom: 1.45rem;
+				bottom:0;
 				span {
 					text-align: center;
 				}
@@ -38,7 +42,7 @@ detailssafe {
 				padding: 0;
 				right: 25%;
 				position: absolute;
-				bottom: 1.45rem;
+				bottom: 0;
 				span {
 					text-align: center;
 				}
@@ -50,6 +54,11 @@ detailssafe {
 				background-color: #38b63a;
 				display: block;
 				margin-top: 1.07rem;
+				position:fixed;
+				left:0;
+				right:0;
+				z-index: 111;
+				bottom:0.5rem;
 				.button-inner {
 					font-size: 0.36rem;
 				}

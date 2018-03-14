@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ChangeDetectorRef  } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
-import { DatePipe } from '@angular/common';
 import { BLE } from '@ionic-native/ble';
 import { NativeService } from '../../../providers/nativeService';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -9,6 +8,7 @@ import { HttpService } from '../../../providers/httpService'
 import { detailsWorkPage } from './detailsWork/detailsWork'
 import { detaSafePage } from './detailsSafe/detailsSafe'
 import { APP_SERVE_URL } from "../../../providers/config";
+import { ImageViewerController } from "ionic-img-viewer";
 
 declare var cordova;
 @Component({
@@ -21,6 +21,8 @@ export class detaildPage {
     private _isMatch;
     Worknew;
     dateTime;
+    isrequire
+    isresult = true
     private Workfrom = {
         isMatch: '',//账实是否相符
         realCheckedTime: "",//实际查库日
@@ -48,7 +50,8 @@ export class detaildPage {
         difference: "",//差数
         slip: "",//差率
         result: "",//不符原因
-        barnType: "",//仓房类型
+        barnType: "",//仓房类型,
+        remark: ""//备注
     }
     private addButton: any = {
         text: "确认"
@@ -78,6 +81,9 @@ export class detaildPage {
     _unsolvedimg = []
     _solveimg = []
     _amount;
+    index = 1
+    code;
+    _barnTime
     private pringarr = ["8C:DE:52:FA:A6:19"]
     constructor(
         public params: NavParams,
@@ -87,11 +93,14 @@ export class detaildPage {
         public BLE: BLE,
         public navCtrl: NavController,
         private nativeService: NativeService,
+        public imageViewerCtrl: ImageViewerController,
+         public cd: ChangeDetectorRef
     ) {
 
         this.dateTime = new Date().toISOString();
         this.Worknew = FormBuilder.group({
-            isMatch: ['', Validators.compose([Validators.required])],
+            remark: ['', Validators.compose([Validators.required])],
+            isMatch: ['是', Validators.compose([Validators.required])],
             realCheckedTime: ['', Validators.compose([Validators.required])],
             qualityGrade: ['', Validators.compose([Validators.required])],
             putWay: ['', Validators.compose([Validators.required])],
@@ -110,9 +119,9 @@ export class detaildPage {
             wide: ['', Validators.compose([Validators.required])],
             high: ['', Validators.compose([Validators.required])],
             unQuality: ['', Validators.compose([Validators.required])],
-            lossWater: ['', Validators.compose([Validators.required])],
-            lossNature: ['', Validators.compose([Validators.required])],
-            loss: ['', Validators.compose([Validators.required])],
+            lossWater: ['0', Validators.compose([Validators.required])],
+            lossNature: ['0', Validators.compose([Validators.required])],
+            loss: [, Validators.compose([Validators.required])],
             checkNum: ['', Validators.compose([Validators.required])],
             difference: ['', Validators.compose([Validators.required])],
             slip: ['', Validators.compose([Validators.required])],
@@ -120,6 +129,7 @@ export class detaildPage {
 
             barnType: ['', Validators.compose([Validators.required])],
         })
+        this.Workfrom.remark = this.Worknew.controls["remark"]
         this.Workfrom.isMatch = this.Worknew.controls["isMatch"]
         this.Workfrom.realCheckedTime = this.Worknew.controls["realCheckedTime"],
             this.Workfrom.qualityGrade = this.Worknew.controls["qualityGrade"],
@@ -151,9 +161,14 @@ export class detaildPage {
         this.problem = "all"
         this.classify = "new"
         this.sample = this.params.get('json')
-        this._amount = this.sample.amount*1000
+        this._amount = this.sample.amount
         console.log(this.sample.amount)
         console.log(this.sample)
+        this.code = this.sample.sampleNo
+        this._barnTime = this.sample.barnTime.substring(0, 7)
+        // safetyReport/data
+    }
+    ionViewDidEnter() {
         //工作底稿的数据
         this.sampleId = {
             params: `{"sampleId":"${this.sample.id}"}`
@@ -184,17 +199,19 @@ export class detaildPage {
                 this.Safe_flag = true
                 this.Safe = safe["rows"]
                 console.log(this.Safe[0].images.split(","))
-                this.Safe[0].images.split(",").forEach((i, v) => {
-                    this.Safe_img.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
-                })
+                for (var i = 0; i < this.Safe.length; i++) {
+                    this.Safe[i].images = this.Safe[i].images.split(",")
+                    this.Safe[i].images.forEach((index, v) => {
+                        console.log(this.Safe[i].images[v])
+                        this.Safe[i].images[v] = `${APP_SERVE_URL}grain/upload/picture/${index}`
+                    })
+                }
+                console.log(this.Safe)
             } else {
                 this.Safe_flag = false
             }
 
         })
-        // safetyReport/data
-    }
-    ionViewDidEnter() {
         // alert(111)
         // this.BLE.showBluetoothSettings()        
 
@@ -209,11 +226,6 @@ export class detaildPage {
                 this._unsolved = this.Safe.filter((i, v) => {
                     return i.isDeal == -1
                 })
-                if (this._unsolved.length) {
-                    this._unsolved[0].images.split(",").forEach((i, v) => {
-                        this._unsolvedimg.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
-                    })
-                }
 
                 console.log(this._unsolvedimg)
                 break;
@@ -223,14 +235,15 @@ export class detaildPage {
                 this._solve = this.Safe.filter((i, v) => {
                     return i.isDeal == 1
                 })
-                if (this._solve.length) {
-                    this._solve[0].images.split(",").forEach((i, v) => {
-                        this._solveimg.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
-                    })
-                }
 
 
         }
+    }
+    // 查看图片
+    lookPicture(img) {
+        console.log(img)
+        const viewer = this.imageViewerCtrl.create(img)
+        viewer.present();
     }
     solve(e) {
         // console.log(e)
@@ -246,9 +259,13 @@ export class detaildPage {
                 let safe = res.json()
                 this.Safe = safe["rows"]
                 console.log(this.Safe[0].images.split(","))
-                this.Safe[0].images.split(",").forEach((i, v) => {
-                    this.Safe_img.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
-                })
+                for (var i = 0; i < this.Safe.length; i++) {
+                    this.Safe[i].images = this.Safe[i].images.split(",")
+                    this.Safe[i].images.forEach((index, v) => {
+                        console.log(this.Safe[i].images[v])
+                        this.Safe[i].images[v] = `${APP_SERVE_URL}grain/upload/picture/${index}`
+                    })
+                }
 
             })
         })
@@ -256,7 +273,11 @@ export class detaildPage {
     onSubmit(e) {
         console.log(e, this.Work.id)
         e.value.id = this.Work.id
-        let data = e.value
+
+        let data = {
+            params: JSON.stringify(e.value),
+            type: 2
+        }
         this.Http.post("grain/manuscript/edit", data).subscribe(res => {
             console.log(res)
         })
@@ -274,73 +295,78 @@ export class detaildPage {
     _sample() {
         this.nativeService.showLoading()
         // this._ble()
-        this.BLE.enable();
-        var flag = false;
-        var time = 0;
-        var is_conn = false;
-        this.BLE.startScan([]).subscribe(res => {
-            console.log(res)
-            if (res.name == "HM-Z3" && !flag) {
-                flag = true;
-                var ble_mac = res.id;
-                console.log(ble_mac, flag)
-                this.print(ble_mac);
-                setTimeout(function () { return 0 }, 1000);
-                this._ble(res => {
-                    let parpam = {
-                        id: this.sample.id,
-                        sampleState: 1
-                    }
-                    this.Http.post("/grain/sample/edit", parpam).subscribe(res => {
-                        this.data = res.json()
-
-                        if (this.data.success) {
-                            let params = {
-                                title: "提示",
-                                subTitle: "扦样成功",
-                                buttons: [
-                                    {
-                                        text: "确认",
-                                        handler: () => {
-                                        }
-                                    }
-                                ],
-                                cssClass: "outsuccse only"
-                            }
-                            let addbuton = {
-                                text: null
-                            }
-                            let addInput = []
-                            this._alert._alertSmlpe(params, addbuton, addInput, data => {
-                                console.log(data)
-                            })
-                            this.sample.sampleState = 1
-                        }else{
-                            let params = {
-                                title: "提示",
-                                subTitle: "扦样失败,请重新点击打印条形码",
-                                buttons: [
-                                    {
-                                        text: "确认",
-                                        handler: () => {
-                                        }
-                                    }
-                                ],
-                                cssClass: "outsuccse only"
-                            }
-                            let addbuton = {
-                                text: null
-                            }
-                            let addInput = []
-                            this._alert._alertSmlpe(params, addbuton, addInput, data => {
-                                console.log(data)
-                            })
-                           
+        this.BLE.enable().then(res => {
+            var flag = false;
+            var time = 0;
+            var is_conn = false;
+            this.BLE.startScan([]).subscribe(res => {
+                console.log(res)
+                if (res.name == "HM-Z3" && !flag) {
+                    flag = true;
+                    var ble_mac = res.id;
+                    console.log(ble_mac, flag)
+                    this.print(ble_mac);
+                    setTimeout(function () { return 0 }, 1000);
+                    this._ble(res => {
+                        let parpam = {
+                            id: this.sample.id,
+                            sampleState: 1
                         }
-                    })
-                });
-            }
+                        this.Http.post("/grain/sample/edit", parpam).subscribe(res => {
+                            this.data = res.json()
+
+                            if (this.data.success) {
+                                let params = {
+                                    title: "提示",
+                                    subTitle: "扦样成功",
+                                    buttons: [
+                                        {
+                                            text: "确认",
+                                            handler: () => {
+                                                this.index++
+                                            }
+                                        }
+                                    ],
+                                    cssClass: "outsuccse only"
+                                }
+                                let addbuton = {
+                                    text: null
+                                }
+                                let addInput = []
+                                this._alert._alertSmlpe(params, addbuton, addInput, data => {
+                                    console.log(data)
+                                })
+                                this.sample.sampleState = 1
+                            } else {
+                                let params = {
+                                    title: "提示",
+                                    subTitle: "扦样失败,请重新点击打印条形码",
+                                    buttons: [
+                                        {
+                                            text: "确认",
+                                            handler: () => {
+                                            }
+                                        }
+                                    ],
+                                    cssClass: "outsuccse only"
+                                }
+                                let addbuton = {
+                                    text: null
+                                }
+                                let addInput = []
+                                this._alert._alertSmlpe(params, addbuton, addInput, data => {
+                                    console.log(data)
+                                })
+
+                            }
+                        })
+                    });
+                }
+            })
+        }, err => {
+            this.nativeService.hideLoading();
         })
+
     }
     print(ble_mac) {
         console.log(ble_mac)
@@ -384,20 +410,16 @@ export class detaildPage {
         })
     }
     _ble(callback) {
-        let data = {
-            "id": `${this.sample.id}`
-        }
-        this.Http.post("grain/sample/get", data).subscribe(res => {
-            var urlpng = res.json()["samplePic"]
-            console.log(urlpng,res)
-            var url = res.json()["sampleNo"]
-            console.log(url)
-            cordova.plugins.barcode.printBarCode(url, "300", "0", "50", "180", res => {
-                // this.Httpupdate()
+
+        cordova.plugins.barcode.printBarCode(this.code, "300", "0", "50", "180", res => {
+            // this.Httpupdate()
+            if (!(this.index > 1)) {
                 callback()
-            }, err => {
-                console.log(err)
-            })
+
+            }
+
+        }, err => {
+            console.log(err)
         })
 
 
@@ -444,32 +466,79 @@ export class detaildPage {
         //         })
 
     }
+    // 差数
+    difference() {
+        var correctioFactor = this.Worknew.value.correctioFactor || 1
+        var deductVolume = this.Worknew.value.deductVolume || 0
+        var length = this.Worknew.value.length || 1
+        var wide = this.Worknew.value.wide || 1
+        var high = this.Worknew.value.high || 1
+        this.Work.difference = Math.round(this.sample.amount * 1000 - (((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1)))
+        this.slip()
+    }
+    //差率
+    slip() {
+        var correctioFactor = this.Worknew.value.correctioFactor || 1
+        var deductVolume = this.Worknew.value.deductVolume || 0
+        var length = this.Worknew.value.length || 1
+        var wide = this.Worknew.value.wide || 1
+        var high = this.Worknew.value.high || 1
+        this.Work.slip = ((this.sample.amount * 1000 - (((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1))) / (this.sample.amount * 1000) * 100).toFixed(1)
+        console.log(this.Work.slip)
+    }
+    // 合计
+    loss() {
+        this.Work.loss = this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1
+        var correctioFactor = this.Worknew.value.correctioFactor || 1
+        var deductVolume = this.Worknew.value.deductVolume || 0
+        var length = this.Worknew.value.length || 1
+        var wide = this.Worknew.value.wide || 1
+        var high = this.Worknew.value.high || 1
+        this.Work.checkNum = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1))
+        this.difference()
+    }
     // 测量计算数
     unQuality() {
-        this.Work.unQuality = Math.round(this.Work.realVolume * this.Work.aveDensity)
+        var correctioFactor = this.Worknew.value.correctioFactor || 1
+        var deductVolume = this.Worknew.value.deductVolume || 0
+        var length = this.Worknew.value.length || 1
+        var wide = this.Worknew.value.wide || 1
+        var high = this.Worknew.value.high || 1
+        this.Work.unQuality = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor))
+        this.loss()
     }
-    mianji(e) {
+    mianji() {
         var length = this.Worknew.value.length || 1
         var wide = this.Worknew.value.wide || 1
         var high = this.Worknew.value.high || 1
         this.Work.measuredVolume = (length * wide * high).toFixed(1);
+        this.sttj()
     }
     //粮堆实体体积（m3）
-    sttj(e) {
+    sttj() {
         var deductVolume = this.Worknew.value.deductVolume || 0
         this.Work.realVolume = (this.Work.measuredVolume - deductVolume).toFixed(1)
+        this.Work.checkNum = Math.round(this.Worknew.value.unQuality * 1 + this.Worknew.value.loss * 1)
+        this.unQuality()
+
+
+    }
+    // 粮食容重
+    realCapacity() {
+        this.Work.realCapacity = this.detaWork.value.realCapacity
     }
     // //容重
     // rongzhong(e) {
     //     this.Worknew.value.realCapacity = this.Worknew.value.realCapacity
     // }
     //粮堆平均密度（kg/m）
-    ldpjmd(e) {
+    ldpjmd() {
         var correctioFactor = this.Worknew.value.correctioFactor || 1
         this.Work.aveDensity = (this.Worknew.value.realCapacity * correctioFactor).toFixed(1)
+        this.loss()
     }
     // 账实是否相符
-    slip() {
+    isMatch() {
         var that = this
         const parpam = {
             title: "账实是否相符",
@@ -489,6 +558,11 @@ export class detaildPage {
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.Worknew.value.isMatch = data
             that.Work.isMatch = data
+            if (data == "是") {
+                this.isresult = true
+            } else {
+                this.isresult = false
+            }
         })
     }
     // 仓房类型
@@ -525,7 +599,7 @@ export class detaildPage {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            // that.Worknew.value.barnType = data
+            that.Worknew.value.barnType = data
             // that._barnType = data
             that.Work.barnType = data
         })
@@ -554,6 +628,7 @@ export class detaildPage {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
+            console.log(data)
             that.Worknew.value.qualityGrade = data
             // switch (data) {
             //     case 1:
@@ -595,7 +670,6 @@ export class detaildPage {
             that.Work.putWay = data
         })
     }
-
     // _ble() {
     //     this.BLE.enable();
     //     // this.BLE.showBluetoothSettings()

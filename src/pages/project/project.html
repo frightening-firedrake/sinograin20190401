@@ -22,7 +22,7 @@
 			<ion-select placeholder="被查直属库" [(ngModel)]="Company" interface="popover"  (ngModelChange)="changeVersion(Company)" >
 				<ion-option [value]="list.id" *ngFor="let list of Companyarr;index as i " >{{list.libraryName}}</ion-option>
 			</ion-select>
-			<ion-label class="search_states">筛选
+			<ion-label class="search_state">{{shaixuan}}
 				<ion-icon name="arrow-up"></ion-icon>
 			</ion-label>
 		</ion-item>
@@ -49,14 +49,14 @@
 			<span>状态:</span>
 		</div>
 		<div class="buttons"> 
-			<!--<button ion-button class="active" (click)="select_smaple()">全部</button>-->
+			<button ion-button class="active" (click)="select_smaple()">全部</button>
 			<button ion-button (click)="select_smaple(-1)">未扦样</button>
 			<button ion-button (click)="select_smaple(1)">已扦样</button>
 		</div>
-		<div class="search_screen">
+		<!--<div class="search_screen">
 			<ion-searchbar cancelButtonText="wwww" placeholder="请输入品种进行搜索" [(ngModel)]="myInput"></ion-searchbar>
 			<button ion-button block outline color="secondary"  class="submit" (click)="secondary()" >完成</button>
-		</div>
+		</div>-->
 		
 	</div>
 <ion-content>

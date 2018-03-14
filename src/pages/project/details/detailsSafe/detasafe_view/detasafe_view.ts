@@ -14,7 +14,9 @@ import { dateSafeServe } from '../detasafeSever'
 export class detasafeViewPage {
     imgdatalist = []
     imgdata = []
+    imageNum;
     @Input() num;
+    @Input() default
     @Output() key = new EventEmitter()
     constructor(
         public Alert: ActionSheetController,
@@ -24,7 +26,7 @@ export class detasafeViewPage {
         public Http: HttpService,
         // private transfer: FileTransfer,
     ) {
-
+        
     }
     lists = {
         label: "问题",
@@ -33,6 +35,7 @@ export class detasafeViewPage {
     even(event) {
         this.key.emit(event)
     }
+
     GetImgUrl(Url, callback) {
         let data = {
             pictureFile: Url
@@ -54,12 +57,12 @@ export class detasafeViewPage {
                     text: "删除",
                     handler: () => {
                         var that = this
-                        console.log(that.imgdatalist)
+                        console.log(that.imgdatalist,that.num,that.default)
                         this.imgdatalist = this.imgdatalist.filter(function (i, v) {
-                            that.dateser.deleteImg(index, that.num)
-                            return index != v
+                            that.dateser.deleteImg(index, that.num-that.default)
+                            return v != index
                         })
-                        console.log(this.imgdatalist)
+                        // console.log(this.imgdatalist)
                     }
                 }
             ]
@@ -67,6 +70,7 @@ export class detasafeViewPage {
         AlertSheetcancl.present();
     }
     getphone() {
+        console.log(this.num-this.default)
         let AlertSheet = this.Alert.create({
             title: null,
             buttons: [
@@ -83,6 +87,7 @@ export class detasafeViewPage {
                             targetWidth: 800,
                             sourceType: 1,
                         }).then((imageData) => {
+                            
                             // imageData是图片
                             var that = this
                             // this.GetImgUrl(imageData, data => {
@@ -98,7 +103,7 @@ export class detasafeViewPage {
                                 that.GetImgUrl(base64, (data) => {
                                     that.imgdatalist.push(imageData)
                                     that.imgdata.push(data)
-                                    that.dateser.setImg(that.imgdata, that.num)
+                                    that.dateser.setImg(that.imgdata, that.num-that.default)
                                 })
                             }
                         }, (err) => {
@@ -136,7 +141,7 @@ export class detasafeViewPage {
                                 that.GetImgUrl(base64, (data) => {
                                     that.imgdatalist.push(imageData)
                                     that.imgdata.push(data)
-                                    that.dateser.setImg(that.imgdata, that.num)
+                                    that.dateser.setImg(that.imgdata, that.num-that.default)
                                 })
                             }
                             // this.GetImgUrl(imageData, data => {

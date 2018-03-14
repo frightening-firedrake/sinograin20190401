@@ -67,7 +67,7 @@ public class barcode extends CordovaPlugin {
         try{
         	// if(HPRTPrinterHelper.IsOpened()){
 
-	            HPRTPrinterHelper.printAreaSize("0","200","200",h,"1");
+	            HPRTPrinterHelper.printAreaSize("0","200","200",h,"4");
 	            // HPRTPrinterHelper.Expanded("0","0",getPictureString(img_url));
 	            // HPRTPrinterHelper.Form();
 	            // HPRTPrinterHelper.Print();

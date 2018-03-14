@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams, NavController } from 'ionic-angular';
 import { HttpService } from '../../../../providers/httpService'
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -8,6 +8,7 @@ import { _alertBomb } from '../../../common/_alert'
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { dateSafeServe } from './detasafeSever'
 import { APP_SERVE_URL } from "../../../../providers/config";
+import { ImageViewerController } from "ionic-img-viewer";
 
 
 @Component({
@@ -21,13 +22,17 @@ export class detaSafePage {
     detaSafeForm: FormGroup;
     data;
     _unsolvedimg
+    num
     _solveimg
+    addrequ = false
     ImgJson = []
     _state = true;
     _unsolved: any = []
     _solve: any = []
     problem = "all"
+    isrequire = false
     report_img = [];
+    submitName
     // 报告
     // 1是解决，2是未解决
     report: any
@@ -37,10 +42,13 @@ export class detaSafePage {
         public Home: HomeService,
         public dateser: dateSafeServe,
         public _alert: _alertBomb,
-        public Http: HttpService
+        public Http: HttpService,
+        public navCtrl: NavController,
+        public imageViewerCtrl: ImageViewerController
     ) {
         this.data = this.params.get("params")
         console.log(this.data)
+        this.dateser.setImg(this.ImgJson, 0)
         this.detaSafeForm = FormBuilder.group({
 
         })
@@ -48,13 +56,27 @@ export class detaSafePage {
             params: `{"sampleId":${this.data.id}}`
         }
         this.Http.post("grain/safetyReport/data", data).subscribe(res => {
-            console.log(res.json()["rows"][0])
+            this.num = res.json()["rows"].length
+            if (this.num) {
+                this.submitName = "添加问题"
+            } else {
+                this.submitName = "提交"
+                this.addrequ = true
+
+            }
+            console.log(res.json()["rows"])
             if (res.json()["rows"].length) {
                 this._state = true
                 this.report = res.json()["rows"]
-                this.report[0].images.split(",").forEach((i, v) => {
-                    this.report_img.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
-                })
+                for (var i = 0; i < this.report.length; i++) {
+                    this.report[i].images = this.report[i].images.split(",")
+
+                    this.report[i].images.forEach((index, v) => {
+                        console.log(this.report[i].images[v])
+                        this.report[i].images[v] = `${APP_SERVE_URL}grain/upload/picture/${index}`
+                    })
+                }
+                console.log(this.report)
             } else {
                 this._state = false
             }
@@ -81,14 +103,14 @@ export class detaSafePage {
         this.lists.pop()
         this.ImgJson.pop()
     }
-     solve(e) {
+    solve(e) {
         // console.log(e)
         let data = {
             "isDeal": 1,
             "id": e.id
         }
         let id = {
-              params: `{"sampleId":${this.data.id}}`
+            params: `{"sampleId":${this.data.id}}`
         }
         this.Http.post("grain/safetyReport/edit", data).subscribe(res => {
             this.report_img = []
@@ -96,35 +118,92 @@ export class detaSafePage {
             this.Http.post("/grain/safetyReport/data", id).subscribe(res => {
                 this._state = true
                 this.report = res.json()["rows"]
-                this.report[0].images.split(",").forEach((i, v) => {
-                    this.report_img.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
-                })
+                for (var i = 0; i < this.report.length; i++) {
+                    this.report[i].images = this.report[i].images.split(",")
+                    this.report[i].images.forEach((index, v) => {
+                        console.log(this.report[i].images[v])
+                        this.report[i].images[v] = `${APP_SERVE_URL}grain/upload/picture/${index}`
+                    })
+                }
 
             })
         })
     }
+    // 查看图片
+    lookPicture(img) {
+        console.log(img)
+        const viewer = this.imageViewerCtrl.create(img)
+        viewer.present();
+    }
     onSubmit(e) {
-        console.log(e)
-        // console.log(this.ImgJson)
-        this.dateser.getImg().subscribe(res => {
-            res.forEach((i, v) => {
-                console.log(i.Imgarr.join())
-                var imgstr = i.Imgarr.join()
-                console.log(succc)
-                var succc = { "problem": this.keyVule[i.id - 1], "images": imgstr, "sampleId": this.data.id }
-                console.log(succc)
-                this.ImgJson.push(JSON.stringify(succc))
-                console.log(111)
+        if (!this.addrequ) {
+            this.addrequ = true
+            this.submitName = "提交"
+        } else {
+            console.log(e)
+            // console.log(this.ImgJson)
+            this.dateser.getImg().subscribe(res => {
+                res.forEach((i, v) => {
+                    console.log(i.Imgarr.join())
+                    var imgstr = i.Imgarr.join()
+                    console.log(222222222222222222222222222222222222222222222222)
+                    var succc = { "problem": this.keyVule[i.id - 1], "images": imgstr, "sampleId": this.data.id }
+                    this.ImgJson.push(JSON.stringify(succc))
+                    console.log(11111111111111111111111111111111111)
+                    console.log(this.ImgJson)
+                });
                 let data = {
                     params: `[${this.ImgJson}]`
                 }
                 console.log(this.ImgJson, data)
-                this.Http.post("grain/safetyReport/save", data).subscribe(res => {
-                    console.log(res)
-                })
-            });
+                if (this.ImgJson.length) {
+                    this.Http.post("grain/safetyReport/save", data).subscribe(res => {
+                        this.isrequire = true
+                        var parpam = {
+                            title: "提示",
+                            subTitle: "问题已提交",
+                            buttons: [
+                                {
+                                    text: "确认",
+                                    handler: () => {
+                                        this.isrequire = false
+                                        this.navCtrl.pop()
+                                    }
+                                }
+                            ],
+                            cssClass: "outsuccse only"
+                        }
+                        var addbuton = {
+                            text: null
+                        }
+                        var addInput = []
+                        this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
+                    })
+                } else {
+                    this.isrequire = true
+                    var parpam = {
+                        title: "提示",
+                        subTitle: "请填写问题",
+                        buttons: [
+                            {
+                                text: "确认",
+                                handler: () => {
+                                    this.isrequire = false
+                                    // this.navCtrl.pop()
+                                }
+                            }
+                        ],
+                        cssClass: "outsuccse only"
+                    }
+                    var addbuton = {
+                        text: null
+                    }
+                    var addInput = []
+                    this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
+                }
+            })
+        }
 
-        })
 
         // console.log(this.keyVule)
 
@@ -137,13 +216,19 @@ export class detaSafePage {
                 this._unsolved = this.report.filter((i, v) => {
                     return i.isDeal == -1
                 })
-                if (this._unsolved.length) {
-                    this._unsolved[0].images.split(",").forEach((i, v) => {
-                        this._unsolvedimg.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
-                    })
-                }
+                // if (this._unsolved.length) {
+                //     console.log(this._unsolved)                    
+                //     for (var i = 0; i < this._unsolved.length; i++) {
+                //         this._unsolved[i].images = this._unsolved[i].images.split(",")
 
-                console.log(this._unsolvedimg)
+                //         this._unsolved[i].images.forEach((index, v) => {
+                //             console.log(this._unsolved[i].images[v])
+                //             this._unsolved[i].images[v] = `${APP_SERVE_URL}grain/upload/picture/${index}`
+                //         })
+                //     }
+                // }
+
+                console.log(this._unsolved)
                 break;
             case "solve":
                 this._solveimg = []
@@ -151,11 +236,18 @@ export class detaSafePage {
                 this._solve = this.report.filter((i, v) => {
                     return i.isDeal == 1
                 })
-                if (this._solve.length) {
-                    this._solve[0].images.split(",").forEach((i, v) => {
-                        this._solveimg.push(`${APP_SERVE_URL}grain/upload/picture/${i}`)
-                    })
-                }
+            // if (this._solve.length) {
+            //     console.log(this._solve)
+            //     for (var i = 0; i < this._solve.length; i++) {
+            //         this._solve[i].images = this._solve[i].images.split(",")
+
+            //         this._solve[i].images.forEach((index, v) => {
+            //             console.log(this._solve[i].images[v])
+            //             this._solve[i].images[v] = `${APP_SERVE_URL}grain/upload/picture/${index}`
+            //         })
+            //     }
+            //      console.log(this._solve)
+            // }
 
 
         }

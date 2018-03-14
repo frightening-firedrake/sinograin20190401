@@ -1,9 +1,9 @@
-import { Component,enableProdMode } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { Component, enableProdMode } from '@angular/core';
+import { NavParams, NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { HttpService } from '../../../../providers/httpService'
 import { _alertBomb } from '../../../common/_alert'
-// enableProdMode();
+enableProdMode();
 @Component({
     selector: "detailsWork",
     templateUrl: "./detailsWork.html"
@@ -16,12 +16,12 @@ export class detailsWorkPage {
     private _barnType;
     private plibraryName;
     private Work: any = {
-        isMatch: '',//账实是否相符
+        isMatch: "是",//账实是否相符
 
         realCheckedTime: "",//实际查库日
 
-        qualityGrade: "",//质量等级,
-        putWay: "",//入仓方式
+        qualityGrade: " ",//质量等级,
+        putWay: " ",//入仓方式
         storageCapacity: "",//入库容重
         storageWater: "",//入库水分
         storageImpurity: "",//入库杂质
@@ -37,13 +37,13 @@ export class detailsWorkPage {
         wide: "",//宽
         high: "",//高
         unQuality: "",//测量计算数
-        lossWater: "",//水分减量
-        lossNature: "",//自然损耗
-        loss: "",//合计
+        lossWater: "0",//水分减量
+        lossNature: "0",//自然损耗
+        loss: 0,//合计
         checkNum: "",//检查计算数
         difference: "",//差数
         slip: "",//差率
-        result: "",//不符原因
+        result: "无",//不符原因
 
         barnType: "",//仓房类型
     };;
@@ -51,7 +51,9 @@ export class detailsWorkPage {
     dateTime;
     _qualityGrade;
     _unQuality;
-    sampleId
+    sampleId;
+    _amount;
+    title;
     Workfrom: any = {
         isMatch: '',//账实是否相符
 
@@ -81,9 +83,10 @@ export class detailsWorkPage {
         difference: "",//差数
         slip: "",//差率
         result: "",//不符原因
-
+        remark: "",
         barnType: "",//仓房类型
     };
+    isresult = true;
     _isfinsh = false
     private addButton: any = {
         text: "确认"
@@ -92,11 +95,14 @@ export class detailsWorkPage {
         public parpam: NavParams,
         public FormBuilder: FormBuilder,
         public Http: HttpService,
-        public _alert: _alertBomb
+        public _alert: _alertBomb,
+        public navctrl: NavController
     ) {
         this.dateTime = new Date().toISOString();
         console.log(this.parpam.get("params"))
         this.data = this.parpam.get("params")
+        this._amount = this.data.amount * 1000
+
         // 工作底稿
         this.sampleId = {
             params: `{"sampleId":"${this.data.id}"}`
@@ -106,17 +112,19 @@ export class detailsWorkPage {
             let work = res.json()
             // console.log(work["rows"].length)
             if (work["rows"].length) {
+                this.title = "修改工作底稿"
+                // console.log(this.title)
                 this.Work = work["rows"][0]
                 this.callback()
                 // this._isfinsh = true
             } else {
+                this.title = "创建工作底稿"
             }
         })
         var DateY = new Date().getFullYear()
         var DateM = new Date().getMonth() + 1
         var DateD = new Date().getDate()
         // this.dateTime = `${DateY}-${DateM}-${DateD}`
-        this.data.amount = this.data.amount * 1000
         let library = {
             "id": this.data.pLibraryId
         }
@@ -131,22 +139,35 @@ export class detailsWorkPage {
     callback() {
 
     }
-    // 测量计算数
-
-    unQuality() {
-        this._unQuality = Math.round(this.detaWork.value.realVolume * this.detaWork.value.aveDensity)
-    }
-    // tiji(){
-    //     return this.detaWork.value.realVolume * this.detaWork.value.aveDensity
-    // }
     ionViewDidEnter() {
+        // 工作底稿
+        this.sampleId = {
+            params: `{"sampleId":"${this.data.id}"}`
+        }
+        if (this.Work.length) {
+            this.Http.post("/grain/manuscript/data", this.sampleId).subscribe(res => {
+                console.log(res.json())
+                let work = res.json()
+                // console.log(work["rows"].length)
+                if (work["rows"].length) {
+                    this.title = "修改工作底稿"
+                    // console.log(this.title)
+                    this.Work = work["rows"][0]
+                    this.callback()
+                    // this._isfinsh = true
+                } else {
+                    this.title = "创建工作底稿"
+                }
+            })
+        }
+
         this.detaWork = this.FormBuilder.group({
-            isMatch: [this.Work.isMatch, Validators.compose([Validators.required])],
+            isMatch: [this.Work.isMatch || "是", Validators.compose([Validators.required])],
             realCheckedTime: [this.Work.realCheckedTime, Validators.compose([Validators.required])],
-            qualityGrade: [this.Work.qualityGrade, Validators.compose([Validators.required])],
-            putWay: [this.Work.putWay, Validators.compose([Validators.required])],
+            qualityGrade: [this.Work.qualityGrade || " ", Validators.compose([Validators.required])],
+            putWay: [this.Work.putWay || " ", Validators.compose([Validators.required])],
             storageCapacity: [this.Work.storageCapacity, Validators.compose([Validators.required])],
-            storageWater: [this.Work.storageWater, Validators.compose([Validators.required])],
+            storageWater: [this.Work.storageWater || "0", Validators.compose([Validators.required])],
             storageImpurity: [this.Work.storageImpurity, Validators.compose([Validators.required])],
             realCapacity: [this.Work.realCapacity, Validators.compose([Validators.required])],
             realWater: [this.Work.realWater, Validators.compose([Validators.required])],
@@ -160,18 +181,18 @@ export class detailsWorkPage {
             wide: [this.Work.wide, Validators.compose([Validators.required])],
             high: [this.Work.high, Validators.compose([Validators.required])],
             unQuality: [this.Work.unQuality, Validators.compose([Validators.required])],
-            lossWater: [this.Work.lossWater, Validators.compose([Validators.required])],
-            lossNature: [this.Work.lossNature, Validators.compose([Validators.required])],
-            loss: [this.Work.loss, Validators.compose([Validators.required])],
+            lossWater: [this.Work.lossWater || 0, Validators.compose([Validators.required])],
+            lossNature: [this.Work.lossNature || 0, Validators.compose([Validators.required])],
+            loss: [this.Work.loss || 0, Validators.compose([Validators.required])],
             checkNum: [this.Work.checkNum, Validators.compose([Validators.required])],
             difference: [this.Work.difference, Validators.compose([Validators.required])],
             slip: [this.Work.slip, Validators.compose([Validators.required])],
-            result: [this.Work.result, Validators.compose([Validators.required])],
-
-            barnType: [this.Work.barnType, Validators.compose([Validators.required])],
+            result: [this.Work.result || "无", Validators.compose([Validators.required])],
+            remark: [this.Work.remark, Validators.compose([Validators.required])],
+            barnType: [this.Work.barnType || " ", Validators.compose([Validators.required])],
         })
         // this.Workfrom.myDate = this.detaWork.controls["myDate"]
-
+        this.Workfrom.remark = this.detaWork.controls["remark"]
         this.Workfrom.isMatch = this.detaWork.controls["isMatch"]
         this.Workfrom.realCheckedTime = this.detaWork.controls["realCheckedTime"],
             this.Workfrom.qualityGrade = this.detaWork.controls["qualityGrade"],
@@ -208,52 +229,89 @@ export class detailsWorkPage {
         this._isfinsh = true
     }
     onSubmit(e) {
+        e.value.sampleId = this.data.id
         let data = {
-            params: JSON.stringify(e.value)
+            params: JSON.stringify(e.value),
+            type: 1
         }
-        this.Http.post("grain/manuscript/saveManMobile", data).subscribe(res => {
-            console.log(res)
+        this.Http.post("grain/manuscript/saveOrEditMobile", data).subscribe(res => {
+            this.navctrl.pop()
         })
         console.log(e)
     }
-    // onKey(e) {
-
-    //     // console.log(this.detaWork.value.slip>-3&&this.detaWork.value.slip<3)
-    //     if (this.detaWork.value.slip > -3 && this.detaWork.value.slip < 3) {
-    //         this._slip = "符合"
-    //     } else {
-    //         this._slip = "不符合"
-    //     }
-    // }
-    mianji(e) {
+    // 差数
+    difference() {
+        var correctioFactor = this.detaWork.value.correctioFactor || 1
+        var deductVolume = this.detaWork.value.deductVolume || 0
         var length = this.detaWork.value.length || 1
         var wide = this.detaWork.value.wide || 1
         var high = this.detaWork.value.high || 1
-
-        this.detaWork.value.measuredVolume = (length * wide * high).toFixed(1);
+        this.Work.difference = Math.round(this.data.amount * 1000 - (((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor) * 1 + (this.detaWork.value.lossWater * 1 + this.detaWork.value.lossNature * 1)))
+        this.slip()
+    }
+    //差率
+    slip() {
+        var correctioFactor = this.detaWork.value.correctioFactor || 1
+        var deductVolume = this.detaWork.value.deductVolume || 0
+        var length = this.detaWork.value.length || 1
+        var wide = this.detaWork.value.wide || 1
+        var high = this.detaWork.value.high || 1
+        this.Work.slip = ((this.data.amount * 1000 - (((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor) * 1 + (this.detaWork.value.lossWater * 1 + this.detaWork.value.lossNature * 1))) / (this.data.amount * 1000) * 100).toFixed(1)
+        console.log(this.Work.slip)
+    }
+    // 合计
+    loss() {
+        this.Work.loss = this.detaWork.value.lossWater * 1 + this.detaWork.value.lossNature * 1
+        var correctioFactor = this.detaWork.value.correctioFactor || 1
+        var deductVolume = this.detaWork.value.deductVolume || 0
+        var length = this.detaWork.value.length || 1
+        var wide = this.detaWork.value.wide || 1
+        var high = this.detaWork.value.high || 1
+        this.Work.checkNum = Math.round(((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor) * 1 + (this.detaWork.value.lossWater * 1 + this.detaWork.value.lossNature * 1))
+        this.difference()
+    }
+    // 测量计算数
+    unQuality() {
+        var correctioFactor = this.detaWork.value.correctioFactor || 1
+        var deductVolume = this.detaWork.value.deductVolume || 0
+        var length = this.detaWork.value.length || 1
+        var wide = this.detaWork.value.wide || 1
+        var high = this.detaWork.value.high || 1
+        this.Work.unQuality = Math.round(((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor))
+        this.loss()
+    }
+    mianji() {
+        var length = this.detaWork.value.length || 1
+        var wide = this.detaWork.value.wide || 1
+        var high = this.detaWork.value.high || 1
+        this.Work.measuredVolume = (length * wide * high).toFixed(1);
+        this.sttj()
     }
     //粮堆实体体积（m3）
-    sttj(e) {
+    sttj() {
         var deductVolume = this.detaWork.value.deductVolume || 0
-        this.detaWork.value.realVolume = (this.detaWork.value.measuredVolume - deductVolume).toFixed(1)
-    }
-    //容重
-    rongzhong(e) {
-        this.detaWork.value.realCapacity = this.detaWork.value.realCapacity
-    }
-    //粮堆平均密度（kg/m）
-    ldpjmd(e) {
-        var correctioFactor = this.detaWork.value.correctioFactor || 1
-        this.detaWork.value.aveDensity = (this.detaWork.value.realCapacity * correctioFactor).toFixed(1)
-    }
-    // bgzrsh(e) {
-    //     var date = new Date();
-    //     var newDate = date.getFullYear();
-    //     this.detaWork.value.lossNature = this.detaWork.value.grainQuality * 0.002 * (newDate - this.detaWork.value.gainTime)
+        this.Work.realVolume = (this.Work.measuredVolume - deductVolume).toFixed(1)
+        this.Work.checkNum = Math.round(this.detaWork.value.unQuality * 1 + this.detaWork.value.loss * 1)
+        this.unQuality()
 
+
+    }
+    // 粮食容重
+    realCapacity() {
+        this.Work.realCapacity = this.detaWork.value.realCapacity
+    }
+    // //容重
+    // rongzhong(e) {
+    //     this.detaWork.value.realCapacity = this.detaWork.value.realCapacity
     // }
+    //粮堆平均密度（kg/m）
+    ldpjmd() {
+        var correctioFactor = this.detaWork.value.correctioFactor || 1
+        this.Work.aveDensity = (this.detaWork.value.realCapacity * correctioFactor).toFixed(1)
+        this.loss()
+    }
     // 账实是否相符
-    slip() {
+    isMatch() {
         var that = this
         const parpam = {
             title: "账实是否相符",
@@ -273,6 +331,12 @@ export class detailsWorkPage {
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.detaWork.value.isMatch = data
             that.Work.isMatch = data
+            console.log(data)
+            if (data == "是") {
+                this.isresult = true
+            } else {
+                this.isresult = false
+            }
         })
     }
     // 仓房类型
@@ -285,27 +349,27 @@ export class detailsWorkPage {
             {
                 type: 'radio',
                 label: '平房仓',
-                value: '1'
+                value: '平房仓'
             },
             {
                 type: 'radio',
                 label: '高大平房仓',
-                value: '2'
+                value: '高大平房仓'
             },
             {
                 type: 'radio',
                 label: '苏式仓',
-                value: '3'
+                value: '苏式仓'
             },
             {
                 type: 'radio',
                 label: '窑洞仓',
-                value: '4'
+                value: '窑洞仓'
             },
             {
                 type: 'radio',
                 label: '地下仓',
-                value: '5'
+                value: '地下仓'
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {

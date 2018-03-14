@@ -145,11 +145,11 @@ export class HttpService {
       msg = '请求失败，请连接网络';
     } else {
       if (status === 0) {
-        msg = '请求失败，请求响应出错';
+        msg = '请求失败,错误代码:0';
       } else if (status === 404) {
-        msg = '请求失败，未找到请求地址';
+        msg = '请求失败,错误代码:404';
       } else if (status === 500) {
-        msg = '请求失败，服务器出错，请稍后再试';
+        msg = '请求失败,错误代码:500';
       }
     }
     this.alertCtrl.create({

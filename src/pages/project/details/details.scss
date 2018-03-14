@@ -157,15 +157,15 @@ derails {
 										padding-left: 0;
 										ion-input {
 											height: 100%;
-											position:relative;
+											position: relative;
 											touch-action: manipulation;
 											input {
 												height: 100%;
 												margin: 0;
-												padding-left: 50%;
+												padding-left: 20%;
 											}
-											.input-cover{
-												display:none;
+											.input-cover {
+												display: none;
 											}
 										}
 									}
@@ -211,7 +211,7 @@ derails {
 								.input-wrapper {
 									justify-content: space-between;
 									ion-input {
-										position:relative;
+										position: relative;
 										height: 100%;
 										touch-action: manipulation;
 										input {
@@ -222,9 +222,9 @@ derails {
 											text-align: right;
 											padding-left: 20%;
 										}
-										.input-cover{
-												display:none;
-											}
+										.input-cover {
+											display: none;
+										}
 									}
 									// padding: 0 0.65rem;
 									padding-right: 0;
@@ -303,16 +303,16 @@ derails {
 										// padding-left: 0.15rem;
 										ion-input {
 											height: 100%;
-											position:relative;
+											position: relative;
 											touch-action: manipulation;
 											input {
 												height: 100%;
 												margin: 0;
 												text-align: right;
-												padding-left: 50%;
+												padding-left: 20%;
 											}
-											.input-cover{
-												display:none;
+											.input-cover {
+												display: none;
 											}
 										}
 									}
@@ -433,10 +433,10 @@ derails {
 								&.active {
 									color: #999999;
 									.label {
-										color: #999999 ;
+										color: #999999;
 									}
 									span {
-										color: #999999 ;
+										color: #999999;
 									}
 									p {
 										color: #999999!important;
@@ -499,7 +499,7 @@ derails {
 												height: 1.1rem;
 												margin-left: 0.1rem;
 												vertical-align: text-top;
-												border:1px solid  #38b63a;
+												border: 1px solid #38b63a;
 											}
 										}
 									}
@@ -517,11 +517,14 @@ derails {
 														width: 1.5rem;
 														height: 0.8rem;
 														font-size: 0.3rem;
+														span {
+															color: white !important;
+														}
 														&:disabled {
 															opacity: 1;
 															background-color: #b9b9b9;
 															span {
-																color: white;
+																color: white !important;
 															}
 														}
 													}
@@ -532,7 +535,7 @@ derails {
 								}
 								.textarea_item {
 									position: relative;
-                                    min-height:2.5rem;
+									min-height: 2.5rem;
 									img {
 										position: absolute;
 										width: 1.3rem;
@@ -545,11 +548,11 @@ derails {
 						}
 					}
 					.list {
-                        margin-bottom: 0.2rem;
-                        border-top: 1px solid #dbdbdb;
-                        border-bottom: 1px solid #dbdbdb;
-                        background-color: white;
-                        padding: 0 16px;
+						margin-bottom: 0.2rem;
+						border-top: 1px solid #dbdbdb;
+						border-bottom: 1px solid #dbdbdb;
+						background-color: white;
+						padding: 0 16px;
 						&.problem {
 							.item {
 								// height:auto;
@@ -602,59 +605,58 @@ derails {
 							}
 						}
 						.item {
-                            min-height: 0;
-                            padding: 0;
-                            height: 0.99rem;
-                            line-height: 0.99rem;
-                            font-size: 0.3rem;
-                            color: #999999;
-                            border-bottom: 1px solid #dbdbdb;   
+							min-height: 0;
+							padding: 0;
+							height: 0.99rem;
+							line-height: 0.99rem;
+							font-size: 0.3rem;
+							color: #999999;
+							border-bottom: 1px solid #dbdbdb;
 							.item-inner {
 								.input-wrapper {
-                                   padding: 0 0.65rem;
+									padding: 0 0.65rem;
 									.label {
-                                        margin: 0;
+										margin: 0;
 										color: #000000;
 									}
 									span {
-                                        float: right;
+										float: right;
 										color: #000000;
 									}
 								}
 							}
-                            &:last-child {
-                                border-bottom: none;
-                            }
-                            &.problem_textarea {
-                                height: auto;
-                                .item-inner {
-                                    padding: 0;
-                                    .input-wrapper {
-                                        padding-right: 0;
-                                        .label {
-                                            color: #333333;
-                                            font-size: 0.3rem;
-                                            align-self: flex-start;
-                                            span {
-                                                display: inline-block;
-                                                float: left;
-                                            }
-                                            .textarea_content {
-                                                display: inline-block;
-                                                width: 5.4rem;
-                                                height: auto;
-                                                white-space: normal;
-                                                padding-right: 0.1rem;
-                                                color: #333333;
-                                                font-size: 0.3rem;
-                                                //  padding-bottom:1.5rem;
-                                                vertical-align: text-top;
-                                                
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+							&:last-child {
+								border-bottom: none;
+							}
+							&.problem_textarea {
+								height: auto;
+								.item-inner {
+									padding: 0;
+									.input-wrapper {
+										padding-right: 0;
+										.label {
+											color: #333333;
+											font-size: 0.3rem;
+											align-self: flex-start;
+											span {
+												display: inline-block;
+												float: left;
+											}
+											.textarea_content {
+												display: inline-block;
+												width: 5.4rem;
+												height: auto;
+												white-space: normal;
+												padding-right: 0.1rem;
+												color: #333333;
+												font-size: 0.3rem;
+												//  padding-bottom:1.5rem;
+												vertical-align: text-top;
+											}
+										}
+									}
+								}
+							}
 						}
 					}
 				}
