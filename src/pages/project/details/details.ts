@@ -1,4 +1,4 @@
-import { Component,ChangeDetectorRef  } from '@angular/core';
+import { Component  } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
 import { BLE } from '@ionic-native/ble';
 import { NativeService } from '../../../providers/nativeService';
@@ -8,7 +8,7 @@ import { HttpService } from '../../../providers/httpService'
 import { detailsWorkPage } from './detailsWork/detailsWork'
 import { detaSafePage } from './detailsSafe/detailsSafe'
 import { APP_SERVE_URL } from "../../../providers/config";
-import { ImageViewerController } from "ionic-img-viewer";
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 declare var cordova;
 @Component({
@@ -93,8 +93,7 @@ export class detaildPage {
         public BLE: BLE,
         public navCtrl: NavController,
         private nativeService: NativeService,
-        public imageViewerCtrl: ImageViewerController,
-         public cd: ChangeDetectorRef
+        private photoViewer: PhotoViewer
     ) {
 
         this.dateTime = new Date().toISOString();
@@ -241,9 +240,8 @@ export class detaildPage {
     }
     // 查看图片
     lookPicture(img) {
+        this.photoViewer.show(img,"My title",{share: false})
         console.log(img)
-        const viewer = this.imageViewerCtrl.create(img)
-        viewer.present();
     }
     solve(e) {
         // console.log(e)

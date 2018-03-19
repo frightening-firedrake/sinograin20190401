@@ -8,7 +8,7 @@ import { _alertBomb } from '../../../common/_alert'
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { dateSafeServe } from './detasafeSever'
 import { APP_SERVE_URL } from "../../../../providers/config";
-import { ImageViewerController } from "ionic-img-viewer";
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 
 @Component({
@@ -44,7 +44,7 @@ export class detaSafePage {
         public _alert: _alertBomb,
         public Http: HttpService,
         public navCtrl: NavController,
-        public imageViewerCtrl: ImageViewerController
+        private photoViewer: PhotoViewer
     ) {
         this.data = this.params.get("params")
         console.log(this.data)
@@ -131,9 +131,9 @@ export class detaSafePage {
     }
     // 查看图片
     lookPicture(img) {
-        console.log(img)
-        const viewer = this.imageViewerCtrl.create(img)
-        viewer.present();
+        this.photoViewer.show(img,"My title",{share: false})
+        // console.log(img)
+       
     }
     onSubmit(e) {
         if (!this.addrequ) {

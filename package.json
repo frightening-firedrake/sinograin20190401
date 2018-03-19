@@ -28,6 +28,7 @@
     "@ionic-native/file-transfer": "^4.5.3",
     "@ionic-native/geolocation": "^4.2.1",
     "@ionic-native/in-app-browser": "^4.5.3",
+    "@ionic-native/photo-viewer": "^4.5.3",
     "@ionic-native/splash-screen": "3.12.1",
     "@ionic-native/status-bar": "3.12.1",
     "@ionic-native/toast": "^3.10.2",
@@ -89,7 +90,8 @@
       "cordova-plugin-ble-central": {},
       "cordova-plugin-file": {},
       "cordova-plugin-app-version": {},
-      "com.liang.barcode": {}
+      "com.liang.barcode": {},
+      "com-sarriaroman-photoviewer": {}
     }
   }
 }

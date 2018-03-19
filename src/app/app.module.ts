@@ -1,10 +1,10 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler, Platform  } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, Platform } from 'ionic-angular';
 import { HttpModule } from "@angular/http";
 import { Toast } from '@ionic-native/toast';
 import { Geolocation } from '@ionic-native/geolocation';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner'; 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,6 +25,7 @@ import { StorageService } from '../providers/locationstorageService';
 import { Utils } from '../providers/Utils';
 
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -36,7 +37,7 @@ import { Utils } from '../providers/Utils';
       backButtonText: " ",
       backButtonIcon: "arrow-back",
       tabsHideOnSubPages: 'true',
-       iconMode: 'ios',
+      iconMode: 'ios',
     }, linkConfig),
     IonicStorageModule.forRoot({
       name: 'webapp',
@@ -56,7 +57,7 @@ import { Utils } from '../providers/Utils';
     SplashScreen,
     StorageService,
     GlobalData,
-    HttpService, 
+    HttpService,
     NativeService,
     Utils,
     Toast,
