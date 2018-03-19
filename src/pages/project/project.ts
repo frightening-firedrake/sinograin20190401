@@ -1,13 +1,12 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { BLE } from '@ionic-native/ble';
-
-import { HomeService } from '../home/home.serve';
 import { HttpService } from '../../providers/httpService'
 
 import { detaSafePage } from './details/detailsSafe/detailsSafe'
 import { detailsWorkPage } from './details/detailsWork/detailsWork'
 import { detaildPage } from './details/details'
+import { Samplelist } from './sampletable/samplelist'
 
 declare var $;
 
@@ -30,12 +29,12 @@ export class ProjectPage {
     // "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
   ]
   gendrslist = [];
-  constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService, public BLE: BLE, public cd: ChangeDetectorRef) {
+  constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService) {
 
     this.gendersNav = this.parpam.get("num")
     console.log(this.gendersNav)
     if(this.gendersNav == "4"){
-      this.titleName = "扦样列表"
+      this.titleName = "扦样登记列表"
       console.log(this.titleName)
     }else if(this.gendersNav == "3"){
       this.titleName = "监督检查"
@@ -78,13 +77,14 @@ export class ProjectPage {
     })
   }
   getlist(listId) {
+    
     this.listId = listId
     let data = {
-      params: `{"libraryId":${listId},"sampleState":${this._select_smaple},"regState":2}`
+      params: `{"libraryId":${listId},"regState":2}`
     }
     this.genders = listId
-    this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
-      console.log(res)
+    this.Http.post("grain/register/data", data).subscribe(res => {
+      console.log(res.json())
       // console.log(res.json(),"color:blue")
       this.gendrslist = res.json()["rows"]
     })
@@ -139,7 +139,7 @@ export class ProjectPage {
     let data;
     if (!this.myInput) {
       data = {
-        params: `{"libraryId":${this.genders},"sampleState":${this._select_smaple},"regState":2}`
+        params: `{"libraryId":${this.genders},"regState":2}`
       }
     } else {
       data = {
@@ -147,33 +147,15 @@ export class ProjectPage {
         // params: '{"libId":'+this.genders+',"sampleState":' + this._select_smaple+',"sort":'+this./+'}'
       }
     }
-    this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
+    this.Http.post("grain/register/data", data).subscribe(res => {
       console.log(res)
       // console.log(res.json(),"color:blue")
       this.gendrslist = res.json()["rows"]
     })
   }
-  // 不同点击，改变页面
+  // 进入列表页
   setNavPush(key: any) {
-
-    switch (this.gendersNav) {
-      case 3:
-        this.navCtrl.push(detaSafePage, {
-          "params": key,
-          "newpage": this.gendersNav
-        })
-        break;
-      case 2:
-        this.navCtrl.push(detailsWorkPage, {
-          "params": key,
-          "newpage": this.gendersNav
-        })
-        break;
-      default:
-        this.navCtrl.push(detaildPage, {
-          "json": key
-        })
-    }
+    this.navCtrl.push(Samplelist,{"num":this.gendersNav,"newpage":key})
   }
   // 下拉刷新
   doRefresh(refresher) {
@@ -183,12 +165,12 @@ export class ProjectPage {
       refresher.complete();
     }, 2000);
   }
-  // 上啦加载
-  doInfinite(infiniteScroll) {
-    {
-      setTimeout(() => {
-        infiniteScroll.complete();
-      }, 5000);
-    }
-  }
+  // // 上啦加载
+  // doInfinite(infiniteScroll) {
+  //   {
+  //     setTimeout(() => {
+  //       infiniteScroll.complete();
+  //     }, 5000);
+  //   }
+  // }
 }

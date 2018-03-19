@@ -16,7 +16,8 @@ import { detaildPage } from './details/details'
 import { detailsWorkPage } from './details/detailsWork/detailsWork'
 import { detaSafePage } from './details/detailsSafe/detailsSafe'
 import { detasafeViewPage } from './details/detailsSafe/detasafe_view/detasafe_view'
-import { dateSafeServe } from './details/detailsSafe/detasafeSever'
+import { dateSafeServe } from './details/detailsSafe/detasafeSever';
+import { Samplelist } from './sampletable/samplelist';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 @NgModule({
@@ -29,7 +30,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
         detaildPage,
         detailsWorkPage,
         detaSafePage,
-        detasafeViewPage
+        detasafeViewPage,
+        Samplelist
     ],
     imports: [
         CommonModule,
@@ -45,7 +47,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
         detaildPage,
         detailsWorkPage,
         detaSafePage,
-        detasafeViewPage
+        detasafeViewPage,
+        Samplelist
     ],
      providers:[
         HomeService,
