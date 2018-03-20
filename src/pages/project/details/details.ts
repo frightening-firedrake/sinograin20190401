@@ -276,7 +276,7 @@ export class detaildPage {
             params: JSON.stringify(e.value),
             type: 2
         }
-        this.Http.post("grain/manuscript/edit", data).subscribe(res => {
+        this.Http.post("grain/manuscript/saveOrEditMobile", data).subscribe(res => {
             console.log(res)
         })
         console.log(e)

@@ -3,7 +3,7 @@ import { NavParams, NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { HttpService } from '../../../../providers/httpService'
 import { _alertBomb } from '../../../common/_alert'
-// enableProdMode();
+enableProdMode();
 @Component({
     selector: "detailsWork",
     templateUrl: "./detailsWork.html"

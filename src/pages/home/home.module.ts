@@ -6,17 +6,19 @@ import { CommonsModule } from '../common/common.module';
 import { HomePage } from './home';
 import { noticePage } from './notice/notice'
 import { noticeViewPage } from './notice/notice_view/notice_view'
+// import { detaildPage } from '../project/details/details'
 
 import { HomeService } from './home.serve';
 import { _alertBomb } from '../common/_alert'
 import { BLE } from '@ionic-native/ble';
 import { StorageService } from '../../providers/locationstorageService'
 
+
 @NgModule({
     declarations: [
         HomePage,
         noticePage,
-        noticeViewPage
+        noticeViewPage,
     ],
     imports: [
         CommonModule,
@@ -27,7 +29,7 @@ import { StorageService } from '../../providers/locationstorageService'
     entryComponents: [
         HomePage,
         noticePage,
-        noticeViewPage
+        noticeViewPage,
     ],
     providers:[
         HomeService,

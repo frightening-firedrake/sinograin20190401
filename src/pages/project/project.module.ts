@@ -57,6 +57,9 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
         BLE,
         dateSafeServe,
         PhotoViewer
+    ],
+    exports:[
+        detaildPage
     ]
 })
 export class ProjectModule {
