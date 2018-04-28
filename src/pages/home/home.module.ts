@@ -11,6 +11,7 @@ import { noticeViewPage } from './notice/notice_view/notice_view'
 import { HomeService } from './home.serve';
 import { _alertBomb } from '../common/_alert'
 import { BLE } from '@ionic-native/ble';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { StorageService } from '../../providers/locationstorageService'
 
 
@@ -35,7 +36,8 @@ import { StorageService } from '../../providers/locationstorageService'
         HomeService,
         _alertBomb,
         StorageService,
-        BLE
+        BLE,
+        BarcodeScanner
     ]
 })
 export class HomeModule {

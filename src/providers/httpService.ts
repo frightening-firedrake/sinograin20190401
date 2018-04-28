@@ -8,6 +8,7 @@ import { GlobalData } from "./globalData";
 import { NativeService } from "./nativeService";
 import { AlertController } from "ionic-angular";
 import { APP_SERVE_URL } from "./config";
+import { StorageService } from './locationstorageService';
 
 @Injectable()
 export class HttpService {
@@ -15,36 +16,47 @@ export class HttpService {
   constructor(public http: Http,
     private globalData: GlobalData,
     private nativeService: NativeService,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    public Storage: StorageService) {
   }
-  public encode(url){
-      return encodeURI(url)
+  public encode(url) {
+    return encodeURI(url)
   }
+  private _token: string;
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
     url = HttpService.replaceUrl(url);
     // console.info(url);
-    if (options.headers) {
-      options.headers.append('token', this.globalData.token);
-    } else {
-      options.headers = new Headers({
-        'token': this.globalData.token
-      });
-    }
+
     // return this.http.request(url,options);
     return Observable.create((observer) => {
       // console.info(12);
       this.nativeService.showLoading();
+      this.Storage.GetStorage("userLogin").subscribe(res => {
+        res.then(res => {
+          console.log(res)
+          if (res) {
+            this._token = res.token;
+            if (options.headers) {
+              options.headers.append('Authorization', this._token);
+            } else {
+              options.headers = new Headers({
+                'Authorization': this._token
+              });
+            }
+            console.log(options)
+          }
+          this.http.request(url, options).subscribe(res => {
+            this.nativeService.hideLoading();
+            // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
+            observer.next(res);
+          }, err => {
+            this.requestFailed(url, options, err);//处理请求失败
+            observer.error(err);
+            console.info('错误')
+          });
+        })
+      })
       // console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
-
-      this.http.request(url, options).subscribe(res => {
-        this.nativeService.hideLoading();
-        // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
-        observer.next(res);
-      }, err => {
-        this.requestFailed(url, options, err);//处理请求失败
-        observer.error(err);
-        console.info('错误')
-      });
     });
   }
 

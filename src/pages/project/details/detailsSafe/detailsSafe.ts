@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
 import { HttpService } from '../../../../providers/httpService'
+import { StorageService } from '../../../../providers/locationstorageService'
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { HomeService } from '../../../home/home.serve'
@@ -33,6 +34,7 @@ export class detaSafePage {
     isrequire = false
     report_img = [];
     submitName
+    userName;
     // 报告
     // 1是解决，2是未解决
     report: any
@@ -44,8 +46,14 @@ export class detaSafePage {
         public _alert: _alertBomb,
         public Http: HttpService,
         public navCtrl: NavController,
-        private photoViewer: PhotoViewer
+        private photoViewer: PhotoViewer,
+        private storage: StorageService
     ) {
+        this.storage.GetStorage("userLogin").subscribe(res => {
+            res.then(res => {
+                this.userName = res.userName
+            })
+        })
         this.data = this.params.get("params")
         console.log(this.data)
         this.dateser.setImg(this.ImgJson, 0)
@@ -131,9 +139,9 @@ export class detaSafePage {
     }
     // 查看图片
     lookPicture(img) {
-        this.photoViewer.show(img,"My title",{share: false})
+        this.photoViewer.show(img, "My title", { share: false })
         // console.log(img)
-       
+
     }
     onSubmit(e) {
         if (!this.addrequ) {
@@ -147,7 +155,7 @@ export class detaSafePage {
                     console.log(i.Imgarr.join())
                     var imgstr = i.Imgarr.join()
                     console.log(222222222222222222222222222222222222222222222222)
-                    var succc = { "problem": this.keyVule[i.id - 1], "images": imgstr, "sampleId": this.data.id }
+                    var succc = { "problem": this.keyVule[i.id - 1], "images": imgstr, "sampleId": this.data.id, "rummager": this.userName }
                     this.ImgJson.push(JSON.stringify(succc))
                     console.log(11111111111111111111111111111111111)
                     console.log(this.ImgJson)
@@ -162,6 +170,26 @@ export class detaSafePage {
                         var parpam = {
                             title: "提示",
                             subTitle: "问题已提交",
+                            buttons: [
+                                {
+                                    text: "确认",
+                                    handler: () => {
+                                        this.isrequire = false
+                                        this.navCtrl.pop()
+                                    }
+                                }
+                            ],
+                            cssClass: "outsuccse only"
+                        }
+                        var addbuton = {
+                            text: null
+                        }
+                        var addInput = []
+                        this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
+                    }, err => {
+                        var parpam = {
+                            title: "提示",
+                            subTitle: "问题出错,请重新输入",
                             buttons: [
                                 {
                                     text: "确认",

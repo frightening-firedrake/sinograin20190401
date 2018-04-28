@@ -5,6 +5,7 @@ import { HomeService } from '../home/home.serve';
 import { Camera } from '@ionic-native/camera';
 import { BLE } from '@ionic-native/ble';
 import { _alertBomb } from '../common/_alert'
+import { StorageService } from '../../providers/locationstorageService'
 
 import { CommonsModule } from '../common/common.module';
 import { ProjectPage } from './project';
@@ -56,7 +57,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
         _alertBomb,
         BLE,
         dateSafeServe,
-        PhotoViewer
+        PhotoViewer,
+        StorageService
     ],
     exports:[
         detaildPage

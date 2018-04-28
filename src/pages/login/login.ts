@@ -41,7 +41,6 @@ export class loginPage {
         }
         this.Http.post('/grain/login', parpam).subscribe(res => {
             try{
-                res.json()
                 this.data = res.json()
             if (this.data.success) {
                 this.NavCtrl.pop()

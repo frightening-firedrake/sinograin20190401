@@ -1,5 +1,6 @@
 
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+
 
 @Injectable()
 export class GlobalData {
@@ -7,8 +8,6 @@ export class GlobalData {
   private _userId: string;
   private _username: string;
   private _token: string;
-
-
   get userId(): string {
     return this._userId;
   }
@@ -26,6 +25,7 @@ export class GlobalData {
   }
 
   get token(): string {
+     
     return this._token;
   }
 

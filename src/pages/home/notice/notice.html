@@ -1,32 +1,35 @@
 <app-header title='扦样查询'></app-header>
-<ion-header class="search" no-border>
-    <ion-toolbar>
-        <ion-item>
-            <!--<ion-label class="search_state">{{shaixuan}}
+<form action="">
+    <ion-header class="search" no-border>
+        <ion-toolbar>
+            <ion-item>
+                <!--<ion-label class="search_state">{{shaixuan}}
 				<ion-icon name="arrow-up"></ion-icon>
 			</ion-label>-->
-            <div class="search_screen">
-                <ion-searchbar cancelButtonText="wwww" placeholder="请输入品种进行搜索" (ionInput)="secondary()" [debounce]="1000"	 [(ngModel)]="myInput"></ion-searchbar>
-                <!--<button ion-button block outline color="secondary" class="submit" (click)="secondary()">完成</button>-->
-            </div>
-        </ion-item>
+                <div class="search_screen">
+                    <ion-searchbar placeholder="请输入编号进行搜索" [(ngModel)]="myInput"  name="kkk"></ion-searchbar>
+                    <button ion-button block outline color="secondary" class="submit" (click)="secondary()">完成</button>
+                    <button ion-button block outline color="secondary" class="submit" (click)="scan()">扫描</button>
+                </div>
+            </ion-item>
 
-    </ion-toolbar>
-    <ion-row class="thead">
-        <ion-col col-4>
-            <ion-label>扦样编号</ion-label>
-        </ion-col>
-        <ion-col col-2>
-            <ion-label>货位号</ion-label>
-        </ion-col>
-        <ion-col col-3>
-            <ion-label>品种</ion-label>
-        </ion-col>
-        <ion-col col-3>
-            <ion-label>状态</ion-label>
-        </ion-col>
-    </ion-row>
-</ion-header>
+        </ion-toolbar>
+        <ion-row class="thead">
+            <ion-col col-4>
+                <ion-label>扦样编号</ion-label>
+            </ion-col>
+            <ion-col col-2>
+                <ion-label>货位号</ion-label>
+            </ion-col>
+            <ion-col col-3>
+                <ion-label>品种</ion-label>
+            </ion-col>
+            <ion-col col-3>
+                <ion-label>状态</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-header>
+</form>
 <ion-content>
     <!--<div class="classify">-->
     <!--<div class="applye" *ngSwitchCase="'applye'">
@@ -218,4 +221,8 @@
         </ion-row>
         <!--<button ion-button  large color="secondary" (click)="_ble()" class="sumbit" type="button">链接蓝牙</button>-->
     </ion-grid>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [hidden]="rows>totle">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
