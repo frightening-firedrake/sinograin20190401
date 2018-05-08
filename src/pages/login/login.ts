@@ -42,14 +42,12 @@ export class loginPage {
             captcha:"1"
         }
         this.Http.post('/grain/login', parpam).subscribe(res => {
-            try{
-                this.data = res.json()
-            if (this.data.success) {
-                this.NavCtrl.pop()
+            this.data = res.json()
+            if(this.data.success){
+                 this.NavCtrl.pop()
                 this.Storage.SetStorage("userLogin", this.data.user)
-            }
-            }catch(e){
-                alert("用户名或密码错误")
+            }else{
+                alert("用户名或密码错误") 
             }
             
         })
