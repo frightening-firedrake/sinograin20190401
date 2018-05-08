@@ -68,7 +68,6 @@ export class MyApp {
       activeVC.dismiss()
       let activeNav = activeVC.getNav();//通过当前视图的ViewController获取的NavController
       console.log(tabs, tab, activeVC, activeNav)
-      console.log(this.nativeService.hideLoading())
       this.nativeService.hideLoading()
       return activeNav.canGoBack() ? activeNav.pop() : this.showExit();//this.showExit()
     })

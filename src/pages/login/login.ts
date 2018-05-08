@@ -37,7 +37,9 @@ export class loginPage {
         // userName,userPass
         let parpam = {
             userName: e.value.username,
-            userPass: e.value.password
+            userPass: e.value.password,
+            verityCode: "1",
+            captcha:"1"
         }
         this.Http.post('/grain/login', parpam).subscribe(res => {
             try{
