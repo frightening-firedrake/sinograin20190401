@@ -33,7 +33,7 @@ export class HttpService {
       this.nativeService.showLoading();
       this.Storage.GetStorage("userLogin").subscribe(res => {
         res.then(res => {
-          console.log(res)
+          //console.log(res)
           if (res) {
             this._token = res.token;
             if (options.headers) {
@@ -43,7 +43,7 @@ export class HttpService {
                 'Authorization': this._token
               });
             }
-            console.log(options)
+            // console.log(options)
           }
           this.http.request(url, options).subscribe(res => {
             this.nativeService.hideLoading();

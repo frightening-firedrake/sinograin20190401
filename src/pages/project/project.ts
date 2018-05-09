@@ -24,7 +24,9 @@ export class ProjectPage {
   shaixuan = "筛选"
   titleName;
   listId;
-  public Companyarr;
+  samplylist:any;
+  public Companyarr:any;
+
   public gendersarr: any = [
     // "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
   ]
@@ -51,9 +53,11 @@ export class ProjectPage {
     let Company = {
      params:`{"pLibraryId": "-1","page":"1","rows":"100"}` 
     }
-    this.Http.post("grain/library/data", Company).subscribe(res => {
-      console.log(res.json())
-      this.Companyarr = res.json()["rows"]
+    this.Http.post("grain/library/getAll", Company).subscribe(res => {
+      this.samplylist = res.json()
+      this.Companyarr =  this.samplylist.filter((i,v)=>{
+          return i.pLibraryId == -1
+      })
       // this.Company = this.Companyarr[0].id
     })
   }
@@ -65,19 +69,20 @@ export class ProjectPage {
   }
   // 选择被查库点
   changeVersion(list) {
-    console.log(list)
-    let data = {
-      params: '{"pLibraryId":' + list + '}'
-    }
-    this.Http.post("grain/library/data", data).subscribe(res => {
-
-      this.gendersarr = res.json()["rows"]
-      console.log(this.gendersarr)
-      // this.genders = this.gendersarr[0].id
+    this.gendersarr = this.samplylist.filter((i,v)=>{
+          return i.pLibraryId == list
     })
+    // let data = {
+    //   params: '{"pLibraryId":' + list + '}'
+    // }
+    // this.Http.post("grain/library/getAll", data).subscribe(res => {
+    //    console.log(res.json())
+    //   this.gendersarr = res.json()["rows"]
+     
+    //this.genders = this.gendersarr[0].id
+    // })
   }
   getlist(listId) {
-    
     this.listId = listId
     let data = {
       params: `{"libraryId":${listId},"regState":2}`
@@ -90,26 +95,26 @@ export class ProjectPage {
     })
   }
   ionViewWillEnter() {
-    $(".search_state").off().on("click", function () {
+    // $(".search_state").off().on("click", function () {
 
-      $(".zhezhao").toggle()
-      $(".screen").toggle()
-      $(".thead").toggle()
-    })
-    $(".buttons").off().on("click", "button", function (e) {
-      $(".buttons button").removeClass("active")
-      $(this).addClass("active")
-    })
-    $(".zhezhao").off().on("click", function () {
-      $(this).hide()
-      $(".screen").hide()
-      $(".thead").toggle()
-    })
-    $(".submit").off().on("click", function () {
-      $(".zhezhao").toggle()
-      $(".screen").toggle()
-      $(".thead").toggle()
-    })
+    //   $(".zhezhao").toggle()
+    //   $(".screen").toggle()
+    //   $(".thead").toggle()
+    // })
+    // $(".buttons").off().on("click", "button", function (e) {
+    //   $(".buttons button").removeClass("active")
+    //   $(this).addClass("active")
+    // })
+    // $(".zhezhao").off().on("click", function () {
+    //   $(this).hide()
+    //   $(".screen").hide()
+    //   $(".thead").toggle()
+    // })
+    // $(".submit").off().on("click", function () {
+    //   $(".zhezhao").toggle()
+    //   $(".screen").toggle()
+    //   $(".thead").toggle()
+    // })
   }
 
   //筛选框的三种分类
