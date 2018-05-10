@@ -4,6 +4,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeService } from '../providers/nativeService'
+import { AppVersion } from '@ionic-native/app-version';
+import { _alertBomb } from '../pages/common/_alert'
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { HttpService } from '../providers/httpService'
+
 
 import { TabsPage } from '../pages/tabs/tabs';
 @Component({
@@ -22,6 +27,10 @@ export class MyApp {
     public toastCtrl: ToastController,
     public nativeService: NativeService,
     public ionicApp: IonicApp,
+    public _alert: _alertBomb,
+    public App: AppVersion,
+    public Http: HttpService,
+    public iab: InAppBrowser
   ) {
 
     platform.ready().then(() => {
@@ -39,8 +48,50 @@ export class MyApp {
       // watch.unsubscribe();
       statusBar.styleDefault();
       splashScreen.hide();
+      this.update();//注册更新事件
       this.registerBackButtonAction();//注册返回按键事件
     });
+
+  }
+  update() {
+    var flag = this.nativeService.isMobile()
+    if (flag) {
+      this.App.getVersionNumber().then(res => {
+        console.log(res)
+        var data = {
+          "v": res
+        }
+        this.Http.get("http://yh.ityyedu.com/check_update.php", data).subscribe(res => {
+          if (res.json()["error_no"] == 100) {
+            let parpam = {
+              title: "发现新版本",
+              subTitle:"wifi环境下更新更加快捷哦~",
+              buttons: [
+                {
+                  text: "暂不更新",
+                  handler: () => {
+
+                  }
+                },
+                {
+                  text: "确认",
+                  handler: () => {
+                    this.iab.create("http://yh.ityyedu.com/check_update.php?a=download", '_system')
+                  }
+                }
+              ],
+              cssClass: "succse outsuccse"
+            }
+            var addbuton = {
+
+            }
+            var addInput = []
+            this._alert._alertSmlpe(parpam, addbuton, addInput, data => { })
+
+          }
+        })
+      })
+    }
 
   }
   registerBackButtonAction() {
