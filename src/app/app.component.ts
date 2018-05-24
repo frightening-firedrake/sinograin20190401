@@ -116,7 +116,7 @@ export class MyApp {
       let tabs = this.nav.getActiveChildNav();//获取tabs导航,this.nav是总导航,tabs是子导航
       let tab = tabs.getSelected();//获取选中的tab
       let activeVC = tab.getActive();//通过当前选中的tab获取ViewController
-      activeVC.dismiss()
+      //activeVC.dismiss()
       let activeNav = activeVC.getNav();//通过当前视图的ViewController获取的NavController
       console.log(tabs, tab, activeVC, activeNav)
       this.nativeService.hideLoading()
@@ -126,8 +126,6 @@ export class MyApp {
 
   //双击退出提示框
   showExit() {
-
-
     if (this.backButtonPressed) { //当触发标志为true时，即2秒内双击返回按键则退出APP
       this.platform.exitApp();
     } else {
