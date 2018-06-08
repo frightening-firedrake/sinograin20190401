@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'
 
 import { HeaderPage } from './header/headerPage';
+import { promptPage } from './Prompt/Prompt';
 
 
 @NgModule({
 
   declarations: [
-      HeaderPage
+      HeaderPage,
+      promptPage
       ],
   imports: [
       IonicModule,
@@ -17,7 +19,7 @@ import { HeaderPage } from './header/headerPage';
       FormsModule,
     ],
   providers: [],
-  exports: [ HeaderPage ]
+  exports: [ HeaderPage,promptPage ]
 })
 export class CommonsModule {
 }

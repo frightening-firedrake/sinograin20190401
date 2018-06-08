@@ -1,0 +1,51 @@
+<app-header title="扦样信息"></app-header>
+<ion-content>
+    <form [formGroup]="nocode" (ngSubmit)="onSubmit(nocode)">
+        <ion-list class="lists_input">
+            <ion-item type="ion-item" ion-item (click)="zhishuku()">
+                <span class="title_span">被查直属库:</span>
+                <span>{{_zhishuku}}</span>
+            </ion-item>
+            <ion-item type="ion-item" ion-item (click)="kudian()">
+                <span class="title_span">被查库点:</span>
+                <span>{{_kudian}}</span>
+            </ion-item>
+            <ion-item type="ion-item" class="num" ion-item>
+                <ion-label class="title_span">货位号:</ion-label>
+                <ion-input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="_huoweihao" placeholder="请填写货位号"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="lists_input">
+            <ion-item type="ion-item" ion-item (click)="pinzhong()">
+                <span class="title_span">品种:</span>
+                <span>{{_pinzhong}}</span>
+            </ion-item>
+            <ion-item type="ion-item" ion-item (click)="xinzhi()">
+                <span class="title_span">性质:</span>
+                <span>{{_xinzhi}}</span>
+            </ion-item>
+            <ion-item type="ion-item" class="num" ion-item>
+                <ion-label class="title_span">数量:</ion-label>
+                <ion-input type="number" [(ngModel)]="_number" [ngModelOptions]="{standalone: true}" placeholder="请填写数量"></ion-input>
+            </ion-item>
+            <ion-item type="ion-item" class="num" ion-item>
+                <ion-label class="title_span">产地:</ion-label>
+                <ion-input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="_chandi" placeholder="请填写产地"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="lists_input">
+            <ion-item type="ion-item" class="num" ion-item>
+                <ion-label class="title_span"><span class="title_span">收获年度:</span></ion-label>
+                <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [ngModelOptions]="{standalone: true}" [(ngModel)]="dataTime"></ion-datetime>
+            </ion-item>
+            <ion-item type="ion-item" class="num" ion-item>
+                <ion-label class="title_span">备注:</ion-label>
+                <ion-input type="text" placeholder="请填写备注" [formControl]="_beizhu"></ion-input>
+            </ion-item>
+        </ion-list>
+        <div class="buttons">
+            <button ion-button large color="secondary" class="button" type="submit" [disabled]="!(nocode.valid)">确认</button>
+            <button ion-button large color="secondary" class="button cleard" type="button" (click)="pop()">取消</button>
+        </div>
+    </form>
+</ion-content>

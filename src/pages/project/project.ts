@@ -24,8 +24,12 @@ export class ProjectPage {
   shaixuan = "筛选"
   titleName;
   listId;
-  samplylist:any;
-  public Companyarr:any;
+  samplylist: any;
+  prompt: boolean = false;
+  promptobj = {
+    content: "请选择被查直属库、被查库点进行筛选哦!"
+  }
+  public Companyarr: any;
 
   public gendersarr: any = [
     // "本库", "沁县库区", "山西屯留国家粮食储备库", "山西晋城国家粮食储备库", "长子分库", "山西长治国家粮食储备", "黎城分库"
@@ -35,12 +39,12 @@ export class ProjectPage {
 
     this.gendersNav = this.parpam.get("num")
     console.log(this.gendersNav)
-    if(this.gendersNav == "4"){
+    if (this.gendersNav == "4") {
       this.titleName = "扦样登记列表"
       console.log(this.titleName)
-    }else if(this.gendersNav == "3"){
+    } else if (this.gendersNav == "3") {
       this.titleName = "监督检查"
-    }else if(this.gendersNav == "2"){
+    } else if (this.gendersNav == "2") {
       this.titleName = "工作底稿"
     }
     // // 所有库点
@@ -51,12 +55,12 @@ export class ProjectPage {
     // })
     // 被查单位
     let Company = {
-     params:`{"pLibraryId": "-1","page":"1","rows":"100"}` 
+      params: `{"pLibraryId": "-1","page":"1","rows":"100"}`
     }
     this.Http.post("grain/library/getAll", Company).subscribe(res => {
       this.samplylist = res.json()
-      this.Companyarr =  this.samplylist.filter((i,v)=>{
-          return i.pLibraryId == -1
+      this.Companyarr = this.samplylist.filter((i, v) => {
+        return i.pLibraryId == -1
       })
       // this.Company = this.Companyarr[0].id
     })
@@ -69,8 +73,8 @@ export class ProjectPage {
   }
   // 选择被查库点
   changeVersion(list) {
-    this.gendersarr = this.samplylist.filter((i,v)=>{
-          return i.pLibraryId == list
+    this.gendersarr = this.samplylist.filter((i, v) => {
+      return i.pLibraryId == list
     })
     // let data = {
     //   params: '{"pLibraryId":' + list + '}'
@@ -78,7 +82,7 @@ export class ProjectPage {
     // this.Http.post("grain/library/getAll", data).subscribe(res => {
     //    console.log(res.json())
     //   this.gendersarr = res.json()["rows"]
-     
+
     //this.genders = this.gendersarr[0].id
     // })
   }
@@ -90,6 +94,7 @@ export class ProjectPage {
     this.genders = listId
     this.Http.post("grain/register/data", data).subscribe(res => {
       console.log(res.json())
+      this.prompt = true
       // console.log(res.json(),"color:blue")
       this.gendrslist = res.json()["rows"]
     })
@@ -119,18 +124,18 @@ export class ProjectPage {
 
   //筛选框的三种分类
   select_smaple(event = '0') {
-    if(event == "-1"){
+    if (event == "-1") {
       this.shaixuan = "未扦样"
-    }else if(event == "1"){
+    } else if (event == "1") {
       this.shaixuan = "已扦样"
-    }else{
+    } else {
       this.shaixuan = "筛选"
     }
     this._select_smaple = event
     this.getlist(this.listId)
-     $(".zhezhao").toggle()
-      $(".screen").hide()
-      $(".thead").toggle()
+    $(".zhezhao").toggle()
+    $(".screen").hide()
+    $(".thead").toggle()
     // let data = {
     //   params: '{"libraryId":1,"sampleState":' + event + '}'
     // }
@@ -160,7 +165,7 @@ export class ProjectPage {
   }
   // 进入列表页
   setNavPush(key: any) {
-    this.navCtrl.push(Samplelist,{"num":this.gendersNav,"newpage":key})
+    this.navCtrl.push(Samplelist, { "num": this.gendersNav, "newpage": key })
   }
   // 下拉刷新
   doRefresh(refresher) {

@@ -77,6 +77,15 @@ page-about{
                             .select-text{
                                 line-height:1.5;
                             }
+                            .select-icon{
+
+                                .select-icon-inner{
+                                    top:50%;
+                                    bottom:50%;
+                                    margin-top:auto;
+                                    margin-bottom:auto;
+                                }
+                            }
                             button{
                                 padding:0;
                                 width:0;

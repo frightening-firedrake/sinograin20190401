@@ -18,17 +18,7 @@ export class TabsPage {
   // public id: number;
   // public selectTabIndex: number;
 
-  constructor(public params: NavParams, public modalCtrl: ModalController, public Storage: StorageService) {
-    this.Storage.GetStorage("userLogin").subscribe(res => {
-      res.then(val => {
-        const User = val
-        // console.log( )
-        if (!User) {
-          let profileModal = this.modalCtrl.create(loginPage);
-          profileModal.present();
-        }
-      })
-    })
+  constructor(public params: NavParams, public Storage: StorageService) {
     // console.log(this.Storage.GetStorage("userLogin"))
 
 

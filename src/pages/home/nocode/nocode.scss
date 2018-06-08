@@ -1,0 +1,178 @@
+nocode {
+    ion-content {
+        .scroll-content {
+            margin-top: 0.88rem;
+            padding: 0 !important;
+            margin-bottom: 0 !important;
+            .list {
+                margin: 0;
+                margin-top: 0.2rem;
+                border-top: 1px solid #dbdbdb;
+                border-bottom: 1px solid #dbdbdb;
+                padding: 0 0.35rem;
+                background-color: white;
+                .item {
+                    min-height: 0;
+                    padding: 0;
+                    height: 1rem;
+                    line-height: 0.99rem;
+                    font-size: 0.3rem;
+                    color: #666666;
+                    border-top: 1px solid #dbdbdb;
+                    .item-inner {
+                        padding-right: 0.55rem;
+                        height: 100%;
+                        .input-wrapper {
+                            // padding: 0 0.65rem;
+                            padding-right: 0;
+                            ion-datetime {
+                                padding: 0;
+                                line-height: 0.99rem;
+                                text-align: left;
+                                // margin-right:1rem;
+                            }
+                            .label {
+                                margin: 0;
+                                span {
+                                    color: #333333;
+                                    font-size: 0.3rem;
+                                    float: right;
+                                }
+                            }
+                        }
+                        button {
+                            margin: 0;
+                            height: 100%;
+                            .button-inner {
+                                ion-icon {
+                                    font-weight: normal;
+                                    height: 100%;
+                                    font-size: 0.5rem;
+                                    line-height: 0.99rem;
+                                    color: #c8c8c8;
+                                }
+                            }
+                        }
+                    }
+                    &:last-child {
+                        border-bottom: none;
+                        .item-inner {
+                            // border-bottom: none !important;
+                        }
+                    }
+                    &:first-child {
+                        border-top: none !important;
+                        .item-inner {
+                            border-top: none !important;
+                        }
+                    }
+                }
+            }
+            form {
+                margin-bottom: 0.6rem;
+                .list {
+                    .item {
+                        &.ng-invalid {
+                            .item-inner {
+                                border-bottom: 1px solid red;
+                            }
+                        }
+                        &.fixed {
+                            span {
+                                color: #333333;
+                            }
+                        }
+                        .item-inner {
+                            padding: 0;
+                            .input-wrapper {
+                                ion-datetime {
+                                    padding: 0;
+                                    line-height: 0.99rem;
+                                    text-align: left;
+                                    // margin-right:1rem;
+                                }
+                                .label {
+                                    span {
+                                        color: #666666;
+                                    }
+                                    .title_span {
+                                        width: 1.7rem;
+                                        text-align: right;
+                                        float: left;
+                                        font-size: 0.3rem;
+                                        color: #666666;
+                                        &.title_span_font {
+                                            color: #000000;
+                                        }
+                                    }
+                                    &.title_span {
+                                        width: 1.7rem;
+                                        text-align: right;
+                                        float: left;
+                                        font-size: 0.3rem;
+                                        color: #666666;
+                                        &.title_span_font {
+                                            color: #000000;
+                                        }
+                                    }
+                                }
+                                // padding-left:0.7rem;
+                            }
+                            .no_button {
+                                opacity: 0;
+                            }
+                            button {
+                                min-width: 0;
+                                margin-left: 0.37rem;
+                            }
+                        }
+                        &.num {
+                            .item-inner {
+                                .input-wrapper {
+                                    justify-content: space-between;
+                                    // padding-left: 0.15rem;
+                                    ion-input {
+                                        position: relative;
+                                        height: 100%;
+                                        touch-action: manipulation;
+                                        input {
+                                            height: 100%;
+                                            margin: 0;
+                                            line-height: 1;
+                                            text-align: right;
+                                            padding-left: 20%;
+                                            width: 100%;
+                                        }
+                                        .input-cover {
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .buttons {
+                    text-align: center;
+                    width: auto;
+                }
+                .button {
+                    width: 2.2rem;
+                    height: 0.9rem;
+                    display: inline-block;
+                    background-color: #38b63a;
+                    border: 1px solid #38b63a;
+                    text-align: center;
+                    margin: 0;
+                    line-height: 0.9rem;
+                    font-size: 0.36rem;
+                    box-shadow: none;
+                    &.cleard {
+                        background-color: white;
+                        color: #38b63a;
+                    }
+                }
+            }
+        }
+    }
+}

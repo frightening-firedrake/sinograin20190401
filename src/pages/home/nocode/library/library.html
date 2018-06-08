@@ -1,0 +1,24 @@
+<app-header title="扫描入库"></app-header>
+<ion-content>
+    <ion-list class="lists_input">
+        <ion-item type="ion-item" ion-item>
+            <span class="title_span">{{number}}:</span>
+            <span>{{numbercon}}</span>
+        </ion-item>
+        <ion-item type="ion-item" ion-item>
+            <span class="title_span">样品入库时间:</span>
+            <span>{{data | date: 'yyyy-MM-dd'}}</span>
+        </ion-item>
+    </ion-list>
+    <ion-list class="lists_input">
+        <ion-item type="ion-item" ion-item>
+            <span class="title_span">入库签名:</span>
+            <span>{{userName}}</span>
+        </ion-item>
+        <ion-item type="ion-item" ion-item>
+            <span class="title_span">存放位置:</span>
+            <span *ngIf="library">{{library}}</span>
+            <button (click)="scand()" *ngIf="!library" ion-button large color="secondary"> <ion-icon name="qr-scanner"></ion-icon>扫描</button>
+        </ion-item>
+    </ion-list>
+</ion-content>

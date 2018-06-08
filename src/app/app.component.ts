@@ -32,7 +32,6 @@ export class MyApp {
     public Http: HttpService,
     public iab: InAppBrowser
   ) {
-
     platform.ready().then(() => {
 
       // get current position
@@ -65,7 +64,7 @@ export class MyApp {
           if (res.json()["error_no"] == 100) {
             let parpam = {
               title: "发现新版本",
-              subTitle:"wifi环境下更新更加快捷哦~",
+              subTitle: "wifi环境下更新更加快捷哦~",
               buttons: [
                 {
                   text: "暂不更新",
@@ -95,23 +94,24 @@ export class MyApp {
 
   }
   registerBackButtonAction() {
-
-
     this.platform.registerBackButtonAction(() => {
 
       if (this.Keyboard.isOpen()) {
         this.Keyboard.close()
         return
       }
-      let activePortal = this.ionicApp._modalPortal.getActive() || this.ionicApp._overlayPortal.getActive();
+      // this.ionicApp._modalPortal.getActive() ||
+      let activePortal =   this.ionicApp._overlayPortal.getActive();
       let loadingPortal = this.ionicApp._loadingPortal.getActive();
       if (activePortal) {
         //其他的关闭
         activePortal.dismiss().catch(() => {
         });
-        activePortal.onDidDismiss(() => {
-        });
         return;
+      }
+      if(loadingPortal){
+         
+          return;
       }
       let tabs = this.nav.getActiveChildNav();//获取tabs导航,this.nav是总导航,tabs是子导航
       let tab = tabs.getSelected();//获取选中的tab
@@ -119,7 +119,7 @@ export class MyApp {
       //activeVC.dismiss()
       let activeNav = activeVC.getNav();//通过当前视图的ViewController获取的NavController
       console.log(tabs, tab, activeVC, activeNav)
-      this.nativeService.hideLoading()
+      
       return activeNav.canGoBack() ? activeNav.pop() : this.showExit();//this.showExit()
     })
   }

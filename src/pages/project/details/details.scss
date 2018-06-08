@@ -460,7 +460,13 @@ derails {
 											}
 											.input {
 												height: 100%;
-												    line-height: 1.5;
+												line-height: 1.5;
+												input{
+													height:100%;
+													line-height:1;
+													margin:0;
+													margin-left:8px;
+												}
 												// color:#333333;
 											}
 										}
@@ -474,8 +480,11 @@ derails {
 										}
 										.label {
 											white-space: normal;
+											display:flex;
+											flex-direction:row;
+											
 											span {
-												float: left;
+												 flex-shrink:0;
 											}
 											//  position: relative;
 											ion-icon {
@@ -490,13 +499,14 @@ derails {
 												vertical-align: text-top;
 											}
 											.imgs {
-												float: left;
+												
 												width: 5.3rem;
 												padding-bottom: 0.2rem;
 											}
 											img {
 												width: 1.6rem;
 												height: 1.1rem;
+												display:inline-block;
 												margin-left: 0.1rem;
 												vertical-align: text-top;
 												border: 1px solid #38b63a;

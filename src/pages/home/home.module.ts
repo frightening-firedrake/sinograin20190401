@@ -6,11 +6,14 @@ import { CommonsModule } from '../common/common.module';
 import { HomePage } from './home';
 import { noticePage } from './notice/notice'
 import { noticeViewPage } from './notice/notice_view/notice_view'
+import { NoCode } from './nocode/nocode';
+import { libraryPage } from './nocode/library/library'
+import { codePage } from "./code/code"
+import { roomPage } from './room/room'
 // import { detaildPage } from '../project/details/details'
 
 import { HomeService } from './home.serve';
 import { _alertBomb } from '../common/_alert'
-import { BLE } from '@ionic-native/ble';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { StorageService } from '../../providers/locationstorageService'
 
@@ -20,25 +23,32 @@ import { StorageService } from '../../providers/locationstorageService'
         HomePage,
         noticePage,
         noticeViewPage,
+        NoCode,
+        libraryPage,
+        codePage,
+        roomPage
     ],
     imports: [
         CommonModule,
-        IonicModule.forRoot(HomePage,{}
-        ), 
+        IonicModule.forRoot(HomePage, {}
+        ),
         CommonsModule
     ],
     entryComponents: [
         HomePage,
         noticePage,
         noticeViewPage,
+        NoCode,
+        libraryPage,
+        codePage,
+        roomPage
     ],
-    providers:[
+    providers: [
         HomeService,
         _alertBomb,
         StorageService,
-        BLE,
         BarcodeScanner
-    ]
+    ],
 })
 export class HomeModule {
 

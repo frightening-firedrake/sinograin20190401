@@ -120,8 +120,10 @@ safe_speech {
 								}
 								.label {
 									white-space: normal;
+									display:flex;
+									flex-direction:row;
 									span {
-										float: left;
+										 flex-shrink:0;
 									}
 									//  position: relative;
 									ion-icon {
@@ -136,7 +138,7 @@ safe_speech {
 										vertical-align: text-top;
 									}
 									.imgs {
-										float: left;
+										
 										width: 5.3rem;
 										padding-bottom: 0.2rem;
 									}

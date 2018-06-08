@@ -1,41 +1,27 @@
-<!--<ion-header>
-  <ion-navbar>
-  </ion-navbar>
-</ion-header>
-<app-header title='about'></app-header>
-
-<ion-content padding>
-111
-<br/>
-<br/>
-2222
-</ion-content>-->
-
-
 <app-header [title]=titleName></app-header>
 <ion-header class="search" no-border>
-	<ion-toolbar>
-		<ion-item>
-			<ion-select placeholder="被查库点" [(ngModel)]="genders" interface="popover" (ngModelChange)="getlist(genders)">
-				<ion-option [value]="list.id" *ngFor="let list of gendersarr;index as i " >{{list.libraryName}}</ion-option>
-			</ion-select>
-			<ion-select placeholder="被查直属库" [(ngModel)]="Company" interface="popover"  (ngModelChange)="changeVersion(Company)" >
-				<ion-option [value]="list.id" *ngFor="let list of Companyarr;index as i " >{{list.libraryName}}</ion-option>
-			</ion-select>
-			<ion-label class="search_state">{{shaixuan}}
-				<ion-icon name="arrow-up"></ion-icon>
-			</ion-label>
-		</ion-item>
+    <ion-toolbar>
+        <ion-item>
+            <ion-select placeholder="被查库点" [(ngModel)]="genders" interface="popover" (ngModelChange)="getlist(genders)">
+                <ion-option [value]="list.id" *ngFor="let list of gendersarr;index as i ">{{list.libraryName}}</ion-option>
+            </ion-select>
+            <ion-select placeholder="被查直属库" [(ngModel)]="Company" interface="popover" (ngModelChange)="changeVersion(Company)">
+                <ion-option [value]="list.id" *ngFor="let list of Companyarr;index as i ">{{list.libraryName}}</ion-option>
+            </ion-select>
+            <ion-label class="search_state">{{shaixuan}}
+                <ion-icon name="arrow-up"></ion-icon>
+            </ion-label>
+        </ion-item>
 
-	</ion-toolbar>
-	<ion-row class="thead">
-			<ion-col col-6>
-				<ion-label>表格名称</ion-label>
-			</ion-col>
-			<ion-col col-6>
-				<ion-label>最后检查日期</ion-label>
-			</ion-col>
-		</ion-row>
+    </ion-toolbar>
+    <ion-row class="thead">
+        <ion-col col-6>
+            <ion-label>表格名称</ion-label>
+        </ion-col>
+        <ion-col col-6>
+            <ion-label>最后检查日期</ion-label>
+        </ion-col>
+    </ion-row>
 </ion-header>
 <!--<div class="zhezhao"></div>
 	<div class="screen">
@@ -54,24 +40,24 @@
 		
 	</div>-->
 <ion-content>
-	
-	<ion-refresher (ionRefresh)="doRefresh($event)" >
-		<ion-refresher-content></ion-refresher-content>
-	</ion-refresher>
-	
-	<ion-grid>
-		
-		<ion-row class="tbody" (click)="setNavPush(list)" *ngFor="let list of gendrslist">
-			<ion-col col-6>
-				<ion-label>{{list.formName}}</ion-label>
-			</ion-col>
-			<ion-col col-6>
-				<ion-label>{{list.createTime?list.createTime:"未扦样"}}</ion-label>
-			</ion-col>
-		</ion-row>
-		<!--<button ion-button  large color="secondary" (click)="_ble()" class="sumbit" type="button">链接蓝牙</button>-->
-	</ion-grid>
-	<!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <prompt [promptObj]=promptobj [hidden]=prompt></prompt>
+    <ion-grid [hidden]=!prompt>
+
+        <ion-row class="tbody" (click)="setNavPush(list)" *ngFor="let list of gendrslist">
+            <ion-col col-6>
+                <ion-label>{{list.formName}}</ion-label>
+            </ion-col>
+            <ion-col col-6>
+                <ion-label>{{list.createTime?list.createTime:"未扦样"}}</ion-label>
+            </ion-col>
+        </ion-row>
+        <!--<button ion-button  large color="secondary" (click)="_ble()" class="sumbit" type="button">链接蓝牙</button>-->
+    </ion-grid>
+    <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
 		<ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载">
 		</ion-infinite-scroll-content>
 	</ion-infinite-scroll>-->

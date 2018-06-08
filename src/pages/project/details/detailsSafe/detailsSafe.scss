@@ -132,8 +132,10 @@ detailssafe {
 								}
 								.label {
 									white-space: normal;
+									display:flex;
+									flex-direction:row;
 									span {
-										float: left;
+										 flex-shrink:0;
 									}
 									//  position: relative;
 									ion-icon {
@@ -148,15 +150,17 @@ detailssafe {
 										vertical-align: text-top;
 									}
 									.imgs {
-										float: left;
+										
 										width: 5.3rem;
 										padding-bottom: 0.2rem;
 									}
 									img {
 										width: 1.6rem;
 										height: 1.1rem;
+										display:inline-block;
 										margin-left: 0.1rem;
 										vertical-align: text-top;
+										border: 1px solid #38b63a;
 										// border:1px solid  #38b63a;
 									}
 								}

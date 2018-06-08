@@ -39,17 +39,36 @@ export class loginPage {
             userName: e.value.username,
             userPass: e.value.password,
             verityCode: "1",
-            captcha:"1"
+            captcha: "1"
         }
         this.Http.post('/grain/login', parpam).subscribe(res => {
             this.data = res.json()
-            if(this.data.success){
-                 this.NavCtrl.pop()
+            if (this.data.success) {
                 this.Storage.SetStorage("userLogin", this.data.user)
-            }else{
-                alert("用户名或密码错误") 
+                this.viewCtrl.dismiss(this.data.user);
+            } else {
+                var parpam = {
+                    title: "提示",
+                    subTitle: "用户名或密码错误",
+                    buttons: [
+                        {
+                            text: "确认",
+                            handler: () => {
+
+                            }
+                        }
+                    ],
+                    cssClass: "outsuccse only"
+                }
+                var addbuton = {
+                    text: null
+                }
+                var addInput = []
+                this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
             }
-            
+
+        },error=>{
+           
         })
         // this.NavCtrl.pop()
         // this.Storage.SetStorage("userLogin", { "username": e.value.username, "passwork": e.value.passwork })

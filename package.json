@@ -34,6 +34,7 @@
     "@ionic-native/toast": "^3.10.2",
     "@ionic/storage": "^2.0.1",
     "angularx-qrcode": "^1.0.1",
+    "com-sarriaroman-photoviewer": "~1.1.16",
     "com.liang.barcode": "file:barcode",
     "cordova-android": "^5.1.0",
     "cordova-plugin-app-version": "^0.1.9",
@@ -62,8 +63,7 @@
     "qrious": "^2.2.0",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.12",
-    "com-sarriaroman-photoviewer": "~1.1.16"
+    "zone.js": "0.8.12"
   },
   "devDependencies": {
     "@ionic/app-scripts": "2.1.4",

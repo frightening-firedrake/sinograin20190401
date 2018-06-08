@@ -1,10 +1,11 @@
-<ion-header>
+<!--<ion-header>
     <ion-navbar>
         <ion-title>
             {{title}}
         </ion-title>
     </ion-navbar>
-</ion-header>
+</ion-header>-->
+<app-header [title]=title></app-header>
 <ion-content>
     <form [formGroup]="detaWork" (ngSubmit)="onSubmit(detaWork)" *ngIf="_isfinsh">
         <ion-list class="lists_input">
@@ -25,7 +26,7 @@
                 <span class="title_span">所在库区:</span>
                 <span>{{data.libraryName}}</span>
             </ion-item>
-            <ion-item type="ion-item"  class="num" ion-item (click)="barnType()">
+            <ion-item type="ion-item" class="num" ion-item (click)="barnType()">
                 <ion-label class="title_span">仓房类型:</ion-label>
                 <ion-input type="text" readonly="true" [value]="Work.barnType" [formControl]="Workfrom.barnType"></ion-input>
                 <!--<span>{{Work.barnType}}</span>-->
@@ -42,8 +43,7 @@
                 <ion-label class="title_span"><span class="title_span">实际查库日:</span></ion-label>
                 <!--<ion-datetime min="1981" cancelText="取消" doneText="选择" displayFormat="YYYY/DD/MM" pickerFormat="YYYY MM DD" [formControl]="Workfrom.realCheckedTime" [(ngModel)]="dateTime"></ion-datetime>-->
 
-                <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [formControl]="Workfrom.realCheckedTime"
-                    [(ngModel)]="dateTime"></ion-datetime>
+                <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [formControl]="Workfrom.realCheckedTime" [(ngModel)]="dateTime"></ion-datetime>
                 <!--<ion-item ion-ion-item icon-only item-end clear color="light" type="ion-item" class="no_ion-item">
                                 <ion-icon  name="ios-arrow-forward-outline"></ion-icon>
                             </ion-item>-->
@@ -66,13 +66,13 @@
                 </ion-label>
             </ion-item>
             <!--这里的复选框有问题，稍后解决-->
-            <ion-item  class="num" type="ion-item" ion-item (click)="putWay()">
+            <ion-item class="num" type="ion-item" ion-item (click)="putWay()">
                 <ion-label class="title_span">入仓方式:</ion-label>
                 <ion-label class="float_label" [ngSwitch]="Work.putWay">
                     <ion-input type="text" *ngSwitchCase="1" readonly="true" value="机械入仓" [formControl]="Workfrom.putWay"></ion-input>
                     <ion-input type="text" *ngSwitchCase="2" readonly="true" value="人工入仓" [formControl]="Workfrom.putWay"></ion-input>
                     <ion-input type="text" *ngSwitchDefault readonly="true" value="" [formControl]="Workfrom.qualityGrade"></ion-input>
-                    
+
                 </ion-label>
             </ion-item>
         </ion-list>

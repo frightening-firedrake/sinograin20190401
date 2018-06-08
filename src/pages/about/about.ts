@@ -24,8 +24,11 @@ export class AboutPage {
         public modalCtrl: ModalController,
         public App: AppVersion,
         public Http: HttpService,
-        public iab:InAppBrowser
+        public iab: InAppBrowser
     ) {
+
+    }
+    ionViewDidEnter() {
         this.Storage.GetStorage("userLogin").subscribe(res => {
             res.then(suc => {
                 this.userName = suc.userName
@@ -35,8 +38,8 @@ export class AboutPage {
     clear() {
         this.Storage.RemoveStorage("userLogin").then(res => {
             this.navCtrl.parent.select(0);
-            let profileModal = this.modalCtrl.create(loginPage);
-            profileModal.present();
+            // let profileModal = this.modalCtrl.create(loginPage);
+            // profileModal.present();
         })
 
 
@@ -50,7 +53,7 @@ export class AboutPage {
             }
             this.Http.get("http://yh.ityyedu.com/check_update.php", data).subscribe(res => {
                 if (res.json()["error_no"] == 100) {
-                    this.iab.create("http://yh.ityyedu.com/check_update.php?a=download",'_system')
+                    this.iab.create("http://yh.ityyedu.com/check_update.php?a=download", '_system')
                 } else {
                     var parpam = {
                         title: "提示",
