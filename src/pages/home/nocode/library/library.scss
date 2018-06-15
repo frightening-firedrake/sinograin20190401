@@ -1,33 +1,33 @@
 library {
     ion-content {
         .scroll-content {
-            margin-top: 0.88rem;
+            margin-top:1.173333rem;
             padding: 0 !important;
             margin-bottom: 0 !important;
             .list {
                 margin: 0;
-                margin-top: 0.2rem;
+                margin-top: .266667rem;
                 border-top: 1px solid #dbdbdb;
                 border-bottom: 1px solid #dbdbdb;
-                padding: 0 0.35rem;
+                padding: 0 .466667rem;
                 background-color: white;
                 .item {
                     min-height: 0;
                     padding: 0;
-                    height: 1rem;
-                    line-height: 0.99rem;
-                    font-size: 0.3rem;
+                    height: 1.333333rem;
+                    line-height:1.32rem;
+                    font-size: .4rem;
                     color: #666666;
                     border-bottom: 1px solid #dbdbdb;
                     .item-inner {
-                        padding-right: 0.55rem;
+                        padding-right: .733333rem;
                         height: 100%;
                         .input-wrapper {
                             // padding: 0 0.65rem;
                             padding-right: 0;
                             ion-datetime {
                                 padding: 0;
-                                line-height: 0.99rem;
+                                line-height: 1.32rem;
                                 text-align: left;
                                 // margin-right:1rem;
                             }
@@ -35,30 +35,30 @@ library {
                                 margin: 0;
                                 span {
                                     color: #333333;
-                                    font-size: 0.3rem;
+                                    font-size: .4rem;
                                     float: right;
                                 }
                             }
                             button {
                                 margin: 0;
                                 padding: 0;
-                                width: 2.2rem;
-                                height: 0.9rem;
-                                margin-top: 0.03rem;
+                                width: 2.933333rem;
+                                height:1.2rem;
+                                margin-top: .04rem;
                                 box-shadow: none;
                                 float: right;
                                 background-color: #38b63a;
                                 span.button-inner {
                                     color: white;
-                                    font-size: 0.36rem;
-                                    line-height: 0.9rem;
+                                    font-size: .48rem;
+                                    line-height: 1.2rem;
                                     ion-icon {
                                         // margin-left: -0.1rem;
-                                        margin-right: 0.1rem;
+                                        margin-right: .133333rem;
                                         font-weight: normal;
                                         height: 100%;
-                                        font-size: 0.5rem;
-                                        line-height: 0.9rem;
+                                        font-size: .666667rem;
+                                        line-height: 1.2rem;
                                         color: white;
                                     }
                                 }
@@ -67,18 +67,18 @@ library {
                         button {
                             margin: 0;
                             padding: 0;
-                            width: 2.2rem;
+                            width: 2.933333rem;
                             height: 90%;
                             float: right;
                             background-color: #38b63a;
                             .button-inner {
                                 color: white;
-                                font-size: 0.36rem;
+                                font-size: .48rem;
                                 ion-icon {
                                     font-weight: normal;
                                     height: 100%;
-                                    font-size: 0.5rem;
-                                    line-height: 0.99rem;
+                                    font-size: .666667rem;
+                                    line-height: 1.32rem;
                                     color: white;
                                 }
                             }
@@ -114,7 +114,7 @@ library {
                         .input-wrapper {
                             ion-datetime {
                                 padding: 0;
-                                line-height: 0.99rem;
+                                line-height:1.32rem;
                                 text-align: left;
                                 // margin-right:1rem;
                             }
@@ -123,20 +123,20 @@ library {
                                     color: #666666;
                                 }
                                 .title_span {
-                                    width: 1.7rem;
+                                    width: 2.266667rem;
                                     text-align: right;
                                     float: left;
-                                    font-size: 0.3rem;
+                                    font-size:.4rem;
                                     color: #666666;
                                     &.title_span_font {
                                         color: #000000;
                                     }
                                 }
                                 &.title_span {
-                                    width: 1.7rem;
+                                    width: 2.266667rem;
                                     text-align: right;
                                     float: left;
-                                    font-size: 0.3rem;
+                                    font-size:.4rem;
                                     color: #666666;
                                     &.title_span_font {
                                         color: #000000;
@@ -150,7 +150,7 @@ library {
                         }
                         button {
                             min-width: 0;
-                            margin-left: 0.37rem;
+                            margin-left: .493333rem;
                         }
                     }
                     &.num {

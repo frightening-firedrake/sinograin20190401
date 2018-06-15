@@ -277,7 +277,8 @@ export class detailsWorkPage {
         var length = this.detaWork.value.length || 1
         var wide = this.detaWork.value.wide || 1
         var high = this.detaWork.value.high || 1
-        this.Work.unQuality = Math.round(((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor))
+        this.Work.unQuality = Math.round(this.Work.realVolume * this.Work.aveDensity)
+        // this.Work.unQuality = Math.round(((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor))
         this.loss()
     }
     mianji() {

@@ -1,0 +1,218 @@
+sample {
+    .search {
+        top: 1.173333rem;
+        // padding:0 0.25rem;
+        z-index: 10;
+        height: auto;
+        border-bottom: 1px solid #dedede;
+        position: relative;
+        background-color: white;
+        z-index: 20;
+        .thead {
+            text-align: center;
+            // padding: 0 .133333rem;
+            padding-right: .133333rem;
+            height: 1.333333rem;
+            //    position:relative;
+            width: 100%;
+            z-index: 11;
+            background-color: #509cfa;
+            .col {
+                line-height: 1.333333rem;
+                padding: 0;
+                &.check {
+                    line-height: 1.466667rem;
+                    ion-label {
+                        ion-checkbox {
+                            .checkbox-icon {
+                                border: none;
+                                &.checkbox-checked {
+                                    .checkbox-inner {
+                                        left: 5px;
+                                        top: 1px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ion-label {
+                    height: 100%;
+                    margin: 0;
+                    font-size: .4rem;
+                    color: white;
+                }
+            }
+        }
+        .toolbar {
+            height: 100%;
+            min-height: 0;
+            padding: 0;
+            .toolbar-background {
+                border-color: transparent;
+            }
+            .toolbar-content {
+                height: 100%;
+                width: 100%;
+                .item {
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                    min-height: 0;
+                    .item-inner {
+                        padding: 0;
+                        border-bottom: none;
+                        flex-direction: row-reverse;
+                        .search_screen {
+                            padding-left: .666667rem;
+                            padding-right: .32rem;
+                            // padding-top: 0.24rem;
+                            // padding-bottom: 0.46rem;
+                            background-color: white;
+                            ion-searchbar {
+                                padding: 0;
+                                width: 6.626667rem;
+                                display: inline-block;
+                                margin: 0 auto;
+                                height: .746667rem;
+                                margin-bottom: 0.2rem;
+                                margin-right: .426667rem;
+                                .searchbar-input-container {
+                                    height: 100%;
+                                    font-size: .373333rem;
+                                    color: #666666;
+                                    border-radius: .133333rem;
+                                    border: 1px solid #bfbfbf;
+                                    background-color: #ececec;
+                                    .searchbar-clear-icon {
+                                        display: none;
+                                    }
+                                    .searchbar-search-icon {
+                                        left: 90%;
+                                        display: none;
+                                        top: 0;
+                                        bottom: 0;
+                                        margin: auto 0;
+                                    }
+                                    input {
+                                        box-shadow: none;
+                                        height: 100%;
+                                        line-height: 2;
+                                        border-radius: .266667rem;
+                                        padding: 0;
+                                        color: #666666;
+                                        background-color: transparent;
+                                        padding-left: .266667rem;
+                                        font-size: .373333rem;
+                                    }
+                                }
+                            }
+                        }
+                        .submit {
+                            width: 1.693333rem;
+                            display: inline-block;
+                            margin: 0 auto;
+                            height: .666667rem;
+                            border-radius: .133333rem;
+                            margin-bottom: .133333rem;
+                            margin-top: -.133333rem;
+                            font-size: .32rem;
+                            background-color: #30d05f;
+                            color: white;
+                            img {
+                                width: .533333rem;
+                                height: .533333rem;
+                            }
+                            // margin-left:auto;
+                        }
+                        .label {
+                            margin: 0;
+                            height: 100%;
+                            font-size: .4rem;
+                            text-align: left;
+                            line-height: 1.173333rem;
+                            color: #38b63a;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ion-content {
+        margin-top: 1.173333rem;
+        .scroll-content {
+            // padding: 0 .333333rem;
+            background-color: white !important;
+            border-top: none !important;
+            .grid {
+                // max-height: 14.666667rem;
+                overflow-y: scroll;
+                //    margin-top:1rem;
+                padding: 0;
+                .row {
+                    padding: 0;
+                    .col {
+                        padding: 0;
+                        text-align: center;
+                    }
+                }
+                .tbody {
+                    height: 1.333333rem;
+                    padding: 0 .013333rem;
+                    .col {
+                        border-bottom: 1px solid #dbdbdb;
+                        &.check {
+                            ion-label {
+                                line-height: 1.466667rem;
+                                ion-checkbox {
+                                    .checkbox-icon {
+                                        border-color: #509cfa;
+                                        &.checkbox-checked {
+                                            .checkbox-inner {
+                                                // left: 5px;
+                                                // top: 1px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        ion-label {
+                            height: 100%;
+                            margin: 0;
+                            line-height: 1.333333rem;
+                            color: #666666;
+                            font-size: .32rem;
+                        }
+                    }
+                }
+            }
+            .buttons {
+                width: 6.6rem;
+                height: auto;
+                margin: 0 auto;
+                margin-top: .573333rem;
+                button {
+                    width: 2.933333rem;
+                    height: 1.2rem;
+                    display: inline-block;
+                    margin: 0;
+                    padding: 0;
+                    &:first-child {
+                        float: left;
+                    }
+                    &.right {
+                        float: right;
+                    }
+                    &:disabled {
+                        background-color: #999999;
+                        opacity: .6;
+                    }
+                }
+                .both {
+                    clear: both;
+                }
+            }
+        }
+    }
+}

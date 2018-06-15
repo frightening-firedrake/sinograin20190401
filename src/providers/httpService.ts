@@ -43,7 +43,7 @@ export class HttpService {
             {
               text: "确认",
               handler: () => {
-
+                // this.navCtrl.pop()
               }
             }
           ],

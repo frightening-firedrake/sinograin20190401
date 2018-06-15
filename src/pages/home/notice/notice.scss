@@ -127,7 +127,7 @@ notice {
     //     }
     // }
     .search {
-        top: 0.88rem;
+        top: 1.173333rem;
         // padding:0 0.25rem;
         z-index: 10;
         height: auto;
@@ -138,17 +138,17 @@ notice {
         .thead {
             text-align: center;
             //  padding: 0 0.3rem ;
-            height: 1rem;
+            height: 1.333333rem;
             //    position:relative;
             width: 100%;
             z-index: 11;
             .col {
-                line-height: 1rem;
+                line-height:1.333333rem;
                 padding: 0;
                 background-color: #509cfa;
                 ion-label {
                     margin: 0;
-                    font-size: 0.3rem;
+                    font-size:.4rem;
                     color: white;
                 }
             }
@@ -173,8 +173,8 @@ notice {
                         border-bottom: none;
                         flex-direction: row-reverse;
                         .search_screen {
-                            padding-left:0.2rem;
-                            padding-right:0.2rem;
+                            padding-left:.266667rem;
+                            padding-right:.266667rem;
                             // padding-top: 0.24rem;
                             // padding-bottom: 0.46rem;
                             background-color: white;
@@ -183,12 +183,12 @@ notice {
                                 width:57%;
                                 display:inline-block;
                                 margin: 0 auto;
-                                height: 0.56rem;
+                                height: .746667rem;
                                 margin-bottom: 0.2rem;
                                 .searchbar-input-container {
                                     height: 100%;
-                                    border-radius: 5px;
-                                    font-size: 0.28rem;
+                                    border-radius: .066667rem;
+                                    font-size:.373333rem;
                                     color: #666666;
                                     border: 1px solid #bfbfbf;
                                     background-color: #ececec;
@@ -209,8 +209,8 @@ notice {
                                         padding: 0;
                                         color: #666666;
                                         background-color: transparent;
-                                        padding-left: 0.2rem;
-                                        font-size: 0.28rem;
+                                        padding-left: .266667rem;
+                                        font-size:.373333rem;
                                     }
                                 }
                             }
@@ -219,26 +219,26 @@ notice {
                             width:21%;
                             display:inline-block;
                             margin:0 auto;
-                            margin-bottom:0.1rem;
-                            margin-top:-0.1rem;
-                            font-size:0.3rem;
+                            margin-bottom:.133333rem;
+                            margin-top:-.133333rem;
+                            font-size:.4rem;
                             background-color:#30d05f;
                             color:white;
                                 img{
-                                    width:0.4rem;
-                                    height:0.4rem;
+                                    width:.533333rem;
+                                    height:.533333rem;
                                 }
                             // margin-left:auto;
                         }
                         .buttons {
                             width: 100%;
                             // height:0.67rem;
-                            padding: 0 0.24rem;
+                            padding: 0 .32rem;
                             line-height: 0;
                             border-bottom: 1px solid #eeeeee;
                             background-color: white;
-                            padding-top: 0.2rem;
-                            padding-bottom: 0.1rem;
+                            padding-top: .266667rem;
+                            padding-bottom: .133333rem;
                             flex-direction: row;
                             display: flex;
                             justify-content: space-between;
@@ -246,8 +246,8 @@ notice {
                                 margin: 0;
                                 // width:1.22rem;
                                 overflow: visible;
-                                height: 0.55rem;
-                                border-radius: 2px;
+                                height:.733333rem;
+                                border-radius:.026667rem;
                                 text-align: center;
                                 // line-height:0.55rem;
                                 color: #999999;
@@ -255,7 +255,7 @@ notice {
                                 background-color: transparent;
                                 box-shadow: none;
                                 border: 1px solid #d5d5d5;
-                                font-size: 0.3rem;
+                                font-size: .4rem;
                                 &.active {
                                     background-color: #ff4c78;
                                     border: none;
@@ -266,23 +266,23 @@ notice {
                         .label {
                             margin: 0;
                             height: 100%;
-                            font-size: 0.3rem;
+                            font-size: .4rem;
                             text-align: left;
-                            line-height: 0.88rem;
+                            line-height: 1.173333rem;
                             color: #38b63a;
                         }
                         ion-select {
                             padding: 0;
                             background-color: #f2f2f2;
-                            width: 2.5rem;
-                            height: 0.6rem;
+                            width: 3.333333rem;
+                            height:.8rem;
                             max-width: none;
-                            padding-right: 0.25rem;
-                            padding-left: 0.22rem;
-                            padding-top: 0.08rem;
+                            padding-right: .333333rem;
+                            padding-left: .293333rem;
+                            padding-top: .106667rem;
                             // padding:0.15rem 0.26rem 01.7rem 0.25rem;
                             color: #333333;
-                            font-size: 0.3rem;
+                            font-size: .4rem;
                             border: 1px solid #dfdfdf;
                             button {
                                 padding: 0;
@@ -300,12 +300,12 @@ notice {
         .scroll-content {
             background-color: white !important;
             border-top: none !important;
-            margin-top: 2.8rem !important;
+            margin-top: 3.733333rem !important;
             margin-bottom: 0 !important;
             .grid {
                 //    margin-top:1rem;
                 padding: 0;
-                padding: 0 0.3rem !important;
+                padding: 0 .4rem !important;
                 .row {
                     padding: 0;
                     .col {
@@ -314,23 +314,23 @@ notice {
                     }
                 }
                 .tbody {
-                    padding: 0 0.01rem;
+                    padding: 0 .013333rem;
                     .col {
-                        height: 1rem;
+                        height: 1.333333rem;
                         border-bottom: 1px solid #dbdbdb;
                         ion-label {
                             height: 100%;
                             margin: 0;
-                            line-height: 1rem;
+                            line-height: 1.333333rem;
                             color: #666666;
-                            font-size: 0.24rem;
+                            font-size: .32rem;
                         }
                     }
                 }
             }
         }
         ion-refresher {
-            top: 2.8rem!important;
+            top: 3.733333rem!important;
         }
     }
 }

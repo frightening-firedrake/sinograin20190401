@@ -1,4 +1,4 @@
-<app-header title='扦样查询'></app-header>
+<app-header title='搜索查询'></app-header>
 <form action="">
     <ion-header class="search" no-border>
         <ion-toolbar>
@@ -7,7 +7,7 @@
 				<ion-icon name="arrow-up"></ion-icon>
 			</ion-label>-->
                 <div class="search_screen">
-                    <ion-searchbar placeholder="请输入编号进行搜索" [(ngModel)]="myInput"  name="kkk"></ion-searchbar>
+                    <ion-searchbar placeholder="请输入编号进行搜索" [(ngModel)]="myInput" name="kkk"></ion-searchbar>
                     <button ion-button block outline color="secondary" class="submit" (click)="secondary()">完成</button>
                     <button ion-button block outline color="secondary" class="submit" (click)="scan()">扫描</button>
                 </div>
@@ -15,7 +15,7 @@
 
         </ion-toolbar>
         <ion-row class="thead">
-            <ion-col col-4>
+            <!--<ion-col col-4>
                 <ion-label>扦样编号</ion-label>
             </ion-col>
             <ion-col col-2>
@@ -26,6 +26,18 @@
             </ion-col>
             <ion-col col-3>
                 <ion-label>状态</ion-label>
+            </ion-col>-->
+            <ion-col col-4>
+                <ion-label>检验编号</ion-label>
+            </ion-col>
+            <ion-col col-2>
+                <ion-label>存放位置</ion-label>
+            </ion-col>
+            <ion-col col-3>
+                <ion-label>入库签名</ion-label>
+            </ion-col>
+            <ion-col col-3>
+                <ion-label>入库时间</ion-label>
             </ion-col>
         </ion-row>
     </ion-header>
@@ -219,7 +231,6 @@
                 <ion-label *ngSwitchDefault>未扦样</ion-label>
             </ion-col>
         </ion-row>
-        <!--<button ion-button  large color="secondary" (click)="_ble()" class="sumbit" type="button">链接蓝牙</button>-->
     </ion-grid>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [hidden]="rows>totle">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载">

@@ -1,5 +1,5 @@
-import { Component,Input } from '@angular/core';
-import { NavParams,NavController } from 'ionic-angular';
+import { Component, Input } from '@angular/core';
+import { NavParams, NavController } from 'ionic-angular';
 import { DatePipe } from "@angular/common";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { _alertBomb } from '../../../common/_alert'
@@ -17,7 +17,7 @@ export class libraryPage {
     userName;
     library: any;
     @Input() number = "样品编号";
-    @Input() numbercon = this.testnum;
+    @Input() numbercon;
     constructor(
         private params: NavParams,
         private datePipe: DatePipe,
@@ -27,6 +27,7 @@ export class libraryPage {
         private navCtrl: NavController
     ) {
         this.testnum = this.params.get("testnum")
+        this.numbercon = this.testnum
         this.data = this.datePipe.transform(new Date(), "MM/dd/yyyy");
         this.Storage.GetStorage("userLogin").subscribe(res => {
             res.then(res => {

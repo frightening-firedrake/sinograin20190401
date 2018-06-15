@@ -1,0 +1,69 @@
+transfer {
+    ion-content {
+        background-color: white !important;
+        .scroll-content {
+            margin-top: 1.173333rem;
+            // padding-top: .186667rem;
+            ion-item {
+                margin-top: .24rem;
+                width: 100%;
+                height: 1.333333rem;
+                min-height: 0;
+                border-top: 1px solid #dbdbdb;
+                border-bottom: 1px solid #dbdbdb;
+                padding: .253333rem .306667rem .253333rem .32rem;
+                .item-inner {
+                    padding: 0 !important;
+                    border-bottom: none !important;
+                    .input-wrapper {
+                        ion-select {
+                            padding: 0;
+                            width: 100%;
+                            height: .8rem;
+                            max-width: none;
+                            padding-right: .466667rem;
+                            border: none;
+                            background-color: #f2f2f2;
+                            padding-left: .48rem;
+                            font-size: .4rem;
+                            color: #999999;
+                            line-height: 2;
+                            .select-icon {
+                                height: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+            button {
+                margin-top: 1.493333rem;
+                .button-inner {
+                    ion-icon {
+                        margin-right: .133333rem;
+                    }
+                }
+            }
+            .buttons {
+                width: 6.6rem;
+                height: 1.2rem;
+                margin: 0 auto;
+                margin-top: 4.5rem;
+                .sumbit {
+                    margin: 0;
+                    padding: 0;
+                    width: 2.933333rem;
+                    height: 100%;
+                    display: inline-block;
+                    float: left;
+                    box-shadow: none;
+                    &.right {
+                        float: right;
+                        background-color: white;
+                        color: #38b63a;
+                        border: 1px solid #38b63a;
+                    }
+                }
+            }
+        }
+    }
+}

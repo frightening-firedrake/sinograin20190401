@@ -14,7 +14,7 @@ detailsWork {
                 ion-title {
                     .toolbar-title {
                         width: 100%;
-                        font-size: 0.36rem;
+                        font-size: .48rem;
                         color: white;
                         font-weight: normal;
                         text-align: center;
@@ -22,9 +22,9 @@ detailsWork {
                 }
                 .label {
                     position: absolute;
-                    right: 0.2rem;
+                    right: .266667rem;
                     margin: 0;
-                    font-size: 0.3rem;
+                    font-size: 0;
                     color: white;
                     float: right;
                 }
@@ -34,16 +34,16 @@ detailsWork {
     ion-content {
         .scroll-content {
             // margin: 0 !important;
-            margin-top: 0.88rem;
+            margin-top: 1.173333rem;
             padding: 0 !important;
             margin-bottom: 0 !important;
             // padding-bottom: 1.2rem !important;
             .list {
                 margin: 0;
-                margin-top: 0.2rem;
+                margin-top: .266667rem;
                 border-top: 1px solid #dbdbdb;
                 border-bottom: 1px solid #dbdbdb;
-                padding: 0 0.35rem;
+                padding: 0 .466667rem;
                 background-color: white;
                 border-bottom: 1px solid #dbdbdb;
                 .item {
@@ -52,7 +52,7 @@ detailsWork {
                             .input-wrapper {
                                 padding-left: 0 !important;
                                 .label {
-                                    width: 2.2rem !important;
+                                    width: 2.933333rem !important;
                                 }
                             }
                         }
@@ -69,20 +69,20 @@ detailsWork {
                     }
                     min-height: 0;
                     padding: 0;
-                    height:1rem;
-                    line-height: 0.99rem;
-                    font-size: 0.3rem;
+                    height:1.333333rem;
+                    line-height: 1.32rem;
+                    font-size: .4rem;
                     color: #666666;
                     border-bottom: 1px solid #dbdbdb;
                     .item-inner {
-                        padding-right: 0.55rem;
+                        padding-right: .733333rem;
                         height: 100%;
                         .input-wrapper {
                             // padding: 0 0.65rem;
                             padding-right: 0;
                             ion-datetime {
                                 padding: 0;
-                                line-height: 0.99rem;
+                                line-height: 1.32rem;
                                 text-align: left;
                                 // margin-right:1rem;
                             }
@@ -90,7 +90,7 @@ detailsWork {
                                 margin: 0;
                                 span {
                                     color: #333333;
-                                    font-size: 0.3rem;
+                                    font-size: .4rem;
                                     float: right;
                                 }
                             }
@@ -102,8 +102,8 @@ detailsWork {
                                 ion-icon {
                                     font-weight: normal;
                                     height: 100%;
-                                    font-size: 0.5rem;
-                                    line-height: 0.99rem;
+                                    font-size: .666667rem;
+                                    line-height: 1.32rem;
                                     color: #c8c8c8;
                                 }
                             }
@@ -123,7 +123,7 @@ detailsWork {
                     &.num_data {
                         .item-inner {
                             .input-wrapper {
-                                padding-left: 0.43rem;
+                                padding-left: .573333rem;
                             }
                         }
                     }
@@ -131,7 +131,7 @@ detailsWork {
                         .item-inner {
                             .input-wrapper {
                                 justify-content: space-between;
-                                padding-left: 0.15rem;
+                                padding-left: .2rem;
                                 ion-input {
                                     position: relative;
                                     height: 100%;
@@ -153,7 +153,7 @@ detailsWork {
                     &.data {
                         .item-inner {
                             .input-wrapper {
-                                padding-left: 0.65rem;
+                                padding-left: .866667rem;
                             }
                         }
                     }
@@ -164,7 +164,7 @@ detailsWork {
                             .input-wrapper {
                                 .label {
                                     span {
-                                        font-size: 0.3rem;
+                                        font-size: .4rem;
                                         color: #000000;
                                     }
                                 }
@@ -187,7 +187,7 @@ detailsWork {
                     border-top: none;
                     padding: 0;
                     .item {
-                        padding: 0 0.35rem;
+                        padding: 0 .466667rem;
                         border: none;
                         .item-inner {
                             border-top: 1px solid #dbdbdb;
@@ -213,14 +213,14 @@ detailsWork {
                                 .input-wrapper {
                                     padding: 0;
                                     .label.title_span {
-                                        width: 3.6rem;
+                                        width: 4.8rem;
                                     }
                                 }
                             }
                         }
                     }
                     .list_img {
-                        height: 3.2rem;
+                        height: 4.266667rem;
                         padding: 0;
                         .item-inner {
                             .input-wrapper {
@@ -244,7 +244,7 @@ detailsWork {
                 }
             }
             form {
-                margin-bottom: 0.6rem;
+                margin-bottom: .8rem;
                 .list {
                     .item {
                         &.ng-invalid {
@@ -265,20 +265,20 @@ detailsWork {
                                         color: #666666;
                                     }
                                     .title_span {
-                                        width: 1.7rem;
+                                        width: 2.266667rem;
                                         text-align: right;
                                         float: left;
-                                        font-size: 0.3rem;
+                                        font-size: .4rem;
                                         color: #666666;
                                         &.title_span_font {
                                             color: #000000;
                                         }
                                     }
                                     &.title_span {
-                                        width: 1.7rem;
+                                        width: 2.266667rem;
                                         text-align: right;
                                         float: left;
-                                        font-size: 0.3rem;
+                                        font-size: .4rem;
                                         color: #666666;
                                         &.title_span_font {
                                             color: #000000;
@@ -292,20 +292,20 @@ detailsWork {
                             }
                             button {
                                 min-width: 0;
-                                margin-left: 0.37rem;
+                                margin-left: .493333rem;
                             }
                         }
                     }
                 }
                 .sumbit {
-                    height: 0.9rem;
-                    width: 6rem;
+                    height: 1.2rem;
+                    width: 8rem;
                     margin: 0 auto;
                     background-color: #38b63a;
                     display: block;
-                    margin-top: 0.55rem;
+                    margin-top: .733333rem;
                     .button-inner {
-                        font-size: 0.36rem;
+                        font-size: .48rem;
                     }
                 }
             }

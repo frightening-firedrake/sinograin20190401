@@ -4,6 +4,7 @@ import { HttpService } from '../../../providers/httpService'
 import { noticeViewPage } from './notice_view/notice_view'
 import { detaildPage } from '../../project/details/details'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { sampleDetailsPage } from "./sampledetails/sampledetails"
 
 @Component({
     selector: "notice",
@@ -74,8 +75,11 @@ export class noticePage {
         })
     }
     setNavPush(key: any) {
-        this.navCtrl.push(detaildPage, {
-            "json": key
+        // this.navCtrl.push(detaildPage, {
+        //     "json": key
+        // })
+        this.navCtrl.push(sampleDetailsPage,{
+            "json":key
         })
     }
     // 下拉刷新

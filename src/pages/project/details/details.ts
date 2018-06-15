@@ -1,4 +1,4 @@
-import { Component  } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
 import { BLE } from '@ionic-native/ble';
 import { NativeService } from '../../../providers/nativeService';
@@ -240,7 +240,7 @@ export class detaildPage {
     }
     // 查看图片
     lookPicture(img) {
-        this.photoViewer.show(img,"My title",{share: false})
+        this.photoViewer.show(img, "My title", { share: false })
         console.log(img)
     }
     solve(e) {
@@ -502,7 +502,8 @@ export class detaildPage {
         var length = this.Worknew.value.length || 1
         var wide = this.Worknew.value.wide || 1
         var high = this.Worknew.value.high || 1
-        this.Work.unQuality = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor))
+        this.Work.unQuality = Math.round(this.Work.realVolume * this.Work.aveDensity)
+        // this.Work.unQuality = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor))
         this.loss()
     }
     mianji() {

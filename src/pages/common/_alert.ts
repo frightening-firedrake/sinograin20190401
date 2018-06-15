@@ -36,7 +36,8 @@ export class _alertBomb {
             subTitle: parpam.subTitle,
             buttons: parpam.buttons,
             cssClass:parpam.cssClass,
-            enableBackdropDismiss:false
+            enableBackdropDismiss:false,
+            inputs:parpam.inputs
         });
         if (addInput.length||addInput) {
             $(addInput).each(function (i, v) {

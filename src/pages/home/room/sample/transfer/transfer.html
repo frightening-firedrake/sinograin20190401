@@ -1,0 +1,27 @@
+<app-header title="转移"></app-header>
+<ion-content>
+    <ion-item>
+        <ion-select interface="popover" placeholder="选择样品室">
+            <ion-option></ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-select interface="popover" placeholder="选择柜号">
+            <ion-option></ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-select interface="popover" placeholder="选择位置">
+            <ion-option></ion-option>
+        </ion-select>
+    </ion-item>
+    <button ion-button large color="secondary" class="sumbit" type="button" (click)="getbarcode()">
+        <ion-icon name="qr-scanner"></ion-icon>
+        扫描转移
+    </button>
+    <div class="buttons">
+        <button ion-button large color="secondary" class="sumbit" type="button">确定</button>
+        <button ion-button large color="secondary" class="sumbit right" type="button">取消</button>
+        <div class="both"></div>
+    </div>
+</ion-content>

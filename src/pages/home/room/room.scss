@@ -1,0 +1,209 @@
+room {
+    .search {
+        top: 1.173333rem;
+        // padding: 0 .333333rem;
+        z-index: 10;
+        height: auto;
+        // border-bottom: 1px solid #dedede;
+        position: relative;
+        // background-color: white;
+        z-index: 20;
+        .thead {
+            background-color: white;
+            text-align: center;
+            padding: 0 .333333rem;
+            //  padding: 0 0.3rem ;
+            height: 1.333333rem;
+            //    position:relative;
+            width: 100%;
+            z-index: 11;
+            .col {
+                line-height: 1.333333rem;
+                padding: 0;
+                background-color: #509cfa;
+                ion-select {
+                    max-width: none;
+                    width: 100%;
+                    padding: 0;
+                    display: inline-block;
+                    height: 100%;
+                    // padding: .146667rem.48rem 0 .493333rem;
+                    background-color: transparent;
+                    // border: 1px solid #dfdfdf;
+                    .select-text {
+                        font-size: .4rem;
+                        color: white;
+                        display: inline-block;
+                        width: auto;
+                        height: auto;
+                    }
+                    .select-icon {
+                        display: inline-block;
+                        width: auto;
+                        height: auto;
+                        top: 0;
+                        bottom: 0;
+                        margin: auto 0;
+                        position: absolute;
+                        .select-icon-inner {
+                            color: white;
+                        }
+                    }
+                }
+                ion-label {
+                    margin: 0;
+                    font-size: .4rem;
+                    color: white;
+                }
+            }
+        }
+        .toolbar {
+            height: 100%;
+            min-height: 0;
+            padding: 0;
+            width: 100%;
+            height: 1.333333rem;
+            margin-bottom: .253333rem;
+            background-color: white;
+            border-radius: .133333rem;
+            padding: .253333rem .306667rem .253333rem .32rem;
+            .toolbar-background {
+                background: white;
+                border-color: transparent;
+            }
+            .toolbar-content {
+                height: 100%;
+                width: 100%;
+                .item {
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                    min-height: 0;
+                    .item-inner {
+                        padding: 0;
+                        border-bottom: none;
+                        flex-direction: row-reverse;
+                        .label {
+                            margin: 0;
+                            height: 100%;
+                            font-size: .4rem;
+                            text-align: right;
+                            line-height: 1.173333rem;
+                            color: transparent;
+                        }
+                        ion-select {
+                            padding: 0;
+                            background-color: #f2f2f2;
+                            width: 49%;
+                            height: .8rem;
+                            max-width: none;
+                            padding-right: .333333rem;
+                            padding-left: .293333rem;
+                            padding-top: .106667rem;
+                            // padding:0.15rem 0.26rem 01.7rem 0.25rem;
+                            color: #333333;
+                            font-size: .4rem;
+                            border: 1px solid #dfdfdf;
+                            .select-text {
+                                line-height: 1.5;
+                            }
+                            .select-icon {
+                                .select-icon-inner {
+                                    top: 50%;
+                                    bottom: 50%;
+                                    margin-top: auto;
+                                    margin-bottom: auto;
+                                }
+                            }
+                            button {
+                                padding: 0;
+                                width: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ion-content {
+        margin-top: 1.173333rem;
+        .scroll-content {
+            padding: 0 .333333rem;
+            background-color: white !important;
+            border-top: none !important;
+            .grid {
+                //    margin-top:1rem;
+                padding: 0;
+                .row {
+                    padding: 0;
+                    .col {
+                        padding: 0;
+                        text-align: center;
+                    }
+                }
+                .tbody {
+                    padding: 0 .013333rem;
+                    .col {
+                        height: 1.333333rem;
+                        border-bottom: 1px solid #dbdbdb;
+                        ion-label {
+                            height: 100%;
+                            margin: 0;
+                            line-height: 1.333333rem;
+                            color: #666666;
+                            font-size: .32rem;
+                            &.state {
+                                font-size: .4rem;
+                                color: #333333;
+                                &.full {
+                                    &:before {
+                                        content: "";
+                                        width: .32rem;
+                                        display: inline-block;
+                                        height: .32rem;
+                                        border-radius: 50%;
+                                        background-color: #c81212;
+                                    }
+                                    span {
+                                        color: #c81212;
+                                    }
+                                }
+                                &.notfull {
+                                    &:before {
+                                        content: "";
+                                        width: .32rem;
+                                        display: inline-block;
+                                        height: .32rem;
+                                        border-radius: 50%;
+                                        background-color: #e2b028;
+                                    }
+                                    span {
+                                        color: #e2b028;
+                                    }
+                                }
+                                &.free {
+                                    &:before {
+                                        content: "";
+                                        width: .32rem;
+                                        display: inline-block;
+                                        height: .32rem;
+                                        border-radius: 50%;
+                                        background-color: #38b63a;
+                                    }
+                                    span {
+                                        color: #38b63a;
+                                    }
+                                }
+                                span {
+                                    font-size: inherit;
+                                    margin-right: .36rem;
+                                    margin-left: .133333rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

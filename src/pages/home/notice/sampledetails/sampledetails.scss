@@ -1,0 +1,83 @@
+sampledetails {
+    ion-content {
+        .scroll-content {
+            margin-top: 1.173333rem;
+            padding: 0 !important;
+            margin-bottom: 0 !important;
+            .list {
+                margin: 0;
+                margin-top: .266667rem;
+                border-top: 1px solid #dbdbdb;
+                border-bottom: 1px solid #dbdbdb;
+                padding: 0 .466667rem;
+                background-color: white;
+                .item {
+                    min-height: 0;
+                    padding: 0;
+                    height: 1.333333rem;
+                    line-height: 1.32rem;
+                    font-size: .4rem;
+                    color: #666666;
+                    border-top: 1px solid #dbdbdb;
+                    .item-inner {
+                        padding-right: .733333rem;
+                        height: 100%;
+                        .input-wrapper {
+                            // padding: 0 0.65rem;
+                            padding-right: 0;
+                            ion-datetime {
+                                padding: 0;
+                                line-height: 1.32rem;
+                                text-align: left;
+                                // margin-right:1rem;
+                            }
+                            .label {
+                                margin: 0;
+                                span {
+                                    color: #333333;
+                                    font-size: .4rem;
+                                    float: right;
+                                }
+                                .title_span {
+                                    width: 2.266667rem;
+                                    text-align: right;
+                                    float: left;
+                                    font-size: .4rem;
+                                    color: #666666;
+                                    &.title_span_font {
+                                        color: #000000;
+                                    }
+                                }
+                            }
+                        }
+                        button {
+                            margin: 0;
+                            height: 100%;
+                            .button-inner {
+                                ion-icon {
+                                    font-weight: normal;
+                                    height: 100%;
+                                    font-size: .666667rem;
+                                    line-height: 1.32rem;
+                                    color: #c8c8c8;
+                                }
+                            }
+                        }
+                    }
+                    &:last-child {
+                        border-bottom: none;
+                        .item-inner {
+                            // border-bottom: none !important;
+                        }
+                    }
+                    &:first-child {
+                        border-top: none !important;
+                        .item-inner {
+                            border-top: none !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -10,6 +10,10 @@ import { NoCode } from './nocode/nocode';
 import { libraryPage } from './nocode/library/library'
 import { codePage } from "./code/code"
 import { roomPage } from './room/room'
+import { SamplePage } from "./room/sample/sample"
+import { transferPage } from "./room/sample/transfer/transfer"
+import { sampleDetailsPage } from "./notice/sampledetails/sampledetails"
+
 // import { detaildPage } from '../project/details/details'
 
 import { HomeService } from './home.serve';
@@ -26,7 +30,10 @@ import { StorageService } from '../../providers/locationstorageService'
         NoCode,
         libraryPage,
         codePage,
-        roomPage
+        roomPage,
+        SamplePage,
+        transferPage,
+        sampleDetailsPage
     ],
     imports: [
         CommonModule,
@@ -41,7 +48,10 @@ import { StorageService } from '../../providers/locationstorageService'
         NoCode,
         libraryPage,
         codePage,
-        roomPage
+        roomPage,
+        SamplePage,
+        transferPage,
+        sampleDetailsPage
     ],
     providers: [
         HomeService,

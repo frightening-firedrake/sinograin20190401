@@ -9,10 +9,10 @@ import { StorageService } from '../../providers/locationstorageService'
 
 import { CommonsModule } from '../common/common.module';
 import { ProjectPage } from './project';
-import { safePage } from './safe/safe'
-import { safeViewPage } from './safe/safe_view/safe_view'
-import { workPage } from './work/work'
-import { workViewPage } from './work/work_view/work_view'
+// import { safePage } from './safe/safe'
+// import { safeViewPage } from './safe/safe_view/safe_view'
+// import { workPage } from './work/work'
+// import { workViewPage } from './work/work_view/work_view'
 import { detaildPage } from './details/details'
 import { detailsWorkPage } from './details/detailsWork/detailsWork'
 import { detaSafePage } from './details/detailsSafe/detailsSafe'
@@ -24,10 +24,10 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
 @NgModule({
     declarations: [
         ProjectPage,
-        safePage,
-        safeViewPage,
-        workPage,
-        workViewPage,
+        // safePage,
+        // safeViewPage,
+        // workPage,
+        // workViewPage,
         detaildPage,
         detailsWorkPage,
         detaSafePage,
@@ -41,10 +41,10 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     ],
     entryComponents: [
         ProjectPage,
-        safePage,
-        safeViewPage,
-        workPage,
-        workViewPage,
+        // safePage,
+        // safeViewPage,
+        // workPage,
+        // workViewPage,
         detaildPage,
         detailsWorkPage,
         detaSafePage,
