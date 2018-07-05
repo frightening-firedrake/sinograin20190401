@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicPageModule } from 'ionic-angular';
-import { HomeService } from '../home/home.serve';
 import { Camera } from '@ionic-native/camera';
 import { BLE } from '@ionic-native/ble';
 import { _alertBomb } from '../common/_alert'
@@ -52,7 +51,6 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
         Samplelist
     ],
      providers:[
-        HomeService,
         Camera,
         _alertBomb,
         BLE,

@@ -66,6 +66,9 @@ export class  Samplelist{
       console.log(res)
       // console.log(res.json(),"color:blue")
       this.gendrslist = res.json()["rows"]
+      this.gendrslist = this.gendrslist.filter(v=>{
+        return v.sampleState<4
+      })
     })
   }
   ionViewWillEnter() {

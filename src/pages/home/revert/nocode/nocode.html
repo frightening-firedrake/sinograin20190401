@@ -1,0 +1,32 @@
+<app-header title="样品信息"></app-header>
+<ion-content>
+    <ion-list class="lists_input">
+        <ion-item type="ion-item" ion-item>
+            <span class="title_span">{{number}}:</span>
+            <!--<span>{{}}</span>-->
+        </ion-item>
+        <ion-item type="ion-item" ion-item>
+            <span class="title_span">样品入库时间:</span>
+            <span>{{data | date: 'yyyy-MM-dd'}}</span>
+        </ion-item>
+    </ion-list>
+    <ion-list class="lists_input">
+        <ion-item type="ion-item" ion-item>
+            <span class="title_span">入库签名:</span>
+            <span>admin</span>
+        </ion-item>
+        <ion-item type="ion-item" ion-item>
+            <span class="title_span">存放位置:</span>
+            <span>1室-11柜-24</span>
+        </ion-item>
+        <ion-item type="ion-item" ion-item>
+            <span class="title_span">领取人:</span>
+            <span>admin</span>
+        </ion-item>
+        <ion-item type="ion-item" ion-item>
+            <span class="title_span">领取日期:</span>
+            <span>2018-09-07</span>
+        </ion-item>
+    </ion-list>
+    <button ion-button color="secondary" class="submit" (click)="revert()">归还样品</button>
+</ion-content>

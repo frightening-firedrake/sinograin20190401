@@ -23,11 +23,16 @@ export class NoCode {
     nocode;
     librarys;
     _beizhu;
+    _creatTime;
     gendrslist;
     _xinzhi = "请选择性质";
-    _pinzhong = "请选择品种";
+    _pinzhong;
+    formdata = {
+        beizhu: "",
+        pinzhong: ""
+    }
     addButton = {
-        text: "确认"
+        text: ""
     }
     constructor(
         private _alert: _alertBomb,
@@ -47,19 +52,21 @@ export class NoCode {
         })
         this.nocode = this.FormBuilder.group({
             beizhu: ["", Validators.required],
+            pingzhong: ["", Validators.required]
         })
         this._beizhu = this.nocode.controls["beizhu"]
+        this._pinzhong = this.nocode.controls["pingzhong"]
     }
-    ionViewDidEnter(){
-         //置空
-        this._zhishuku = "请选择直属库"
-        this._kudian = "请选择库点"
-        this._huoweihao = null
-        this._pinzhong = "请选择品种"
-        this._xinzhi = "请选择性质"
-        this._number = null
-        this._chandi = null
-        this.dataTime = null
+    ionViewDidEnter() {
+        //置空
+        this._zhishuku = ""
+        this._kudian = ""
+        this._huoweihao = ""
+        // this._pinzhong = ""
+        this._xinzhi = ""
+        this._number = ""
+        this._chandi = ""
+        this.dataTime = ""
         this.nocode.value.beizhu = null
     }
     zhishuku() {
@@ -75,9 +82,9 @@ export class NoCode {
                 value: v.id,
             })
         })
-        this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
+        this._alert._alertSmlpe(parpam,this.addButton, addInput, data => {
             this.librarys = this.Companyarr.filter((v, i) => {
-                return v.id == data
+                return v.id == data.value
             })
             this._zhishuku = this.librarys[0].libraryName
         })
@@ -100,7 +107,7 @@ export class NoCode {
             });
             this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
                 var kudianname = this.gendrslist.filter((v, i) => {
-                    return v.id == data
+                    return v.id == data.value
                 })
                 this._kudian = kudianname[0].libraryName
             })
@@ -134,16 +141,21 @@ export class NoCode {
             {
                 type: 'radio',
                 label: '小麦',
-                value: '小麦',
+                value: '1',
             },
             {
                 type: 'radio',
                 label: '玉米',
-                value: '玉米'
+                value: '2'
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            this._pinzhong = data
+            this.formdata.pinzhong = data.value
+            if (data.value`` == 1) {
+                this.nocode.value.pingzhong = "小麦"
+            } else {
+                this.nocode.value.pingzhong = "玉米"
+            }
         })
     }
     xinzhi() {
@@ -178,13 +190,26 @@ export class NoCode {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            this._xinzhi = data
+            this._xinzhi = data.value
         })
     }
-    pop(){
+    pop() {
         this.navCtrl.pop()
     }
     onSubmit(nocode) {
-        this.navCtrl.push(libraryPage, { "testnum": "20180029" })
+        let params = {
+            position: this._huoweihao,
+            sort: nocode.value.pingzhong,
+            quality: this._xinzhi,
+            amount: this._number,
+            originPlace: this._chandi,
+            gainTime: this.dataTime,
+            remark: nocode.value.beizhu,
+            otherState: 2
+        }
+        this.Http.post("grain/sample/saveRuku", params).subscribe(res => {
+            this.navCtrl.push(libraryPage, { "testnum": res.json() })
+        })
+
     }
 }

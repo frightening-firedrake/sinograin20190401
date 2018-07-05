@@ -154,7 +154,7 @@ export class NativeService {
    * 统一调用此方法显示loading
    * @param content 显示的内容
    */
-  showLoading(content: string = ''): void {
+  showLoading(content: string = '加载中'): void {
     if (!this.loadingIsOpen) {
       this.loadingIsOpen = true;
       this.loading = this.loadingCtrl.create({

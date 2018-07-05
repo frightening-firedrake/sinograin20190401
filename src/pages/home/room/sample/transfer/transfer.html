@@ -1,18 +1,18 @@
 <app-header title="转移"></app-header>
 <ion-content>
     <ion-item>
-        <ion-select interface="popover" placeholder="选择样品室">
-            <ion-option></ion-option>
+        <ion-select [(ngModel)]="select_sample" interface="popover" placeholder="选择样品室" (ngModelChange)="selectSample()">
+            <ion-option *ngFor="let _selectSample of _sample" [value]="_selectSample.id">{{_selectSample.depot}}</ion-option>
         </ion-select>
     </ion-item>
     <ion-item>
-        <ion-select interface="popover" placeholder="选择柜号">
-            <ion-option></ion-option>
+        <ion-select interface="popover" [(ngModel)]="select_counter" placeholder="选择柜号" (ngModelChange)="selectcounter()">
+            <ion-option *ngFor="let counterid of counter" [value]="counterid.id">{{counterid.counter}}</ion-option>
         </ion-select>
     </ion-item>
     <ion-item>
-        <ion-select interface="popover" placeholder="选择位置">
-            <ion-option></ion-option>
+        <ion-select interface="popover" [(ngModel)]="select_places" placeholder="选择位置">
+            <ion-option *ngFor="let placesid of places" [value]="placesid.id">{{placesid.place}}</ion-option>
         </ion-select>
     </ion-item>
     <button ion-button large color="secondary" class="sumbit" type="button" (click)="getbarcode()">
@@ -20,8 +20,8 @@
         扫描转移
     </button>
     <div class="buttons">
-        <button ion-button large color="secondary" class="sumbit" type="button">确定</button>
-        <button ion-button large color="secondary" class="sumbit right" type="button">取消</button>
+        <button ion-button large color="secondary" class="sumbit" type="button" (click)="submit()" [disabled]="!select_places">确定</button>
+        <button ion-button large color="secondary" class="sumbit right" type="button" (click)="clear()">取消</button>
         <div class="both"></div>
     </div>
 </ion-content>

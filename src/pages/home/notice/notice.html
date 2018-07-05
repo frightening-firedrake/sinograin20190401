@@ -14,8 +14,8 @@
             </ion-item>
 
         </ion-toolbar>
-        <ion-row class="thead">
-            <!--<ion-col col-4>
+        <ion-row class="thead" *ngIf="liststate==1">
+            <ion-col col-4>
                 <ion-label>扦样编号</ion-label>
             </ion-col>
             <ion-col col-2>
@@ -26,7 +26,9 @@
             </ion-col>
             <ion-col col-3>
                 <ion-label>状态</ion-label>
-            </ion-col>-->
+            </ion-col>
+        </ion-row>
+        <ion-row class="thead" *ngIf="liststate==2">
             <ion-col col-4>
                 <ion-label>检验编号</ion-label>
             </ion-col>
@@ -42,7 +44,9 @@
         </ion-row>
     </ion-header>
 </form>
-<ion-content>
+<ion-content [ngClass]="{'none':heardershow}">
+
+    <prompt [promptObj]=promptObj [hidden]=promp></prompt>
     <!--<div class="classify">-->
     <!--<div class="applye" *ngSwitchCase="'applye'">
             <ion-list>
@@ -211,9 +215,7 @@
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-
-    <ion-grid>
-
+    <ion-grid *ngIf="liststate==1">
         <ion-row class="tbody" (click)="setNavPush(list)" *ngFor="let list of gendrslist">
             <ion-col col-4>
                 <ion-label>{{list.sampleNo}}</ion-label>
@@ -229,6 +231,22 @@
                 <ion-label *ngSwitchCase="-1">未扦样</ion-label>
                 <ion-label *ngSwitchCase="2">入库</ion-label>
                 <ion-label *ngSwitchDefault>未扦样</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="liststate==2">
+        <ion-row class="tbody" (click)="setNavPushsample(list)" *ngFor="let list of gendrslist">
+            <ion-col col-4>
+                <ion-label>{{list.sampleNum}}</ion-label>
+            </ion-col>
+            <ion-col col-2>
+                <ion-label>{{list.position}}</ion-label>
+            </ion-col>
+            <ion-col col-3>
+                <ion-label>{{list.autograph}}</ion-label>
+            </ion-col>
+            <ion-col col-3>
+                <ion-label>{{list.storageTime}}</ion-label>
             </ion-col>
         </ion-row>
     </ion-grid>

@@ -4,11 +4,12 @@ derails {
         height: auto;
         position: relative;
         .segment {
-            background-color: white;
+            // background-color: white;
             .segment-button {
                 height: 1.333333rem;
                 font-size: .4rem;
                 color: #333333;
+                background-color: white;
                 line-height: 1.333333rem;
                 border-width: .053333rem;
                 border-color: white;

@@ -161,8 +161,6 @@ export class detaildPage {
         this.classify = "new"
         this.sample = this.params.get('json')
         this._amount = this.sample.amount
-        console.log(this.sample.amount)
-        console.log(this.sample)
         this.code = this.sample.sampleNo
         this._barnTime = this.sample.barnTime.substring(0, 7)
         // safetyReport/data
@@ -173,9 +171,7 @@ export class detaildPage {
             params: `{"sampleId":"${this.sample.id}"}`
         }
         this.Http.post("/grain/manuscript/data", this.sampleId).subscribe(res => {
-            console.log(res.json())
             let work = res.json()
-            // console.log(work["rows"].length)
             if (work["rows"].length) {
                 this.Work_flag = true
                 this.Work = work["rows"][0]
@@ -187,25 +183,20 @@ export class detaildPage {
             "id": this.sample.pLibraryId
         }
         this.Http.post("/grain/library/get", library).subscribe(res => {
-            console.log(res)
             this.plibraryName = res.json()["libraryName"]
         })
         // 安全报告的数据
         this.Http.post("/grain/safetyReport/data", this.sampleId).subscribe(res => {
-            console.log(res.json())
             let safe = res.json()
             if (safe["rows"].length) {
                 this.Safe_flag = true
                 this.Safe = safe["rows"]
-                console.log(this.Safe[0].images.split(","))
                 for (var i = 0; i < this.Safe.length; i++) {
                     this.Safe[i].images = this.Safe[i].images.split(",")
                     this.Safe[i].images.forEach((index, v) => {
-                        console.log(this.Safe[i].images[v])
                         this.Safe[i].images[v] = `${APP_SERVE_URL}grain/upload/picture/${index}`
                     })
                 }
-                console.log(this.Safe)
             } else {
                 this.Safe_flag = false
             }
@@ -218,15 +209,12 @@ export class detaildPage {
 
     }
     segmentChanged(event) {
-        console.log(event)
         switch (event.value) {
             case "unsolved":
                 this._unsolvedimg = []
                 this._unsolved = this.Safe.filter((i, v) => {
                     return i.isDeal == -1
                 })
-
-                console.log(this._unsolvedimg)
                 break;
             case "solve":
                 this._solveimg = []
@@ -241,7 +229,6 @@ export class detaildPage {
     // 查看图片
     lookPicture(img) {
         this.photoViewer.show(img, "My title", { share: false })
-        console.log(img)
     }
     solve(e) {
         // console.log(e)
@@ -253,14 +240,11 @@ export class detaildPage {
             this.Safe_img = []
             this.problem = "all"
             this.Http.post("/grain/safetyReport/data", this.sampleId).subscribe(res => {
-                console.log(res.json())
                 let safe = res.json()
                 this.Safe = safe["rows"]
-                console.log(this.Safe[0].images.split(","))
                 for (var i = 0; i < this.Safe.length; i++) {
                     this.Safe[i].images = this.Safe[i].images.split(",")
                     this.Safe[i].images.forEach((index, v) => {
-                        console.log(this.Safe[i].images[v])
                         this.Safe[i].images[v] = `${APP_SERVE_URL}grain/upload/picture/${index}`
                     })
                 }
@@ -269,7 +253,6 @@ export class detaildPage {
         })
     }
     onSubmit(e) {
-        console.log(e, this.Work.id)
         e.value.id = this.Work.id
 
         let data = {
@@ -277,9 +260,7 @@ export class detaildPage {
             type: 2
         }
         this.Http.post("grain/manuscript/saveOrEditMobile", data).subscribe(res => {
-            console.log(res)
         })
-        console.log(e)
     }
     // 没有工作底稿的时候
     Workdetails() {
@@ -298,11 +279,9 @@ export class detaildPage {
             var time = 0;
             var is_conn = false;
             this.BLE.startScan([]).subscribe(res => {
-                console.log(res)
                 if (res.name == "HM-Z3" && !flag) {
                     flag = true;
                     var ble_mac = res.id;
-                    console.log(ble_mac, flag)
                     this.print(ble_mac);
                     setTimeout(function () { return 0 }, 1000);
                     this._ble(res => {
@@ -336,26 +315,27 @@ export class detaildPage {
                                 })
                                 this.sample.sampleState = 1
                             } else {
-                                let params = {
-                                    title: "提示",
-                                    subTitle: "扦样失败,请重新点击打印条形码",
-                                    buttons: [
-                                        {
-                                            text: "确认",
-                                            handler: () => {
+                                if (this.sample.sampleState != 1) {
+                                    let params = {
+                                        title: "提示",
+                                        subTitle: "扦样失败,请重新点击打印条形码",
+                                        buttons: [
+                                            {
+                                                text: "确认",
+                                                handler: () => {
+                                                }
                                             }
-                                        }
-                                    ],
-                                    cssClass: "outsuccse only"
+                                        ],
+                                        cssClass: "outsuccse only"
+                                    }
+                                    let addbuton = {
+                                        text: null
+                                    }
+                                    let addInput = []
+                                    this._alert._alertSmlpe(params, addbuton, addInput, data => {
+                                        console.log(data)
+                                    })
                                 }
-                                let addbuton = {
-                                    text: null
-                                }
-                                let addInput = []
-                                this._alert._alertSmlpe(params, addbuton, addInput, data => {
-                                    console.log(data)
-                                })
-
                             }
                         })
                     });

@@ -29,18 +29,22 @@ export class _alertBomb {
     //         }  单纯的弹出框
     //addInput是单选框每一个选项
 
-    _alertSmlpe(parpam, addButton:any=null, addInput:any=null, callback) {
+    _alertSmlpe(parpam, addButton: any = null, addInput: any = null, callback) {
         let $alert = this._alert.create({
             title: parpam.title,
-            message:parpam.message,
+            message: parpam.message,
             subTitle: parpam.subTitle,
             buttons: parpam.buttons,
-            cssClass:parpam.cssClass,
-            enableBackdropDismiss:false,
-            inputs:parpam.inputs
+            cssClass: parpam.cssClass,
+            enableBackdropDismiss: false,
+            inputs: parpam.inputs
         });
-        if (addInput.length||addInput) {
+        if (addInput.length || addInput) {
             $(addInput).each(function (i, v) {
+                v.handler = function (data) {
+                    $alert.dismiss()
+                    callback(data)
+                }
                 $alert.addInput(v);
             })
         }
@@ -54,7 +58,6 @@ export class _alertBomb {
                 }
             })
         }
-
         $alert.present();
     }
 }

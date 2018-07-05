@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
-import { IonicModule } from 'ionic-angular';
-import { HomeService } from '../home/home.serve';
+import { IonicModule, IonicPageModule } from 'ionic-angular';
 
 import { loginModule } from "../login/login.module"
 import { TabsPage } from "./tabs";
 
 @NgModule({
 
-  declarations: [
-      TabsPage
-      ],
-  imports: [
-      loginModule,
-      IonicModule.forRoot(TabsPage)
+    declarations: [
+        TabsPage
     ],
-  entryComponents: [
-      TabsPage
-      ],
-  providers: [HomeService],
+    imports: [
+        loginModule,
+        IonicPageModule.forChild(TabsPage)
+    ],
+    entryComponents: [
+        TabsPage
+    ],
+    providers: [],
 })
 export class TabModule {
 }

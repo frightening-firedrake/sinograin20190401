@@ -11,9 +11,9 @@ page-about {
         padding: 0 .333333rem;
         z-index: 10;
         height: auto;
-        border-bottom: 1px solid #dedede;
+        // border-bottom: 1px solid #dedede;
         position: relative;
-        background-color: white;
+        // background-color: white;
         z-index: 20;
         .thead {
             text-align: center;
@@ -66,17 +66,19 @@ page-about {
                             width: 49%;
                             height: .8rem;
                             max-width: none;
-                            padding-right: .333333rem;
-                            padding-left: .293333rem;
-                            padding-top: .106667rem;
+                            // padding-top: .106667rem;
                             // padding:0.15rem 0.26rem 01.7rem 0.25rem;
                             color: #333333;
                             font-size: .4rem;
                             border: 1px solid #dfdfdf;
                             .select-text {
+                                margin-top: .106667rem;
+                                padding-left: .293333rem;
                                 line-height: 1.5;
                             }
                             .select-icon {
+                                margin-right: .333333rem;
+                                margin-top: .106667rem;
                                 .select-icon-inner {
                                     top: 50%;
                                     bottom: 50%;

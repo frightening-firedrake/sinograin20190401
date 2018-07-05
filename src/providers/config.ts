@@ -1,7 +1,8 @@
 export const FILE_SERVE_URL = '';//文件存储地址
 // export const APP_SERVE_URL = 'http://m.ityyedu.com/'; 
 // export const APP_SERVE_URL = 'http://localhost:80/'; 
-export const APP_SERVE_URL = 'http://192.168.1.232:8083/'; 
+// export const APP_SERVE_URL = 'http://192.168.1.232:8080/'; 
+export const APP_SERVE_URL = 'http://192.168.1.231:8083/'; 
 
 
 export const DEFAULT_AVATAR = './assets/image/header.png';//用户默认头像

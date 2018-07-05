@@ -1,17 +1,17 @@
 <ion-header class="home_hearder">
-	<ion-navbar hideBackButton="true">
-		<ion-title>登录</ion-title>
-	</ion-navbar>
+    <ion-navbar hideBackButton="true">
+        <ion-title>登录</ion-title>
+    </ion-navbar>
 </ion-header>
 <ion-content>
-    <form  [formGroup]="login" (ngSubmit)="onSubmit(login)">
+    <form [formGroup]="login" (ngSubmit)="onSubmit(login)">
         <ion-list>
             <ion-item>
                 <!--lock-->
                 <ion-icon name='test' class="user_icon" item-start></ion-icon>
                 <!---->
-                <ion-input type="text" placeholder="请输入您的账号"   [formControl]="User.username" style=" background-image:url(assets/image/index/login_03.png);"></ion-input>
-                <ion-icon name='ios-checkmark-circle'*ngIf="this.User.username.valid" class="close_icon" item-end color="secondary" ></ion-icon>
+                <ion-input type="text" placeholder="请输入您的账号" [formControl]="User.username" style=" background-image:url(assets/image/index/login_03.png);"></ion-input>
+                <ion-icon name='ios-checkmark-circle' *ngIf="this.User.username.valid" class="close_icon" item-end color="secondary"></ion-icon>
             </ion-item>
             <ion-item>
                 <!--lock-->

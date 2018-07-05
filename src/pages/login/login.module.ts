@@ -21,7 +21,6 @@ import { _alertBomb } from '../common/_alert'
     providers: [
         _alertBomb,
         HttpService
-
     ],
 })
 

@@ -4,9 +4,9 @@ sample {
         // padding:0 0.25rem;
         z-index: 10;
         height: auto;
-        border-bottom: 1px solid #dedede;
+        // border-bottom: 1px solid #dedede;
         position: relative;
-        background-color: white;
+        // background-color: white;
         z-index: 20;
         .thead {
             text-align: center;
@@ -39,7 +39,7 @@ sample {
                 ion-label {
                     height: 100%;
                     margin: 0;
-                    font-size: .4rem;
+                    font-size: .373333rem;
                     color: white;
                 }
             }
@@ -76,7 +76,7 @@ sample {
                                 margin: 0 auto;
                                 height: .746667rem;
                                 margin-bottom: 0.2rem;
-                                margin-right: .426667rem;
+                                // margin-right: .426667rem;
                                 .searchbar-input-container {
                                     height: 100%;
                                     font-size: .373333rem;
@@ -142,6 +142,7 @@ sample {
         margin-top: 1.173333rem;
         .scroll-content {
             // padding: 0 .333333rem;
+            margin-bottom: 0!important;
             background-color: white !important;
             border-top: none !important;
             .grid {

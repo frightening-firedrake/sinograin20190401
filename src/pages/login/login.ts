@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, ViewController } from "ionic-angular";
+import { NavController, ViewController, App } from "ionic-angular";
 import { StorageService } from '../../providers/locationstorageService'
 import { HttpService } from '../../providers/httpService'
 
@@ -19,12 +19,14 @@ export class loginPage {
     }
     private data: any;
     constructor(public _alert: _alertBomb,
+        public appCtrl: App,
         public viewCtrl: ViewController,
         public FormBuilder: FormBuilder,
         public NavCtrl: NavController,
         public Storage: StorageService,
         public Http: HttpService
     ) {
+
         this.login = FormBuilder.group({
             username: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
             password: ['', Validators.compose([Validators.required, Validators.minLength(4)])]
@@ -67,8 +69,8 @@ export class loginPage {
                 this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
             }
 
-        },error=>{
-           
+        }, error => {
+
         })
         // this.NavCtrl.pop()
         // this.Storage.SetStorage("userLogin", { "username": e.value.username, "passwork": e.value.passwork })

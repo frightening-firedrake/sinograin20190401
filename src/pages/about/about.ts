@@ -1,5 +1,5 @@
 import { Component } from "@angular/core"
-import { NavController, ModalController } from "ionic-angular"
+import { NavController } from "ionic-angular"
 
 import { _alertBomb } from '../common/_alert'
 import { AppVersion } from '@ionic-native/app-version';
@@ -17,20 +17,21 @@ import { loginPage } from '../login/login'
 
 export class AboutPage {
     public userName: string;
+    public roleName
     constructor(
         public _alert: _alertBomb,
         public navCtrl: NavController,
         public Storage: StorageService,
-        public modalCtrl: ModalController,
         public App: AppVersion,
         public Http: HttpService,
-        public iab: InAppBrowser
+        public iab: InAppBrowser,
     ) {
 
     }
     ionViewDidEnter() {
         this.Storage.GetStorage("userLogin").subscribe(res => {
             res.then(suc => {
+                this.roleName = suc.roleName
                 this.userName = suc.userName
             })
         })

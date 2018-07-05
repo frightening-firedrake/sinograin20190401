@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, Platform } from 'ionic-angular';
 import { HttpModule } from "@angular/http";
 import { Toast } from '@ionic-native/toast';
-import { Geolocation } from '@ionic-native/geolocation';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -22,6 +21,7 @@ import { GlobalData } from '../providers/globalData';
 import { HttpService } from '../providers/httpService';
 import { NativeService } from '../providers/nativeService';
 import { StorageService } from '../providers/locationstorageService';
+import { AuthorityService } from '../providers/authority'
 import { Utils } from '../providers/Utils';
 
 
@@ -38,7 +38,10 @@ import { Utils } from '../providers/Utils';
       backButtonIcon: "arrow-back",
       tabsHideOnSubPages: 'true',
       iconMode: 'ios',
-    }, linkConfig),
+      pageTransition: 'ios-transition',
+      swipeBackEnabled:true,
+      // preloadModules:true
+    }),
     IonicStorageModule.forRoot({
       name: 'webapp',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
@@ -61,8 +64,8 @@ import { Utils } from '../providers/Utils';
     NativeService,
     Utils,
     Toast,
-    Geolocation,
     BarcodeScanner,
+    AuthorityService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

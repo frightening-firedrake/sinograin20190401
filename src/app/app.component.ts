@@ -1,7 +1,6 @@
 import { Component, ViewChild, } from '@angular/core';
 import { Platform, Keyboard, ToastController, Nav, IonicApp } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Geolocation } from '@ionic-native/geolocation';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeService } from '../providers/nativeService'
 import { AppVersion } from '@ionic-native/app-version';
@@ -20,7 +19,6 @@ export class MyApp {
   backButtonPressed: boolean = false;
   constructor(
     public platform: Platform,
-    geolocation: Geolocation,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     public Keyboard: Keyboard,

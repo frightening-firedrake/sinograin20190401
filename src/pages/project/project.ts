@@ -73,6 +73,7 @@ export class ProjectPage {
   }
   // 选择被查库点
   changeVersion(list) {
+    this.gendrslist = []
     this.gendersarr = this.samplylist.filter((i, v) => {
       return i.pLibraryId == list
     })

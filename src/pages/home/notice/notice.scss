@@ -131,9 +131,9 @@ notice {
         // padding:0 0.25rem;
         z-index: 10;
         height: auto;
-        border-bottom: 1px solid #dedede;
+        // border-bottom: 1px solid #dedede;
         position: relative;
-        background-color: white;
+        // background-color: white;
         z-index: 20;
         .thead {
             text-align: center;
@@ -143,12 +143,12 @@ notice {
             width: 100%;
             z-index: 11;
             .col {
-                line-height:1.333333rem;
+                line-height: 1.333333rem;
                 padding: 0;
                 background-color: #509cfa;
                 ion-label {
                     margin: 0;
-                    font-size:.4rem;
+                    font-size: .373333rem;
                     color: white;
                 }
             }
@@ -173,22 +173,22 @@ notice {
                         border-bottom: none;
                         flex-direction: row-reverse;
                         .search_screen {
-                            padding-left:.266667rem;
-                            padding-right:.266667rem;
+                            padding-left: .266667rem;
+                            padding-right: .266667rem;
                             // padding-top: 0.24rem;
                             // padding-bottom: 0.46rem;
                             background-color: white;
                             ion-searchbar {
                                 padding: 0;
-                                width:57%;
-                                display:inline-block;
+                                width: 57%;
+                                display: inline-block;
                                 margin: 0 auto;
                                 height: .746667rem;
                                 margin-bottom: 0.2rem;
                                 .searchbar-input-container {
                                     height: 100%;
                                     border-radius: .066667rem;
-                                    font-size:.373333rem;
+                                    font-size: .373333rem;
                                     color: #666666;
                                     border: 1px solid #bfbfbf;
                                     background-color: #ececec;
@@ -197,7 +197,7 @@ notice {
                                     }
                                     .searchbar-search-icon {
                                         left: 90%;
-                                        display:none;
+                                        display: none;
                                         top: 0;
                                         bottom: 0;
                                         margin: auto 0;
@@ -210,24 +210,24 @@ notice {
                                         color: #666666;
                                         background-color: transparent;
                                         padding-left: .266667rem;
-                                        font-size:.373333rem;
+                                        font-size: .373333rem;
                                     }
                                 }
                             }
                         }
-                        .submit{
-                            width:21%;
-                            display:inline-block;
-                            margin:0 auto;
-                            margin-bottom:.133333rem;
-                            margin-top:-.133333rem;
-                            font-size:.4rem;
-                            background-color:#30d05f;
-                            color:white;
-                                img{
-                                    width:.533333rem;
-                                    height:.533333rem;
-                                }
+                        .submit {
+                            width: 21%;
+                            display: inline-block;
+                            margin: 0 auto;
+                            margin-bottom: .133333rem;
+                            margin-top: -.133333rem;
+                            font-size: .4rem;
+                            background-color: #30d05f;
+                            color: white;
+                            img {
+                                width: .533333rem;
+                                height: .533333rem;
+                            }
                             // margin-left:auto;
                         }
                         .buttons {
@@ -246,8 +246,8 @@ notice {
                                 margin: 0;
                                 // width:1.22rem;
                                 overflow: visible;
-                                height:.733333rem;
-                                border-radius:.026667rem;
+                                height: .733333rem;
+                                border-radius: .026667rem;
                                 text-align: center;
                                 // line-height:0.55rem;
                                 color: #999999;
@@ -275,7 +275,7 @@ notice {
                             padding: 0;
                             background-color: #f2f2f2;
                             width: 3.333333rem;
-                            height:.8rem;
+                            height: .8rem;
                             max-width: none;
                             padding-right: .333333rem;
                             padding-left: .293333rem;
@@ -295,6 +295,11 @@ notice {
         }
     }
     ion-content {
+        &.none {
+            .scroll-content {
+                margin-top: 2.3rem !important;
+            }
+        }
         // top:0.88rem;
         // position:relative !important;
         .scroll-content {

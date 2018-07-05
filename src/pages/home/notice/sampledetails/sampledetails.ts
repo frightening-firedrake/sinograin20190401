@@ -12,5 +12,6 @@ export class sampleDetailsPage{
         private params: NavParams
     ){
         this._params = this.params.get("json")
+        console.log(this._params)
     }
 }

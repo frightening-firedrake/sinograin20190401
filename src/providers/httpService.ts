@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 import { Utils } from "./Utils";
 import { GlobalData } from "./globalData";
 import { NativeService } from "./nativeService";
-import { AlertController } from "ionic-angular";
+import { AlertController, ModalController } from "ionic-angular";
 import { APP_SERVE_URL } from "./config";
 import { StorageService } from './locationstorageService';
 import { _alertBomb } from '../pages/common/_alert'
@@ -17,6 +17,7 @@ export class HttpService {
   constructor(public http: Http,
     private globalData: GlobalData,
     private nativeService: NativeService,
+    public modalCtrl: ModalController,
     private alertCtrl: AlertController,
     public Storage: StorageService,
     public _alert: _alertBomb) {
@@ -32,13 +33,12 @@ export class HttpService {
 
     // return this.http.request(url,options);
     return Observable.create((observer) => {
-      // console.info(12);
       this.nativeService.showLoading();
       var t = setTimeout(() => {
         this.nativeService.hideLoading();
         var parpam = {
           title: "提示",
-          subTitle: "网络问题请重试",
+          subTitle: "网络崩溃,别紧张试试看刷新页面",
           buttons: [
             {
               text: "确认",
@@ -55,6 +55,7 @@ export class HttpService {
         var addInput = []
         this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
       }, 10000)
+
       this.Storage.GetStorage("userLogin").subscribe(res => {
         res.then(res => {
           //console.log(res)
@@ -73,13 +74,12 @@ export class HttpService {
             clearTimeout(t)
             this.nativeService.hideLoading();
             // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
-            observer.next(res);
+              observer.next(res);
           }, err => {
-            this.nativeService.hideLoading();
-
+            // console.log("111")
+            clearTimeout(t)
             this.requestFailed(url, options, err);//处理请求失败
             observer.error(err);
-            console.info('错误')
           });
         })
       })
@@ -179,8 +179,10 @@ export class HttpService {
   private requestFailed(url: string, options: RequestOptionsArgs, err) {
     this.nativeService.hideLoading();
     console.log('%c 请求失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
-    let msg = '请求发生异常', status = err.status;
-    if (!this.nativeService.isConnecting()) {
+    let msg = "1", status = err.status;
+    if(msg == "1"){
+      return 0;
+    }else if (!this.nativeService.isConnecting()) {
       msg = '请求失败，请连接网络';
     } else {
       if (status === 0) {
@@ -204,6 +206,7 @@ export class HttpService {
       ],
       cssClass: "outsuccse only"
     }).present();
+    
   }
 
   /**
@@ -227,4 +230,5 @@ export class HttpService {
       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(data[p]));
     return str.join("&");
   }
+
 }

@@ -4,7 +4,6 @@ import { HttpService } from '../../../../providers/httpService'
 import { StorageService } from '../../../../providers/locationstorageService'
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { HomeService } from '../../../home/home.serve'
 import { _alertBomb } from '../../../common/_alert'
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { dateSafeServe } from './detasafeSever'
@@ -41,7 +40,6 @@ export class detaSafePage {
     constructor(public params: NavParams,
         public FormBuilder: FormBuilder,
         public camera: Camera,
-        public Home: HomeService,
         public dateser: dateSafeServe,
         public _alert: _alertBomb,
         public Http: HttpService,

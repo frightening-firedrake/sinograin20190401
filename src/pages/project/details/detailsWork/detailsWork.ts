@@ -89,7 +89,7 @@ export class detailsWorkPage {
     isresult = true;
     _isfinsh = false
     private addButton: any = {
-        text: "确认"
+        text: ""
     }
     constructor(
         public parpam: NavParams,
@@ -330,10 +330,10 @@ export class detailsWorkPage {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            that.detaWork.value.isMatch = data
-            that.Work.isMatch = data
+            that.detaWork.value.isMatch = data.value
+            that.Work.isMatch = data.value
             console.log(data)
-            if (data == "是") {
+            if (data.value == "是") {
                 this.isresult = true
             } else {
                 this.isresult = false
@@ -374,8 +374,8 @@ export class detailsWorkPage {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            that.detaWork.value.barnType = data
-            that.Work.barnType = data
+            that.detaWork.value.barnType = data.value
+            that.Work.barnType = data.value
         })
     }
     // 质量的弹框
@@ -402,8 +402,8 @@ export class detailsWorkPage {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            that.detaWork.value.qualityGrade = data
-            that.Work.qualityGrade = data
+            that.detaWork.value.qualityGrade = data.value
+            that.Work.qualityGrade = data.value
         })
     }
     // 入库方式
@@ -425,10 +425,8 @@ export class detailsWorkPage {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            that.detaWork.value.putWay = data
-            that.Work.putWay = data
-            // console.log(data)
-            console.log(data)
+            that.detaWork.value.putWay = data.value
+            that.Work.putWay = data.value
 
         })
     }

@@ -4,25 +4,36 @@
         <ion-list class="lists_input">
             <ion-item type="ion-item" ion-item (click)="zhishuku()">
                 <span class="title_span">被查直属库:</span>
-                <span>{{_zhishuku}}</span>
+                <span>{{_zhishuku||"被查直属库"}}</span>
             </ion-item>
             <ion-item type="ion-item" ion-item (click)="kudian()">
                 <span class="title_span">被查库点:</span>
-                <span>{{_kudian}}</span>
+                <span>{{_kudian||"被查库点"}}</span>
             </ion-item>
             <ion-item type="ion-item" class="num" ion-item>
                 <ion-label class="title_span">货位号:</ion-label>
                 <ion-input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="_huoweihao" placeholder="请填写货位号"></ion-input>
             </ion-item>
+            <ion-item type="ion-item" class="num" ion-item>
+                <ion-label class="title_span"><span class="title_span">入库时间:</span></ion-label>
+                <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [ngModelOptions]="{standalone: true}" [(ngModel)]="_creatTime" placeholder="入库时间"></ion-datetime>
+            </ion-item>
         </ion-list>
         <ion-list class="lists_input">
-            <ion-item type="ion-item" ion-item (click)="pinzhong()">
-                <span class="title_span">品种:</span>
-                <span>{{_pinzhong}}</span>
+            <ion-item type="ion-item" class="num" ion-item (click)="pinzhong()">
+                <ion-label class="title_span">品种:</ion-label>
+                <ion-label class="float_label" [ngSwitch]="formdata.pinzhong">
+                    <ion-input type="text" *ngSwitchCase="1" readonly="true" value="玉米" [formControl]="_pinzhong"></ion-input>
+                    <ion-input type="text" *ngSwitchCase="2" readonly="true" value="小麦" [formControl]="_pinzhong"></ion-input>
+                    <ion-input type="text" *ngSwitchDefault readonly="true" [formControl]="_pinzhong" value=""></ion-input>
+
+                </ion-label>
+                <!--<ion-input type="text" placeholder="品种" readonly [formControl]="_pinzhong" [(value)]="nocode.value.pingzhong"></ion-input>-->
+                <!--<span>{{nocode.value.pingzhong||"品种"}}</span>-->
             </ion-item>
             <ion-item type="ion-item" ion-item (click)="xinzhi()">
                 <span class="title_span">性质:</span>
-                <span>{{_xinzhi}}</span>
+                <span>{{_xinzhi||"性质"}}</span>
             </ion-item>
             <ion-item type="ion-item" class="num" ion-item>
                 <ion-label class="title_span">数量:</ion-label>
@@ -36,7 +47,7 @@
         <ion-list class="lists_input">
             <ion-item type="ion-item" class="num" ion-item>
                 <ion-label class="title_span"><span class="title_span">收获年度:</span></ion-label>
-                <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [ngModelOptions]="{standalone: true}" [(ngModel)]="dataTime"></ion-datetime>
+                <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [ngModelOptions]="{standalone: true}" [(ngModel)]="dataTime" placeholder="收获年度"></ion-datetime>
             </ion-item>
             <ion-item type="ion-item" class="num" ion-item>
                 <ion-label class="title_span">备注:</ion-label>

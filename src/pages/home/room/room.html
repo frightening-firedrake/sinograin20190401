@@ -2,16 +2,14 @@
 <ion-header class="search" no-border>
     <ion-toolbar>
         <ion-item>
-            <ion-select interface="popover" placeholder="状态" [(ngModel)]="_state">
+            <ion-select interface="popover" placeholder="状态" [(ngModel)]="_state" (ngModelChange)="selectState()">
                 <ion-option value="1">全部</ion-option>
                 <ion-option value="2">已满</ion-option>
                 <ion-option value="3">未满</ion-option>
-                <ion-option value="3">空闲</ion-option>
+                <ion-option value="4">空闲</ion-option>
             </ion-select>
-            <ion-select interface="popover" placeholder="选择样品室" [(ngModel)]="_sample">
-                <ion-option value="1">样品一室</ion-option>
-                <ion-option value="2">样品二室</ion-option>
-                <ion-option value="3">样品三室</ion-option>
+            <ion-select [(ngModel)]="_select" interface="popover" placeholder="选择样品室" (ngModelChange)="selectSample()">
+                <ion-option *ngFor="let _selectSample of _sample" [value]="_selectSample.id">{{_selectSample.depot}}</ion-option>
             </ion-select>
         </ion-item>
     </ion-toolbar>
@@ -30,28 +28,14 @@
     </ion-refresher>
     <prompt [promptObj]=_promptobj [hidden]=_prompt></prompt>
     <ion-grid [hidden]=!_prompt>
-        <ion-row class="tbody" (click)="sample()">
+        <ion-row class="tbody" (click)="sample(Counter)" *ngFor="let Counter of _Counterlist">
             <ion-col col-6>
-                <ion-label>1号柜</ion-label>
+                <ion-label>{{Counter.counter}}</ion-label>
             </ion-col>
             <ion-col col-6>
-                <ion-label class="state full"><span>36/36</span>已满</ion-label>
-            </ion-col>
-        </ion-row>
-        <ion-row class="tbody">
-            <ion-col col-6>
-                <ion-label>2号柜</ion-label>
-            </ion-col>
-            <ion-col col-6>
-                <ion-label class="state notfull"><span>14/36</span>未满</ion-label>
-            </ion-col>
-        </ion-row>
-        <ion-row class="tbody">
-            <ion-col col-6>
-                <ion-label>3号柜</ion-label>
-            </ion-col>
-            <ion-col col-6>
-                <ion-label class="state free"><span>1/36</span>空闲</ion-label>
+                <ion-label *ngIf="Counter.warehouseUseNumber==36" class="state full"><span>{{Counter.warehouseUseNumber}}/{{Counter.warehouseTotal}}</span>已满</ion-label>
+                <ion-label *ngIf="Counter.warehouseUseNumber<36 && Counter.warehouseUseNumber>36" class="state notfull"><span>{{Counter.warehouseUseNumber}}/{{Counter.warehouseTotal}}</span>未满</ion-label>
+                <ion-label *ngIf="Counter.warehouseUseNumber<36" class="state free"><span>{{Counter.warehouseUseNumber}}/{{Counter.warehouseTotal}}</span>空闲</ion-label>
             </ion-col>
         </ion-row>
         <!--<button ion-button  large color="secondary" (click)="_ble()" class="sumbit" type="button">链接蓝牙</button>-->

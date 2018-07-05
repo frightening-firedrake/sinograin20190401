@@ -2,70 +2,70 @@
 <ion-content>
     <ion-list class="lists_input">
         <ion-item>
-            <span class="title_span">创建时间:</span>
-            <span>2018.05.02</span>
+            <span class="title_span">申请时间:</span>
+            <span>{{_params.createTime}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">检验编号:</span>
-            <span>6000301001</span>
+            <span>{{_params.sampleNum}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">性质:</span>
-            <span>ZC</span>
+            <span>{{_params.quality}}</span>
         </ion-item>
     </ion-list>
     <ion-list class="lists_input">
         <ion-item>
             <span class="title_span">被查直属库:</span>
-            <span>襄垣</span>
+            <span>{{_params.formName|slice:0:2}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">产地:</span>
-            <span>河南</span>
+            <span>{{_params.originPlace}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">被查库点:</span>
-            <span>本库</span>
+            <span>{{_params.libraryName}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">品种:</span>
-            <span>小麦</span>
+            <span>{{_params.sort}}</span>
         </ion-item>
     </ion-list>
     <ion-list class="lists_input">
         <ion-item>
             <span class="title_span">代表数量(吨):</span>
-            <span>7818.294</span>
+            <span>{{_params.amount}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">收获年度:</span>
-            <span>河南</span>
+            <span>{{_params.gainTime}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">扦样日期:</span>
-            <span>2017.12.12</span>
+            <span>{{_params.sampleTime}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">备注:</span>
-            <span>秋季普查</span>
+            <span>{{_params.remark}}</span>
         </ion-item>
     </ion-list>
     <ion-list class="lists_input">
         <ion-item>
             <span class="title_span">扦样编号:</span>
-            <span>6000301001</span>
+            <span>{{_params.sampleNo}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">样品入库时间:</span>
-            <span>2017.12.09</span>
+            <span>{{_params.storageTime}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">入库签名:</span>
-            <span>admin</span>
+            <span>{{_params.autograph}}</span>
         </ion-item>
         <ion-item>
             <span class="title_span">存放位置:</span>
-            <span>1室-3号柜-12</span>
+            <span>{{_params.position}}</span>
         </ion-item>
     </ion-list>
 </ion-content>

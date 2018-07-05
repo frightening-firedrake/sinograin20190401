@@ -1,26 +1,26 @@
 <app-header [title]=_sample></app-header>
 <ion-header class="search" no-border>
-    <ion-toolbar>
+    <!--<ion-toolbar>
         <ion-item>
             <div class="search_screen">
-                <ion-searchbar placeholder="请输入扦样编号进行搜索" [(ngModel)]="myInput" name="kkk"></ion-searchbar>
+                <ion-searchbar placeholder="请输入检验编号进行搜索" [(ngModel)]="myInput" name="kkk"></ion-searchbar>
                 <button ion-button block outline color="secondary" class="submit">搜索</button>
             </div>
         </ion-item>
-    </ion-toolbar>
+    </ion-toolbar>-->
     <ion-row class="thead">
         <ion-col col-1 class="check">
             <ion-label>
-                <ion-checkbox></ion-checkbox>
+                <ion-checkbox (click)="updateall()" [(ngModel)]="_update"></ion-checkbox>
             </ion-label>
         </ion-col>
         <ion-col col-1>
             <ion-label>编号</ion-label>
         </ion-col>
-        <ion-col col-3>
+        <ion-col col-2>
             <ion-label>检验编号</ion-label>
         </ion-col>
-        <ion-col col-3>
+        <ion-col col-4>
             <ion-label>存放位置</ion-label>
         </ion-col>
         <ion-col col-2>
@@ -36,26 +36,26 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-grid>
-        <ion-row class="tbody" (click)="check(roomonly)" *ngFor="let roomonly of room">
+        <ion-row class="tbody" (click)="check($event,roomonly)" *ngFor="let roomonly of room">
             <ion-col col-1 class="check">
                 <ion-label>
-                    <ion-checkbox [checked]=roomonly.checked></ion-checkbox>
+                    <ion-checkbox (click)="check($event,roomonly)" [checked]=roomonly.checked></ion-checkbox>
                 </ion-label>
             </ion-col>
             <ion-col col-1>
                 <ion-label>{{roomonly.id}}</ion-label>
             </ion-col>
-            <ion-col col-3>
-                <ion-label>{{roomonly.num}}</ion-label>
+            <ion-col col-2>
+                <ion-label>{{roomonly.sampleNum}}</ion-label>
             </ion-col>
-            <ion-col col-3>
-                <ion-label>{{roomonly.position}}</ion-label>
+            <ion-col col-4>
+                <ion-label>{{roomonly.storage}}</ion-label>
             </ion-col>
             <ion-col col-2>
-                <ion-label>{{roomonly.auto}}</ion-label>
+                <ion-label>{{roomonly.autograph}}</ion-label>
             </ion-col>
             <ion-col col-2>
-                <ion-label>{{roomonly.Time}}</ion-label>
+                <ion-label>{{roomonly.createTime}}</ion-label>
             </ion-col>
         </ion-row>
     </ion-grid>
