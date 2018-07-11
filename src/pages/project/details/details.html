@@ -33,6 +33,7 @@
                             <span *ngSwitchCase="1">已扦样</span>
                             <span *ngSwitchCase="-1">未扦样</span>
                             <span *ngSwitchCase="2">入库</span>
+                            <span *ngSwitchCase="3">已分小样</span>
                         </div>
                     </ion-item>
                     <ion-item type="ion-item" class="num" ion-item>
@@ -119,7 +120,7 @@
                         <ion-item ion-item class="num" type="ion-item">
                             <span class="title_span">被检查企业:</span>
                             <!--<ion-input type="number"  [formControl]="Workfrom.enterprise"></ion-input>-->
-                            <span>{{plibraryName}}</span>
+                            <span>{{plibraryName}}库</span>
                             <!--<ion-item ion-ion-item icon-only item-end clear color="light" type="ion-item" class="no_ion-item">
                                 <ion-icon  name="ios-arrow-forward-outline"></ion-icon>
                             </ion-item>-->
@@ -128,8 +129,7 @@
                             <ion-label class="title_span"><span class="title_span">实际查库日:</span></ion-label>
                             <!--<ion-datetime min="1981" cancelText="取消" doneText="选择" displayFormat="YYYY/DD/MM" pickerFormat="YYYY MM DD" [formControl]="Workfrom.realCheckedTime" [(ngModel)]="dateTime"></ion-datetime>-->
 
-                            <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [formControl]="Workfrom.realCheckedTime"
-                                [(ngModel)]="dateTime"></ion-datetime>
+                            <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [formControl]="Workfrom.realCheckedTime" [(ngModel)]="dateTime"></ion-datetime>
                             <!--<ion-item ion-ion-item icon-only item-end clear color="light" type="ion-item" class="no_ion-item">
                                 <ion-icon  name="ios-arrow-forward-outline"></ion-icon>
                             </ion-item>-->
@@ -170,7 +170,7 @@
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
                             <ion-label class="title_span">水分（%）:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.storageWater" [value]="Work.storageWater"></ion-input>
+                            <ion-input type="number" [formControl]="Workfrom.storageWater" [value]="Work.storageWater" (ionBlur)="shuifen('storageWater')"></ion-input>
                             <!--<span>{{Work.storageWater}}</span>-->
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
@@ -188,7 +188,7 @@
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
                             <ion-label class="title_span">水分（%）:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.realWater" [value]="Work.realWater"></ion-input>
+                            <ion-input type="number" [formControl]="Workfrom.realWater" [value]="Work.realWater" (ionBlur)="shuifen('realWater')"></ion-input>
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
                             <ion-label class="title_span">杂质（%）:</ion-label>
@@ -355,7 +355,7 @@
                         </div>
                     </ion-item>
                 </ion-list>-->
-                <button ion-button large color="secondary" class="sumbit" (click)="Safedetails()" >添加问题</button>
+                <button ion-button large color="secondary" class="sumbit" (click)="Safedetails()">添加问题</button>
                 <div padding class="problem_select">
                     <ion-segment [(ngModel)]="problem" (ionChange)="segmentChanged($event)">
                         <ion-segment-button value="all">
@@ -386,7 +386,7 @@
                                 <ion-item class="phont">
                                     <span>图片:</span>
                                     <div class="imgs">
-                                        <img [src]="img" *ngFor="let img of pro.images" alt=""  (click)="lookPicture(img)">
+                                        <img [src]="img" *ngFor="let img of pro.images" alt="" (click)="lookPicture(img)">
                                     </div>
                                 </ion-item>
                                 <ion-item class="succse">
@@ -411,7 +411,7 @@
                                 <ion-item class="phont">
                                     <span>图片:</span>
                                     <div class="imgs">
-                                        <img [src]="img" *ngFor="let img of pro.images" alt=""  (click)="lookPicture(img)">
+                                        <img [src]="img" *ngFor="let img of pro.images" alt="" (click)="lookPicture(img)">
                                     </div>
                                 </ion-item>
                                 <ion-item class="succse">
@@ -436,7 +436,7 @@
                                 <ion-item class="phont">
                                     <span>图片:</span>
                                     <div class="imgs">
-                                        <img [src]="img" *ngFor="let img of pro.images" alt=""  (click)="lookPicture(img)">
+                                        <img [src]="img" *ngFor="let img of pro.images" alt="" (click)="lookPicture(img)">
                                     </div>
                                 </ion-item>
                                 <ion-item class="succse">

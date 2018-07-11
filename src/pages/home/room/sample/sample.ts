@@ -4,6 +4,7 @@ import { _alertBomb } from '../../../common/_alert'
 import { transferPage } from './transfer/transfer'
 import { StorageService } from '../../../../providers/locationstorageService'
 import { HttpService } from '../../../../providers/httpService'
+import { SampleDetailsPage } from './details/details'
 
 
 @Component({
@@ -43,6 +44,11 @@ export class SamplePage {
 
         // console.log(this.roomfalg, this.room)
     }
+    godetails(only){
+        this.navCtrl.push(SampleDetailsPage,{
+            sample:only
+        })
+    }
     check(event, list) {
         event.stopPropagation();
         list.checked = !list.checked
@@ -68,7 +74,6 @@ export class SamplePage {
                 {
                     text: '确认',
                     handler: data => {
-                        console.log(data);
                         let id = [];
                         this.roomfalg.forEach(v => {
                             id.push(v.id)
@@ -129,7 +134,6 @@ export class SamplePage {
                 {
                     text: '取消',
                     handler: data => {
-                        console.log('Saved clicked');
                     }
                 }
             ],
@@ -176,7 +180,6 @@ export class SamplePage {
                 }
             });
         }
-        console.log(this.roomfalg)
     }
     //转移
     transfer() {
@@ -207,7 +210,6 @@ export class SamplePage {
     doRefresh(refresher) {
         // this.secondary()
         this.ionViewDidEnter()
-        console.log(refresher)
         setTimeout(() => {
             refresher.complete();
         }, 2000);

@@ -1,0 +1,49 @@
+<app-header [title]=number></app-header>
+<ion-header class="search" no-border>
+    <ion-grid>
+        <ion-row class="thead">
+            <ion-col col-4>
+                <ion-label>编号</ion-label>
+            </ion-col>
+            <ion-col col-4>
+                <ion-label>扦样编号</ion-label>
+            </ion-col>
+            <ion-col col-4>
+                <ion-label>存放位置</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+<ion-content>
+    <ion-grid *ngIf="!samllsampleflag">
+        <ion-row class="tbody" *ngFor="let list of samllsamplelist.samples;index as i">
+            <ion-col col-4>
+                <ion-label>{{i+1}}</ion-label>
+            </ion-col>
+            <ion-col col-4>
+                <ion-label>{{list.sampleNo}}</ion-label>
+            </ion-col>
+            <ion-col col-4>
+                <ion-label>{{list.storage}}</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="samllsampleflag">
+        <ion-row class="tbody" *ngFor="let list of SamllSamplelistonly;index as i">
+            <ion-col col-4>
+                <ion-label>{{i+1}}</ion-label>
+            </ion-col>
+            <ion-col col-4>
+                <ion-label>{{list.sampleNo}}</ion-label>
+            </ion-col>
+            <ion-col col-4>
+                <ion-label>{{list.storage}}</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <div class="buttons" *ngIf="!samllsampleflag">
+        <button ion-button large color="secondary" class="button" type="submit" (click)="revert()">归还样品</button>
+        <button ion-button large color="secondary" class="button cleard" type="button" (click)="barcode()">扫描搜索样品位置</button>
+    </div>
+    <button ion-button large color="secondary" class="pop" type="submit" (click)="pop()" *ngIf="samllsampleflag">返回</button>
+</ion-content>

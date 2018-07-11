@@ -53,7 +53,6 @@ export class detaSafePage {
             })
         })
         this.data = this.params.get("params")
-        console.log(this.data)
         this.dateser.setImg(this.ImgJson, 0)
         this.detaSafeForm = FormBuilder.group({
 
@@ -70,7 +69,6 @@ export class detaSafePage {
                 this.addrequ = true
 
             }
-            console.log(res.json()["rows"])
             if (res.json()["rows"].length) {
                 this._state = true
                 this.report = res.json()["rows"]
@@ -78,11 +76,9 @@ export class detaSafePage {
                     this.report[i].images = this.report[i].images.split(",")
 
                     this.report[i].images.forEach((index, v) => {
-                        console.log(this.report[i].images[v])
                         this.report[i].images[v] = `${APP_SERVE_URL}grain/upload/picture/${index}`
                     })
                 }
-                console.log(this.report)
             } else {
                 this._state = false
             }
@@ -127,7 +123,6 @@ export class detaSafePage {
                 for (var i = 0; i < this.report.length; i++) {
                     this.report[i].images = this.report[i].images.split(",")
                     this.report[i].images.forEach((index, v) => {
-                        console.log(this.report[i].images[v])
                         this.report[i].images[v] = `${APP_SERVE_URL}grain/upload/picture/${index}`
                     })
                 }
@@ -146,22 +141,16 @@ export class detaSafePage {
             this.addrequ = true
             this.submitName = "提交"
         } else {
-            console.log(e)
             // console.log(this.ImgJson)
             this.dateser.getImg().subscribe(res => {
                 res.forEach((i, v) => {
-                    console.log(i.Imgarr.join())
                     var imgstr = i.Imgarr.join()
-                    console.log(222222222222222222222222222222222222222222222222)
                     var succc = { "problem": this.keyVule[i.id - 1], "images": imgstr, "sampleId": this.data.id, "rummager": this.userName }
                     this.ImgJson.push(JSON.stringify(succc))
-                    console.log(11111111111111111111111111111111111)
-                    console.log(this.ImgJson)
                 });
                 let data = {
                     params: `[${this.ImgJson}]`
                 }
-                console.log(this.ImgJson, data)
                 if (this.ImgJson.length) {
                     this.Http.post("grain/safetyReport/save", data).subscribe(res => {
                         this.isrequire = true
@@ -235,7 +224,6 @@ export class detaSafePage {
 
     }
     segmentChanged(event) {
-        console.log(event)
         switch (event.value) {
             case "unsolved":
                 this._unsolvedimg = []
@@ -253,8 +241,6 @@ export class detaSafePage {
                 //         })
                 //     }
                 // }
-
-                console.log(this._unsolved)
                 break;
             case "solve":
                 this._solveimg = []

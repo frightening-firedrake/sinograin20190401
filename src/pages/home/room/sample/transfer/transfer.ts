@@ -26,7 +26,6 @@ export class transferPage {
         public _alert: _alertBomb,
     ) {
         this.sample = this.params.get("sample")
-        console.log(this.sample)
     }
     ionViewDidEnter() {
         this.Http.post("grain/warehouse/getAll").subscribe(res => {
@@ -35,9 +34,7 @@ export class transferPage {
     }
     getbarcode() {
         this.barcode.scan().then(barcodeData => {
-            console.log(barcodeData)
             if (barcodeData.cancelled) {
-                console.log("User cancelled the action!");
                 return false;
             } else {
                 var textflag = barcodeData.text

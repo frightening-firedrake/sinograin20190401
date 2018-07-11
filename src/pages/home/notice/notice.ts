@@ -57,7 +57,6 @@ export class noticePage {
     getwarehouse() {
         this.promp = true
         this.Http.post("grain/sample/getAll").subscribe(res => {
-            console.log(res.json())
             // this.totle = res.json()["total"]
             // // console.log(res.json(),"color:blue")
             this.gendrslist = res.json()
@@ -72,7 +71,6 @@ export class noticePage {
             page: "1"
         }
         this.Http.post("grain/sample/data", data).subscribe(res => {
-            console.log(res.json())
             this.totle = res.json()["total"]
             // console.log(res.json(),"color:blue")
             this.gendrslist = res.json()["rows"]
@@ -84,7 +82,6 @@ export class noticePage {
             this.myInput = barcodeData.text
             this.secondary()
         }).catch(err => {
-            console.log('Error', err);
         });
     }
     // 搜索
@@ -164,7 +161,6 @@ export class noticePage {
             }
             this.Http.post("grain/sample/data", data).subscribe(res => {
                 this.promp = true
-                console.log(res)
                 // console.log(res.json(),"color:blue")
                 this.gendrslist = res.json()["rows"]
             })
@@ -184,7 +180,6 @@ export class noticePage {
     // 下拉刷新
     doRefresh(refresher) {
         // this.getList()
-        console.log(refresher)
         setTimeout(() => {
             refresher.complete();
         }, 2000);

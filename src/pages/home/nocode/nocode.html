@@ -2,13 +2,14 @@
 <ion-content>
     <form [formGroup]="nocode" (ngSubmit)="onSubmit(nocode)">
         <ion-list class="lists_input">
-            <ion-item type="ion-item" ion-item (click)="zhishuku()">
-                <span class="title_span">被查直属库:</span>
-                <span>{{_zhishuku||"被查直属库"}}</span>
+            <ion-item type="ion-item" class="num" [ngClass]="{'true':formdata.zhishuku}" ion-item (click)="zhishuku()">
+                <ion-label class="title_span">被查直属库:</ion-label>
+                <ion-input type="text" readonly="true" [value]=formdata.zhishuku [formControl]="_zhishuku"></ion-input>
+                <!--<span>{{_zhishuku||"被查直属库"}}</span>-->
             </ion-item>
-            <ion-item type="ion-item" ion-item (click)="kudian()">
-                <span class="title_span">被查库点:</span>
-                <span>{{_kudian||"被查库点"}}</span>
+            <ion-item type="ion-item" class="num" [ngClass]="{'true':formdata.kudian}" ion-item (click)="kudian()">
+                <ion-label class="title_span">被查库点:</ion-label>
+                <ion-input type="text" readonly="true" [value]=formdata.kudian [formControl]="_kudian"></ion-input>
             </ion-item>
             <ion-item type="ion-item" class="num" ion-item>
                 <ion-label class="title_span">货位号:</ion-label>
@@ -23,8 +24,8 @@
             <ion-item type="ion-item" class="num" ion-item (click)="pinzhong()">
                 <ion-label class="title_span">品种:</ion-label>
                 <ion-label class="float_label" [ngSwitch]="formdata.pinzhong">
-                    <ion-input type="text" *ngSwitchCase="1" readonly="true" value="玉米" [formControl]="_pinzhong"></ion-input>
-                    <ion-input type="text" *ngSwitchCase="2" readonly="true" value="小麦" [formControl]="_pinzhong"></ion-input>
+                    <ion-input type="text" *ngSwitchCase="1" readonly="true" value="小麦" [formControl]="_pinzhong"></ion-input>
+                    <ion-input type="text" *ngSwitchCase="2" readonly="true" value="玉米" [formControl]="_pinzhong"></ion-input>
                     <ion-input type="text" *ngSwitchDefault readonly="true" [formControl]="_pinzhong" value=""></ion-input>
 
                 </ion-label>

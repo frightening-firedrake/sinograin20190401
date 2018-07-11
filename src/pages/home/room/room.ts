@@ -40,7 +40,6 @@ export class roomPage {
     doRefresh(refresher) {
         this.selectSample()
         // this.secondary()
-        console.log(refresher)
         setTimeout(() => {
             refresher.complete();
         }, 2000);

@@ -54,7 +54,6 @@ export class MyApp {
     var flag = this.nativeService.isMobile()
     if (flag) {
       this.App.getVersionNumber().then(res => {
-        console.log(res)
         var data = {
           "v": res
         }
@@ -116,7 +115,6 @@ export class MyApp {
       let activeVC = tab.getActive();//通过当前选中的tab获取ViewController
       //activeVC.dismiss()
       let activeNav = activeVC.getNav();//通过当前视图的ViewController获取的NavController
-      console.log(tabs, tab, activeVC, activeNav)
       
       return activeNav.canGoBack() ? activeNav.pop() : this.showExit();//this.showExit()
     })

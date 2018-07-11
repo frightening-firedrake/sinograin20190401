@@ -54,7 +54,7 @@ export class detaildPage {
         remark: ""//备注
     }
     private addButton: any = {
-        text: "确认"
+        text: ""
     }
     classify: any
     Safe_img = [];
@@ -270,6 +270,10 @@ export class detaildPage {
     Safedetails() {
         this.navCtrl.push(detaSafePage, { "params": this.sample })
     }
+    //水分
+    shuifen(el) {
+        this.Work[el] = (this.Worknew.value[el] * 1).toFixed(1)
+    }
     // 扦样信息中的打印条形码的功能
     _sample() {
         this.nativeService.showLoading()
@@ -311,7 +315,6 @@ export class detaildPage {
                                 }
                                 let addInput = []
                                 this._alert._alertSmlpe(params, addbuton, addInput, data => {
-                                    console.log(data)
                                 })
                                 this.sample.sampleState = 1
                             } else {
@@ -333,7 +336,6 @@ export class detaildPage {
                                     }
                                     let addInput = []
                                     this._alert._alertSmlpe(params, addbuton, addInput, data => {
-                                        console.log(data)
                                     })
                                 }
                             }
@@ -347,10 +349,8 @@ export class detaildPage {
 
     }
     print(ble_mac) {
-        console.log(ble_mac)
         this.BLE.stopScan()
         cordova.plugins.barcode.open(ble_mac, res => {
-            console.log("js" + res)
             this.nativeService.hideLoading();
             let parpam = {
                 title: "是否确认扦样",
@@ -381,7 +381,6 @@ export class detaildPage {
                 return 0
             })
         }, err => {
-            console.log("nojs" + err)
             this.nativeService.hideLoading();
             alert("请关闭蓝牙重新连接")
             this.ble_falg = true
@@ -397,7 +396,6 @@ export class detaildPage {
             }
 
         }, err => {
-            console.log(err)
         })
 
 
@@ -435,7 +433,6 @@ export class detaildPage {
     }
     connect(device) {
         this.characteristics = [];
-        console.log(device)
         // cordova.plugins.barcode.open(device.id, res => {
         //             this.nativeService.hideLoading();
 
@@ -451,7 +448,8 @@ export class detaildPage {
         var length = this.Worknew.value.length || 1
         var wide = this.Worknew.value.wide || 1
         var high = this.Worknew.value.high || 1
-        this.Work.difference = Math.round(this.sample.amount * 1000 - (((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1)))
+        // this.Work.difference = Math.round(this.sample.amount * 1000 - (((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1)))
+        this.Work.difference = (this._amount * 1000) - this.Worknew.value.checkNum
         this.slip()
     }
     //差率
@@ -462,7 +460,6 @@ export class detaildPage {
         var wide = this.Worknew.value.wide || 1
         var high = this.Worknew.value.high || 1
         this.Work.slip = ((this.sample.amount * 1000 - (((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1))) / (this.sample.amount * 1000) * 100).toFixed(1)
-        console.log(this.Work.slip)
     }
     // 合计
     loss() {
@@ -472,7 +469,8 @@ export class detaildPage {
         var length = this.Worknew.value.length || 1
         var wide = this.Worknew.value.wide || 1
         var high = this.Worknew.value.high || 1
-        this.Work.checkNum = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1))
+        // this.Work.checkNum = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1))
+        this.Work.checkNum = this.Worknew.value.unQuality + Number(this.Worknew.value.lossWater)  + Number(this.Worknew.value.lossNature)
         this.difference()
     }
     // 测量计算数
@@ -504,7 +502,7 @@ export class detaildPage {
     }
     // 粮食容重
     realCapacity() {
-        this.Work.realCapacity = this.detaWork.value.realCapacity
+        this.Work.realCapacity = this.Worknew.value.realCapacity
     }
     // //容重
     // rongzhong(e) {
@@ -535,9 +533,9 @@ export class detaildPage {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            that.Worknew.value.isMatch = data
-            that.Work.isMatch = data
-            if (data == "是") {
+            that.Worknew.value.isMatch = data.value
+            that.Work.isMatch = data.value
+            if (data.value == "是") {
                 this.isresult = true
             } else {
                 this.isresult = false
@@ -578,9 +576,9 @@ export class detaildPage {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            that.Worknew.value.barnType = data
+            that.Worknew.value.barnType = data.value
             // that._barnType = data
-            that.Work.barnType = data
+            that.Work.barnType = data.value
         })
     }
     // 质量的弹框
@@ -607,8 +605,7 @@ export class detaildPage {
             },
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
-            console.log(data)
-            that.Worknew.value.qualityGrade = data
+            that.Worknew.value.qualityGrade = data.value
             // switch (data) {
             //     case 1:
             //         that._qualityGrade = "一等";
@@ -620,7 +617,7 @@ export class detaildPage {
             //         that._qualityGrade = "三等"
 
             // }
-            that.Work.qualityGrade = data
+            that.Work.qualityGrade = data.value
         })
     }
     // 入库方式
@@ -644,9 +641,8 @@ export class detaildPage {
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             // that.Worknew.value.putWay = data
             // console.log(data)
-            that.Worknew.value.putWay = data
-            console.log(data)
-            that.Work.putWay = data
+            that.Worknew.value.putWay = data.value
+            that.Work.putWay = data.value
         })
     }
     // _ble() {

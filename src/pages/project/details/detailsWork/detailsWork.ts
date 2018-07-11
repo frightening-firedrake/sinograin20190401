@@ -99,7 +99,6 @@ export class detailsWorkPage {
         public navctrl: NavController
     ) {
         this.dateTime = new Date().toISOString();
-        console.log(this.parpam.get("params"))
         this.data = this.parpam.get("params")
         this._amount = this.data.amount * 1000
 
@@ -108,14 +107,12 @@ export class detailsWorkPage {
             params: `{"sampleId":"${this.data.id}"}`
         }
         this.Http.post("/grain/manuscript/data", this.sampleId).subscribe(res => {
-            console.log(res.json())
             let work = res.json()
             // console.log(work["rows"].length)
             if (work["rows"].length) {
                 this.title = "修改工作底稿"
                 // console.log(this.title)
                 this.Work = work["rows"][0]
-                this.callback()
                 // this._isfinsh = true
             } else {
                 this.title = "创建工作底稿"
@@ -129,15 +126,15 @@ export class detailsWorkPage {
             "id": this.data.pLibraryId
         }
         this.Http.post("grain/library/get", library).subscribe(res => {
-            console.log(res)
             this.plibraryName = res.json()["libraryName"]
         })
         // console.log(this.data)        
         // :['', [Validators.minLength(4)]]
 
     }
-    callback() {
-
+    shuifen(font) {
+        this.Work[font] = (this.detaWork.value[font] * 1).toFixed(1)
+        //    this.Work.storageWater = this.Work.storageWater.toFixed(1)
     }
     ionViewDidEnter() {
         // 工作底稿
@@ -146,14 +143,12 @@ export class detailsWorkPage {
         }
         if (this.Work.length) {
             this.Http.post("/grain/manuscript/data", this.sampleId).subscribe(res => {
-                console.log(res.json())
                 let work = res.json()
                 // console.log(work["rows"].length)
                 if (work["rows"].length) {
                     this.title = "修改工作底稿"
                     // console.log(this.title)
                     this.Work = work["rows"][0]
-                    this.callback()
                     // this._isfinsh = true
                 } else {
                     this.title = "创建工作底稿"
@@ -237,7 +232,6 @@ export class detailsWorkPage {
         this.Http.post("grain/manuscript/saveOrEditMobile", data).subscribe(res => {
             this.navctrl.pop()
         })
-        console.log(e)
     }
     // 差数
     difference() {
@@ -246,7 +240,8 @@ export class detailsWorkPage {
         var length = this.detaWork.value.length || 1
         var wide = this.detaWork.value.wide || 1
         var high = this.detaWork.value.high || 1
-        this.Work.difference = Math.round(this.data.amount * 1000 - (((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor) * 1 + (this.detaWork.value.lossWater * 1 + this.detaWork.value.lossNature * 1)))
+        this.Work.difference = (this._amount) - this.detaWork.value.checkNum
+        // this.Work.difference = Math.round(this.data.amount * 1000 - (((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor) * 1 + (this.detaWork.value.lossWater * 1 + this.detaWork.value.lossNature * 1)))
         this.slip()
     }
     //差率
@@ -257,7 +252,6 @@ export class detailsWorkPage {
         var wide = this.detaWork.value.wide || 1
         var high = this.detaWork.value.high || 1
         this.Work.slip = ((this.data.amount * 1000 - (((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor) * 1 + (this.detaWork.value.lossWater * 1 + this.detaWork.value.lossNature * 1))) / (this.data.amount * 1000) * 100).toFixed(1)
-        console.log(this.Work.slip)
     }
     // 合计
     loss() {
@@ -267,7 +261,8 @@ export class detailsWorkPage {
         var length = this.detaWork.value.length || 1
         var wide = this.detaWork.value.wide || 1
         var high = this.detaWork.value.high || 1
-        this.Work.checkNum = Math.round(((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor) * 1 + (this.detaWork.value.lossWater * 1 + this.detaWork.value.lossNature * 1))
+        // this.Work.checkNum = Math.round(((length * wide * high) - deductVolume) * (this.detaWork.value.realCapacity * correctioFactor) * 1 + (this.detaWork.value.lossWater * 1 + this.detaWork.value.lossNature * 1))
+        this.Work.checkNum = this.detaWork.value.unQuality + Number(this.detaWork.value.lossWater) + Number(this.detaWork.value.lossNature)
         this.difference()
     }
     // 测量计算数
@@ -332,7 +327,6 @@ export class detailsWorkPage {
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             that.detaWork.value.isMatch = data.value
             that.Work.isMatch = data.value
-            console.log(data)
             if (data.value == "是") {
                 this.isresult = true
             } else {

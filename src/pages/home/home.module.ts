@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule,IonicPageModule } from 'ionic-angular';
+import { IonicModule, IonicPageModule } from 'ionic-angular';
+import { BLE } from '@ionic-native/ble';
 
 import { CommonsModule } from '../common/common.module';
 import { HomePage } from './home';
@@ -13,8 +14,9 @@ import { roomPage } from './room/room'
 import { SamplePage } from "./room/sample/sample"
 import { transferPage } from "./room/sample/transfer/transfer"
 import { sampleDetailsPage } from "./notice/sampledetails/sampledetails"
-import { ReverNocodePage } from './revert/nocode/nocode'
-import { RevercodePage } from './revert/code/code'
+import { SamllSamplePage } from './revert/samllsample/samllsample'
+import { Revertlist } from './revert/revertlist/revertlist'
+import { SampleDetailsPage } from './room/sample/details/details'
 
 // import { detaildPage } from '../project/details/details'
 
@@ -35,8 +37,9 @@ import { StorageService } from '../../providers/locationstorageService'
         SamplePage,
         transferPage,
         sampleDetailsPage,
-        ReverNocodePage,
-        RevercodePage
+        Revertlist,
+        SamllSamplePage,
+        SampleDetailsPage
     ],
     imports: [
         CommonModule,
@@ -54,13 +57,15 @@ import { StorageService } from '../../providers/locationstorageService'
         SamplePage,
         transferPage,
         sampleDetailsPage,
-        ReverNocodePage,
-        RevercodePage
+        Revertlist,
+        SamllSamplePage,
+        SampleDetailsPage
     ],
     providers: [
         _alertBomb,
         StorageService,
         BarcodeScanner,
+        BLE
     ],
 })
 export class HomeModule {

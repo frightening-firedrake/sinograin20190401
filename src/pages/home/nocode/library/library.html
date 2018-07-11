@@ -3,7 +3,7 @@
     <ion-list class="lists_input">
         <ion-item type="ion-item" ion-item>
             <span class="title_span">扦样编号:</span>
-            <span>{{numbercon.sampleNum?numbercon.sampleNum:numbercon.sampleNo}}</span>
+            <span>{{numbercon.sampleNo?numbercon.sampleNo:numbercon.sampleNo}}</span>
         </ion-item>
         <ion-item type="ion-item" ion-item>
             <span class="title_span">样品入库时间:</span>
@@ -22,9 +22,10 @@
         </ion-item>
         <ion-item type="ion-item" ion-item *ngIf="library">
             <ion-label><span class="title_span">存放位置:</span></ion-label>
-            <ion-select placeholder="存放位置" [(ngModel)]="_position" interface="popover" (ngModelChange)="place()">
+            <!--<ion-select placeholder="存放位置" [(ngModel)]="_position" interface="popover" (ngModelChange)="place()">
                 <ion-option *ngFor="let pos of _positionlist" [value]="pos.place">{{pos.place}}</ion-option>
-            </ion-select>
+            </ion-select>-->
+            <ion-label><span>{{_positionlist[0].place}}</span></ion-label>
         </ion-item>
     </ion-list>
 </ion-content>

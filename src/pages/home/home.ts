@@ -12,8 +12,7 @@ import { noticePage } from './notice/notice'
 import { NoCode } from './nocode/nocode';
 import { codePage } from './code/code'
 import { roomPage } from './room/room'
-import { ReverNocodePage } from './revert/nocode/nocode'
-import { RevercodePage } from "./revert/code/code"
+import { Revertlist } from './revert/revertlist/revertlist'
 
 @Component({
   selector: 'page-home',
@@ -77,69 +76,7 @@ export class HomePage {
   // 样品归还
   revert() {
     this.Authority.validate("库管员").then(() => {
-      var parpam = {
-        title: "是否有扦样条形码？",
-        subTitle: "",
-        buttons: [
-          {
-            text: "无条形码",
-            handler: () => {
-              setTimeout(() => {
-                this.alertModel()
-              }, 50)
-            }
-          },
-          {
-            text: "有条形码",
-            handler: () => {
-              this.navCtrl.push(RevercodePage)
-              // this.barcode.scan().then(barcodeData => {
-              //   if (barcodeData.cancelled) {
-              //     console.log("User cancelled the action!");
-              //     return false;
-              //   } else {
-              //     let params = {
-              //       sampleNo: barcodeData.text
-              //     }
-              //     this.Http.post("grain/sample/getBySampleNo", params).subscribe(res => {
-              //       if (res.json()["sampleState"] == 1) {
-              //         this.navCtrl.push(codePage, { "codenumber": res.json() })
-              //       } else {
-              //         var parpam = {
-              //           title: '提示',
-              //           subTitle: "此样品已入库",
-              //           buttons: [
-              //             {
-              //               text: "确认",
-              //               handler: () => {
-
-              //               }
-              //             }
-              //           ],
-              //           cssClass: "outsuccse only"
-              //         }
-              //         var addbuton = {
-              //           text: null
-              //         }
-              //         var addInput = []
-              //         this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
-              //       }
-              //     })
-
-              //   }
-              // }).catch(err => {
-
-              // });
-            },
-          }
-        ],
-        cssClass: "outsuccse"
-      }
-      var addbuton = {
-        text: null
-      }
-      var addInput = []
-      this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
+      this.navCtrl.push(Revertlist)
     })
   }
   //扫描入库
@@ -159,9 +96,7 @@ export class HomePage {
             text: "有条形码",
             handler: () => {
               this.barcode.scan().then(barcodeData => {
-                console.log(barcodeData)
                 if (barcodeData.cancelled) {
-                  console.log("User cancelled the action!");
                   return false;
                 } else {
                   let params = {
@@ -228,91 +163,5 @@ export class HomePage {
         this.SYYNumber = (respon["SYYNumber"] / 10000).toFixed(2) || "0"
       })
     });
-  }
-
-  alertModel() {
-    var parpam = {
-      title: '无条形码',
-      subTitle: "检验编号:",
-      buttons: [
-        {
-          text: '确认',
-          handler: data => {
-            // sample/data   params
-            let handparams = {
-              sampleNum: data.sampleNum
-            }
-            //获取领取人
-            this.Http.post("/grain/handover/getBySampleNum", handparams).subscribe(res => {
-              let respon = res.json()
-              if (respon) {
-                //获取样品信息
-                let params = {
-                  sampleNum: data.sampleNum
-                }
-                this.Http.post('/grain/sample/data', { params: JSON.stringify(params) }).subscribe(res => {
-                  let datares = res.json()
-                  if (datares["total"]) {
-                    datares["rows"][0].receiptor = respon["rows"][0].receiptor
-                    this.navCtrl.push(ReverNocodePage, { sampleNum: datares["rows"][0] })
-                  } else {
-                    this.revertModel()
-                  }
-                })
-              } else {
-                this.revertModel()
-              }
-            })
-            // this.Http.post('/grain/sample/data', { params: JSON.stringify(params) }).subscribe(res => {
-            //   let respon = res.json()
-            //   if (respon["total"]) {
-            //     this.navCtrl.push(ReverNocodePage, { sampleNum: respon["rows"][0] })
-            //   } else {
-            //     this.revertModel()
-            //   }
-            // })
-          }
-        },
-        {
-          text: '取消',
-          handler: data => {
-
-          }
-        }
-      ],
-      cssClass: "outsuccse input",
-      inputs: [
-        {
-          name: 'sampleNum',
-          type: "text",
-          placeholder: '请输入检验编号'
-        },
-      ]
-    }
-    var addbuton = {
-      text: null
-    }
-    var addInput = []
-    this._alert._alertSmlpe(parpam, addbuton, addInput, data => { })
-  }
-  revertModel() {
-    var parpam = {
-      title: '提示',
-      subTitle: "此样品暂无领取信息",
-      buttons: [
-        {
-          text: "确认",
-          handler: () => {
-
-          }
-        }
-      ],
-      cssClass: "outsuccse only"
-    }
-    var addbuton = {
-      text: null
-    }
-    var addInput = []
-    this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
   }
 }

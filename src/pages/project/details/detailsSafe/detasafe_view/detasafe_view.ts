@@ -57,7 +57,6 @@ export class detasafeViewPage {
                     text: "删除",
                     handler: () => {
                         var that = this
-                        console.log(that.imgdatalist,that.num,that.default)
                         this.imgdatalist = this.imgdatalist.filter(function (i, v) {
                             that.dateser.deleteImg(index, that.num-that.default)
                             return v != index
@@ -70,7 +69,6 @@ export class detasafeViewPage {
         AlertSheetcancl.present();
     }
     getphone() {
-        console.log(this.num-this.default)
         let AlertSheet = this.Alert.create({
             title: null,
             buttons: [
@@ -137,7 +135,6 @@ export class detasafeViewPage {
                             image.src = img;
                             image.onload = function () {
                                 var base64 = that.getBase64Image(image);
-                                console.log(base64)
                                 that.GetImgUrl(base64, (data) => {
                                     that.imgdatalist.push(imageData)
                                     that.imgdata.push(data)
@@ -173,7 +170,6 @@ export class detasafeViewPage {
         var dataURL = canvas.toDataURL("image/jpeg" + ext);
         var index = dataURL.indexOf(",")
         var dateURLTO = dataURL.slice(index+1)
-        console.log(index,dataURL)
         return dateURLTO;
     }
 

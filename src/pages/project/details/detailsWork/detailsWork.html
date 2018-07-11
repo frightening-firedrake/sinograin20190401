@@ -87,7 +87,7 @@
             </ion-item>
             <ion-item type="ion-item" ion-item class="num ">
                 <ion-label class="title_span">水分（%）:</ion-label>
-                <ion-input type="number" [formControl]="Workfrom.storageWater" [value]="Work.storageWater"></ion-input>
+                <ion-input type="number" [formControl]="Workfrom.storageWater" [value]="Work.storageWater" (ionBlur)="shuifen('storageWater')"></ion-input>
                 <!--<span>{{Work.storageWater}}</span>-->
             </ion-item>
             <ion-item type="ion-item" ion-item class="num ">
@@ -105,7 +105,7 @@
             </ion-item>
             <ion-item type="ion-item" ion-item class="num ">
                 <ion-label class="title_span">水分（%）:</ion-label>
-                <ion-input type="number" [formControl]="Workfrom.realWater" [value]="Work.realWater"></ion-input>
+                <ion-input type="number" [formControl]="Workfrom.realWater" [value]="Work.realWater" (ionBlur)="shuifen('realWater')"></ion-input>
             </ion-item>
             <ion-item type="ion-item" ion-item class="num ">
                 <ion-label class="title_span">杂质（%）:</ion-label>

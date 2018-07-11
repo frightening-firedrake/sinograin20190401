@@ -34,10 +34,8 @@ export class  Samplelist{
     this.gendersNav = this.parpam.get("num")
     this.sample = this.parpam.get("newpage")
     this.getlist(this.sample.libraryId)
-    console.log(this.gendersNav)
     if(this.gendersNav == "4"){
       this.titleName = "扦样列表"
-      console.log(this.titleName)
     }else if(this.gendersNav == "3"){
       this.titleName = "监督检查列表"
     }else if(this.gendersNav == "2"){
@@ -63,8 +61,6 @@ export class  Samplelist{
     }
     this.genders = listId
     this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
-      console.log(res)
-      // console.log(res.json(),"color:blue")
       this.gendrslist = res.json()["rows"]
       this.gendrslist = this.gendrslist.filter(v=>{
         return v.sampleState<4
@@ -127,7 +123,6 @@ export class  Samplelist{
       }
     }
     this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
-      console.log(res)
       // console.log(res.json(),"color:blue")
       this.gendrslist = res.json()["rows"]
     })
@@ -157,7 +152,6 @@ export class  Samplelist{
   // 下拉刷新
   doRefresh(refresher) {
     this.secondary()
-    console.log(refresher)
     setTimeout(() => {
       refresher.complete();
     }, 2000);

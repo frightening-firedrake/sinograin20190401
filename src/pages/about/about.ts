@@ -48,7 +48,6 @@ export class AboutPage {
     update() {
 
         this.App.getVersionNumber().then(res => {
-            console.log(res)
             var data = {
                 "v": res
             }

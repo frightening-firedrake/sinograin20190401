@@ -128,11 +128,11 @@ export class libraryPage {
         let placeparams = {
             autograph: this.userName,
             id: this.testnum ? this.testnum.id : this.numbercon.id,
-            placeId: this._position
+            placeId: this._positionlist[0].place
         }
         var parpam = {
             title: "请确认存放位置",
-            subTitle: `存放位置为${this.library}-${this._position}号位`,
+            subTitle: `存放位置为${this.library}-${this._positionlist[0].place}号位`,
             buttons: [
 
                 {

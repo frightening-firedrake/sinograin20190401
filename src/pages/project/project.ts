@@ -38,10 +38,8 @@ export class ProjectPage {
   constructor(public navCtrl: NavController, public parpam: NavParams, public Http: HttpService) {
 
     this.gendersNav = this.parpam.get("num")
-    console.log(this.gendersNav)
     if (this.gendersNav == "4") {
       this.titleName = "扦样登记列表"
-      console.log(this.titleName)
     } else if (this.gendersNav == "3") {
       this.titleName = "监督检查"
     } else if (this.gendersNav == "2") {
@@ -94,7 +92,6 @@ export class ProjectPage {
     }
     this.genders = listId
     this.Http.post("grain/register/data", data).subscribe(res => {
-      console.log(res.json())
       this.prompt = true
       // console.log(res.json(),"color:blue")
       this.gendrslist = res.json()["rows"]
@@ -159,7 +156,6 @@ export class ProjectPage {
       }
     }
     this.Http.post("grain/register/data", data).subscribe(res => {
-      console.log(res)
       // console.log(res.json(),"color:blue")
       this.gendrslist = res.json()["rows"]
     })
@@ -171,7 +167,6 @@ export class ProjectPage {
   // 下拉刷新
   doRefresh(refresher) {
     this.secondary()
-    console.log(refresher)
     setTimeout(() => {
       refresher.complete();
     }, 2000);

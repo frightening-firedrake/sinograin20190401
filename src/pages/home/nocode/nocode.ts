@@ -3,9 +3,11 @@ import { NavController } from 'ionic-angular'
 import { _alertBomb } from '../../common/_alert'
 import { HttpService } from '../../../providers/httpService'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { NativeService } from '../../../providers/nativeService';
+import { BLE } from '@ionic-native/ble';
 
 import { libraryPage } from './library/library'
-
+declare var cordova;
 @Component({
     selector: "nocode",
     templateUrl: "./nocode.html"
@@ -13,6 +15,7 @@ import { libraryPage } from './library/library'
 
 export class NoCode {
     _zhishuku = "请选择直属库";
+    _kudianId;
     _kudian = "请选择库点";
     Companyarr;
     samplylist;
@@ -29,7 +32,9 @@ export class NoCode {
     _pinzhong;
     formdata = {
         beizhu: "",
-        pinzhong: ""
+        pinzhong: "",
+        zhishuku: "",
+        kudian: ""
     }
     addButton = {
         text: ""
@@ -38,7 +43,9 @@ export class NoCode {
         private _alert: _alertBomb,
         private Http: HttpService,
         public FormBuilder: FormBuilder,
-        private navCtrl: NavController
+        private navCtrl: NavController,
+        private ble: BLE,
+        private nativeService: NativeService,
     ) {
         // 直属库
         let Company = {
@@ -52,15 +59,19 @@ export class NoCode {
         })
         this.nocode = this.FormBuilder.group({
             beizhu: ["", Validators.required],
-            pingzhong: ["", Validators.required]
+            pingzhong: ["", Validators.required],
+            zhishuku: ["", Validators.required],
+            kudian: ["", Validators.required]
         })
         this._beizhu = this.nocode.controls["beizhu"]
         this._pinzhong = this.nocode.controls["pingzhong"]
+        this._zhishuku = this.nocode.controls["zhishuku"]
+        this._kudian = this.nocode.controls["kudian"]
     }
     ionViewDidEnter() {
         //置空
-        this._zhishuku = ""
-        this._kudian = ""
+        // this._zhishuku = ""
+        // this._kudian = ""
         this._huoweihao = ""
         // this._pinzhong = ""
         this._xinzhi = ""
@@ -82,11 +93,12 @@ export class NoCode {
                 value: v.id,
             })
         })
-        this._alert._alertSmlpe(parpam,this.addButton, addInput, data => {
+        this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             this.librarys = this.Companyarr.filter((v, i) => {
                 return v.id == data.value
             })
-            this._zhishuku = this.librarys[0].libraryName
+            this.formdata.zhishuku = this.librarys[0].libraryName
+            // this.nocode.value.zhishuku = this.librarys[0].libraryName
         })
     }
     kudian() {
@@ -109,7 +121,8 @@ export class NoCode {
                 var kudianname = this.gendrslist.filter((v, i) => {
                     return v.id == data.value
                 })
-                this._kudian = kudianname[0].libraryName
+                this.formdata.kudian = kudianname[0].libraryName
+                this._kudianId = kudianname[0].id
             })
         }
         catch (error) {
@@ -151,7 +164,7 @@ export class NoCode {
         ]
         this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
             this.formdata.pinzhong = data.value
-            if (data.value`` == 1) {
+            if (data.value == 1) {
                 this.nocode.value.pingzhong = "小麦"
             } else {
                 this.nocode.value.pingzhong = "玉米"
@@ -197,6 +210,66 @@ export class NoCode {
         this.navCtrl.pop()
     }
     onSubmit(nocode) {
+        //  let params = {
+        //     position: this._huoweihao,
+        //     sort: nocode.value.pingzhong,
+        //     quality: this._xinzhi,
+        //     amount: this._number,
+        //     originPlace: this._chandi,
+        //     gainTime: this.dataTime,
+        //     remark: nocode.value.beizhu,
+        //     otherState: 1,
+        //     libraryId: this._kudianId//提交时候会去value但value不是id而是文字
+        // }
+        // this.Http.post("grain/sample/saveRuku", params).subscribe(res => {
+        //     console.log(res)
+        // })
+        this.nativeService.showLoading()
+        this.ble.enable().then(() => {
+            this.ble.startScan([]).subscribe(res => {
+                if (res.name == 'HM-Z3') {
+                    this.printf(res.id)
+                    setTimeout(() => { return 0 }, 1000)
+                    this.Bleprint(nocode)
+                }
+            })
+        }).catch(() => {
+            this.nativeService.hideLoading()
+            let parpam = {
+                title: "提示",
+                subTitle: "暂未搜索到打印设备",
+                buttons: [
+                    {
+                        text: '取消',
+                        // role: 'destructive',
+                        handler: () => {
+
+                        }
+                    },
+                    {
+                        text: '确认',
+                        //   role: 'destructive',
+                        handler: () => {
+                        }
+                    }
+                ],
+                cssClass: "outsuccse succse"
+            }
+            let addbuton = {
+                text: null
+            }
+            let addInput = []
+            this._alert._alertSmlpe(parpam, addbuton, addInput, data => {
+                return 0
+            })
+        })
+    }
+    printf(name) {
+        this.nativeService.hideLoading()
+        this.ble.stopScan()
+        cordova.plugins.barcode.open(name)
+    }
+    Bleprint(nocode) {
         let params = {
             position: this._huoweihao,
             sort: nocode.value.pingzhong,
@@ -205,10 +278,46 @@ export class NoCode {
             originPlace: this._chandi,
             gainTime: this.dataTime,
             remark: nocode.value.beizhu,
-            otherState: 2
+            otherState: 1,
+            libraryId: this._kudianId//提交时候会去value但value不是id而是文字
         }
-        this.Http.post("grain/sample/saveRuku", params).subscribe(res => {
-            this.navCtrl.push(libraryPage, { "testnum": res.json() })
+
+        let parpam = {
+            title: "是否确认扦样",
+            subTitle: "此操作不可逆，请谨慎选择",
+            buttons: [
+                {
+                    text: '取消',
+                    // role: 'destructive',
+                    handler: () => {
+
+                    }
+                },
+                {
+                    text: '确认',
+                    //   role: 'destructive',
+                    handler: () => {
+                        this.Http.post("grain/sample/saveRuku", params).subscribe(respon => {
+                            cordova.plugins.barcode.printBarCode(respon.json()["sampleNo"], "300", "0", "50", "180", res => {
+                                this.navCtrl.push(libraryPage, { "testnum": respon.json() })
+                                // this.Httpupdate()
+                            }, err => {
+                                // })
+                            })
+                            // this._ble()
+
+                        })
+                    }
+                }
+            ],
+            cssClass: "outsuccse succse"
+        }
+        let addbuton = {
+            text: null
+        }
+        let addInput = []
+        this._alert._alertSmlpe(parpam, addbuton, addInput, data => {
+            return 0
         })
 
     }
