@@ -18,6 +18,7 @@ export class SamplePage {
     private _storage;
     private _update = false
     private room: any;
+    private remark
     constructor(
         private params: NavParams,
         private _alert: _alertBomb,
@@ -213,5 +214,15 @@ export class SamplePage {
         setTimeout(() => {
             refresher.complete();
         }, 2000);
+    }
+    //按照备注搜索
+    getlist(remark){
+        let params = {
+            counterId:this.params.get("Counter"),
+            remark:remark
+        }
+        this.Http.post("/grain/sample/getByCounterId",{params:JSON.stringify(params)}).subscribe(res=>{
+            this.room = res.json()
+        })
     }
 }

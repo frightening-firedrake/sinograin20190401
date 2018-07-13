@@ -279,79 +279,29 @@ export class detaildPage {
         this.nativeService.showLoading()
         // this._ble()
         this.BLE.enable().then(res => {
-            var flag = false;
-            var time = 0;
-            var is_conn = false;
             this.BLE.startScan([]).subscribe(res => {
-                if (res.name == "HM-Z3" && !flag) {
-                    flag = true;
+                if (res.name == "HM-Z3") {
                     var ble_mac = res.id;
                     this.print(ble_mac);
                     setTimeout(function () { return 0 }, 1000);
-                    this._ble(res => {
-                        let parpam = {
-                            id: this.sample.id,
-                            sampleState: 1
-                        }
-                        this.Http.post("/grain/sample/edit", parpam).subscribe(res => {
-                            this.data = res.json()
-
-                            if (this.data.success) {
-                                let params = {
-                                    title: "提示",
-                                    subTitle: "扦样成功",
-                                    buttons: [
-                                        {
-                                            text: "确认",
-                                            handler: () => {
-                                                this.index++
-                                            }
-                                        }
-                                    ],
-                                    cssClass: "outsuccse only"
-                                }
-                                let addbuton = {
-                                    text: null
-                                }
-                                let addInput = []
-                                this._alert._alertSmlpe(params, addbuton, addInput, data => {
-                                })
-                                this.sample.sampleState = 1
-                            } else {
-                                if (this.sample.sampleState != 1) {
-                                    let params = {
-                                        title: "提示",
-                                        subTitle: "扦样失败,请重新点击打印条形码",
-                                        buttons: [
-                                            {
-                                                text: "确认",
-                                                handler: () => {
-                                                }
-                                            }
-                                        ],
-                                        cssClass: "outsuccse only"
-                                    }
-                                    let addbuton = {
-                                        text: null
-                                    }
-                                    let addInput = []
-                                    this._alert._alertSmlpe(params, addbuton, addInput, data => {
-                                    })
-                                }
-                            }
-                        })
-                    });
+                    if(this.code){
+                        this._ble()
+                    }else{
+                        
+                    }
                 }
             })
         }, err => {
             this.nativeService.hideLoading();
         })
-
     }
     print(ble_mac) {
         this.BLE.stopScan()
-        cordova.plugins.barcode.open(ble_mac, res => {
-            this.nativeService.hideLoading();
+        cordova.plugins.barcode.open(ble_mac)
+        this.nativeService.hideLoading();
+        if (this.code) {
+
+        } else {
             let parpam = {
                 title: "是否确认扦样",
                 subTitle: "此操作不可逆，请谨慎选择",
@@ -367,7 +317,58 @@ export class detaildPage {
                         text: '确认',
                         //   role: 'destructive',
                         handler: () => {
-                            // this._ble()
+                            let parpam = {
+                                id: this.sample.id,
+                                sampleState: 1
+                            }
+                            this.Http.post("/grain/sample/standSample", parpam).subscribe(res => {
+                                this.data = res.json()
+                                if (this.data.success) {
+                                    this.code = this.data.sampleNo
+                                    let params = {
+                                        title: "提示",
+                                        subTitle: "扦样成功",
+                                        buttons: [
+                                            {
+                                                text: "确认",
+                                                handler: () => {
+                                                    this._ble();
+                                                }
+                                            }
+                                        ],
+                                        cssClass: "outsuccse only"
+                                    }
+                                    let addbuton = {
+                                        text: null
+                                    }
+                                    let addInput = []
+                                    this._alert._alertSmlpe(params, addbuton, addInput, data => {
+                                    })
+                                    this.sample.sampleState = 1
+                                } else {
+                                    if (this.sample.sampleState != 1) {
+                                        let params = {
+                                            title: "提示",
+                                            subTitle: "扦样失败,请重新点击打印条形码",
+                                            buttons: [
+                                                {
+                                                    text: "确认",
+                                                    handler: () => {
+                                                    }
+                                                }
+                                            ],
+                                            cssClass: "outsuccse only"
+                                        }
+                                        let addbuton = {
+                                            text: null
+                                        }
+                                        let addInput = []
+                                        this._alert._alertSmlpe(params, addbuton, addInput, data => {
+                                        })
+                                    }
+                                }
+                            })
+
                         }
                     }
                 ],
@@ -380,25 +381,12 @@ export class detaildPage {
             this._alert._alertSmlpe(parpam, addbuton, addInput, data => {
                 return 0
             })
-        }, err => {
-            this.nativeService.hideLoading();
-            alert("请关闭蓝牙重新连接")
-            this.ble_falg = true
-        })
+        }
     }
-    _ble(callback) {
-
+    _ble() {
         cordova.plugins.barcode.printBarCode(this.code, "300", "0", "50", "180", res => {
-            // this.Httpupdate()
-            if (!(this.index > 1)) {
-                callback()
-
-            }
-
         }, err => {
         })
-
-
         // this.BLE.enable();
         // this.nativeService.showLoading();
         // // this.connect("8C:DE:52:FA:A6:19")
@@ -470,7 +458,7 @@ export class detaildPage {
         var wide = this.Worknew.value.wide || 1
         var high = this.Worknew.value.high || 1
         // this.Work.checkNum = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1))
-        this.Work.checkNum = this.Worknew.value.unQuality + Number(this.Worknew.value.lossWater)  + Number(this.Worknew.value.lossNature)
+        this.Work.checkNum = this.Worknew.value.unQuality + Number(this.Worknew.value.lossWater) + Number(this.Worknew.value.lossNature)
         this.difference()
     }
     // 测量计算数

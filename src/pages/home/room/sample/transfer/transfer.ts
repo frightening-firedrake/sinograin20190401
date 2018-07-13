@@ -3,6 +3,7 @@ import { NavParams, NavController } from "ionic-angular";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { HttpService } from '../../../../../providers/httpService'
 import { _alertBomb } from '../../../../common/_alert'
+import { SamplePage } from '../sample'
 
 
 @Component({
@@ -26,6 +27,7 @@ export class transferPage {
         public _alert: _alertBomb,
     ) {
         this.sample = this.params.get("sample")
+        console.log(this.sample)
     }
     ionViewDidEnter() {
         this.Http.post("grain/warehouse/getAll").subscribe(res => {
@@ -131,6 +133,7 @@ export class transferPage {
         this.navCtrl.pop()
     }
     submit() {
+        console.log(this.sample)
         let params = {
             oldPlaceId: this.sample[0].placeId,
             placeId: this.select_places,

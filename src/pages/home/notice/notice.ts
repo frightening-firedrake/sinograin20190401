@@ -167,6 +167,7 @@ export class noticePage {
         }
     }
     setNavPush(key: any) {
+        console.log(key)
         this.navCtrl.push(detaildPage, {
             "json": key
         })

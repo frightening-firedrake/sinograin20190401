@@ -144,7 +144,7 @@ export class libraryPage {
                 {
                     text: "确认",
                     handler: () => {
-                        this.Http.post("grain/sample/edit", placeparams).subscribe(res => {
+                        this.Http.post("grain/sample/saveRukuXinxi", placeparams).subscribe(res => {
                             this.submitRuku()
                         })
 
@@ -163,7 +163,7 @@ export class libraryPage {
     submitRuku() {
         var parpam = {
             title: "入库成功",
-            subTitle: `已成功入库${this.library}-${this._position}号位,<br>是否继续入库操作`,
+            subTitle: `已成功入库${this.library}-${this._positionlist[0].place}号位,<br>是否继续入库操作`,
             buttons: [
                 {
                     text: "返回首页",

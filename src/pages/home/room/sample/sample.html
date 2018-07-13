@@ -1,5 +1,14 @@
 <app-header [title]=_sample></app-header>
 <ion-header class="search" no-border>
+    <ion-toolbar>
+        <ion-select placeholder="请按照备注搜索" [(ngModel)]="remark" interface="popover" (ngModelChange)="getlist(remark)">
+            <ion-option>春季抽查（杂质）</ion-option>
+            <ion-option>秋季普查</ion-option>
+            <ion-option>2017年度轮换验收</ion-option>
+            <ion-option>2018年度轮换验收</ion-option>
+            <ion-option>收购巡查</ion-option>
+        </ion-select>
+    </ion-toolbar>
     <!--<ion-toolbar>
         <ion-item>
             <div class="search_screen">
