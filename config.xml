@@ -98,7 +98,7 @@
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
-    <plugin name="com.liang.barcode" spec="barcode" />
     <plugin name="com-sarriaroman-photoviewer" spec="~1.1.16" />
+    <plugin name="com.liang.barcode" spec="barcode" />
     <engine name="android" spec="^5.1.0" />
 </widget>

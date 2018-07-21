@@ -13,7 +13,7 @@ import { _alertBomb } from '../pages/common/_alert'
 
 @Injectable()
 export class HttpService {
-
+  private flag = true;
   constructor(public http: Http,
     private globalData: GlobalData,
     private nativeService: NativeService,
@@ -27,64 +27,68 @@ export class HttpService {
   }
   private _token: string;
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
-    url = HttpService.replaceUrl(url);
-    var t
-    // console.info(url);
+    if (this.flag) {
+      url = HttpService.replaceUrl(url);
+      var t
+      // console.info(url);
 
-    // return this.http.request(url,options);
-    return Observable.create((observer) => {
-      this.nativeService.showLoading();
-      var t = setTimeout(() => {
-        this.nativeService.hideLoading();
-        var parpam = {
-          title: "提示",
-          subTitle: "网络崩溃,别紧张试试看刷新页面",
-          buttons: [
-            {
-              text: "确认",
-              handler: () => {
-                // this.navCtrl.pop()
+      // return this.http.request(url,options);
+      return Observable.create((observer) => {
+        this.nativeService.showLoading();
+        var t = setTimeout(() => {
+          this.flag = false
+          this.nativeService.hideLoading();
+          var parpam = {
+            title: "提示",
+            subTitle: "网络崩溃,别紧张试试看刷新页面",
+            buttons: [
+              {
+                text: "确认",
+                handler: () => {
+                  this.flag = true
+                  // this.navCtrl.pop()
+                }
               }
-            }
-          ],
-          cssClass: "outsuccse only"
-        }
-        var addbuton = {
-          text: null
-        }
-        var addInput = []
-        this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
-      }, 10000)
-
-      this.Storage.GetStorage("userLogin").subscribe(res => {
-        res.then(res => {
-          //console.log(res)
-          if (res) {
-            this._token = res.token;
-            if (options.headers) {
-              options.headers.append('Authorization', this._token);
-            } else {
-              options.headers = new Headers({
-                'Authorization': this._token
-              });
-            }
-            // console.log(options)
+            ],
+            cssClass: "outsuccse only"
           }
-          this.http.request(url, options).subscribe(res => {
-            clearTimeout(t)
-            this.nativeService.hideLoading();
-            // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
+          var addbuton = {
+            text: null
+          }
+          var addInput = []
+          this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
+        }, 10000)
+
+        this.Storage.GetStorage("userLogin").subscribe(res => {
+          res.then(res => {
+            //console.log(res)
+            if (res) {
+              this._token = res.token;
+              if (options.headers) {
+                options.headers.append('Authorization', this._token);
+              } else {
+                options.headers = new Headers({
+                  'Authorization': this._token
+                });
+              }
+              // console.log(options)
+            }
+            this.http.request(url, options).subscribe(res => {
+              clearTimeout(t)
+              this.nativeService.hideLoading();
+              // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
               observer.next(res);
-          }, err => {
-            // console.log("111")
-            clearTimeout(t)
-            this.requestFailed(url, options, err);//处理请求失败
-            observer.error(err);
-          });
+            }, err => {
+              // console.log("111")
+              clearTimeout(t)
+              this.requestFailed(url, options, err);//处理请求失败
+              observer.error(err);
+            });
+          })
         })
-      })
-      // console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
-    });
+        // console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
+      });
+    }
   }
 
   public get(url: string, paramMap: any = null): Observable<Response> {
@@ -180,9 +184,9 @@ export class HttpService {
     this.nativeService.hideLoading();
     console.log('%c 请求失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
     let msg = "1", status = err.status;
-    if(msg == "1"){
+    if (msg == "1") {
       return 0;
-    }else if (!this.nativeService.isConnecting()) {
+    } else if (!this.nativeService.isConnecting()) {
       msg = '请求失败，请连接网络';
     } else {
       if (status === 0) {
@@ -206,7 +210,7 @@ export class HttpService {
       ],
       cssClass: "outsuccse only"
     }).present();
-    
+
   }
 
   /**

@@ -298,7 +298,7 @@ export class NoCode {
                     //   role: 'destructive',
                     handler: () => {
                         this.Http.post("grain/sample/saveRuku", params).subscribe(respon => {
-                            cordova.plugins.barcode.printBarCode(respon.json()["sampleNo"], "300", "0", "50", "180", res => {
+                            cordova.plugins.barcode.printBarCode(respon.json()["sampleNo"], "300", "0", "50", "180","3", res => {
                                 this.navCtrl.push(libraryPage, { "testnum": respon.json() })
                                 // this.Httpupdate()
                             }, err => {

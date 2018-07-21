@@ -384,7 +384,7 @@ export class detaildPage {
         }
     }
     _ble() {
-        cordova.plugins.barcode.printBarCode(this.code, "300", "0", "50", "180", res => {
+        cordova.plugins.barcode.printBarCode(this.code, "300", "0", "50", "180","3", res => {
         }, err => {
         })
         // this.BLE.enable();

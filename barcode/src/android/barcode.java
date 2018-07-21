@@ -38,8 +38,9 @@ public class barcode extends CordovaPlugin {
             String x = args.getString(2);
             String y = args.getString(3);
             String codeh = args.getString(4);
+            String num = args.getString(5);
 
-            this.printBarCode(barcode,h,x,y,codeh,callbackContext);
+            this.printBarCode(barcode,h,x,y,codeh,num,callbackContext);
             return true;
         }else if(action.equals("close")){
             this.close(callbackContext);
@@ -62,12 +63,12 @@ public class barcode extends CordovaPlugin {
 
     }
 
-    private void printBarCode(String barcode,String h,String x,String y,String codeh, CallbackContext callbackContext) {
+    private void printBarCode(String barcode,String h,String x,String y,String codeh,String num,CallbackContext callbackContext) {
         // HPRTPrinterHelper HPRTPrinter=new HPRTPrinterHelper(Context,PrinterName);
         try{
         	// if(HPRTPrinterHelper.IsOpened()){
 
-	            HPRTPrinterHelper.printAreaSize("0","200","200",h,"4");
+	            HPRTPrinterHelper.printAreaSize("0","200","200",h,num);
 	            // HPRTPrinterHelper.Expanded("0","0",getPictureString(img_url));
 	            // HPRTPrinterHelper.Form();
 	            // HPRTPrinterHelper.Print();

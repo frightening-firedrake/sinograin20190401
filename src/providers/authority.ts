@@ -15,6 +15,7 @@ export class AuthorityService {
     }
     //1.扦样人员2.样品人员3.超级管理员
     validate(event) {
+        console.log(event)
         return new Promise((resolve, reject) => {
             this.Storage.GetStorage("userLogin").subscribe(res => {
                 res.then(res => {
@@ -23,7 +24,7 @@ export class AuthorityService {
                         if (event == this.roleName) {
                             this.flag = true
                             resolve()
-                        } else if (this.roleName == "超级管理员") {
+                        } else if (event == "超级管理员" || this.roleName == "超级管理员") {
                             this.flag = true
                             resolve()
                         } else {
