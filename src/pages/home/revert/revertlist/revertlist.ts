@@ -13,10 +13,11 @@ import { SamllSamplePage } from '../samllsample/samllsample'
 
 export class Revertlist {
     prompt = {
-        content: "请使用样品交接单上的编号进行搜索"
+        content: "请使用归还单上的编号进行搜索"
     }
     promptflag = false;
     myInput;
+    flag = 0;
     _handoverlist;
     constructor(
         private Http: HttpService,

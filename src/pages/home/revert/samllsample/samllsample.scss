@@ -1,6 +1,8 @@
 samllsample {
     .search {
         top: 1.173333rem;
+        background-color: #509cfa;
+        padding: 0 0.1rem;
         // padding:0 0.25rem;
         z-index: 10;
         height: auto;
@@ -21,7 +23,6 @@ samllsample {
                 .col {
                     line-height: 1.333333rem;
                     padding: 0;
-                    background-color: #509cfa;
                     ion-label {
                         margin: 0;
                         font-size: .373333rem;
