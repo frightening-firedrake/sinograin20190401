@@ -108,7 +108,7 @@ export class HomePage {
                     } else {
                       var parpam = {
                         title: '提示',
-                        subTitle: "此样品已入库",
+                        subTitle: "此样品已储存",
                         buttons: [
                           {
                             text: "确认",

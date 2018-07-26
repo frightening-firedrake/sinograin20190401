@@ -27,6 +27,11 @@ export class Revertlist {
     ) {
 
     }
+    ionViewDidEnter() {
+        if (this.myInput) {
+            this.search()
+        }
+    }
     search() {
         let params = {
             id: this.myInput
@@ -58,27 +63,27 @@ export class Revertlist {
         })
     }
     binggon(evens) {
-        if (evens.returnState == 1) {
-            var parpam = {
-                title: "提示",
-                subTitle: "该样品领取交接单已经归还",
-                buttons: [
-                    {
-                        text: "确认",
-                        handler: () => {
+        // if (evens.returnState == 1) {
+        //     var parpam = {
+        //         title: "提示",
+        //         subTitle: "该样品领取交接单已经归还",
+        //         buttons: [
+        //             {
+        //                 text: "确认",
+        //                 handler: () => {
 
-                        }
-                    }
-                ],
-                cssClass: "outsuccse only"
-            }
-            var addbuton = {
-                text: null
-            }
-            var addInput = []
-            this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
-        } else {
-            this.navCtrl.push(SamllSamplePage, { "sample": this._handoverlist })
-        }
+        //                 }
+        //             }
+        //         ],
+        //         cssClass: "outsuccse only"
+        //     }
+        //     var addbuton = {
+        //         text: null
+        //     }
+        //     var addInput = []
+        //     this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
+        // } else {
+        this.navCtrl.push(SamllSamplePage, { "sample": this._handoverlist })
+        // }
     }
 }

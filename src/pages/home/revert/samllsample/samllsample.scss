@@ -1,8 +1,6 @@
 samllsample {
     .search {
         top: 1.173333rem;
-        background-color: #509cfa;
-        padding: 0 0.1rem;
         // padding:0 0.25rem;
         z-index: 10;
         height: auto;
@@ -11,7 +9,8 @@ samllsample {
         // background-color: white;
         z-index: 20;
         .grid {
-            padding: 0;
+            background-color: #509cfa;
+            padding: 0 0.1rem;
             // padding: 0 0.4rem !important;
             .thead {
                 text-align: center;
@@ -64,6 +63,12 @@ samllsample {
                             line-height: 1.333333rem;
                             color: inherit;
                             font-size: .32rem;
+                            &.active {
+                                color: #FD3535
+                            }
+                            &.invalid {
+                                color: #9D9D9D;
+                            }
                         }
                     }
                 }
