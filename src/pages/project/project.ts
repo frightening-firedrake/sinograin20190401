@@ -88,7 +88,7 @@ export class ProjectPage {
   getlist(listId) {
     this.listId = listId
     let data = {
-      params: `{"libraryId":${listId},"regState":2,"type":-1}`
+      params: `{"libraryId":${listId},"regState":2}`
     }
     this.genders = listId
     this.Http.post("grain/register/data", data).subscribe(res => {

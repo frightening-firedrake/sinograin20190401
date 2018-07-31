@@ -28,17 +28,24 @@ export class Revertlist {
 
     }
     ionViewDidEnter() {
-        if (this.myInput) {
-            this.search()
+        this.search()
+    }
+    acticvflag(event) {
+        if(event == 0){
+            this.myInput = ""
+        }else{
+            this.myInput = event
         }
+        this.search()
+        this.myInput = ""
     }
     search() {
         let params = {
             id: this.myInput
         }
-        this.Http.post("grain/handover/getStorage", params).subscribe(res => {
+        this.Http.post("grain/returnSingle/data", { params: JSON.stringify(params) }).subscribe(res => {
             try {
-                this._handoverlist = [res.json()]
+                this._handoverlist = res.json()["rows"]
                 this.promptflag = true
             } catch (e) {
                 var parpam = {
@@ -83,7 +90,8 @@ export class Revertlist {
         //     var addInput = []
         //     this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
         // } else {
-        this.navCtrl.push(SamllSamplePage, { "sample": this._handoverlist })
+        this.navCtrl.push(SamllSamplePage, { "sample": evens })
         // }
     }
+
 }

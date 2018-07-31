@@ -10,6 +10,7 @@ import { AlertController, ModalController } from "ionic-angular";
 import { APP_SERVE_URL } from "./config";
 import { StorageService } from './locationstorageService';
 import { _alertBomb } from '../pages/common/_alert'
+import { loginPage } from '../pages/login/login'
 
 @Injectable()
 export class HttpService {
@@ -74,8 +75,14 @@ export class HttpService {
               // console.log(options)
             }
             this.http.request(url, options).subscribe(res => {
+
               clearTimeout(t)
               this.nativeService.hideLoading();
+              // if (res.json()["code"] == "1000000") {
+                
+              //   // let profile = this.modalCtrl.create(loginPage);
+              //   // profile.present();
+              // }
               // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
               observer.next(res);
             }, err => {

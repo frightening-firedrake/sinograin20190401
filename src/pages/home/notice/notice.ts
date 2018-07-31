@@ -95,7 +95,7 @@ export class noticePage {
                     fenxiaoyangSampleState: 3
                 }
                 this.Http.post("grain/sample/data", { params: JSON.stringify(data) }).subscribe(res => {
-                    this.promp = true
+                    this.promp = false
                     // console.log(res.json())
                     let list = res.json()
                     // console.log(res.json(),"color:blue")

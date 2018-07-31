@@ -28,7 +28,7 @@ export class loginPage {
     ) {
 
         this.login = FormBuilder.group({
-            username: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+            username: ['', Validators.compose([Validators.required])],
             password: ['', Validators.compose([Validators.required, Validators.minLength(4)])]
         })
         this.User.username = this.login.controls['username']

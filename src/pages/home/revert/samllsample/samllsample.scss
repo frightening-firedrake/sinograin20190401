@@ -20,6 +20,11 @@ samllsample {
                 width: 100%;
                 z-index: 11;
                 .col {
+                    &:first-child {
+                        ion-label {
+                            font-size: 0.35rem;
+                        }
+                    }
                     line-height: 1.333333rem;
                     padding: 0;
                     ion-label {

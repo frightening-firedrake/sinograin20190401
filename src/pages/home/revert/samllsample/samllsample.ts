@@ -13,6 +13,8 @@ export class SamllSamplePage {
     samllsamplelist;
     SamllSamplelistonly;
     samllsampleflag = false;
+    samllsampleState;
+    barcodeflag = true
     constructor(
         private params: NavParams,
         private navCtrl: NavController,
@@ -20,56 +22,79 @@ export class SamllSamplePage {
         private Barcode: BarcodeScanner,
         private _alert: _alertBomb
     ) {
-        this.samllsamplelist = this.params.get("sample")[0]
-        this.number = "编号" + this.params.get("sample")[0].id
+        this.samllsamplelist = this.params.get("sample")
+        this.number = "编号" + this.params.get("sample").id
+    }
+    ionViewDidEnter() {
+        this.init()
+    }
+    init() {
+        let params = {
+            id: this.params.get("sample").id
+        }
+        this.Http.post("grain/returnSingle/getStorage", params).subscribe(res => {
+            try {
+                this.samllsamplelist = res.json()
+                this.samllsampleState = this.samllsamplelist.returnState
+            } catch (e) {
+                    this.navCtrl.pop()
+            }
+        })
     }
     revert() {
-        var parpam = {
-            title: '归还',
-            subTitle: "归还人签名:",
-            buttons: [
-                {
-                    text: '确认',
-                    handler: data => {
-                        let params = {
-                            id: this.samllsamplelist.id,
-                            returnPerson: data.Person,
-                            returnState: 1,
-                            sampleNums: this.samllsamplelist.sampleNums
+        let params = {
+            id: this.samllsamplelist.id,
+            returnState: 1
+        }
+        this.Http.post("grain/returnSingle/guihuan", params).subscribe(res => {
+            this.navCtrl.pop()
+        })
+    }
+    delect(list) {
+        if (this.samllsamplelist.samples.length == 1) {
+            var parpam = {
+                title: "提示",
+                subTitle: "此归还单仅剩一个样品<br/>删除后归还单相继删除",
+                buttons: [
+                    {
+                        text: "确认",
+                        handler: () => {
+                            this.deletesubmit(list)
                         }
-                        this.Http.post("/grain/handover/guiHuan", params).subscribe(res => {
-                            this.navCtrl.pop()
-                        })
+                    },
+                    {
+                        text: "取消",
+                        handler: () => {
+
+                        }
                     }
-                },
-                {
-                    text: '取消',
-                    handler: data => {
-                    }
-                }
-            ],
-            cssClass: "outsuccse input",
-            inputs: [
-                {
-                    name: 'Person',
-                    value: "",
-                    // label:"处理事由"
-                    type: "text",
-                    placeholder: '请输入归还人签名'
-                },
-            ]
+                ],
+                cssClass: "outsuccse succse"
+            }
+            var addbuton = {
+                text: null
+            }
+            var addInput = []
+            this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
+        } else {
+            this.deletesubmit(list)
         }
-        var addbuton = {
-            text: null
+
+    }
+    ionViewCanLeave() {
+        if (this.barcodeflag) {
+            return true
+        } else {
+            return false
         }
-        var addInput = []
-        this._alert._alertSmlpe(parpam, addbuton, addInput, data => { })
     }
     barcode() {
-
         this.Barcode.scan().then(barcodeData => {
             if (barcodeData.cancelled) {
-                return false;
+                this.barcodeflag = false
+                setTimeout(() => {
+                    this.barcodeflag = true
+                }, 1000)
             } else {
                 let params = {
                     sampleNo: barcodeData.text
@@ -85,6 +110,49 @@ export class SamllSamplePage {
     }
     pop() {
         this.samllsampleflag = false
+    }
+    deletesubmit(list) {
+        let params = {
+            id: this.samllsamplelist.id,
+            sampleId: list.id
+        }
+        this.Http.post("grain/returnSingle/removeSampleId", params).subscribe(res => {
+            if (res.json()["success"]) {
+                var parpam = {
+                    title: "提示",
+                    subTitle: "删除成功",
+                    buttons: [
+                        {
+                            text: "确认",
+                            handler: () => {
+                                this.init()
+                            }
+                        }
+                    ],
+                    cssClass: "outsuccse only"
+                }
+            } else {
+                var parpam = {
+                    title: "提示",
+                    subTitle: "删除失败",
+                    buttons: [
+                        {
+                            text: "确认",
+                            handler: () => {
+                                this.init()
+                            }
+                        }
+                    ],
+                    cssClass: "outsuccse only"
+                }
+            }
+            var addbuton = {
+                text: null
+            }
+            var addInput = []
+            this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
+
+        })
     }
 }
 

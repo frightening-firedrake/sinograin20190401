@@ -41,10 +41,12 @@ export class libraryPage {
     }
     scand() {
         this.barcode.scan().then(barcodeData => {
+            let str:any = barcodeData.text
+            str = str.slice(str.indexOf("?")+1).split("=")
             let paramsPlaces = {
-                counterId: barcodeData.text//柜子的id
+                counter:str[1]//柜子的id
             }
-            this.Http.post("grain/warehouseCounterPlace/findPlaces", paramsPlaces).subscribe(res => {
+            this.Http.post("grain/warehouseCounterPlace/findPlacesByCounter", paramsPlaces).subscribe(res => {
                 if (!res.json()["length"]) {
                     var parpam = {
                         title: "提示",
@@ -67,7 +69,7 @@ export class libraryPage {
                     this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
                 } else {
                     //返回的是柜子的容量
-                    this.library = paramsPlaces.counterId + "号柜"
+                    this.library = paramsPlaces.counter
                     this._positionlist = res.json()
                 }
 

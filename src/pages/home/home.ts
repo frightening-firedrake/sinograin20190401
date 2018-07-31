@@ -55,7 +55,7 @@ export class HomePage {
     })
     //获取统计
     this.Http.get("grain/sample/getAllCereals").subscribe(res => {
-      // console.log(res)
+      console.log(res)
       let respon = res.json()
       this.XMNumber = (respon["XMNumber"] / 10000).toFixed(2)
       this.YMNumber = (respon["YMNumber"] / 10000).toFixed(2)

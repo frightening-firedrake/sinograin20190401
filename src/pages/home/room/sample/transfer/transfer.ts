@@ -19,6 +19,7 @@ export class transferPage {
     private select_counter;
     private places;
     private select_places;
+    private _barcode = true
     constructor(
         private params: NavParams,
         private barcode: BarcodeScanner,
@@ -34,10 +35,20 @@ export class transferPage {
             this._sample = res.json()
         })
     }
+    ionViewCanLeave(){
+        if(this._barcode){
+            return true
+        }else{
+            return false
+        }
+    }
     getbarcode() {
         this.barcode.scan().then(barcodeData => {
             if (barcodeData.cancelled) {
-                return false;
+                this._barcode = false
+                setTimeout(()=>{
+                    this._barcode = true
+                },1000)
             } else {
                 var textflag = barcodeData.text
                 this.selectSample()

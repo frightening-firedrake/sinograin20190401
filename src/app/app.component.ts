@@ -1,5 +1,5 @@
 import { Component, ViewChild, } from '@angular/core';
-import { Platform, Keyboard, ToastController, Nav, IonicApp } from 'ionic-angular';
+import { Platform, Keyboard, ToastController, Nav, IonicApp, App, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeService } from '../providers/nativeService'
@@ -7,6 +7,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import { _alertBomb } from '../pages/common/_alert'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { HttpService } from '../providers/httpService'
+import { loginPage } from '../pages/login/login'
 
 
 import { TabsPage } from '../pages/tabs/tabs';
@@ -16,6 +17,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage: any = TabsPage;
   @ViewChild('myNav') nav: Nav;
+  viewflag = true
   backButtonPressed: boolean = false;
   constructor(
     public platform: Platform,
@@ -27,6 +29,8 @@ export class MyApp {
     public ionicApp: IonicApp,
     public _alert: _alertBomb,
     public App: AppVersion,
+    public modalCtrl: ModalController,
+    public angularApp: App,
     public Http: HttpService,
     public iab: InAppBrowser
   ) {
@@ -47,9 +51,26 @@ export class MyApp {
       splashScreen.hide();
       this.update();//注册更新事件
       this.registerBackButtonAction();//注册返回按键事件
+      // this.viewEnter()//注册后台自动登出
     });
 
   }
+  // viewEnter() {
+  //   this.angularApp.viewDidLoad.subscribe(res => {
+  //     console.log(res)
+  //     if (this.viewflag) {
+  //       this.Http.get("grain/sample/getAllCereals").subscribe(respon => {
+  //         if (res.name == "ModalCmp") {
+  //           this.viewflag = false
+  //         } else if (respon.json()["code"] == "1000000") {
+  //           let profileModal = this.modalCtrl.create(loginPage);
+  //               profileModal.present();
+  //         }
+  //       })
+  //     }
+
+  //   })
+  // }
   update() {
     var flag = this.nativeService.isMobile()
     if (flag) {
@@ -98,7 +119,7 @@ export class MyApp {
         return
       }
       // this.ionicApp._modalPortal.getActive() ||
-      let activePortal =   this.ionicApp._overlayPortal.getActive();
+      let activePortal = this.ionicApp._overlayPortal.getActive();
       let loadingPortal = this.ionicApp._loadingPortal.getActive();
       if (activePortal) {
         //其他的关闭
@@ -106,16 +127,16 @@ export class MyApp {
         });
         return;
       }
-      if(loadingPortal){
-         
-          return;
+      if (loadingPortal) {
+
+        return;
       }
       let tabs = this.nav.getActiveChildNav();//获取tabs导航,this.nav是总导航,tabs是子导航
       let tab = tabs.getSelected();//获取选中的tab
       let activeVC = tab.getActive();//通过当前选中的tab获取ViewController
       //activeVC.dismiss()
       let activeNav = activeVC.getNav();//通过当前视图的ViewController获取的NavController
-      
+
       return activeNav.canGoBack() ? activeNav.pop() : this.showExit();//this.showExit()
     })
   }

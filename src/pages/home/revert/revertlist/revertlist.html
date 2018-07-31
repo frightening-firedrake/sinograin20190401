@@ -12,9 +12,9 @@
         </ion-item>
         <ion-item class="select">
             <span class="title">归还状态:</span>
-            <button ion-button (click)="flag=0" [ngClass]="{'active':flag==0}">全部</button>
-            <button ion-button (click)="flag=1" [ngClass]="{'active':flag==1}">已归还</button>
-            <button ion-button (click)="flag=2" [ngClass]="{'active':flag==2}">待归还</button>
+            <button ion-button (click)="flag=0;acticvflag(0)" [ngClass]="{'active':flag==0}">全部</button>
+            <button ion-button (click)="flag=1;acticvflag(1)" [ngClass]="{'active':flag==1}">已归还</button>
+            <button ion-button (click)="flag=2;acticvflag(2)" [ngClass]="{'active':flag==2}">待归还</button>
         </ion-item>
     </ion-toolbar>
     <ion-grid>
@@ -36,10 +36,10 @@
     <ion-grid>
         <ion-row class="tbody" [ngClass]="{'binggo':list.returnState==1}" *ngFor="let list of _handoverlist" (click)="binggon(list)">
             <ion-col col-4>
-                <ion-label>{{list.name}}</ion-label>
+                <ion-label>{{list.id}}</ion-label>
             </ion-col>
             <ion-col col-4>
-                <ion-label>{{list.id}}</ion-label>
+                <ion-label>{{list.returnPerson}}</ion-label>
             </ion-col>
             <ion-col col-4>
                 <ion-label [ngClass]="{'active':list.returnState!=1}">{{list.returnState==1?"已归还":"待归还"}}</ion-label>

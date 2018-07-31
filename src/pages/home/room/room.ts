@@ -52,6 +52,10 @@ export class roomPage {
         this.Http.post("grain/warehouseCounter/data", { params: JSON.stringify(params) }).subscribe(res => {
             this._Counter = res.json()["rows"]
             this._Counterlist = this._Counter
+            console.log(this._Counterlist)
+            this._Counterlist.sort((a, b)=>{
+                return a.id - b.id
+            })
             this._prompt = true
         })
     }

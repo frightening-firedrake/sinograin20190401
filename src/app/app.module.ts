@@ -14,6 +14,7 @@ import { MyApp } from './app.component';
 import { ProjectModule } from '../pages/project/project.module';
 import { HomeModule } from '../pages/home/home.module';
 import { AboutModule } from '../pages/about/about.module'
+import { loginModule } from '../pages/login/login.module'
 import { TabModule } from '../pages/tabs/tabs.module';
 import { linkConfig } from './routerConfig';
 
@@ -50,6 +51,7 @@ import { Utils } from '../providers/Utils';
     HomeModule,
     AboutModule,
     ProjectModule,
+    loginModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
