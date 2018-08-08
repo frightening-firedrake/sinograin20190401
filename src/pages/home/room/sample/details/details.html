@@ -12,7 +12,7 @@
         </ion-item>
         <ion-item type="ion-item">
             <span class="title_span">检验编号:</span>
-            <span>{{sample.sampleNo}}</span>
+            <span>{{sample.sampleNum}}</span>
         </ion-item>
     </ion-list>
     <ion-list class="lists_input">
@@ -46,5 +46,6 @@
     <div class="buttons">
         <button ion-button large color="secondary" class="button" type="submit" (click)="transfer()">转移</button>
         <button ion-button large color="secondary" class="button " type="button" (click)="handle()">处理</button>
+        <button ion-button large color="secondary" class="submit" type="button" (click)="print()">打印检验条形码</button>
     </div>
 </ion-content>

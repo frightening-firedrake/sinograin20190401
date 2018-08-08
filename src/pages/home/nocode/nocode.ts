@@ -210,20 +210,7 @@ export class NoCode {
         this.navCtrl.pop()
     }
     onSubmit(nocode) {
-        //  let params = {
-        //     position: this._huoweihao,
-        //     sort: nocode.value.pingzhong,
-        //     quality: this._xinzhi,
-        //     amount: this._number,
-        //     originPlace: this._chandi,
-        //     gainTime: this.dataTime,
-        //     remark: nocode.value.beizhu,
-        //     otherState: 1,
-        //     libraryId: this._kudianId//提交时候会去value但value不是id而是文字
-        // }
-        // this.Http.post("grain/sample/saveRuku", params).subscribe(res => {
-        //     console.log(res)
-        // })
+
         this.nativeService.showLoading()
         this.ble.enable().then(() => {
             this.ble.startScan([]).subscribe(res => {
@@ -235,33 +222,7 @@ export class NoCode {
             })
         }).catch(() => {
             this.nativeService.hideLoading()
-            let parpam = {
-                title: "提示",
-                subTitle: "暂未搜索到打印设备",
-                buttons: [
-                    {
-                        text: '取消',
-                        // role: 'destructive',
-                        handler: () => {
-
-                        }
-                    },
-                    {
-                        text: '确认',
-                        //   role: 'destructive',
-                        handler: () => {
-                        }
-                    }
-                ],
-                cssClass: "outsuccse succse"
-            }
-            let addbuton = {
-                text: null
-            }
-            let addInput = []
-            this._alert._alertSmlpe(parpam, addbuton, addInput, data => {
-                return 0
-            })
+            this._alert._alertnoprint()
         })
     }
     printf(name) {
@@ -298,7 +259,7 @@ export class NoCode {
                     //   role: 'destructive',
                     handler: () => {
                         this.Http.post("grain/sample/saveRuku", params).subscribe(respon => {
-                            cordova.plugins.barcode.printBarCode(respon.json()["sampleNo"], "300", "0", "50", "180","2", res => {
+                            cordova.plugins.barcode.printBarCode(respon.json()["sampleNo"], "300", "0", "50", "180", "2", res => {
                                 this.navCtrl.push(libraryPage, { "testnum": respon.json() })
                                 // this.Httpupdate()
                             }, err => {

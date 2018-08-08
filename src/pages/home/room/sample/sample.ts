@@ -35,19 +35,30 @@ export class SamplePage {
         })
     }
     ionViewDidEnter() {
-        this.Http.post("grain/sample/getByCounterId ", { counterId: this.params.get("Counter") }).subscribe(res => {
+        let params = {
+            counterId: this.params.get("Counter")
+        }
+        this.Http.post("grain/sample/getByCounterId ", { params: JSON.stringify(params) }).subscribe(res => {
             this.room = res.json()
             this.room.forEach(v => {
                 v.checked = false
+            })
+            this.room.sort((a, b) => {
+                return a.sampleNum - b.sampleNum
             })
         })
         this.roomfalg = []
 
         // console.log(this.roomfalg, this.room)
     }
-    godetails(only){
-        this.navCtrl.push(SampleDetailsPage,{
-            sample:only
+    sort(name) {
+        this.room.sort((a, b) => {
+            return a[name] - b[name]
+        })
+    }
+    godetails(only) {
+        this.navCtrl.push(SampleDetailsPage, {
+            sample: only
         })
     }
     check(event, list) {
@@ -96,7 +107,7 @@ export class SamplePage {
                                         {
                                             text: "确认",
                                             handler: () => {
-                                                
+
                                             }
                                         }
                                     ],
@@ -115,7 +126,7 @@ export class SamplePage {
                                         {
                                             text: "确认",
                                             handler: () => {
-                                               
+
                                             }
                                         }
                                     ],
@@ -153,7 +164,7 @@ export class SamplePage {
                     type: "text",
                     placeholder: '请输入处理事由'
                 },
-                
+
             ]
         }
         var addbuton = {
@@ -216,12 +227,12 @@ export class SamplePage {
         }, 2000);
     }
     //按照备注搜索
-    getlist(remark){
+    getlist(remark) {
         let params = {
-            counterId:this.params.get("Counter"),
-            remark:remark
+            counterId: this.params.get("Counter"),
+            remark: remark
         }
-        this.Http.post("/grain/sample/getByCounterId",{params:JSON.stringify(params)}).subscribe(res=>{
+        this.Http.post("/grain/sample/getByCounterId", { params: JSON.stringify(params) }).subscribe(res => {
             this.room = res.json()
         })
     }

@@ -23,7 +23,7 @@ export class noticePage {
     promptObj = {
         content: ""
     }
-    heardershow = true
+    heardershow = false
     liststate;//1.扦样列表2.样品列表
     // classify:any
     // applye:string = "扦样申请"
@@ -39,7 +39,7 @@ export class noticePage {
         // this.classify = "applye"
         // this.getList()
         this.roleName = this.params.get("roleName")
-        if (this.roleName == "扦样员") {
+        if (this.roleName == "监督检查员") {
             this.getList()
             this.liststate = 1
         } else if (this.roleName == "库管员") {
@@ -95,7 +95,7 @@ export class noticePage {
                     fenxiaoyangSampleState: 3
                 }
                 this.Http.post("grain/sample/data", { params: JSON.stringify(data) }).subscribe(res => {
-                    this.promp = false
+                    this.promp = true
                     // console.log(res.json())
                     let list = res.json()
                     // console.log(res.json(),"color:blue")

@@ -2,10 +2,12 @@ import { Component, Input } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
 import { DatePipe } from "@angular/common";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { _alertBomb } from '../../../common/_alert'
-import { HttpService } from '../../../../providers/httpService'
-import { StorageService } from '../../../../providers/locationstorageService'
-
+import { _alertBomb } from '../../../common/_alert';
+import { HttpService } from '../../../../providers/httpService';
+import { StorageService } from '../../../../providers/locationstorageService';
+import { NativeService } from '../../../../providers/nativeService';
+import { BLE } from '@ionic-native/ble';
+declare var cordova;
 @Component({
     templateUrl: "library.html",
     selector: "library",
@@ -17,6 +19,7 @@ export class libraryPage {
     data;
     userName;
     library: any;
+    _bleflag = false
     _position;
     _positionlist;
     @Input() number = "检验编号";
@@ -28,7 +31,9 @@ export class libraryPage {
         public Storage: StorageService,
         private _alert: _alertBomb,
         private Http: HttpService,
-        private navCtrl: NavController
+        private navCtrl: NavController,
+        private nativeService: NativeService,
+        private ble: BLE
     ) {
         this.testnum = this.params.get("testnum")
         this.numbercon = this.testnum ? this.testnum : ""
@@ -38,13 +43,20 @@ export class libraryPage {
                 this.userName = res.userName
             })
         })
+        this.openble()
+    }
+    printf(name) {
+        this.nativeService.hideLoading()
+        this.ble.stopScan()
+        cordova.plugins.barcode.open(name)
     }
     scand() {
         this.barcode.scan().then(barcodeData => {
-            let str:any = barcodeData.text
-            str = str.slice(str.indexOf("?")+1).split("=")
+            let str: any = barcodeData.text
+            str = str.slice(str.indexOf("?") + 1).split("=")
+
             let paramsPlaces = {
-                counter:str[1]//柜子的id
+                counter: str[1]//柜子的id
             }
             this.Http.post("grain/warehouseCounterPlace/findPlacesByCounter", paramsPlaces).subscribe(res => {
                 if (!res.json()["length"]) {
@@ -130,7 +142,7 @@ export class libraryPage {
         let placeparams = {
             autograph: this.userName,
             id: this.testnum ? this.testnum.id : this.numbercon.id,
-            placeId: this._positionlist[0].place
+            placeId: this._positionlist[0].id
         }
         var parpam = {
             title: "请确认存放位置",
@@ -147,7 +159,18 @@ export class libraryPage {
                     text: "确认",
                     handler: () => {
                         this.Http.post("grain/sample/saveRukuXinxi", placeparams).subscribe(res => {
-                            this.submitRuku()
+                            let code
+                            if (this.testnum) {
+                                code = this.testnum.sampleNum
+                            } else {
+                                code = res.json()["sampleNum"]
+                            }
+                            cordova.plugins.barcode.printBarCode(code, "300", "0", "50", "180", "2", res => {
+                                this.submitRuku()
+                                // this.Httpupdate()
+                            }, err => {
+                                // })
+                            })
                         })
 
                     }
@@ -187,5 +210,20 @@ export class libraryPage {
         }
         var addInput = []
         this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
+    }
+    openble() {
+        this.ble.enable().then(() => {
+            this.ble.startScan([]).subscribe(res => {
+                if (res.name == 'HM-Z3') {
+                    console.log("那个")
+                    this.printf(res.id)
+                    setTimeout(() => { return 0 }, 1000)
+                }
+            })
+        }).catch(() => {
+            console.log("哪个")
+            this.nativeService.hideLoading()
+            this._alert._alertnoprint()
+        })
     }
 }

@@ -14,7 +14,7 @@ declare var $;
   templateUrl: 'samplelist.html'
 })
 
-export class  Samplelist{
+export class Samplelist {
   genders;
   gendersNav: any = ""
   _select_smaple = "0";
@@ -33,12 +33,11 @@ export class  Samplelist{
 
     this.gendersNav = this.parpam.get("num")
     this.sample = this.parpam.get("newpage")
-    this.getlist(this.sample.libraryId)
-    if(this.gendersNav == "4"){
+    if (this.gendersNav == "4") {
       this.titleName = "扦样列表"
-    }else if(this.gendersNav == "3"){
+    } else if (this.gendersNav == "3") {
       this.titleName = "监督检查列表"
-    }else if(this.gendersNav == "2"){
+    } else if (this.gendersNav == "2") {
       this.titleName = "工作底稿列表"
     }
     // // 所有库点
@@ -50,20 +49,19 @@ export class  Samplelist{
   }
   // 每次进页面下拉刷新
   ionViewDidEnter() {
-
-
+    this.getlist(this.sample.libraryId)
     // this.doRefresh()
   }
   getlist(listId) {
     this.listId = listId
     let data = {
-      params: `{"libraryId":${listId},"sampleState":${this._select_smaple},"regState":2}`
+      params: `{"libraryId":${listId},"sampleState":${this._select_smaple},"regState":2,"pId":${this.sample.id}}`
     }
     this.genders = listId
     this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
       this.gendrslist = res.json()["rows"]
-      this.gendrslist = this.gendrslist.filter(v=>{
-        return v.sampleState<4
+      this.gendrslist = this.gendrslist.filter(v => {
+        return v.sampleState < 4
       })
     })
   }
@@ -92,11 +90,11 @@ export class  Samplelist{
 
   //筛选框的三种分类
   select_smaple(event = '0') {
-    if(event == "-1"){
+    if (event == "-1") {
       this.shaixuan = "未扦样"
-    }else if(event == "1"){
+    } else if (event == "1") {
       this.shaixuan = "已扦样"
-    }else{
+    } else {
       this.shaixuan = "筛选"
     }
     this._select_smaple = event

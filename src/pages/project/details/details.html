@@ -40,6 +40,10 @@
                         <span class="span_title">扦样编号:</span>
                         <span>{{ sample.sampleWord }}</span>
                     </ion-item>
+                    <ion-item type="ion-item" class="num" ion-item>
+                        <ion-label><span class="span_title">扦样人:</span></ion-label>
+                        <ion-input type="text" [value]=_storage [(ngModel)]="_storage"></ion-input>
+                    </ion-item>
                     <ion-item type="ion-item" ion-item>
                         <span class="span_title">货位号:</span>
                         <span>{{ sample.position}}</span>

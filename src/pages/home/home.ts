@@ -43,8 +43,14 @@ export class HomePage {
     //   }
     // })
   }
+  bo(){
+    this.Http.post("/grain/blueTooth/search").subscribe(res=>{
+      alert(res)
+    })
+  }
   ionViewDidEnter() {
     this.Storage.GetStorage("userLogin").subscribe(res => {
+      // console.log("获取到了")
       res.then(val => {
         const User = val
         // console.log( )
@@ -57,13 +63,13 @@ export class HomePage {
     this.Http.get("grain/sample/getAllCereals").subscribe(res => {
       console.log(res)
       let respon = res.json()
-      this.XMNumber = (respon["XMNumber"] / 10000).toFixed(2)
-      this.YMNumber = (respon["YMNumber"] / 10000).toFixed(2)
-      this.SYYNumber = (respon["SYYNumber"] / 10000).toFixed(2) || "0"
+      this.XMNumber = respon["XMNumber"] ? (respon["XMNumber"] / 10000).toFixed(2) : "0"
+      this.YMNumber = respon["YMNumber"] ? (respon["YMNumber"] / 10000).toFixed(2) : "0"
+      this.SYYNumber = respon["SYYNumber"] ? (respon["SYYNumber"] / 10000).toFixed(2) : "0"
     })
   }
   newpage(parpam, event) {
-    this.Authority.validate("扦样员").then(() => {
+    this.Authority.validate("监督检查员").then(() => {
       this.navCtrl.push(ProjectPage, { "num": parpam })
     })
   }
@@ -160,7 +166,7 @@ export class HomePage {
         let respon = res.json()
         this.XMNumber = (respon["XMNumber"] / 10000).toFixed(2)
         this.YMNumber = (respon["YMNumber"] / 10000).toFixed(2)
-        this.SYYNumber = (respon["SYYNumber"] / 10000).toFixed(2) || "0"
+        this.SYYNumber = (respon["SYYNumber"] / 10000).toFixed(2)
       })
     });
   }

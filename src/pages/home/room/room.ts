@@ -34,7 +34,7 @@ export class roomPage {
     }
     //转到柜室
     sample(Counter) {
-        this.navCtrl.push(SamplePage, { "_sample": "样品" + this._select + "室-" + Counter.id + "号柜", "Counter": Counter.id })
+        this.navCtrl.push(SamplePage, { "_sample": "样品" + this._select+ "室-" + Counter.counter, "Counter": Counter.id })
     }
     // 下拉刷新
     doRefresh(refresher) {
@@ -57,6 +57,7 @@ export class roomPage {
                 return a.id - b.id
             })
             this._prompt = true
+            this._state = null
         })
     }
     selectState() {
