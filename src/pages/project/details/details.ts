@@ -163,7 +163,7 @@ export class detaildPage {
         this.problem = "all"
         this.classify = "new"
         this.sample = this.params.get('json')
-        if (this.sample.autograph.length) {
+        if (this.sample.autograph) {
             this._storage = this.sample.autograph
         } else {
             this.Storage.GetStorage("userLogin").subscribe(res => {
