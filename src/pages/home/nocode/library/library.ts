@@ -6,8 +6,7 @@ import { _alertBomb } from '../../../common/_alert';
 import { HttpService } from '../../../../providers/httpService';
 import { StorageService } from '../../../../providers/locationstorageService';
 import { NativeService } from '../../../../providers/nativeService';
-import { BLE } from '@ionic-native/ble';
-declare var cordova;
+import { BleServer } from '../../../../providers/ble'
 @Component({
     templateUrl: "library.html",
     selector: "library",
@@ -33,7 +32,7 @@ export class libraryPage {
         private Http: HttpService,
         private navCtrl: NavController,
         private nativeService: NativeService,
-        private ble: BLE
+        private ble: BleServer
     ) {
         this.testnum = this.params.get("testnum")
         this.numbercon = this.testnum ? this.testnum : ""
@@ -45,11 +44,7 @@ export class libraryPage {
         })
         this.openble()
     }
-    printf(name) {
-        this.nativeService.hideLoading()
-        this.ble.stopScan()
-        cordova.plugins.barcode.open(name)
-    }
+
     scand() {
         this.barcode.scan().then(barcodeData => {
             let str: any = barcodeData.text
@@ -160,16 +155,12 @@ export class libraryPage {
                     handler: () => {
                         this.Http.post("grain/sample/saveRukuXinxi", placeparams).subscribe(res => {
                             let code
-                            if (this.testnum) {
-                                code = this.testnum.sampleNum
-                            } else {
-                                code = res.json()["sampleNum"]
-                            }
-                            cordova.plugins.barcode.printBarCode(code, "300", "0", "50", "180", "2", res => {
+                            code = res.json()["sampleNum"]
+                            // code
+                            // this.submitRuku()
+                            console.log(this.testnum)
+                            this.ble.print(code).then(res => {
                                 this.submitRuku()
-                                // this.Httpupdate()
-                            }, err => {
-                                // })
                             })
                         })
 
@@ -212,18 +203,6 @@ export class libraryPage {
         this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
     }
     openble() {
-        this.ble.enable().then(() => {
-            this.ble.startScan([]).subscribe(res => {
-                if (res.name == 'HM-Z3') {
-                    console.log("那个")
-                    this.printf(res.id)
-                    setTimeout(() => { return 0 }, 1000)
-                }
-            })
-        }).catch(() => {
-            console.log("哪个")
-            this.nativeService.hideLoading()
-            this._alert._alertnoprint()
-        })
+        this.ble.search()
     }
 }

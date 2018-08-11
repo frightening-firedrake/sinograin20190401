@@ -5,9 +5,9 @@ import { HttpService } from '../../../../../providers/httpService'
 import { _alertBomb } from '../../../../common/_alert'
 import { StorageService } from '../../../../../providers/locationstorageService'
 import { NativeService } from '../../../../../providers/nativeService';
-import { BLE } from '@ionic-native/ble';
+import { BleServer } from '../../../../../providers/ble'
 
-declare var cordova;
+
 @Component({
     selector: "sampleDeatils",
     templateUrl: "details.html"
@@ -22,7 +22,7 @@ export class SampleDetailsPage {
         private _alert: _alertBomb,
         private Storage: StorageService,
         private nativeService: NativeService,
-        private BLE: BLE
+        private BLE: BleServer
     ) {
         this.sample = this.params.get("sample")
         console.log(this.sample)
@@ -132,29 +132,9 @@ export class SampleDetailsPage {
 
     }
     connect() {
-        this.nativeService.showLoading()
-        // this._ble()
-        this.BLE.enable().then(res => {
-            this.BLE.startScan([]).subscribe(res => {
-                console.log(res)
-                if (res.name == "HM-Z3") {
-                    var ble_mac = res.id;
-                    this.open(ble_mac);
-                    setTimeout(function () { return 0 }, 1000);
-                }
-            })
-        }, err => {
-            this.nativeService.hideLoading();
-        })
-    }
-    open(ble_mac) {
-        this.BLE.stopScan()
-        cordova.plugins.barcode.open(ble_mac)
-        this.nativeService.hideLoading();
+        this.BLE.search()
     }
     print() {
-        cordova.plugins.barcode.printBarCode(this.sample.sampleNum, "300", "0", "50", "180", "2", res => {
-        }, err => {
-        })
+        this.BLE.print(this.sample.sampleNum)
     }
 }

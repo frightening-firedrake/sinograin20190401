@@ -21,6 +21,7 @@ import { linkConfig } from './routerConfig';
 import { GlobalData } from '../providers/globalData';
 import { HttpService } from '../providers/httpService';
 import { NativeService } from '../providers/nativeService';
+import { BleServer } from '../providers/ble'
 import { StorageService } from '../providers/locationstorageService';
 import { AuthorityService } from '../providers/authority'
 import { Utils } from '../providers/Utils';
@@ -64,6 +65,7 @@ import { Utils } from '../providers/Utils';
     GlobalData,
     HttpService,
     NativeService,
+    BleServer,
     Utils,
     Toast,
     BarcodeScanner,

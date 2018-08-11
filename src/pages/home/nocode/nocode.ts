@@ -4,10 +4,9 @@ import { _alertBomb } from '../../common/_alert'
 import { HttpService } from '../../../providers/httpService'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { NativeService } from '../../../providers/nativeService';
-import { BLE } from '@ionic-native/ble';
+import { BleServer } from '../../../providers/ble'
 
 import { libraryPage } from './library/library'
-declare var cordova;
 @Component({
     selector: "nocode",
     templateUrl: "./nocode.html"
@@ -44,7 +43,7 @@ export class NoCode {
         private Http: HttpService,
         public FormBuilder: FormBuilder,
         private navCtrl: NavController,
-        private ble: BLE,
+        private ble: BleServer,
         private nativeService: NativeService,
     ) {
         // 直属库
@@ -210,25 +209,9 @@ export class NoCode {
         this.navCtrl.pop()
     }
     onSubmit(nocode) {
-
-        this.nativeService.showLoading()
-        this.ble.enable().then(() => {
-            this.ble.startScan([]).subscribe(res => {
-                if (res.name == 'HM-Z3') {
-                    this.printf(res.id)
-                    setTimeout(() => { return 0 }, 1000)
-                    this.Bleprint(nocode)
-                }
-            })
-        }).catch(() => {
-            this.nativeService.hideLoading()
-            this._alert._alertnoprint()
+        this.ble.search().then(res => {
+            this.Bleprint(nocode)
         })
-    }
-    printf(name) {
-        this.nativeService.hideLoading()
-        this.ble.stopScan()
-        cordova.plugins.barcode.open(name)
     }
     Bleprint(nocode) {
         let params = {
@@ -259,14 +242,10 @@ export class NoCode {
                     //   role: 'destructive',
                     handler: () => {
                         this.Http.post("grain/sample/saveRuku", params).subscribe(respon => {
-                            cordova.plugins.barcode.printBarCode(respon.json()["sampleNo"], "300", "0", "50", "180", "2", res => {
+                            // respon.json()["sampleNo"]
+                            this.ble.print(respon.json()["sampleNo"]).then(res => {
                                 this.navCtrl.push(libraryPage, { "testnum": respon.json() })
-                                // this.Httpupdate()
-                            }, err => {
-                                // })
                             })
-                            // this._ble()
-
                         })
                     }
                 }

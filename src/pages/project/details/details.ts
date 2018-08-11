@@ -10,8 +10,9 @@ import { detaSafePage } from './detailsSafe/detailsSafe'
 import { APP_SERVE_URL } from "../../../providers/config";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { StorageService } from '../../../providers/locationstorageService'
+import { BleServer } from '../../../providers/ble'
 
-declare var cordova;
+
 @Component({
     selector: "derails",
     templateUrl: "./details.html"
@@ -96,9 +97,9 @@ export class detaildPage {
         public navCtrl: NavController,
         private nativeService: NativeService,
         private photoViewer: PhotoViewer,
-        public Storage: StorageService
+        public Storage: StorageService,
+        public ble: BleServer
     ) {
-
         this.dateTime = new Date().toISOString();
         this.Worknew = FormBuilder.group({
             remark: ['', Validators.compose([Validators.required])],
@@ -176,7 +177,10 @@ export class detaildPage {
         console.log(this.sample)
         this._amount = this.sample.amount
         this.code = this.sample.sampleNo
-        this._barnTime = this.sample.barnTime.substring(0, 7)
+        if (this.sample.barnTime) {
+            this._barnTime = this.sample.barnTime.substring(0, 7)
+        }
+
         // safetyReport/data
     }
     ionViewDidEnter() {
@@ -290,129 +294,68 @@ export class detaildPage {
     }
     // 扦样信息中的打印条形码的功能
     _sample() {
-        this.ble_falg = true
-        const addInput = []
-        var bleId;
-        var parpam = {
-            title: "请选择蓝牙设备",
-        }
-        var addbuton = {
-            text: null
-        }
-        this.nativeService.showLoading()
-        // this._ble()
-        this.BLE.enable().then(res => {
-            this.BLE.startScanWithOptions([],{reportDuplicates:true}).subscribe(res => {
-                console.log(res)
-                // if (res.name.length) {
-                //     let respon = [res]
-                //     respon.forEach((item) => {
-                //         addInput.push({
-                //             type: 'radio',
-                //             label: item.name,
-                //             value: item.id
-                //         })
-                //     })
-                // }
-
-                // alert(res.name.indexOf("HM-Z3") != -1)
-                // if (res.name && res.name.indexOf("HM-Z3") != -1) {
-                //     alert(JSON.stringify(res))
-                //     var ble_mac = res.id;
-                //     this.print(ble_mac);
-                //     setTimeout(function () { return 0 }, 1000);
-                //     if (this.code) {
-                //         this._ble()
-                //     } else {
-
-                //     }
-                //  } 
-                //else if (this.ble_falg) {
-                //     var parpam = {
-                //         title: "提示",
-                //         subTitle: "搜索到的蓝牙设备错误<br/>请重启蓝牙重新搜索",
-                //         buttons: [
-                //             {
-                //                 text: "确认",
-                //                 handler: () => {
-                //                     this.ble_falg = false
-                //                     this.nativeService.hideLoading();
-                //                     // this.navCtrl.pop()
-                //                 }
-                //             }
-                //         ],
-                //         cssClass: "outsuccse only"
-                //     }
-                //     var addbuton = {
-                //         text: null
-                //     }
-                //     var addInput = []
-                //     this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
-                // }
-            })
-
-        }, err => {
-            this.nativeService.hideLoading();
+        this.ble.search().then(res => {
+            if (this.code) {
+                this.ble.print(this.code)
+            } else {
+                this.print()
+            }
         })
-        // setTimeout(() => {
-        //     if (addInput.length) {
-        //         this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) {
-        //             bleId = data.value
-        //             alert(bleId)
-        //             var ble_mac = bleId;
-        //             this.print(ble_mac);
-        //             setTimeout(function () { return 0 }, 1000);
-        //             if (this.code) {
-        //                 this._ble()
-        //             } else {
-
-        //             }
-        //         })
-        //     }
-
-        // }, 10000)
     }
-    print(ble_mac) {
-        this.BLE.stopScan()
-        cordova.plugins.barcode.open(ble_mac, success => {
-            console.log(success)
-        })
-        this.nativeService.hideLoading();
-        if (this.code) {
+    print() {
+        let parpam = {
+            title: "是否确认扦样",
+            subTitle: "此操作不可逆，请谨慎选择",
+            buttons: [
+                {
+                    text: '取消',
+                    // role: 'destructive',
+                    handler: () => {
 
-        } else {
-            let parpam = {
-                title: "是否确认扦样",
-                subTitle: "此操作不可逆，请谨慎选择",
-                buttons: [
-                    {
-                        text: '取消',
-                        // role: 'destructive',
-                        handler: () => {
-
+                    }
+                },
+                {
+                    text: '确认',
+                    //   role: 'destructive',
+                    handler: () => {
+                        let parpam = {
+                            id: this.sample.id,
+                            sampleState: 1,
+                            autograph: this._storage
                         }
-                    },
-                    {
-                        text: '确认',
-                        //   role: 'destructive',
-                        handler: () => {
-                            let parpam = {
-                                id: this.sample.id,
-                                sampleState: 1,
-                                autograph: this._storage
-                            }
-                            this.Http.post("/grain/sample/standSample", parpam).subscribe(res => {
-                                this.data = res.json()
-                                if (this.data.success) {
-                                    this.code = this.data.sampleNo
+                        this.Http.post("/grain/sample/standSample", parpam).subscribe(res => {
+                            this.data = res.json()
+                            if (this.data.success) {
+                                this.code = this.data.sampleNo
+                                let params = {
+                                    title: "提示",
+                                    subTitle: "扦样成功",
+                                    buttons: [
+                                        {
+                                            text: "确认",
+                                            handler: () => {
+                                                this.ble.print(this.code)
+                                            }
+                                        }
+                                    ],
+                                    cssClass: "outsuccse only"
+                                }
+                                let addbuton = {
+                                    text: null
+                                }
+                                let addInput = []
+                                this._alert._alertSmlpe(params, addbuton, addInput, data => {
+                                })
+                                this.sample.sampleState = 1
+                            } else {
+                                if (this.sample.sampleState != 1) {
                                     let params = {
                                         title: "提示",
-                                        subTitle: "扦样成功",
+                                        subTitle: "扦样失败,请重新点击打印条形码",
                                         buttons: [
                                             {
                                                 text: "确认",
                                                 handler: () => {
-                                                    this._ble();
                                                 }
                                             }
                                         ],
@@ -424,53 +367,24 @@ export class detaildPage {
                                     let addInput = []
                                     this._alert._alertSmlpe(params, addbuton, addInput, data => {
                                     })
-                                    this.sample.sampleState = 1
-                                } else {
-                                    if (this.sample.sampleState != 1) {
-                                        let params = {
-                                            title: "提示",
-                                            subTitle: "扦样失败,请重新点击打印条形码",
-                                            buttons: [
-                                                {
-                                                    text: "确认",
-                                                    handler: () => {
-                                                    }
-                                                }
-                                            ],
-                                            cssClass: "outsuccse only"
-                                        }
-                                        let addbuton = {
-                                            text: null
-                                        }
-                                        let addInput = []
-                                        this._alert._alertSmlpe(params, addbuton, addInput, data => {
-                                        })
-                                    }
                                 }
-                            })
+                            }
+                        })
 
-                        }
                     }
-                ],
-                cssClass: "outsuccse succse"
-            }
-            let addbuton = {
-                text: null
-            }
-            let addInput = []
-            this._alert._alertSmlpe(parpam, addbuton, addInput, data => {
-                return 0
-            })
+                }
+            ],
+            cssClass: "outsuccse succse"
         }
-    }
-    _ble() {
-        cordova.plugins.barcode.printBarCode(this.code, "300", "0", "50", "180", "2", res => {
-            console.log(res)
-        }, err => {
-            console.log(err)
+        let addbuton = {
+            text: null
+        }
+        let addInput = []
+        this._alert._alertSmlpe(parpam, addbuton, addInput, data => {
+            return 0
         })
-    }
 
+    }
     // 差数
     difference() {
         var correctioFactor = this.Worknew.value.correctioFactor || 1

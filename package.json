@@ -82,10 +82,10 @@
       "cordova-plugin-ble-central": {},
       "cordova-plugin-app-version": {},
       "com-sarriaroman-photoviewer": {},
-      "com.liang.barcode": {},
       "ionic-plugin-keyboard": {},
       "cordova-plugin-screen-orientation": {},
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "com.liang.barcode": {}
     }
   }
 }
