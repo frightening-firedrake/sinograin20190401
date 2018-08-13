@@ -13,8 +13,7 @@
 		<config-file target="AndroidManifest.xml" parent="/manifest">
 			<uses-permission android:name="android.permission.BLUETOOTH"/>
             <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>  
-			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>  
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 		</config-file>
 		<source-file src="src/android/barcode.java" target-dir="src/com/liang/barcode/barcode" />
 		<source-file src="src/android/libs/CPCLA300_V1.01.19.01PRO.jar" target-dir="libs" />

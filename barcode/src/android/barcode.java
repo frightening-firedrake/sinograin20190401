@@ -79,20 +79,11 @@ public class barcode extends CordovaPlugin {
             mReceiver = new BroadcastReceiver() {           //new广播对象
             @Override
             public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+                // Log.d(TAG, "开始扫描...");
+			}else
             // Toast.makeText(context,"BroadcastReceiver",Toast.LENGTH_SHORT).show();how();
-            // if (intent.getAction.equals(BluetoothDevice.ACTION_DISCOVERY_STARTED)) {
-			// 	    //   BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);//获取设备对象
-            //         //     try {
-            //         //         JSONObject o = deviceToJSON(device,"CONNECTED");  //生成json格式的device信息
-            //         //         unpairedDevices.put(o);
-            //         //         callbackContext.success(o);
-            //         //         if (callbackContext != null) {
-            //         //             PluginResult res = new PluginResult(PluginResult.Status.OK, o);//将信息写入 同时设置后续还有返回信息
-            //         //             res.setKeepCallback(true);
-            //         //             callbackContext.sendPluginResult(res); 
-            //         //         }
-            //         //     } catch (JSONException e) {}
-			//     }else 
             if(intent.getAction().equals(BluetoothDevice.ACTION_FOUND)){      
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);//获取设备对象
                     try {
@@ -105,20 +96,10 @@ public class barcode extends CordovaPlugin {
                             }
                         } catch (JSONException e) {}
                 // Toast.makeText(context,"接受到已连接，消息为："+device.getName()+"address: "+device.getAddress(),Toast.LENGTH_LONG).show();
-                }
-                // else if(BluetoothDevice.ACTION_DISCOVERY_FINISHED.equals(intent.getAction())){
-                //     // BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);//获取设备对象
-                //     // try {
-                //     //         JSONObject o = deviceToJSON(device,"DISCONNECTED");  //生成json格式的device信息
-                //     //         unpairedDevices.put(o);
-                //     //         if (callbackContext != null) {
-                //     //             PluginResult res = new PluginResult(PluginResult.Status.OK, o);//将信息写入 同时设置后续还有返回信息
-                //     //             res.setKeepCallback(true);
-                //     //             callbackContext.sendPluginResult(res); 
-                //     //         }
-                //     //     } catch (JSONException e) {}
-                // //    Toast.makeText(context,"接受到断开连接，消息为："+device.getName()+"address: "+device.getAddress(),Toast.LENGTH_LONG).show();
-                //     }
+                }else
+            if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+				// Log.d(TAG, "扫描结束.");
+			}
                 }
             };
             Activity activity = cordova.getActivity();
@@ -151,8 +132,8 @@ public class barcode extends CordovaPlugin {
         private IntentFilter makeFilter() {
             IntentFilter filter = new IntentFilter();
             filter.addAction(BluetoothDevice.ACTION_FOUND);            
-            // filter.addAction(BluetoothDevice.ACTION_DISCOVERY_STARTED);
-            // filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
             return filter;
         }
 

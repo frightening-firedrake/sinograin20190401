@@ -21,35 +21,6 @@ room {
                 line-height: 1.333333rem;
                 padding: 0;
                 background-color: #509cfa;
-                ion-select {
-                    max-width: none;
-                    width: 100%;
-                    padding: 0;
-                    display: inline-block;
-                    height: 100%;
-                    // padding: .146667rem.48rem 0 .493333rem;
-                    background-color: transparent;
-                    // border: 1px solid #dfdfdf;
-                    .select-text {
-                        font-size: .4rem;
-                        color: white;
-                        display: inline-block;
-                        width: auto;
-                        height: auto;
-                    }
-                    .select-icon {
-                        display: inline-block;
-                        width: auto;
-                        height: auto;
-                        top: 0;
-                        bottom: 0;
-                        margin: auto 0;
-                        position: absolute;
-                        .select-icon-inner {
-                            color: white;
-                        }
-                    }
-                }
                 ion-label {
                     margin: 0;
                     font-size: .4rem;
@@ -102,15 +73,14 @@ room {
                             font-size: .4rem;
                             border: 1px solid #dfdfdf;
                             .select-text {
-                                line-height: 1.5;
                                 padding-left: .293333rem;
                                 margin-top: .106667rem;
                             }
                             .select-icon {
-                                margin-right: .333333rem;
-                                margin-top: .106667rem;
+                                height: 100%;
                                 .select-icon-inner {
                                     top: 50%;
+                                    left: -5px;
                                     bottom: 50%;
                                     margin-top: auto;
                                     margin-bottom: auto;
