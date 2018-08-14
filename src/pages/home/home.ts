@@ -35,37 +35,20 @@ export class HomePage {
     public barcode: BarcodeScanner,
     public Http: HttpService
   ) {
-    // this.Http.post("grain/sample/getAll").subscribe(res => {
-    //   try {
-    //     res.json()
-    //   } catch (e) {
-    //     this.loginModel()
-    //   }
-    // })
-  }
-  bo(){
-    this.Http.post("/grain/blueTooth/search").subscribe(res=>{
-      alert(res)
-    })
+
   }
   ionViewDidEnter() {
-    this.Storage.GetStorage("userLogin").subscribe(res => {
-      // console.log("获取到了")
-      res.then(val => {
-        const User = val
-        // console.log( )
-        if (!User) {
-          this.loginModel()
-        }
-      })
-    })
     //获取统计
     this.Http.get("grain/sample/getAllCereals").subscribe(res => {
       console.log(res)
       let respon = res.json()
-      this.XMNumber = respon["XMNumber"] ? (respon["XMNumber"] / 10000).toFixed(2) : "0"
-      this.YMNumber = respon["YMNumber"] ? (respon["YMNumber"] / 10000).toFixed(2) : "0"
-      this.SYYNumber = respon["SYYNumber"] ? (respon["SYYNumber"] / 10000).toFixed(2) : "0"
+      if (res.json()["code"] == "1000000") {
+        this.loginModel()
+      } else {
+        this.XMNumber = respon["XMNumber"] ? (respon["XMNumber"] / 10000).toFixed(2) : "0"
+        this.YMNumber = respon["YMNumber"] ? (respon["YMNumber"] / 10000).toFixed(2) : "0"
+        this.SYYNumber = respon["SYYNumber"] ? (respon["SYYNumber"] / 10000).toFixed(2) : "0"
+      }
     })
   }
   newpage(parpam, event) {
