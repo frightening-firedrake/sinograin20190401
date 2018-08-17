@@ -227,15 +227,10 @@ detailsWork {
                                 .label {
                                     width: 100%;
                                     height: 100%;
-                                    ion-img {
+                                    img {
                                         width: 100%;
                                         height: 100%;
-                                        background-color: transparent;
-                                        img {
-                                            width: 100%;
-                                            height: 100%;
-                                            display: block;
-                                        }
+                                        display: block;
                                     }
                                 }
                             }

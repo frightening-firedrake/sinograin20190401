@@ -62,7 +62,7 @@ export class HttpService {
 
         this.Storage.GetStorage("userLogin").subscribe(res => {
           res.then(res => {
-            //console.log(res)
+            // console.log(res)
             if (res) {
               this._token = res.token;
               if (options.headers) {

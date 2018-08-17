@@ -10,9 +10,7 @@ import { HttpService } from '../../../providers/httpService'
 export class HeaderPage implements OnInit {
     @Input() title: string;
     constructor(public nav: NavController, public Http: HttpService) {
-        console.log(1)
-        this.Http.post("grain/sample/getAll").subscribe(res => {
-            console.log(res)
+        this.Http.post("grain/sample/getAllCereals").subscribe(res => {
             if (res.json()["code"] == "1000000") {
                 this.nav.popToRoot()
             }

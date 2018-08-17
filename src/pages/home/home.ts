@@ -25,6 +25,7 @@ export class HomePage {
   public XMNumber: string;
   public YMNumber: string;
   public SYYNumber: string;
+  public _stroage=false
   constructor(
     public _alert: _alertBomb,
     public navCtrl: NavController,
@@ -38,17 +39,30 @@ export class HomePage {
 
   }
   ionViewDidEnter() {
+
     //获取统计
     this.Http.get("grain/sample/getAllCereals").subscribe(res => {
-      console.log(res)
       let respon = res.json()
       if (res.json()["code"] == "1000000") {
-        this.loginModel()
+        this.stroage()
+        this._stroage = true
       } else {
         this.XMNumber = respon["XMNumber"] ? (respon["XMNumber"] / 10000).toFixed(2) : "0"
         this.YMNumber = respon["YMNumber"] ? (respon["YMNumber"] / 10000).toFixed(2) : "0"
         this.SYYNumber = respon["SYYNumber"] ? (respon["SYYNumber"] / 10000).toFixed(2) : "0"
       }
+    })
+  }
+  stroage() {
+    this.Storage.GetStorage("userLogin").subscribe(res => {
+      // console.log("获取到了")
+      res.then(val => {
+        const User = val
+        // console.log( )
+        if (!User||this._stroage) {
+          this.loginModel()
+        }
+      })
     })
   }
   newpage(parpam, event) {
@@ -139,6 +153,7 @@ export class HomePage {
     })
   }
   loginModel() {
+    this._stroage = false
     let profileModal = this.modalCtrl.create(loginPage);
     profileModal.present();
     profileModal.onDidDismiss(data => {

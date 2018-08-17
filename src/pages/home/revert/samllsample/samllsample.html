@@ -33,7 +33,7 @@
                 <ion-label>{{list.storage}}</ion-label>
             </ion-col>
             <ion-col col-2>
-                <ion-label>admin</ion-label>
+                <ion-label>{{returnPerson}}</ion-label>
             </ion-col>
             <ion-col col-2 *ngIf="samllsampleState==-1" (click)="delect(list)">
                 <ion-label class="active">删除</ion-label>

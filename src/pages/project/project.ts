@@ -57,9 +57,14 @@ export class ProjectPage {
     }
     this.Http.post("grain/library/getAll", Company).subscribe(res => {
       this.samplylist = res.json()
-      this.Companyarr = this.samplylist.filter((i, v) => {
-        return i.pLibraryId == -1
-      })
+      try {
+        this.Companyarr = this.samplylist.filter((i, v) => {
+          return i.pLibraryId == -1
+        })
+      }catch(e){
+        
+      }
+
       // this.Company = this.Companyarr[0].id
     })
   }

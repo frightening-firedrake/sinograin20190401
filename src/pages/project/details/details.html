@@ -179,16 +179,16 @@
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
                             <ion-label class="title_span">杂质（%）:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.storageImpurity" [value]="Work.storageImpurity"></ion-input>
+                            <ion-input type="number" [formControl]="Workfrom.storageImpurity" [value]="Work.storageImpurity" (ionBlur)="shuifen('storageImpurity')"></ion-input>
                         </ion-item>
                     </ion-list>
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item class="list_input">
                             <span class="title_span title_span_font">实测入库质量:</span>
                         </ion-item>
-                        <ion-item type="ion-item" ion-item class="num first_item no_border" (keyup)="realCapacity()">
+                        <ion-item type="ion-item" ion-item class="num first_item no_border">
                             <ion-label class="title_span">容重（g/l）:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.realCapacity" [value]="Work.realCapacity"></ion-input>
+                            <ion-input type="number" [formControl]="Workfrom.realCapacity" #realCapacity [value]="Work.realCapacity"></ion-input>
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
                             <ion-label class="title_span">水分（%）:</ion-label>
@@ -196,28 +196,86 @@
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num ">
                             <ion-label class="title_span">杂质（%）:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.realImpurity" [value]="Work.realImpurity"></ion-input>
+                            <ion-input type="number" [formControl]="Workfrom.realImpurity" [value]="Work.realImpurity" (ionBlur)="shuifen('realImpurity')"></ion-input>
                         </ion-item>
                     </ion-list>
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item class="list_input">
                             <span class="title_span title_span_font">粮堆形状及基本尺寸:</span>
+                            <span (click)="selectshape()" *ngIf="!Work_flag" style="color:red">请选择粮堆形状</span>
                         </ion-item>
-                        <ion-item class="list_img">
-                            <img src="assets/image/index/work.png" />
-                        </ion-item>
-                        <ion-item type="ion-item" ion-item class="num first_item no_border">
-                            <ion-label class="title_span">长（m）:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.length" [value]="Work.length" (keyup)="mianji($event)"></ion-input>
-                        </ion-item>
-                        <ion-item type="ion-item" ion-item class="num ">
-                            <ion-label class="title_span">宽（m）:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.wide" [value]="Work.wide" (keyup)="mianji($event)"></ion-input>
-                        </ion-item>
-                        <ion-item type="ion-item" ion-item class="num ">
-                            <ion-label class="title_span">高（m）:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.high" [value]="Work.high" (keyup)="mianji($event)"></ion-input>
-                        </ion-item>
+                        <div [hidden]="shape!='work'">
+                            <ion-item class="list_img">
+                                <img src="assets/image/index/work.png" />
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num first_item no_border">
+                                <ion-label class="title_span">长（m）:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.length" [value]="Work.length" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num ">
+                                <ion-label class="title_span">宽（m）:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.wide" [value]="Work.wide" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num ">
+                                <ion-label class="title_span">高（m）:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.high" [value]="Work.high" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                        </div>
+                        <div [hidden]="shape!='yuanzhu'">
+                            <ion-item class="list_img">
+                                <img src="assets/image/index/yuanzhu.png" />
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num first_item no_border">
+                                <ion-label class="title_span">圆柱直径:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.diameter" [required]="shape=='yuanzhu'" [value]="Work.diameter" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num ">
+                                <ion-label class="title_span">高:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.high" [required]="shape=='yuanzhu'" [value]="Work.high" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                        </div>
+                        <div [hidden]="shape!='changfangjiezhuiti'">
+                            <ion-item class="list_img">
+                                <img src="assets/image/index/changfangjiezhuiti.png" />
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num first_item no_border">
+                                <ion-label class="title_span">上底面积:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.topS" [required]="shape=='changfangjiezhuiti'" [value]="Work.topS" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num first_item no_border">
+                                <ion-label class="title_span">下底面积:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.bottomS" [required]="shape=='changfangjiezhuiti'" [value]="Work.bottomS" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num ">
+                                <ion-label class="title_span">高:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.high" [required]="shape=='changfangjiezhuiti'" [value]="Work.high" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                        </div>
+                        <div [hidden]="shape!='qita'">
+                            <ion-item class="list_img">
+                                <img src="assets/image/index/qita.png" />
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num first_item no_border">
+                                <ion-label class="title_span">高1:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.high" [value]="Work.high" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num first_item no_border">
+                                <ion-label class="title_span">长1:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.length" [value]="Work.length" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num first_item no_border">
+                                <ion-label class="title_span">宽:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.wide" [value]="Work.wide" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num first_item no_border">
+                                <ion-label class="title_span">高2:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.high_2" [required]="shape=='qita'" [value]="Work.high_2" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                            <ion-item type="ion-item" ion-item class="num first_item no_border">
+                                <ion-label class="title_span">长2:</ion-label>
+                                <ion-input type="number" [formControl]="Workfrom.length_2" [required]="shape=='qita'" [value]="Work.length_2" (keyup)="setmeasuredVolume()"></ion-input>
+                            </ion-item>
+                        </div>
                     </ion-list>
                     <ion-list class="lists_input">
                         <ion-item type="ion-item" ion-item class="list_input ">
@@ -229,7 +287,7 @@
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num long_item">
                             <ion-label class="title_span">需要扣除体积（m3）:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.deductVolume" [value]="Work.deductVolume" (keyup)="sttj($event)"></ion-input>
+                            <ion-input type="number" [formControl]="Workfrom.deductVolume" [value]="Work.deductVolume" (keyup)="setrealVolume()"></ion-input>
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num long_item">
                             <ion-label class="title_span">粮堆实际体积（m3）:</ion-label>
@@ -246,11 +304,11 @@
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num  data long_item">
                             <ion-label class="title_span">粮食容重（g/l）:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.realCapacity" [value]="Work.realCapacity" readonly="true"></ion-input>
+                            <ion-input type="number" [formControl]="Workfrom.realCapacity" [value]="realCapacity.value" readonly="true"></ion-input>
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num data long_item" (keyup)="unQuality()">
                             <ion-label class="title_span">校正后修正系数:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.correctioFactor" [value]="Work.correctioFactor" (keyup)="ldpjmd($event)"></ion-input>
+                            <ion-input type="number" [formControl]="Workfrom.correctioFactor" [value]="Work.correctioFactor" (keyup)="setaveDensity()" (ionBlur)="correctioFactor()"></ion-input>
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num data long_item">
                             <ion-label class="title_span">粮堆平均密度（kg/m）:</ion-label>
@@ -271,13 +329,13 @@
                             <ion-label>应记粮食损耗(kg)</ion-label>
                             <!--<ion-input type="number"></ion-input>-->
                         </ion-item>
-                        <ion-item type="ion-item" ion-item class="num long_item" (keyup)="loss()">
+                        <ion-item type="ion-item" ion-item class="num long_item">
                             <ion-label class="title_span">水分减量:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.lossWater" [value]="Work.lossWater"></ion-input>
+                            <ion-input type="number" [formControl]="Workfrom.lossWater" (keyup)="loss()" [value]="Work.lossWater"></ion-input>
                         </ion-item>
-                        <ion-item type="ion-item" ion-item class="num long_item" (keyup)="loss()">
+                        <ion-item type="ion-item" ion-item class="num long_item">
                             <ion-label class="title_span">保管自然损耗:</ion-label>
-                            <ion-input type="number" [formControl]="Workfrom.lossNature" [value]="Work.lossNature"></ion-input>
+                            <ion-input type="number" [formControl]="Workfrom.lossNature" (keyup)="loss()" [value]="Work.lossNature"></ion-input>
                         </ion-item>
                         <ion-item type="ion-item" ion-item class="num long_item">
                             <ion-label class="title_span">合计:</ion-label>
@@ -324,7 +382,7 @@
                             <ion-input type="text" [formControl]="Workfrom.remark" [value]="Work.remark"></ion-input>
                         </ion-item>
                     </ion-list>
-                    <button ion-button large color="secondary" class="sumbit" type="submit">修改</button>
+                    <button ion-button large color="secondary" class="sumbit" type="submit" [disabled]="!Worknew.valid">修改</button>
                 </form>
             </div>
         </div>

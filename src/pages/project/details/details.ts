@@ -25,6 +25,8 @@ export class detaildPage {
     dateTime;
     isrequire
     isresult = true
+    //粮堆形状
+    shape = "work"
     private Workfrom = {
         isMatch: '',//账实是否相符
         realCheckedTime: "",//实际查库日
@@ -53,7 +55,12 @@ export class detaildPage {
         slip: "",//差率
         result: "",//不符原因
         barnType: "",//仓房类型,
-        remark: ""//备注
+        remark: "",//备注
+        topS: "",//上底面积
+        bottomS: "",//下底面积
+        diameter: "",//直径
+        length_2: "",//长度2
+        high_2: "",//宽度2
     }
     private addButton: any = {
         text: ""
@@ -88,6 +95,24 @@ export class detaildPage {
     _barnTime
     _storage
     private pringarr = ["8C:DE:52:FA:A6:19"]
+    // 2.粮堆实际体积＝粮堆测量体积－需要扣除体积。                                                         
+    // realVolume=measuredVolume-deductVolume
+    // 3.粮堆平均密度＝粮食容重(单位体积粮食重量)×校正后修正系数。                                                                
+    // aveDensity=realCapacity*correctioFactor
+    // 4.测量计算数＝粮堆实际体积×粮堆平均密度。                                                          
+    // unQuality=realVolume*aveDensity
+    // 5.水分减量＝保管账数量×(入库水分%－实测水分%)/(1－实测水分%)。                                                           
+    // lossWater=_amount*（storageWater-realWater）/(1-storageWater)
+    // 6.保管自然损耗＝保管账数量×0.2%×粮食储存年数。                                                             
+    // lossNature=_amount*0.2%*(new data()-data.gainTime)
+    // 7.合计=水分减量＋保管自然损耗。                                                           
+    // loss=lossWater+lossNature
+    // 8.检查计算数＝测量计算数＋应记粮食损耗。                                                           
+    // checkNum=unQuality+loss
+    // 9.差数＝保管账数量－检查计算数；
+    // difference=_amount-checkNum
+    // 10.差率＝差数/保管账数量×100％。
+    // slip=difference/_amount*100%
     constructor(
         public params: NavParams,
         public _alert: _alertBomb,
@@ -118,9 +143,14 @@ export class detaildPage {
             realVolume: ['', Validators.compose([Validators.required])],
             correctioFactor: ['', Validators.compose([Validators.required])],
             aveDensity: ['', Validators.compose([Validators.required])],
-            length: ['', Validators.compose([Validators.required])],
-            wide: ['', Validators.compose([Validators.required])],
-            high: ['', Validators.compose([Validators.required])],
+            length: ['',],//长
+            wide: ['',],//宽
+            high: ['',],//高
+            topS: ['',],//上底面积长方截椎体
+            bottomS: ['',],//下底面积长方截椎体
+            diameter: ['',],//直径 圆柱体
+            length_2: ['',],//长度2 其他
+            high_2: ['',],//高2 其他
             unQuality: ['', Validators.compose([Validators.required])],
             lossWater: ['0', Validators.compose([Validators.required])],
             lossNature: ['0', Validators.compose([Validators.required])],
@@ -132,6 +162,11 @@ export class detaildPage {
 
             barnType: ['', Validators.compose([Validators.required])],
         })
+        this.Workfrom.topS = this.Worknew.controls["topS"]
+        this.Workfrom.bottomS = this.Worknew.controls["bottomS"]
+        this.Workfrom.diameter = this.Worknew.controls["diameter"]
+        this.Workfrom.length_2 = this.Worknew.controls["length_2"]
+        this.Workfrom.high_2 = this.Worknew.controls["high_2"]
         this.Workfrom.remark = this.Worknew.controls["remark"]
         this.Workfrom.isMatch = this.Worknew.controls["isMatch"]
         this.Workfrom.realCheckedTime = this.Worknew.controls["realCheckedTime"],
@@ -173,7 +208,6 @@ export class detaildPage {
                 })
             })
         }
-
         console.log(this.sample)
         this._amount = this.sample.amount
         this.code = this.sample.sampleNo
@@ -193,6 +227,20 @@ export class detaildPage {
             if (work["rows"].length) {
                 this.Work_flag = true
                 this.Work = work["rows"][0]
+                switch (this.Work.shape) {
+                    case "长方体":
+                        this.shape = "work"
+                        break;
+                    case "圆柱体":
+                        this.shape = "yuanzhu"
+                        break;
+                    case "其他":
+                        this.shape = "qita"
+                        break;
+                    case "长方截锥体":
+                        this.shape = "changfangjiezhuiti"
+                        break;
+                }
             } else {
                 this.Work_flag = false
             }
@@ -272,12 +320,30 @@ export class detaildPage {
     }
     onSubmit(e) {
         e.value.id = this.Work.id
-
+        let url
+        switch (this.shape) {
+            case "work":
+                e.value.shape = "长方体"
+                url = "/manuscript/exportExcelCFT"
+                break;
+            case "yuanzhu":
+                e.value.shape = "圆柱体"
+                url = "/manuscript/exportExcelYZT"
+                break;
+            case "changfangjiezhuiti":
+                e.value.shape = "长方截锥体"
+                url = "/manuscript/exportExcelCFJZT"
+                break;
+            case "qita":
+                e.value.shape = "其他"
+                url = "/manuscript/exportExcelQT"
+                break;
+        }
         let data = {
             params: JSON.stringify(e.value),
             type: 2
         }
-        this.Http.post("grain/manuscript/saveOrEditMobile", data).subscribe(res => {
+        this.Http.post("grain" + url, data).subscribe(res => {
         })
     }
     // 没有工作底稿的时候
@@ -289,8 +355,10 @@ export class detaildPage {
         this.navCtrl.push(detaSafePage, { "params": this.sample })
     }
     //水分
-    shuifen(el) {
-        this.Work[el] = (this.Worknew.value[el] * 1).toFixed(1)
+    shuifen(font) {
+        this.Work[font] = (this.Worknew.value[font] * 1).toFixed(1)
+        this.lossWater()
+        //    this.Work.storageWater = this.Work.storageWater.toFixed(1)
     }
     // 扦样信息中的打印条形码的功能
     _sample() {
@@ -385,79 +453,168 @@ export class detaildPage {
         })
 
     }
-    // 差数
-    difference() {
-        var correctioFactor = this.Worknew.value.correctioFactor || 1
-        var deductVolume = this.Worknew.value.deductVolume || 0
-        var length = this.Worknew.value.length || 1
-        var wide = this.Worknew.value.wide || 1
-        var high = this.Worknew.value.high || 1
-        // this.Work.difference = Math.round(this.sample.amount * 1000 - (((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1)))
-        this.Work.difference = (this._amount * 1000) - this.Worknew.value.checkNum
-        this.slip()
+    //校正后修正系数保留
+    correctioFactor() {
+        this.Work.correctioFactor = (this.Worknew.value.correctioFactor * 1).toFixed(2)
     }
-    //差率
-    slip() {
-        var correctioFactor = this.Worknew.value.correctioFactor || 1
-        var deductVolume = this.Worknew.value.deductVolume || 0
-        var length = this.Worknew.value.length || 1
-        var wide = this.Worknew.value.wide || 1
-        var high = this.Worknew.value.high || 1
-        this.Work.slip = ((this.sample.amount * 1000 - (((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1))) / (this.sample.amount * 1000) * 100).toFixed(1)
+    //return 粮堆测量体积
+    setmeasuredVolume() {
+        let count
+        let h = this.Worknew.value.high
+        switch (this.shape) {
+            case "work":
+                var length = this.Worknew.value.length
+                var wide = this.Worknew.value.wide
+                count = (length * wide * h)
+                break;
+            case "yuanzhu":
+                let s = 3.14 * Math.pow(this.Worknew.value.diameter * 1, 2) / 4
+                count = (h * s)
+                break;
+            case "changfangjiezhuiti":
+                let s1 = this.Worknew.value.topS
+                let s2 = this.Worknew.value.bottomS
+                count = ((s1 + s2 + Math.sqrt(s1 * s2)) * h / 3)
+                break;
+            case "qita":
+                let gao2 = this.Worknew.value.high_2
+                let chang2 = this.Worknew.value.length_2
+                var length = this.Worknew.value.length
+                var wide = this.Worknew.value.wide
+                count = (h * length * wide + (h + gao2) * chang2 / 2)
+                break;
+        }
+        this.Work.measuredVolume = count.toFixed(1)
+        // this.sttj()
+        this.setrealVolume()
     }
-    // 合计
+    // return 粮堆实际体积
+    setrealVolume() {
+        let measuredVolume = Number(this.Worknew.value.measuredVolume), deductVolume = Number(this.Worknew.value.deductVolume)
+        this.Work.realVolume = measuredVolume - deductVolume
+        this.setaveDensity()
+    }
+    //return 粮堆平均密度
+    setaveDensity() {
+        //粮食容重=实际容重
+        let realCapacity = Number(this.Worknew.value.realCapacity), correctioFactor = Number(this.Worknew.value.correctioFactor)
+        this.Work.aveDensity = (realCapacity * correctioFactor).toFixed(1)
+        this.unQuality()
+    }
+    // return 测量计算数
+    unQuality() {
+        console.log(this.Work.realVolume, this.Worknew.value.aveDensity, this.Work.aveDensity)
+        let realVolume = Number(this.Worknew.value.realVolume), aveDensity = Number(this.Work.aveDensity)//因为this.Worknew.value.aveDensity是上一个值
+        console.log(realVolume, aveDensity)
+        this.Work.unQuality = Math.round(realVolume * aveDensity)
+
+        this.checkNum()
+    }
+    // return 水分减量
+    lossWater() {
+        let storageWater = Number(this.Worknew.value.storageWater) / 100, relaWater = Number(this.Worknew.value.realWater) / 100
+        this.Work.lossWater = Math.round(this._amount * (storageWater - relaWater) / (1 - storageWater))
+        console.log(storageWater, relaWater, this._amount * (storageWater - relaWater), (1 - storageWater))
+        this.loss()
+    }
+    // return 合计
     loss() {
-        this.Work.loss = this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1
-        var correctioFactor = this.Worknew.value.correctioFactor || 1
-        var deductVolume = this.Worknew.value.deductVolume || 0
-        var length = this.Worknew.value.length || 1
-        var wide = this.Worknew.value.wide || 1
-        var high = this.Worknew.value.high || 1
-        // this.Work.checkNum = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1))
-        this.Work.checkNum = this.Worknew.value.unQuality + Number(this.Worknew.value.lossWater) + Number(this.Worknew.value.lossNature)
+        let lossWater = Number(this.Worknew.value.lossWater), lossNature = Number(this.Worknew.value.lossNature)
+        this.Work.loss = lossWater + lossNature
+        // console.log(lossWater,lossNature)
+        this.checkNum()
+    }
+    // return 检查计算数
+    checkNum() {
+        let unQuality = Number(this.Worknew.value.unQuality), loss = Number(this.Worknew.value.loss)
+        this.Work.checkNum = Math.round(unQuality + loss)
+        // console.log(unQuality,loss)
         this.difference()
     }
-    // 测量计算数
-    unQuality() {
-        var correctioFactor = this.Worknew.value.correctioFactor || 1
-        var deductVolume = this.Worknew.value.deductVolume || 0
-        var length = this.Worknew.value.length || 1
-        var wide = this.Worknew.value.wide || 1
-        var high = this.Worknew.value.high || 1
-        this.Work.unQuality = Math.round(this.Work.realVolume * this.Work.aveDensity)
-        // this.Work.unQuality = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor))
-        this.loss()
+    // return 差数
+    difference() {
+        let _amount = Number(this._amount), checkNum = Number(this.Work.checkNum)
+        this.Work.difference = Math.round(_amount - checkNum)
+        this.slip()
     }
-    mianji() {
-        var length = this.Worknew.value.length || 1
-        var wide = this.Worknew.value.wide || 1
-        var high = this.Worknew.value.high || 1
-        this.Work.measuredVolume = (length * wide * high).toFixed(1);
-        this.sttj()
+    // return 差率
+    slip() {
+        let difference = Number(this.Worknew.value.difference), _amount = Number(this._amount)
+        this.Work.slip = (difference / _amount * 1).toFixed(1)
     }
-    //粮堆实体体积（m3）
-    sttj() {
-        var deductVolume = this.Worknew.value.deductVolume || 0
-        this.Work.realVolume = (this.Work.measuredVolume - deductVolume).toFixed(1)
-        this.Work.checkNum = Math.round(this.Worknew.value.unQuality * 1 + this.Worknew.value.loss * 1)
-        this.unQuality()
-
-
-    }
-    // 粮食容重
-    realCapacity() {
-        this.Work.realCapacity = this.Worknew.value.realCapacity
-    }
-    // //容重
-    // rongzhong(e) {
-    //     this.Worknew.value.realCapacity = this.Worknew.value.realCapacity
+    // // 差数
+    // difference() {
+    //     var correctioFactor = this.Worknew.value.correctioFactor || 1
+    //     var deductVolume = this.Worknew.value.deductVolume || 0
+    //     var length = this.Worknew.value.length || 1
+    //     var wide = this.Worknew.value.wide || 1
+    //     var high = this.Worknew.value.high || 1
+    //     // this.Work.difference = Math.round(this.sample.amount * 1000 - (((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1)))
+    //     this.Work.difference = (this._amount * 1000) - this.Worknew.value.checkNum
+    //     this.slip()
     // }
-    //粮堆平均密度（kg/m）
-    ldpjmd() {
-        var correctioFactor = this.Worknew.value.correctioFactor || 1
-        this.Work.aveDensity = (this.Worknew.value.realCapacity * correctioFactor).toFixed(1)
-        this.loss()
-    }
+    // //差率
+    // slip() {
+    //     var correctioFactor = this.Worknew.value.correctioFactor || 1
+    //     var deductVolume = this.Worknew.value.deductVolume || 0
+    //     var length = this.Worknew.value.length || 1
+    //     var wide = this.Worknew.value.wide || 1
+    //     var high = this.Worknew.value.high || 1
+    //     this.Work.slip = ((this.sample.amount * 1000 - (((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1))) / (this.sample.amount * 1000) * 100).toFixed(1)
+    // }
+    // // 合计
+    // loss() {
+    //     this.Work.loss = this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1
+    //     var correctioFactor = this.Worknew.value.correctioFactor || 1
+    //     var deductVolume = this.Worknew.value.deductVolume || 0
+    //     var length = this.Worknew.value.length || 1
+    //     var wide = this.Worknew.value.wide || 1
+    //     var high = this.Worknew.value.high || 1
+    //     // this.Work.checkNum = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor) * 1 + (this.Worknew.value.lossWater * 1 + this.Worknew.value.lossNature * 1))
+    //     this.Work.checkNum = this.Worknew.value.unQuality + Number(this.Worknew.value.lossWater) + Number(this.Worknew.value.lossNature)
+    //     this.difference()
+    // }
+    // // 测量计算数
+    // unQuality() {
+    //     var correctioFactor = this.Worknew.value.correctioFactor || 1
+    //     var deductVolume = this.Worknew.value.deductVolume || 0
+    //     var length = this.Worknew.value.length || 1
+    //     var wide = this.Worknew.value.wide || 1
+    //     var high = this.Worknew.value.high || 1
+    //     this.Work.unQuality = Math.round(this.Work.realVolume * this.Work.aveDensity)
+    //     // this.Work.unQuality = Math.round(((length * wide * high) - deductVolume) * (this.Worknew.value.realCapacity * correctioFactor))
+    //     this.loss()
+    // }
+    // mianji() {
+    //     var length = this.Worknew.value.length || 1
+    //     var wide = this.Worknew.value.wide || 1
+    //     var high = this.Worknew.value.high || 1
+    //     this.Work.measuredVolume = (length * wide * high).toFixed(1);
+    //     this.sttj()
+    // }
+    // //粮堆实体体积（m3）
+    // sttj() {
+    //     var deductVolume = this.Worknew.value.deductVolume || 0
+    //     this.Work.realVolume = (this.Work.measuredVolume - deductVolume).toFixed(1)
+    //     this.Work.checkNum = Math.round(this.Worknew.value.unQuality * 1 + this.Worknew.value.loss * 1)
+    //     this.unQuality()
+
+
+    // }
+    // // 粮食容重
+    // realCapacity() {
+    //     this.Work.realCapacity = this.Worknew.value.realCapacity
+    // }
+    // // //容重
+    // // rongzhong(e) {
+    // //     this.Worknew.value.realCapacity = this.Worknew.value.realCapacity
+    // // }
+    // //粮堆平均密度（kg/m）
+    // ldpjmd() {
+    //     var correctioFactor = this.Worknew.value.correctioFactor || 1
+    //     this.Work.aveDensity = (this.Worknew.value.realCapacity * correctioFactor).toFixed(1)
+    //     this.loss()
+    // }
     // 账实是否相符
     isMatch() {
         var that = this
@@ -590,4 +747,36 @@ export class detaildPage {
         })
     }
 
+    //粮堆形状选择
+    selectshape() {
+        const parpam = {
+            title: "请选择粮堆形状",
+        }
+        const addInput = [
+            {
+                type: 'radio',
+                label: '长方体',
+                value: 'work'
+            },
+            {
+                type: 'radio',
+                label: '圆柱体 ',
+                value: 'yuanzhu'
+            },
+            {
+                type: 'radio',
+                label: '长方截锥体 ',
+                value: 'changfangjiezhuiti'
+            },
+            {
+                type: 'radio',
+                label: '其他 ',
+                value: 'qita'
+            },
+        ]
+        this._alert._alertSmlpe(parpam, this.addButton, addInput, data => {
+            // that.Worknew.value.putWay = data
+            this.shape = data.value
+        })
+    }
 }

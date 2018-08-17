@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { HttpService } from '../../../../providers/httpService'
+import { StorageService } from '../../../../providers/locationstorageService'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { _alertBomb } from '../../../common/_alert'
 
@@ -15,12 +16,14 @@ export class SamllSamplePage {
     samllsampleflag = false;
     samllsampleState;
     barcodeflag = true
+    returnPerson;
     constructor(
         private params: NavParams,
         private navCtrl: NavController,
         private Http: HttpService,
         private Barcode: BarcodeScanner,
-        private _alert: _alertBomb
+        private _alert: _alertBomb,
+        private Storage:StorageService
     ) {
         this.samllsamplelist = this.params.get("sample")
         this.number = "编号" + this.params.get("sample").id
@@ -29,6 +32,11 @@ export class SamllSamplePage {
         this.init()
     }
     init() {
+        this.Storage.GetStorage("userLogin").subscribe(res=>{
+            res.then(res=>{
+                this.returnPerson = res.userName
+            })
+        })
         let params = {
             id: this.params.get("sample").id
         }
@@ -44,7 +52,8 @@ export class SamllSamplePage {
     revert() {
         let params = {
             id: this.samllsamplelist.id,
-            returnState: 1
+            returnState: 1,
+            returnPerson:this.returnPerson
         }
         this.Http.post("grain/returnSingle/guihuan", params).subscribe(res => {
             this.navCtrl.pop()

@@ -108,23 +108,23 @@ export class Samplelist {
     // })
   }
   // 点击完成时连接后台
-  secondary() {
-    let data;
-    if (!this.myInput) {
-      data = {
-        params: `{"libraryId":${this.genders},"sampleState":${this._select_smaple},"regState":2}`
-      }
-    } else {
-      data = {
-        params: `{"libraryId":${this.genders},"sampleState":${this._select_smaple},"sort":"${this.myInput}"}`
-        // params: '{"libId":'+this.genders+',"sampleState":' + this._select_smaple+',"sort":'+this./+'}'
-      }
-    }
-    this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
-      // console.log(res.json(),"color:blue")
-      this.gendrslist = res.json()["rows"]
-    })
-  }
+  // secondary() {
+  //   let data;
+  //   if (!this.myInput) {
+  //     data = {
+  //       params: `{"libraryId":${this.genders},"sampleState":${this._select_smaple},"regState":2}`
+  //     }
+  //   } else {
+  //     data = {
+  //       params: `{"libraryId":${this.genders},"sampleState":${this._select_smaple},"sort":"${this.myInput}"}`
+  //       // params: '{"libId":'+this.genders+',"sampleState":' + this._select_smaple+',"sort":'+this./+'}'
+  //     }
+  //   }
+  //   this.Http.post("grain/sample/dataMobile", data).subscribe(res => {
+  //     // console.log(res.json(),"color:blue")
+  //     this.gendrslist = res.json()["rows"]
+  //   })
+  // }
   // 不同点击，改变页面
   setNavPush(key: any) {
 
@@ -149,7 +149,7 @@ export class Samplelist {
   }
   // 下拉刷新
   doRefresh(refresher) {
-    this.secondary()
+    // this.secondary()
     setTimeout(() => {
       refresher.complete();
     }, 2000);

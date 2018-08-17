@@ -61,13 +61,14 @@ export class roomPage {
         })
     }
     selectState() {
+        console.log(this._state)
         switch (this._state) {
             case "1":
                 this._Counterlist = this._Counter
                 break;
             case "2":
                 this._Counterlist = this._Counter.filter(v => {
-                    return v.warehouseUseNumber > 36
+                    return v.warehouseUseNumber == 36
                 })
                 break
             case "3":
