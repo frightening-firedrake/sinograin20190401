@@ -51,9 +51,33 @@ export class MyApp {
       splashScreen.hide();
       this.update();//注册更新事件
       this.registerBackButtonAction();//注册返回按键事件
+      this.network()//注册检测网络
       // this.viewEnter()//注册后台自动登出
     });
 
+  }
+  network() {
+      console.log(this.nativeService.getNetworkType)
+    if (!this.nativeService.getNetworkType) {
+      let parpam = {
+        title: "提示",
+        subTitle: "请重新连接网络后开启软件！<br/>软件即将退出！",
+        buttons: [
+          {
+            text: "确认",
+            handler: () => {
+              this.platform.exitApp();
+            }
+          }
+        ],
+        cssClass: "succse only"
+      }
+      var addbuton = {
+
+      }
+      var addInput = []
+      this._alert._alertSmlpe(parpam, addbuton, addInput, data => { })
+    }
   }
   // viewEnter() {
   //   this.angularApp.viewDidLoad.subscribe(res => {

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, Platform } from 'ionic-angular';
 import { HttpModule } from "@angular/http";
 import { Toast } from '@ionic-native/toast';
+import { Network } from '@ionic-native/network';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -70,6 +71,7 @@ import { Utils } from '../providers/Utils';
     Toast,
     BarcodeScanner,
     AuthorityService,
+    Network,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

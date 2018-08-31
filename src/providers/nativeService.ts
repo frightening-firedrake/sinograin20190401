@@ -11,7 +11,7 @@ import { Toast } from '@ionic-native/toast';
 // import {Transfer, TransferObject} from '@ionic-native/transfer';
 // import {InAppBrowser} from '@ionic-native/in-app-browser';
 // import {ImagePicker} from '@ionic-native/image-picker';
-// import {Network} from '@ionic-native/network';
+import { Network } from '@ionic-native/network';
 // import {AppMinimize} from "@ionic-native/app-minimize";
 
 // import {Position} from "../model/type";
@@ -37,7 +37,7 @@ export class NativeService {
               // private file: File,
               // private inAppBrowser: InAppBrowser,
               // private imagePicker: ImagePicker,
-              // private network: Network,
+              private network: Network,
               // private appMinimize: AppMinimize,
               private loadingCtrl: LoadingController) {
   }
@@ -310,20 +310,19 @@ export class NativeService {
   /**
    * 获取网络类型 如`unknown`, `ethernet`, `wifi`, `2g`, `3g`, `4g`, `cellular`, `none`
    */
-  // getNetworkType(): string {
-  //   if (!this.isMobile()) {
-  //     return 'wifi';
-  //   }
-  //   return this.network.type;
-  // }
+  getNetworkType(): string {
+    if (!this.isMobile()) {
+      return 'wifi';
+    }
+    return this.network.type;
+  }
 
   /**
    * 判断是否有网络
    * @returns {boolean}
    */
   isConnecting(): boolean {
-    // return this.getNetworkType() != 'none';
-    return true ;
+    return this.getNetworkType() != 'none';
   }
 
   /**
