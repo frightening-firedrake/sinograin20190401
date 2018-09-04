@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
-import { NavController, ViewController, App } from "ionic-angular";
+import { NavController, ViewController, App,Platform } from "ionic-angular";
 import { StorageService } from '../../providers/locationstorageService'
 import { HttpService } from '../../providers/httpService'
+import { NativeService } from '../../providers/nativeService'
 
 import { _alertBomb } from '../common/_alert'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -24,7 +25,9 @@ export class loginPage {
         public FormBuilder: FormBuilder,
         public NavCtrl: NavController,
         public Storage: StorageService,
-        public Http: HttpService
+        public Http: HttpService,
+        public nativeService: NativeService,
+        public platform: Platform,
     ) {
 
         this.login = FormBuilder.group({
@@ -33,6 +36,7 @@ export class loginPage {
         })
         this.User.username = this.login.controls['username']
         this.User.password = this.login.controls["password"]
+        this.network()
     }
     onSubmit(e) {
         // userName,userPass
@@ -73,5 +77,28 @@ export class loginPage {
         })
         // this.NavCtrl.pop()
         // this.Storage.SetStorage("userLogin", { "username": e.value.username, "passwork": e.value.passwork })
+    }
+    network() {
+        console.log(!this.nativeService.getNetworkType())
+        if (this.nativeService.getNetworkType() == "none") {
+            let parpam = {
+                title: "提示",
+                subTitle: "请重新连接网络!<br/>软件即将退出！",
+                buttons: [
+                    {
+                        text: "确认",
+                        handler: () => {
+                            this.platform.exitApp();
+                        }
+                    }
+                ],
+                cssClass: "outsuccse only"
+            }
+            var addbuton = {
+
+            }
+            var addInput = []
+            this._alert._alertSmlpe(parpam, addbuton, addInput, data => { })
+        }
     }
 }

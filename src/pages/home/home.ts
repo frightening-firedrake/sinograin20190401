@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, ModalController, AlertController, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController,ViewController, IonicPage, Platform } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { _alertBomb } from '../common/_alert'
 import { StorageService } from '../../providers/locationstorageService'
 import { HttpService } from '../../providers/httpService'
 
 import { AuthorityService } from '../../providers/authority'
+import { NativeService } from '../../providers/nativeService'
 import { ProjectPage } from '../project/project'
 import { loginPage } from '../login/login'
 import { noticePage } from './notice/notice'
@@ -25,7 +26,7 @@ export class HomePage {
   public XMNumber: string;
   public YMNumber: string;
   public SYYNumber: string;
-  public _stroage=false
+  public _stroage = false
   constructor(
     public _alert: _alertBomb,
     public navCtrl: NavController,
@@ -34,24 +35,15 @@ export class HomePage {
     public modalCtrl: ModalController,
     public params: NavParams,
     public barcode: BarcodeScanner,
-    public Http: HttpService
+    public Http: HttpService,
+    public nativeService: NativeService,
+    public platform: Platform,
   ) {
 
   }
   ionViewDidEnter() {
-
-    //获取统计
-    this.Http.get("grain/sample/getAllCereals").subscribe(res => {
-      let respon = res.json()
-      if (res.json()["code"] == "1000000") {
-        this.stroage()
-        this._stroage = true
-      } else {
-        this.XMNumber = respon["XMNumber"] ? (respon["XMNumber"] / 10000).toFixed(2) : "0"
-        this.YMNumber = respon["YMNumber"] ? (respon["YMNumber"] / 10000).toFixed(2) : "0"
-        this.SYYNumber = respon["SYYNumber"] ? (respon["SYYNumber"] / 10000).toFixed(2) : "0"
-      }
-    })
+    this.network()
+    this.stroage()
   }
   stroage() {
     this.Storage.GetStorage("userLogin").subscribe(res => {
@@ -59,8 +51,21 @@ export class HomePage {
       res.then(val => {
         const User = val
         // console.log( )
-        if (!User||this._stroage) {
+        if (!User) {
           this.loginModel()
+        } else {
+          //获取统计
+          this.Http.get("grain/sample/getAllCereals").subscribe(res => {
+            let respon = res.json()
+            console.log(`home${JSON.stringify(respon)}`)
+            if (res.json()["code"] == "1000000") {
+              this.loginModel()
+            } else {
+              this.XMNumber = respon["XMNumber"] ? (respon["XMNumber"] / 10000).toFixed(2) : "0"
+              this.YMNumber = respon["YMNumber"] ? (respon["YMNumber"] / 10000).toFixed(2) : "0"
+              this.SYYNumber = respon["SYYNumber"] ? (respon["SYYNumber"] / 10000).toFixed(2) : "0"
+            }
+          })
         }
       })
     })
@@ -153,19 +158,41 @@ export class HomePage {
     })
   }
   loginModel() {
-    this._stroage = false
     let profileModal = this.modalCtrl.create(loginPage);
     profileModal.present();
     profileModal.onDidDismiss(data => {
       this.userName = data.userName
       //获取统计
       this.Http.get("grain/sample/getAllCereals").subscribe(res => {
-        // console.log(res)
+        console.log(res)
         let respon = res.json()
         this.XMNumber = (respon["XMNumber"] / 10000).toFixed(2)
         this.YMNumber = (respon["YMNumber"] / 10000).toFixed(2)
         this.SYYNumber = (respon["SYYNumber"] / 10000).toFixed(2)
       })
     });
+  }
+  network() {
+    console.log(this.nativeService.getNetworkType())
+    if (this.nativeService.getNetworkType() == "none") {
+      let parpam = {
+        title: "提示",
+        subTitle: "请重新连接网络!<br/>软件即将退出！",
+        buttons: [
+          {
+            text: "确认",
+            handler: () => {
+              this.platform.exitApp();
+            }
+          }
+        ],
+        cssClass: "outsuccse only"
+      }
+      var addbuton = {
+
+      }
+      var addInput = []
+      this._alert._alertSmlpe(parpam, addbuton, addInput, data => { })
+    }
   }
 }

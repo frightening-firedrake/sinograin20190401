@@ -26,8 +26,13 @@ transfer {
                             background-color: #f2f2f2;
                             padding-left: .48rem;
                             font-size: .4rem;
-                            color: #999999;
                             line-height: 2;
+                            .select-placeholder.select-text {
+                                color: #999;
+                            }
+                            .select-text {
+                                color: #333;
+                            }
                             .select-icon {
                                 height: 100%;
                             }

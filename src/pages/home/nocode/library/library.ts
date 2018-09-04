@@ -140,7 +140,7 @@ export class libraryPage {
             placeId: this._positionlist[0].id
         }
         var parpam = {
-            title: "请确认存放位置",
+            title: "确认存放位置并打印条形码",
             subTitle: `存放位置为${this.library}-${this._positionlist[0].place}号位`,
             buttons: [
 

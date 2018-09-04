@@ -63,7 +63,6 @@ import { StorageService } from '../../providers/locationstorageService'
     ],
     providers: [
         _alertBomb,
-        StorageService,
         BarcodeScanner,
         BLE
     ],

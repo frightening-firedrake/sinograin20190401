@@ -51,7 +51,7 @@ export class SampleDetailsPage {
                     text: '确认',
                     handler: data => {
                         let params = {
-                            // ids: id.join(),//处理样品的id
+                            ids: this.sample.id,//处理样品的id
                             dispose: data.dispose,//人
                             disposeReason: data.disposeReason//事由
                         }
@@ -64,7 +64,7 @@ export class SampleDetailsPage {
                                         {
                                             text: "确认",
                                             handler: () => {
-
+                                                this.navCtrl.pop()
                                             }
                                         }
                                     ],

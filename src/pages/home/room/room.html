@@ -23,9 +23,6 @@
     </ion-row>
 </ion-header>
 <ion-content>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
     <prompt [promptObj]=_promptobj [hidden]=_prompt></prompt>
     <ion-grid [hidden]=!_prompt>
         <ion-row class="tbody" (click)="sample(Counter)" *ngFor="let Counter of _Counterlist">

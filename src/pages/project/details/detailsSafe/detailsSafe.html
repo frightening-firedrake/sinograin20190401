@@ -1,4 +1,4 @@
-<app-header title='监督检查'></app-header>
+<app-header title='创建监督检查'></app-header>
 <ion-content>
     <form action="" (ngSubmit)="onSubmit(detaSafeForm)" [formGroup]="detaSafeForm">
         <ion-list class="position">
@@ -12,14 +12,14 @@
             </ion-item>
         </ion-list>
         <div *ngIf="!_state||addrequ">
-            <detasafe-view *ngFor="let list of lists ;let i = index" [num]=num+i+1  [default]="num" (key)="keyoff($event,i)"></detasafe-view>
+            <detasafe-view *ngFor="let list of lists ;let i = index" [num]=num+i+1 [default]="num" (key)="keyoff($event,i)"></detasafe-view>
             <p ion-button outline color="secondary" class="add" (click)="add()">问题加一</p>
             <p ion-button outline color="secondary" class="remove" (click)="remove()" *ngIf="lists.length>1">问题减一</p>
             <div class="margin_div"></div>
             <!--<button ion-button large color="secondary" class="sumbit" type="submit" [disabled]="isrequire">{{submitName}}</button>-->
         </div>
     </form>
-    <button ion-button large color="secondary" class="sumbit" (click)="onSubmit(detaSafeForm)" type="submit" [disabled]="isrequire">{{submitName}}</button>    
+    <button ion-button large color="secondary" class="sumbit" (click)="onSubmit(detaSafeForm)" type="submit" [disabled]="isrequire">{{submitName}}</button>
     <div *ngIf="_state">
         <div padding class="problem_select">
             <ion-segment [(ngModel)]="problem" (ionChange)="segmentChanged($event)">
@@ -51,7 +51,7 @@
                         <ion-item class="phont">
                             <span>图片:</span>
                             <div class="imgs">
-                                <img [src]="img" *ngFor="let img of pro.images;let i=index" alt=""   (click)="lookPicture(img)" >
+                                <img [src]="img" *ngFor="let img of pro.images;let i=index" alt="" (click)="lookPicture(img)">
                             </div>
                         </ion-item>
                         <ion-item class="succse">
@@ -76,7 +76,7 @@
                         <ion-item class="phont">
                             <span>图片:</span>
                             <div class="imgs">
-                                <img [src]="img" *ngFor="let img of pro.images" alt=""    (click)="lookPicture(img)">
+                                <img [src]="img" *ngFor="let img of pro.images" alt="" (click)="lookPicture(img)">
                             </div>
                         </ion-item>
                         <ion-item class="succse">
@@ -101,7 +101,7 @@
                         <ion-item class="phont">
                             <span>图片:</span>
                             <div class="imgs">
-                                <img [src]="img" *ngFor="let img of pro.images" alt=""    (click)="lookPicture(img)">
+                                <img [src]="img" *ngFor="let img of pro.images" alt="" (click)="lookPicture(img)">
                             </div>
                         </ion-item>
                         <ion-item class="succse">
@@ -110,7 +110,7 @@
                     </ion-list>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </ion-content>

@@ -39,7 +39,7 @@ export class ProjectPage {
 
     this.gendersNav = this.parpam.get("num")
     if (this.gendersNav == "4") {
-      this.titleName = "扦样登记列表"
+      this.titleName = "扦样登记表"
     } else if (this.gendersNav == "3") {
       this.titleName = "监督检查"
     } else if (this.gendersNav == "2") {

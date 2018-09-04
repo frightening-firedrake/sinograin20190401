@@ -984,6 +984,16 @@ ion-picker-cmp {
         .picker-toolbar {
             line-height: 0;
             .picker-toolbar-button {
+                min-width: .586667rem;
+                min-height: .586667rem;
+                margin: 0 0.3rem;
+                &:first-child {
+                    .picker-button {
+                        span {
+                            color: #666;
+                        }
+                    }
+                }
                 .picker-button {
                     padding: .106667rem;
                     span {
@@ -1093,7 +1103,7 @@ ion-alert.outsuccse {
                         margin: 0;
                         padding: 0;
                         font-size: .4rem;
-                        color: #999999;
+                        color: #333;
                         // padding: .293333rem 0 0 .373333rem;
                         padding-left: .373333rem;
                         height: 100%;

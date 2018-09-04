@@ -34,7 +34,7 @@ export class Samplelist {
     this.gendersNav = this.parpam.get("num")
     this.sample = this.parpam.get("newpage")
     if (this.gendersNav == "4") {
-      this.titleName = "扦样列表"
+      this.titleName = "扦样登记列表"
     } else if (this.gendersNav == "3") {
       this.titleName = "监督检查列表"
     } else if (this.gendersNav == "2") {

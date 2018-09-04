@@ -17,7 +17,7 @@
             </ion-item>
             <ion-item type="ion-item" class="num" ion-item>
                 <ion-label class="title_span"><span class="title_span">入库时间:</span></ion-label>
-                <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [ngModelOptions]="{standalone: true}" [(ngModel)]="_creatTime" placeholder="入库时间"></ion-datetime>
+                <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM" displayFormat="YYYY-MM" [ngModelOptions]="{standalone: true}" [(ngModel)]="_creatTime" placeholder="入库时间"></ion-datetime>
             </ion-item>
         </ion-list>
         <ion-list class="lists_input">
@@ -48,7 +48,7 @@
         <ion-list class="lists_input">
             <ion-item type="ion-item" class="num" ion-item>
                 <ion-label class="title_span"><span class="title_span">收获年度:</span></ion-label>
-                <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY MM DD" displayFormat="YYYY-MM-DD" [ngModelOptions]="{standalone: true}" [(ngModel)]="dataTime" placeholder="收获年度"></ion-datetime>
+                <ion-datetime min="1981" cancelText="取消" doneText="选择" pickerFormat="YYYY" displayFormat="YYYY" [ngModelOptions]="{standalone: true}" [(ngModel)]="dataTime" placeholder="收获年度"></ion-datetime>
             </ion-item>
             <ion-item type="ion-item" class="num" ion-item>
                 <ion-label class="title_span">备注:</ion-label>
@@ -56,7 +56,7 @@
             </ion-item>
         </ion-list>
         <div class="buttons">
-            <button ion-button large color="secondary" class="button" type="submit" [disabled]="!(nocode.valid)">确认</button>
+            <button ion-button large color="secondary" class="button" type="submit" [disabled]="!(nocode.valid)">确认并打印</button>
             <button ion-button large color="secondary" class="button cleard" type="button" (click)="pop()">取消</button>
         </div>
     </form>

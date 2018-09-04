@@ -36,14 +36,6 @@ export class roomPage {
     sample(Counter) {
         this.navCtrl.push(SamplePage, { "_sample": "样品" + this._select+ "室-" + Counter.counter, "Counter": Counter.id })
     }
-    // 下拉刷新
-    doRefresh(refresher) {
-        this.selectSample()
-        // this.secondary()
-        setTimeout(() => {
-            refresher.complete();
-        }, 2000);
-    }
     selectSample() {
         // console.log(this._select)
         let params = {

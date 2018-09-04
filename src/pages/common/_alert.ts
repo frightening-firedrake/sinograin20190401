@@ -7,35 +7,6 @@ export class _alertBomb {
     constructor(public _alert: AlertController, ) {
 
     }
-    _alertnoprint() {
-        let parpam = {
-            title: "提示",
-            subTitle: "暂未搜索到打印设备",
-            buttons: [
-                {
-                    text: '取消',
-                    // role: 'destructive',
-                    handler: () => {
-
-                    }
-                },
-                {
-                    text: '确认',
-                    //   role: 'destructive',
-                    handler: () => {
-                    }
-                }
-            ],
-            cssClass: "outsuccse succse"
-        }
-        let addbuton = {
-            text: null
-        }
-        let addInput = []
-        this._alertSmlpe(parpam, addbuton, addInput, data => {
-            return 0
-        })
-    }
     //  var parpam = {
     //                 title: "提示",
     //                 subTitle: "用户名或密码错误",

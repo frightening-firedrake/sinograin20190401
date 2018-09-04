@@ -28,74 +28,44 @@ export class HttpService {
   }
   private _token: string;
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
-    if (this.flag) {
-      url = HttpService.replaceUrl(url);
-      var t
-      // console.info(url);
-
-      // return this.http.request(url,options);
-      return Observable.create((observer) => {
-        this.nativeService.showLoading();
-        var t = setTimeout(() => {
-          this.flag = false
-          this.nativeService.hideLoading();
-          var parpam = {
-            title: "提示",
-            subTitle: "网络崩溃,别紧张试试看刷新页面",
-            buttons: [
-              {
-                text: "确认",
-                handler: () => {
-                  this.flag = true
-                  // this.navCtrl.pop()
-                }
-              }
-            ],
-            cssClass: "outsuccse only"
-          }
-          var addbuton = {
-            text: null
-          }
-          var addInput = []
-          this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
-        }, 10000)
-
-        this.Storage.GetStorage("userLogin").subscribe(res => {
-          res.then(res => {
-            // console.log(res)
-            if (res) {
-              this._token = res.token;
-              if (options.headers) {
-                options.headers.append('Authorization', this._token);
-              } else {
-                options.headers = new Headers({
-                  'Authorization': this._token
-                });
-              }
-              // console.log(options)
+    url = HttpService.replaceUrl(url);
+    // return this.http.request(url,options);
+    return Observable.create((observer) => {
+      this.nativeService.showLoading();
+      this.Storage.GetStorage("userLogin").subscribe(res => {
+        res.then(res => {
+          // console.log(`http${JSON.stringify(res)}`)
+          // console.log(res==null)
+          if (res) {
+            this._token = res.token;
+            if (options.headers) {
+              options.headers.append('Authorization', this._token);
+            } else {
+              options.headers = new Headers({
+                'Authorization': this._token
+              });
             }
-            this.http.request(url, options).subscribe(res => {
+            // console.log(options)
+          }
+          this.http.request(url, options).subscribe(res => {
+            this.nativeService.hideLoading();
+            // if (res.json()["code"] == "1000000") {
 
-              clearTimeout(t)
-              this.nativeService.hideLoading();
-              // if (res.json()["code"] == "1000000") {
-                
-              //   // let profile = this.modalCtrl.create(loginPage);
-              //   // profile.present();
-              // }
-              // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
-              observer.next(res);
-            }, err => {
-              // console.log("111")
-              clearTimeout(t)
-              this.requestFailed(url, options, err);//处理请求失败
-              observer.error(err);
-            });
-          })
+            //   // let profile = this.modalCtrl.create(loginPage);
+            //   // profile.present();
+            // }
+            // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
+            observer.next(res);
+          }, err => {
+            // console.log("111")
+            this.requestFailed(url, options, err);//处理请求失败
+            observer.error(err);
+          });
         })
-        // console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
-      });
-    }
+      })
+      // console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
+    });
+
   }
 
   public get(url: string, paramMap: any = null): Observable<Response> {
