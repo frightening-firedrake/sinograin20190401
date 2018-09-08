@@ -13,7 +13,7 @@ import { loginPage } from '../pages/login/login'
 import { TabsPage } from '../pages/tabs/tabs';
 @Component({
   templateUrl: 'app.html'
-})
+})   
 export class MyApp {
   rootPage: any = TabsPage;
   @ViewChild('myNav') nav: Nav;
