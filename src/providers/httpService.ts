@@ -57,7 +57,6 @@ export class HttpService {
             // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
             observer.next(res);
           }, err => {
-            // console.log("111")
             this.requestFailed(url, options, err);//处理请求失败
             observer.error(err);
           });
@@ -159,11 +158,9 @@ export class HttpService {
    */
   private requestFailed(url: string, options: RequestOptionsArgs, err) {
     this.nativeService.hideLoading();
-    console.log('%c 请求失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
-    let msg = "1", status = err.status;
-    if (msg == "1") {
-      return 0;
-    } else if (!this.nativeService.isConnecting()) {
+    // console.log('%c 请求失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
+    let msg = "", status = err.status;
+     if (!this.nativeService.isConnecting()) {
       msg = '请求失败，请连接网络';
     } else {
       if (status === 0) {
@@ -172,6 +169,8 @@ export class HttpService {
         msg = '请求失败,错误代码:404';
       } else if (status === 500) {
         msg = '请求失败,错误代码:500';
+      }else {
+        msg = '连接异常，请刷新'
       }
     }
     this.alertCtrl.create({

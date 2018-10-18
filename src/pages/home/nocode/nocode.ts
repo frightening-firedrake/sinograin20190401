@@ -209,6 +209,7 @@ export class NoCode {
         this.navCtrl.pop()
     }
     onSubmit(nocode) {
+
         this.ble.search().then(res => {
             this.Bleprint(nocode)
         })

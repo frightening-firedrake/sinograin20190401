@@ -156,12 +156,39 @@ export class libraryPage {
                         this.Http.post("grain/sample/saveRukuXinxi", placeparams).subscribe(res => {
                             let code
                             code = res.json()["sampleNum"]
+                            if (code) {
+                                this.ble.print(code).then(res => {
+                                    this.submitRuku()
+                                })
+                            } else {
+                                var parpam = {
+                                    title: "入库失败",
+                                    subTitle: `重新入库`,
+                                    buttons: [
+                                        {
+                                            text: "返回首页",
+                                            handler: () => {
+                                                this.navCtrl.popToRoot()
+                                            }
+                                        },
+                                        {
+                                            text: "继续",
+                                            handler: () => {
+                                                this.navCtrl.pop()
+                                            },
+                                        }
+                                    ],
+                                    cssClass: "outsuccse succse"
+                                }
+                                var addbuton = {
+                                    text: null
+                                }
+                                var addInput = []
+                                this._alert._alertSmlpe(parpam, addbuton, addInput, function (data) { })
+                            }
                             // code
                             // this.submitRuku()
-                            console.log(this.testnum)
-                            this.ble.print(code).then(res => {
-                                this.submitRuku()
-                            })
+
                         })
 
                     }

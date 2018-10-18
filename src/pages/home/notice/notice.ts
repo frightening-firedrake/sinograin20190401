@@ -56,10 +56,10 @@ export class noticePage {
     //样品编号
     getwarehouse() {
         this.promp = true
-        this.Http.post("grain/sample/getAll").subscribe(res => {
+        this.Http.post("grain/sample/data").subscribe(res => {
             // this.totle = res.json()["total"]
             // // console.log(res.json(),"color:blue")
-            this.gendrslist = res.json()
+            this.gendrslist = res.json()["rows"]
         })
     }
     //扦样编号

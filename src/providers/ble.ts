@@ -74,6 +74,7 @@ export class BleServer {
                     handler: () => {
                         cordova.plugins.barcode.unregisterReceiver()
                         clearInterval(t)
+                        this.searchTime = 0
                     }
                 },
                 {
