@@ -31,7 +31,7 @@
     "@ionic-native/splash-screen": "3.12.1",
     "@ionic-native/status-bar": "3.12.1",
     "@ionic-native/toast": "^3.10.2",
-    "@ionic/storage": "^2.0.1",
+    "@ionic/storage": "^2.1.0",
     "com-sarriaroman-photoviewer": "^1.1.18",
     "com.liang.barcode": "file:barcode",
     "cordova-android": "^5.1.0",

@@ -1,8 +1,8 @@
 
 export const FILE_SERVE_URL = '';//文件存储地址
 // export const APP_SERVE_URL = 'http://m.ityyedu.com/'; 
-// export const APP_SERVE_URL = 'http://192.168.1.253:8080/'; 
-export const APP_SERVE_URL = 'http://192.168.1.252:8083/'; 
+export const APP_SERVE_URL = 'http://192.168.1.253:8080/'; 
+// export const APP_SERVE_URL = 'http://192.168.1.252:8083/'; 
 // export const APP_SERVE_URL = 'http://192.168.1.231:8083/'; 
 // export const APP_SERVE_URL = 'http://192.168.1.184:8080/'; 
 
