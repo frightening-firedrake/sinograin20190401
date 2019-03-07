@@ -6,7 +6,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 //import {AppVersion} from '@ionic-native/app-version';
 // import {Camera, CameraOptions} from '@ionic-native/camera';
-import { Toast } from '@ionic-native/toast';
+// import { Toast } from '@ionic-native/toast';
 // import {File} from '@ionic-native/file';
 // import {Transfer, TransferObject} from '@ionic-native/transfer';
 // import {InAppBrowser} from '@ionic-native/in-app-browser';
@@ -16,9 +16,9 @@ import { Network } from '@ionic-native/network';
 
 // import {Position} from "../model/type";
 // import {APP_DOWNLOAD, APK_DOWNLOAD} from "./Constants";
-declare var LocationPlugin;
-declare var AMapNavigation;
-declare var cordova: any;
+// declare var LocationPlugin;
+// declare var AMapNavigation;
+// declare var cordova: any;
 
 @Injectable()
 export class NativeService {
@@ -26,13 +26,13 @@ export class NativeService {
   private loadingIsOpen: boolean = false;
 
   constructor(private platform: Platform,
-              private toastCtrl: ToastController,
-              private alertCtrl: AlertController,
+              // private toastCtrl: ToastController,
+              // private alertCtrl: AlertController,
               private statusBar: StatusBar,
               private splashScreen: SplashScreen,
               // private appVersion: AppVersion,
               // private camera: Camera,
-               private toast: Toast,
+              //  private toast: Toast,
               // private transfer: Transfer,
               // private file: File,
               // private inAppBrowser: InAppBrowser,
@@ -136,18 +136,18 @@ export class NativeService {
    * @param message 信息内容
    * @param duration 显示时长
    */
-  showToast(message: string = '操作完成', duration: number = 2000): void {
-    if (this.isMobile()) {
-      this.toast.show(message, String(duration), 'center').subscribe();
-    } else {
-      this.toastCtrl.create({
-        message: message,
-        duration: duration,
-        position: 'middle',
-        showCloseButton: false
-      }).present();
-    }
-  };
+  // showToast(message: string = '操作完成', duration: number = 2000): void {
+  //   if (this.isMobile()) {
+  //     this.toast.show(message, String(duration), 'center').subscribe();
+  //   } else {
+  //     this.toastCtrl.create({
+  //       message: message,
+  //       duration: duration,
+  //       position: 'middle',
+  //       showCloseButton: false
+  //     }).present();
+  //   }
+  // };
 
 
   /**
@@ -395,21 +395,21 @@ export class NativeService {
    * 获得用户当前坐标
    * @return {Promise<Position>}
    */
-  getUserLocation(): Promise<Position> {
-    return new Promise((resolve) => {
-      if (this.isMobile()) {
-        LocationPlugin.getLocation(data => {
-          resolve({'lng': data.longitude, 'lat': data.latitude});
-        }, msg => {
-          alert(msg.indexOf('缺少定位权限') == -1 ? ('错误消息：' + msg) : '缺少定位权限，请在手机设置中开启');
-          this.warn('getUserLocation:' + msg);
-        });
-      } else {
-        this.warn('getUserLocation:非手机环境,即测试环境返回固定坐标');
-        resolve({'lng': 113.350912, 'lat': 23.119495});
-      }
-    });
-  }
+  // getUserLocation(): Promise<Position> {
+  //   return new Promise((resolve) => {
+  //     if (this.isMobile()) {
+  //       LocationPlugin.getLocation(data => {
+  //         resolve({'lng': data.longitude, 'lat': data.latitude});
+  //       }, msg => {
+  //         alert(msg.indexOf('缺少定位权限') == -1 ? ('错误消息：' + msg) : '缺少定位权限，请在手机设置中开启');
+  //         this.warn('getUserLocation:' + msg);
+  //       });
+  //     } else {
+  //       this.warn('getUserLocation:非手机环境,即测试环境返回固定坐标');
+  //       resolve({'lng': 113.350912, 'lat': 23.119495});
+  //     }
+  //   });
+  // }
 
   /**
    * 地图导航

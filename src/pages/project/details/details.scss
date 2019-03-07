@@ -28,7 +28,7 @@ derails {
         .scroll-content {
             // top:0.88rem;
             margin-top: 2.666667rem !important;
-            padding-bottom: 1.333333rem !important;
+            // padding-bottom: 1.333333rem !important;
             margin-bottom: 0!important;
             .classify {
                 .new,
@@ -81,9 +81,9 @@ derails {
                     background-color: #38b63a;
                     display: block;
                     margin-top: .533333rem;
-                    position: fixed;
+                    // position: fixed;
                     z-index: 50;
-                    bottom: .266667rem;
+                    bottom:0;
                     left: 0;
                     right: 0;
                     margin: 0 auto;

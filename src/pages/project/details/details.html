@@ -85,9 +85,10 @@
                         <span>{{ sample.remark }}</span>
                     </ion-item>
                 </ion-list>
-                <button ion-button color="secondary" class="sumbit" (click)="_sample()">打印条形码</button>
                 <!--<ion-item ion-ion-item  large color="secondary" (click)="_ble()" class="sumbit" type="ion-item" [hidden]="ble_falg||(sample.sampleState==1||sample.sampleState>=2)">链接蓝牙</ion-item>-->
             </div>
+            <button ion-button color="secondary" class="sumbit" (click)="_sample()">打印条形码</button>
+
         </div>
         <div *ngSwitchCase="'work'" class="work">
             <ion-list class="new_informations" *ngIf="!Work_flag">

@@ -74,6 +74,7 @@ export class BleServer {
                     handler: () => {
                         cordova.plugins.barcode.unregisterReceiver()
                         clearInterval(t)
+                        this.nativeService.hideLoading()
                         this.searchTime = 0
                     }
                 },

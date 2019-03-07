@@ -362,13 +362,13 @@ export class detaildPage {
     }
     // 扦样信息中的打印条形码的功能
     _sample() {
-        // this.ble.search().then(res => {
-        //     if (this.code) {
-        //         this.ble.print(this.code)
-        //     } else {
+        this.ble.search().then(res => {
+            if (this.code) {
+                this.ble.print(this.code)
+            } else {
                 this.print()
-        //     }
-        // })
+            }
+        })
     }
     print() {
         let parpam = {
@@ -402,7 +402,7 @@ export class detaildPage {
                                         {
                                             text: "确认",
                                             handler: () => {
-                                                this.ble.print(this.code)
+                                                // this.ble.print(this.code)
                                             }
                                         }
                                     ],

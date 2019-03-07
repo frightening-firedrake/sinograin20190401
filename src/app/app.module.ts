@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, Platform } from 'ionic-angular';
 import { HttpModule } from "@angular/http";
-import { Toast } from '@ionic-native/toast';
+// import { Toast } from '@ionic-native/toast';
 import { Network } from '@ionic-native/network';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
@@ -68,7 +68,7 @@ import { Utils } from '../providers/Utils';
     NativeService,
     BleServer,
     Utils,
-    Toast,
+    // Toast,
     BarcodeScanner,
     AuthorityService,
     Network,
